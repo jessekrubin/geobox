@@ -3,16 +3,11 @@
   "$id": "https://geojson.org/schema/Point.json",
   "title": "GeoJSON Point",
   "type": "object",
-  "required": [
-    "type",
-    "coordinates"
-  ],
+  "required": ["type", "coordinates"],
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "Point"
-      ]
+      "enum": ["Point"]
     },
     "coordinates": {
       "type": "array",

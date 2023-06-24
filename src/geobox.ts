@@ -91,7 +91,7 @@ export const GeojsonProperties = () =>
 export const PointGeometry = () =>
   Type.Object({ type: Type.Literal("Point"), coordinates: Coordinate() }, { title: "GeoJSON Point" });
 
-export const LineGeometry = () =>
+export const LineGeometry = (SchemaOptions?: SchemaOptions) =>
   Type.Object(
     {
       type: Type.Literal("LineString"),
@@ -100,9 +100,12 @@ export const LineGeometry = () =>
     },
     {
       title: "GeoJSON LineString",
+      description: "GeoJSON LineString geometry",
+      additionalProperties: false,
+      ...(SchemaOptions || {}),
     }
   );
-export const PolygonGeometry = () =>
+export const PolygonGeometry = (SchemaOptions?: SchemaOptions) =>
   Type.Object(
     {
       type: Type.Literal("Polygon"),
@@ -116,6 +119,7 @@ export const PolygonGeometry = () =>
       title: "PolygonGeometry",
       description: "GeoJSON Polygon geometry",
       additionalProperties: false,
+      ...(SchemaOptions || {}),
     }
   );
 export const MultiPointGeometry = () =>

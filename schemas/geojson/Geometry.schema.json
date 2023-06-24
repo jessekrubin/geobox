@@ -6,16 +6,11 @@
     {
       "title": "GeoJSON Point",
       "type": "object",
-      "required": [
-        "type",
-        "coordinates"
-      ],
+      "required": ["type", "coordinates"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "Point"
-          ]
+          "enum": ["Point"]
         },
         "coordinates": {
           "type": "array",
@@ -36,16 +31,11 @@
     {
       "title": "GeoJSON LineString",
       "type": "object",
-      "required": [
-        "type",
-        "coordinates"
-      ],
+      "required": ["type", "coordinates"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "LineString"
-          ]
+          "enum": ["LineString"]
         },
         "coordinates": {
           "type": "array",
@@ -70,16 +60,11 @@
     {
       "title": "GeoJSON Polygon",
       "type": "object",
-      "required": [
-        "type",
-        "coordinates"
-      ],
+      "required": ["type", "coordinates"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "Polygon"
-          ]
+          "enum": ["Polygon"]
         },
         "coordinates": {
           "type": "array",
@@ -107,16 +92,11 @@
     {
       "title": "GeoJSON MultiPoint",
       "type": "object",
-      "required": [
-        "type",
-        "coordinates"
-      ],
+      "required": ["type", "coordinates"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "MultiPoint"
-          ]
+          "enum": ["MultiPoint"]
         },
         "coordinates": {
           "type": "array",
@@ -140,16 +120,11 @@
     {
       "title": "GeoJSON MultiLineString",
       "type": "object",
-      "required": [
-        "type",
-        "coordinates"
-      ],
+      "required": ["type", "coordinates"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "MultiLineString"
-          ]
+          "enum": ["MultiLineString"]
         },
         "coordinates": {
           "type": "array",
@@ -177,16 +152,11 @@
     {
       "title": "GeoJSON MultiPolygon",
       "type": "object",
-      "required": [
-        "type",
-        "coordinates"
-      ],
+      "required": ["type", "coordinates"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "MultiPolygon"
-          ]
+          "enum": ["MultiPolygon"]
         },
         "coordinates": {
           "type": "array",

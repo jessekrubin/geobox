@@ -3,16 +3,11 @@
   "$id": "https://geojson.org/schema/MultiLineString.json",
   "title": "GeoJSON MultiLineString",
   "type": "object",
-  "required": [
-    "type",
-    "coordinates"
-  ],
+  "required": ["type", "coordinates"],
   "properties": {
     "type": {
       "type": "string",
-      "enum": [
-        "MultiLineString"
-      ]
+      "enum": ["MultiLineString"]
     },
     "coordinates": {
       "type": "array",
