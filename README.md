@@ -2,8 +2,6 @@
 
 geo-json-schemas (and maybe more to come!)
 
-turfbox = turf + geojson + typebox
-
 ## Install
 
 ```bash

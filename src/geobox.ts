@@ -2,7 +2,7 @@
  * Turfbox = turf/geojson + typebox
  */
 import type { AssertType, SchemaOptions, TLiteral, TObject, TSchema, TUnknown } from "./typebox.js";
-import { TNullable, Type } from "./typebox.js";
+import { Nullable, Type } from "./typebox.js";
 import type { IsDefined } from "./types.js";
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
@@ -34,67 +34,80 @@ export const GeoJSONType = () =>
     }
   );
 
-export const TLatitude = () => Type.Number({ minimum: -90, maximum: 90 });
-export const TLongitude = () => Type.Number({ title: "longitude" });
-
-export const TLatitudeRange = () => Type.Number({ minimum: -90, maximum: 90 });
-export const TLongitudeRange = () => Type.Number({ minimum: -180, maximum: 180 });
-export const TCoordinate2d = () =>
-  Type.Tuple([TLongitude(), TLatitude()], {
+export const Latitude = () => Type.Number({ title: "Latitude" });
+export const Longitude = () => Type.Number({ title: "Longitude", description: "longitude" });
+export const LatitudeWgs84 = () =>
+  Type.Number({
+    minimum: -90,
+    maximum: 90,
+    title: "LatitudeWgs84",
+    description: "WGS84 latitude; -90 to 90 degrees",
+  });
+export const LongitudeWgs84 = () =>
+  Type.Number({
+    minimum: -180,
+    maximum: 180,
+    title: "LongitudeWgs84",
+    description: "WGS84 longitude; -180 to 180 degrees",
+  });
+export const Coordinate2d = () =>
+  Type.Tuple([Longitude(), Latitude()], {
     title: "GeoJSON coordinate 2d",
     description: "coordinate: [longitude, latitude]",
   });
-export const TCoordinate3d = () =>
-  Type.Tuple([TLongitude(), TLatitude(), Type.Number()], {
+
+export const Coordinate3d = () =>
+  Type.Tuple([...Type.Rest(Coordinate2d()), Type.Number()], {
     title: "GeoJSON coordinate 3d",
     description: "coordinate: [longitude, latitude, elevation/z]",
   });
-export const TCoordinate = () =>
-  Type.Union([TCoordinate2d(), TCoordinate3d()], {
+export const Coordinate = () =>
+  Type.Union([Coordinate2d(), Coordinate3d()], {
     title: "GeoJSON coordinate",
     description: "coordinate: [longitude, latitude] or [longitude, latitude, elevation/z]",
   });
 
-export const TBBox2d = () =>
-  Type.Tuple([TLongitude(), TLatitude(), TLongitude(), TLatitude()], {
+export const BBox2d = () =>
+  Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
     title: "GeoJSON BBox 2d",
     description: "bbox: [west, south, east, north]",
   });
-export const TBBox3d = () =>
-  Type.Tuple([TLongitude(), TLatitude(), TLongitude(), TLatitude(), Type.Number(), Type.Number()], {
+export const BBox3d = () =>
+  Type.Tuple([...Type.Rest(BBox2d()), Type.Number(), Type.Number()], {
     title: "GeoJSON BBox 3d",
     description: "bbox: [west, south, east, north, min-z, max-z]",
   });
-export const TBBox = () =>
-  Type.Union([TBBox2d(), TBBox3d()], {
+export const BBox = () =>
+  Type.Union([BBox2d(), BBox3d()], {
     title: "GeoJSON BBox",
     description: "bbox: [west, south, east, north] or [west, south, east, north, min-z, max-z]",
   });
 
-export const TGeojsonProperties = () =>
-  TNullable(Type.Record(Type.String(), Type.Unknown()), {
+export const GeojsonProperties = () =>
+  Nullable(Type.Record(Type.String(), Type.Unknown()), {
     default: null,
   });
 
-export const TPointGeometry = () =>
-  Type.Object({ type: Type.Literal("Point"), coordinates: TCoordinate() }, { title: "GeoJSON Point" });
-export const TLineStringGeometry = () =>
+export const PointGeometry = () =>
+  Type.Object({ type: Type.Literal("Point"), coordinates: Coordinate() }, { title: "GeoJSON Point" });
+
+export const LineGeometry = () =>
   Type.Object(
     {
       type: Type.Literal("LineString"),
-      coordinates: Type.Array(TCoordinate()),
-      bbox: Type.Optional(TBBox()),
+      coordinates: Type.Array(Coordinate()),
+      bbox: Type.Optional(BBox()),
     },
     {
       title: "GeoJSON LineString",
     }
   );
-export const TPolygonGeometry = () =>
+export const PolygonGeometry = () =>
   Type.Object(
     {
       type: Type.Literal("Polygon"),
       coordinates: Type.Array(
-        Type.Array(TCoordinate(), {
+        Type.Array(Coordinate(), {
           minItems: 4,
         })
       ),
@@ -105,77 +118,77 @@ export const TPolygonGeometry = () =>
       additionalProperties: false,
     }
   );
-export const TMultiPointGeometry = () =>
+export const MultiPointGeometry = () =>
   Type.Object(
     {
       type: Type.Literal("MultiPoint"),
-      coordinates: Type.Array(TCoordinate()),
-      bbox: Type.Optional(TBBox()),
+      coordinates: Type.Array(Coordinate()),
+      bbox: Type.Optional(BBox()),
     },
     {
       title: "GeoJSON MultiPoint",
     }
   );
 
-export const TMultiLineStringGeometry = () =>
+export const MultiLineStringGeometry = () =>
   Type.Object(
     {
       type: Type.Literal("MultiLineString"),
-      coordinates: Type.Array(Type.Array(TCoordinate())),
-      bbox: Type.Optional(TBBox()),
+      coordinates: Type.Array(Type.Array(Coordinate())),
+      bbox: Type.Optional(BBox()),
     },
     {
       title: "GeoJSON MultiLineString",
     }
   );
 
-export const TMultiPolygonGeometry = () =>
+export const MultiPolygonGeometry = () =>
   Type.Object(
     {
       type: Type.Literal("MultiPolygon"),
-      coordinates: Type.Array(Type.Array(Type.Array(TCoordinate()))),
-      bbox: Type.Optional(TBBox()),
+      coordinates: Type.Array(Type.Array(Type.Array(Coordinate()))),
+      bbox: Type.Optional(BBox()),
     },
     {
       title: "GeoJSON MultiPolygon",
     }
   );
 
-export const TGeometry = () =>
+export const Geometry = () =>
   Type.Union(
     [
-      TPointGeometry(),
-      TLineStringGeometry(),
-      TPolygonGeometry(),
-      TMultiPointGeometry(),
-      TMultiLineStringGeometry(),
-      TMultiPolygonGeometry(),
+      PointGeometry(),
+      LineGeometry(),
+      PolygonGeometry(),
+      MultiPointGeometry(),
+      MultiLineStringGeometry(),
+      MultiPolygonGeometry(),
     ],
     {
       title: "GeoJSON Geometry",
     }
   );
 
-export const TFeatureSchema = () =>
+export const FeatureSchema = () =>
   Type.Object(
     {
       type: Type.Literal("Feature"),
-      geometry: TGeometry(),
-      properties: Type.Optional(TGeojsonProperties()),
-      bbox: Type.Optional(TBBox()),
+      geometry: Geometry(),
+      properties: Type.Optional(GeojsonProperties()),
+      bbox: Type.Optional(BBox()),
     },
     {
       title: "GeoJSON Feature",
     }
   );
 
-export const TFeatureCollection = () =>
+export const FeatureCollection = () =>
   Type.Object(
     {
       type: Type.Literal("FeatureCollection"),
-      features: Type.Array(TFeatureSchema()),
-      properties: Type.Optional(TGeojsonProperties()),
-      bbox: Type.Optional(TBBox()),
+      features: Type.Array(FeatureSchema()),
+      properties: Type.Optional(GeojsonProperties()),
+      bbox: Type.Optional(BBox()),
     },
     {
       title: "GeoJSON FeatureCollection",
@@ -183,12 +196,12 @@ export const TFeatureCollection = () =>
   );
 
 export type GeometrySchema =
-  | ReturnType<typeof TPointGeometry>
-  | ReturnType<typeof TLineStringGeometry>
-  | ReturnType<typeof TPolygonGeometry>
-  | ReturnType<typeof TMultiPointGeometry>
-  | ReturnType<typeof TMultiLineStringGeometry>
-  | ReturnType<typeof TMultiPolygonGeometry>;
+  | ReturnType<typeof PointGeometry>
+  | ReturnType<typeof LineGeometry>
+  | ReturnType<typeof PolygonGeometry>
+  | ReturnType<typeof MultiPointGeometry>
+  | ReturnType<typeof MultiLineStringGeometry>
+  | ReturnType<typeof MultiPolygonGeometry>;
 
 export type FeatureSchema<G extends GeometrySchema, P extends TSchema = TUnknown> = TObject<{
   type: TLiteral<"Feature">;
@@ -198,12 +211,12 @@ export type FeatureSchema<G extends GeometrySchema, P extends TSchema = TUnknown
 
 export type GeojsonProperties<T extends TSchema | undefined> = IsDefined<T> extends true
   ? AssertType<T>
-  : ReturnType<typeof TGeojsonProperties>;
+  : ReturnType<typeof GeojsonProperties>;
 
-export const TFeatureProperties = <T extends TSchema | undefined>(schema?: T) =>
+export const FeatureProperties = <T extends TSchema | undefined>(schema?: T) =>
   (schema === undefined ? Type.Unknown() : schema) as GeojsonProperties<T>;
 
-export function TFeature<Geom extends GeometrySchema, P extends TSchema | undefined>(
+export function Feature<Geom extends GeometrySchema, P extends TSchema | undefined>(
   geometrySchema: Geom,
   propertiesSchema: P,
   options?: SchemaOptions
@@ -212,81 +225,81 @@ export function TFeature<Geom extends GeometrySchema, P extends TSchema | undefi
     {
       type: Type.Literal("Feature"),
       geometry: geometrySchema,
-      properties: TFeatureProperties(propertiesSchema),
+      properties: FeatureProperties(propertiesSchema),
     },
     options
   );
 }
 
-export function TPoint<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
+export function PointFeature<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
   // TODO: figure out how to use featureSchema:
   // return featureSchema(PointGeometry, propertiesSchema, options);
   return Type.Object(
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-      geometry: TPointGeometry(),
-      properties: TFeatureProperties(propertiesSchema),
+      geometry: PointGeometry(),
+      properties: FeatureProperties(propertiesSchema),
     },
     options
   );
 }
 
-export function TLineString<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
+export function LineStringFeature<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-      geometry: TLineStringGeometry(),
-      properties: TFeatureProperties(propertiesSchema),
+      geometry: LineGeometry(),
+      properties: FeatureProperties(propertiesSchema),
     },
     options
   );
 }
 
-export function TPolygon<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
+export function PolygonFeature<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-      geometry: TPolygonGeometry(),
-      properties: TFeatureProperties(propertiesSchema),
+      geometry: PolygonGeometry(),
+      properties: FeatureProperties(propertiesSchema),
     },
     options
   );
 }
 
-export function TMultiPoint<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
+export function MultiPointFeature<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-      geometry: TMultiPointGeometry(),
-      properties: TFeatureProperties(propertiesSchema),
+      geometry: MultiPointGeometry(),
+      properties: FeatureProperties(propertiesSchema),
     },
     options
   );
 }
 
-export function TMultiLineString<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
+export function MultiLineStringFeature<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-      geometry: TMultiLineStringGeometry(),
-      properties: TFeatureProperties(propertiesSchema),
+      geometry: MultiLineStringGeometry(),
+      properties: FeatureProperties(propertiesSchema),
     },
     options
   );
 }
 
-export function TMultiPolygon<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
+export function MultiPolygonFeature<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-      geometry: TMultiPolygonGeometry(),
-      properties: TFeatureProperties(propertiesSchema),
+      geometry: MultiPolygonGeometry(),
+      properties: FeatureProperties(propertiesSchema),
     },
     {
       title: "GeoJSON MultiPolygon Feature",
@@ -295,11 +308,22 @@ export function TMultiPolygon<T extends TSchema | undefined>(propertiesSchema?: 
   );
 }
 
+export function FeatureSet<T extends TSchema | undefined>(propertiesSchema?: T, options?: SchemaOptions) {
+  return {
+    point: PointFeature(propertiesSchema, options),
+    line: LineStringFeature(propertiesSchema, options),
+    polygon: PolygonFeature(propertiesSchema, options),
+    multiPoint: MultiPointFeature(propertiesSchema, options),
+    multiLine: MultiLineStringFeature(propertiesSchema, options),
+    multiPolygon: MultiPolygonFeature(propertiesSchema, options),
+  };
+}
+
 export {
-  TPoint as TPointFeature,
-  TLineString as TLineStringFeature,
-  TPolygon as TPolygonFeature,
-  TMultiPoint as TMultiPointFeature,
-  TMultiLineString as TMultiLineStringFeature,
-  TMultiPolygon as TMultiPolygonFeature,
+  PointFeature as Point,
+  LineStringFeature as LineString,
+  PolygonFeature as Polygon,
+  MultiPointFeature as MultiPoint,
+  MultiLineStringFeature as MultiLineString,
+  MultiPolygonFeature as MultiPolygon,
 };

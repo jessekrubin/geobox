@@ -2,12 +2,12 @@ import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import * as turf from "@turf/turf";
 import { assert, expect, test } from "vitest";
-import * as geobox from "./turfbox.js";
+import * as geobox from "./geobox.js";
 
 test("test point schema builder", () => {
   const p = turf.point([0, 0]);
 
-  const pointSchema = geobox.TPoint();
+  const pointSchema = geobox.PointFeature();
   const pointSchemaValidator = TypeCompiler.Compile(pointSchema);
 
   assert.equal(pointSchemaValidator.Check(p), true);
@@ -18,7 +18,7 @@ test("test point schema builder", () => {
   }
 
   const pDingo = turf.point([0, 0], { dingo: "bash" }); // My dog bash aka 'babydog'
-  const pointSchemaBabydog = geobox.TPoint(Type.Object({ dingo: Type.String() }));
+  const pointSchemaBabydog = geobox.PointFeature(Type.Object({ dingo: Type.String() }));
   const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pDingo)) {
     const t = pDingo;

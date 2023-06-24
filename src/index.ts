@@ -1,1 +1,1 @@
-export * from "./turfbox.js";
+export * from "./geobox.js";
