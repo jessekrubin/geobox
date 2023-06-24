@@ -5,7 +5,35 @@ import type { AssertType, SchemaOptions, TLiteral, TObject, TSchema, TUnknown } 
 import { TNullable, Type } from "./typebox.js";
 import type { IsDefined } from "./types.js";
 
-// This is the format I would like
+export const FeatureTypeLiteral = () => Type.Literal("Feature");
+export const FeatureCollectionTypeLiteral = () => Type.Literal("FeatureCollection");
+export const GeometryCollectionTypeLiteral = () => Type.Literal("GeometryCollection");
+export const PointTypeLiteral = () => Type.Literal("Point");
+export const MultiPointTypeLiteral = () => Type.Literal("MultiPoint");
+export const LineStringTypeLiteral = () => Type.Literal("LineString");
+export const MultiLineStringTypeLiteral = () => Type.Literal("MultiLineString");
+export const PolygonTypeLiteral = () => Type.Literal("Polygon");
+export const MultiPolygonTypeLiteral = () => Type.Literal("MultiPolygon");
+export const GeoJSONType = () =>
+  Type.Union(
+    [
+      FeatureTypeLiteral(),
+      FeatureCollectionTypeLiteral(),
+      GeometryCollectionTypeLiteral(),
+      PointTypeLiteral(),
+      MultiPointTypeLiteral(),
+      LineStringTypeLiteral(),
+      MultiLineStringTypeLiteral(),
+      PolygonTypeLiteral(),
+      MultiPolygonTypeLiteral(),
+    ],
+    {
+      title: "GeoJSON type",
+      description:
+        "GeoJSON type property: Feature, FeatureCollection, GeometryCollection, Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon",
+    }
+  );
+
 export const TLatitude = () => Type.Number({ minimum: -90, maximum: 90 });
 export const TLongitude = () => Type.Number({ title: "longitude" });
 
@@ -260,6 +288,18 @@ export function TMultiPolygon<T extends TSchema | undefined>(propertiesSchema?: 
       geometry: TMultiPolygonGeometry(),
       properties: TFeatureProperties(propertiesSchema),
     },
-    options
+    {
+      title: "GeoJSON MultiPolygon Feature",
+      ...(options || {}),
+    }
   );
 }
+
+export {
+  TPoint as TPointFeature,
+  TLineString as TLineStringFeature,
+  TPolygon as TPolygonFeature,
+  TMultiPoint as TMultiPointFeature,
+  TMultiLineString as TMultiLineStringFeature,
+  TMultiPolygon as TMultiPolygonFeature,
+};
