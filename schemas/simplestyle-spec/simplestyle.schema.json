@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "properties": {
+    "title": {
+      "default": "",
+      "title": "Title",
+      "description": "A title to show when this item is clicked or hovered over",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "description": "A description to show when this item is clicked or hovered over",
+      "type": "string"
+    },
+    "marker-size": {
+      "default": {
+        "const": "medium",
+        "type": "string"
+      },
+      "anyOf": [
+        {
+          "const": "small",
+          "type": "string"
+        },
+        {
+          "const": "medium",
+          "type": "string"
+        },
+        {
+          "const": "large",
+          "type": "string"
+        }
+      ]
+    },
+    "marker-symbol": {
+      "default": "",
+      "title": "Marker Symbol",
+      "description": "A symbol to position in the center of this icon if not provided or \"\", no symbol is overlaid and only the marker is shown Allowed values include - Icon ID - An integer 0 through 9 - A lowercase character \"a\" through \"z\"",
+      "type": "string"
+    },
+    "marker-color": {
+      "default": "#7e7e7e",
+      "title": "Marker Color",
+      "description": "The marker's color; value must follow COLOR RULES",
+      "type": "string"
+    },
+    "stroke": {
+      "default": "#555555",
+      "title": "Stroke",
+      "description": "the color of a line as part of a polygon, polyline, or multigeometry value must follow COLOR RULES",
+      "type": "string"
+    },
+    "stroke-opacity": {
+      "default": 1,
+      "title": "Stroke Opacity",
+      "description": "the opacity of the line component of a polygon, polyline, or multigeometry value must be a floating point number greater than or equal to zero and less or equal to than one",
+      "minimum": 0,
+      "maximum": 1,
+      "type": "number"
+    },
+    "stroke-width": {
+      "default": 2,
+      "title": "Stroke Width",
+      "description": "the width of the line component of a polygon, polyline, or multigeometry value must be a floating point number greater than or equal to 0",
+      "minimum": 0,
+      "type": "number"
+    },
+    "fill": {
+      "default": "#555555",
+      "title": "Fill",
+      "description": "the color of the interior of a polygon value must follow COLOR RULES",
+      "type": "string"
+    },
+    "fill-opacity": {
+      "default": 0.6,
+      "title": "Fill Opacity",
+      "maximum": 1,
+      "minimum": 0,
+      "description": "the opacity of the interior of a polygon. Implementations may choose to set this to 0 for line features value must be a floating point number greater than or equal to zero and less or equal to than one",
+      "type": "number"
+    }
+  }
+}
