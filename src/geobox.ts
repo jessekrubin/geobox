@@ -1,7 +1,7 @@
 /**
  * Turfbox = turf/geojson + typebox
  */
-import type { AssertType, SchemaOptions, TLiteral, TObject, TSchema, TUnknown } from "./typebox.js";
+import type { AssertType, SchemaOptions, TLiteral, TNumber, TObject, TSchema, TUnknown } from "./typebox.js";
 import { Nullable, Type } from "./typebox.js";
 import type { IsDefined } from "./types.js";
 
@@ -34,8 +34,26 @@ export const GeoJSONType = () =>
     }
   );
 
-export const Latitude = () => Type.Number({ title: "Latitude" });
-export const Longitude = () => Type.Number({ title: "Longitude", description: "longitude" });
+/**
+ * GeoJSON Latitude json-schema
+ * @returns {TNumber} GeoJSON Latitude json-schema
+ */
+export const Latitude = () =>
+  Type.Number({
+    title: "Latitude",
+    description: "Longitude",
+  });
+
+/**
+ * GeoJSON Longitude json-schema
+ * @returns {TNumber} GeoJSON Longitude json-schema
+ */
+export const Longitude = () =>
+  Type.Number({
+    title: "Longitude",
+    description: "Longitude",
+  });
+
 export const LatitudeWgs84 = () =>
   Type.Number({
     minimum: -90,
@@ -43,6 +61,7 @@ export const LatitudeWgs84 = () =>
     title: "LatitudeWgs84",
     description: "WGS84 latitude; -90 to 90 degrees",
   });
+
 export const LongitudeWgs84 = () =>
   Type.Number({
     minimum: -180,
@@ -55,7 +74,6 @@ export const Coordinate2d = () =>
     title: "GeoJSON coordinate 2d",
     description: "coordinate: [longitude, latitude]",
   });
-
 export const Coordinate3d = () =>
   Type.Tuple([...Type.Rest(Coordinate2d()), Type.Number()], {
     title: "GeoJSON coordinate 3d",
@@ -64,6 +82,22 @@ export const Coordinate3d = () =>
 export const Coordinate = () =>
   Type.Union([Coordinate2d(), Coordinate3d()], {
     title: "GeoJSON coordinate",
+    description: "coordinate: [longitude, latitude] or [longitude, latitude, elevation/z]",
+  });
+
+export const Coordinate2dWgs84 = () =>
+  Type.Tuple([LongitudeWgs84(), LatitudeWgs84()], {
+    title: "GeoJSON coordinate 2d WGS84",
+    description: "coordinate: [longitude, latitude]",
+  });
+export const Coordinate3dWgs84 = () =>
+  Type.Tuple([...Type.Rest(Coordinate2dWgs84()), Type.Number()], {
+    title: "GeoJSON coordinate 3d WGS84",
+    description: "coordinate: [longitude, latitude, elevation/z]",
+  });
+export const CoordinateWgs84 = () =>
+  Type.Union([Coordinate2dWgs84(), Coordinate3dWgs84()], {
+    title: "GeoJSON coordinate WGS84",
     description: "coordinate: [longitude, latitude] or [longitude, latitude, elevation/z]",
   });
 
@@ -80,6 +114,22 @@ export const BBox3d = () =>
 export const BBox = () =>
   Type.Union([BBox2d(), BBox3d()], {
     title: "GeoJSON BBox",
+    description: "bbox: [west, south, east, north] or [west, south, east, north, min-z, max-z]",
+  });
+
+export const BBox2dWgs84 = () =>
+  Type.Tuple([LongitudeWgs84(), LatitudeWgs84(), LongitudeWgs84(), LatitudeWgs84()], {
+    title: "GeoJSON BBox 2d WGS84",
+    description: "bbox: [west, south, east, north]",
+  });
+export const BBox3dWgs84 = () =>
+  Type.Tuple([...Type.Rest(BBox2dWgs84()), Type.Number(), Type.Number()], {
+    title: "GeoJSON BBox 3d WGS84",
+    description: "bbox: [west, south, east, north, min-z, max-z]",
+  });
+export const BBoxWgs84 = () =>
+  Type.Union([BBox2dWgs84(), BBox3dWgs84()], {
+    title: "GeoJSON BBox WGS84",
     description: "bbox: [west, south, east, north] or [west, south, east, north, min-z, max-z]",
   });
 
@@ -122,7 +172,7 @@ export const PolygonGeometry = (SchemaOptions?: SchemaOptions) =>
       ...(SchemaOptions || {}),
     }
   );
-export const MultiPointGeometry = () =>
+export const MultiPointGeometry = (SchemaOptions?: SchemaOptions) =>
   Type.Object(
     {
       type: Type.Literal("MultiPoint"),
@@ -131,10 +181,13 @@ export const MultiPointGeometry = () =>
     },
     {
       title: "GeoJSON MultiPoint",
+      description: "GeoJSON MultiPoint geometry",
+      additionalProperties: false,
+      ...(SchemaOptions || {}),
     }
   );
 
-export const MultiLineStringGeometry = () =>
+export const MultiLineStringGeometry = (SchemaOptions?: SchemaOptions) =>
   Type.Object(
     {
       type: Type.Literal("MultiLineString"),
@@ -143,10 +196,13 @@ export const MultiLineStringGeometry = () =>
     },
     {
       title: "GeoJSON MultiLineString",
+      description: "GeoJSON MultiLineString geometry",
+      additionalProperties: false,
+      ...(SchemaOptions || {}),
     }
   );
 
-export const MultiPolygonGeometry = () =>
+export const MultiPolygonGeometry = (SchemaOptions?: SchemaOptions) =>
   Type.Object(
     {
       type: Type.Literal("MultiPolygon"),
@@ -155,6 +211,8 @@ export const MultiPolygonGeometry = () =>
     },
     {
       title: "GeoJSON MultiPolygon",
+      description: "GeoJSON MultiPolygon geometry",
+      additionalProperties: false,
     }
   );
 
@@ -170,15 +228,16 @@ export const Geometry = () =>
     ],
     {
       title: "GeoJSON Geometry",
+      description: "GeoJSON Geometry",
     }
   );
 
-export const FeatureSchema = () =>
+export const FeatureSchema = (propertiesSchema?: ReturnType<typeof GeojsonProperties>) =>
   Type.Object(
     {
       type: Type.Literal("Feature"),
       geometry: Geometry(),
-      properties: Type.Optional(GeojsonProperties()),
+      properties: Type.Optional(propertiesSchema || GeojsonProperties()),
       bbox: Type.Optional(BBox()),
     },
     {
@@ -186,16 +245,19 @@ export const FeatureSchema = () =>
     }
   );
 
-export const FeatureCollection = () =>
+export const FeatureCollection = (featureSchema?: ReturnType<typeof FeatureSchema>, schemaOptions?: SchemaOptions) =>
   Type.Object(
     {
       type: Type.Literal("FeatureCollection"),
-      features: Type.Array(FeatureSchema()),
+      features: Type.Array(featureSchema || FeatureSchema()),
       properties: Type.Optional(GeojsonProperties()),
       bbox: Type.Optional(BBox()),
     },
     {
       title: "GeoJSON FeatureCollection",
+      description: "GeoJSON FeatureCollection",
+      additionalProperties: false,
+      ...(schemaOptions || {}),
     }
   );
 
