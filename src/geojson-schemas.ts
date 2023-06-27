@@ -1,7 +1,7 @@
 /**
  * Turfbox = turf/geojson + typebox
  */
-import type { AssertType, SchemaOptions, TLiteral, TNumber, TObject, TSchema, TUnknown } from "./typebox.js";
+import type { AssertType, SchemaOptions, TLiteral, TObject, TSchema, TUnknown } from "./typebox.js";
 import { Nullable, Type } from "./typebox.js";
 import type { IsDefined } from "./types.js";
 

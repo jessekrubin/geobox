@@ -1,33 +1,53 @@
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
-import * as turf from "@turf/turf";
 import { assert, expect, test } from "vitest";
 import * as geobox from "./geojson-schemas.js";
 
-test("test point schema builder", () => {
-  const p = turf.point([0, 0]);
+const simplePointFeature = {
+  type: "Feature",
+  geometry: {
+    type: "Point",
 
+    coordinates: [0, 0],
+  },
+  properties: {},
+};
+
+const pointFeatureDingoProps = {
+  type: "Feature",
+  geometry: {
+    type: "Point",
+    coordinates: [0, 0],
+  },
+  properties: {
+    // My dog bash aka 'babydog'
+    dingo: "bash",
+  },
+};
+
+test("no-properties-schema", () => {
   const pointSchema = geobox.PointFeature();
   const pointSchemaValidator = TypeCompiler.Compile(pointSchema);
 
-  assert.equal(pointSchemaValidator.Check(p), true);
-  if (pointSchemaValidator.Check(p)) {
-    const t = p;
+  assert.equal(pointSchemaValidator.Check(simplePointFeature), true);
+  if (pointSchemaValidator.Check(simplePointFeature)) {
+    const t = simplePointFeature;
     // keep to make eslint is happy and can see the type of t
     expect(t.geometry.coordinates).toEqual([0, 0]);
   }
+});
 
-  const pDingo = turf.point([0, 0], { dingo: "bash" }); // My dog bash aka 'babydog'
+test("point-with-properties-schema", () => {
   const pointSchemaBabydog = geobox.PointFeature(Type.Object({ dingo: Type.String() }));
   const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
-  if (pointSchemaDingoValidator.Check(pDingo)) {
-    const t = pDingo;
+  if (pointSchemaDingoValidator.Check(pointFeatureDingoProps)) {
+    const t = pointFeatureDingoProps;
     expect(t.properties).toEqual({ dingo: "bash" });
   }
 
-  assert.equal(pointSchemaDingoValidator.Check(pDingo), true);
-  assert.equal(pointSchemaDingoValidator.Check(p), false);
+  assert.equal(pointSchemaDingoValidator.Check(pointFeatureDingoProps), true);
+  assert.equal(pointSchemaDingoValidator.Check(simplePointFeature), false);
 
-  const badpoint = { ...p, properties: [123] };
+  const badpoint = { ...simplePointFeature, properties: [123] };
   expect(pointSchemaDingoValidator.Check(badpoint)).toBe(false);
 });
