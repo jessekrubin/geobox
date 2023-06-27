@@ -2,7 +2,7 @@ import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import * as turf from "@turf/turf";
 import { assert, expect, test } from "vitest";
-import * as geobox from "./geobox.js";
+import * as geobox from "./geojson-schemas.js";
 
 test("test point schema builder", () => {
   const p = turf.point([0, 0]);
