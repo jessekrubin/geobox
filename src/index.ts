@@ -1,1 +1,1 @@
-export * from "./geojson-schemas.js";
+export * from "./geojson-schema.js";

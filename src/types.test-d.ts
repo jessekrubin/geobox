@@ -3,7 +3,7 @@ import { expectTypeOf } from "vitest";
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { test } from "vitest";
-import * as geobox from "./geojson-schemas.js";
+import * as geobox from "./geojson-schema.js";
 
 test("test point schema builder", () => {
   const pDingo: {
