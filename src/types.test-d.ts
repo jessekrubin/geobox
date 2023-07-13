@@ -1,5 +1,5 @@
 // import { assertType, expectTypeOf } from "vitest";
-import { expectTypeOf } from "vitest";
+import { expectTypeOf, assertType } from "vitest";
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { test } from "vitest";
@@ -25,7 +25,7 @@ test("test point schema builder", () => {
       dingo: "bash",
     },
   };
-  const pointSchemaBabydog = geobox.PointFeature(Type.Object({ dingo: Type.String() }));
+  const pointSchemaBabydog = geobox.PointFeature({ properties: Type.Object({ dingo: Type.String() }) });
   const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pDingo)) {
     const t = pDingo;

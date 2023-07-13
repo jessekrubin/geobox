@@ -38,7 +38,26 @@ test("no-properties-schema", () => {
 });
 
 test("point-with-properties-schema", () => {
-  const pointSchemaBabydog = geobox.PointFeature(Type.Object({ dingo: Type.String() }));
+  const pointSchemaBabydog = geobox.PointFeature({
+    properties: Type.Object({ dingo: Type.String() }),
+  });
+  const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
+  if (pointSchemaDingoValidator.Check(pointFeatureDingoProps)) {
+    const t = pointFeatureDingoProps;
+    expect(t.properties).toEqual({ dingo: "bash" });
+  }
+
+  assert.equal(pointSchemaDingoValidator.Check(pointFeatureDingoProps), true);
+  assert.equal(pointSchemaDingoValidator.Check(simplePointFeature), false);
+
+  const badpoint = { ...simplePointFeature, properties: [123] };
+  expect(pointSchemaDingoValidator.Check(badpoint)).toBe(false);
+});
+
+test("point-feature-schema-2d", () => {
+  const pointSchemaBabydog = geobox.PointFeature2d({
+    properties: Type.Object({ dingo: Type.String() }),
+  });
   const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pointFeatureDingoProps)) {
     const t = pointFeatureDingoProps;

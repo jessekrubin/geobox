@@ -6,11 +6,12 @@
     "esModuleInterop": true,
     "moduleResolution": "node16",
     "skipLibCheck": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noImplicitAny": true,
     "allowJs": true,
     "noEmit": false,
     "outDir": "dist",
     "resolveJsonModule": true
-  }
+  },
+  "include": ["src/**/*"]
 }

@@ -9,6 +9,8 @@ export type {
   TNumber,
   TObject,
   TSchema,
+  TTuple,
+  TUnion,
   TUnknown,
 } from "@sinclair/typebox";
 
@@ -22,8 +24,8 @@ export type {
  * @param SchemaOptions Options to pass to the schema
  * @returns A schema that is either the original schema or null
  */
-export const Nullable = <T extends TSchema>(schema: T, SchemaOptions?: SchemaOptions) =>
-  Type.Union([schema, Type.Null()], SchemaOptions);
+export const Nullable = <T extends TSchema>(schema: T, options?: SchemaOptions) =>
+  Type.Union([schema, Type.Null()], options);
 
 /**
  * StringEnum
