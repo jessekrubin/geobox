@@ -33,8 +33,8 @@ export type TBBoxSchema =
   | TTuple<[TNumber, TNumber, TNumber, TNumber]>
   | TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>
   | TUnion<
-    [TTuple<[TNumber, TNumber, TNumber, TNumber]>, TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>]
-  >;
+      [TTuple<[TNumber, TNumber, TNumber, TNumber]>, TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>]
+    >;
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
 export const FeatureCollectionTypeLiteral = () => Type.Literal("FeatureCollection");
