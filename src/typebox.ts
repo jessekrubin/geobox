@@ -27,6 +27,8 @@ export type {
 export const Nullable = <T extends TSchema>(schema: T, options?: SchemaOptions) =>
   Type.Union([schema, Type.Null()], options);
 
+export const OptionalNullable = <T extends TSchema>(schema: T, options?: SchemaOptions) => Type.Optional(Nullable(schema, options));
+
 /**
  * StringEnum
  *

@@ -33,8 +33,8 @@ export type TBBoxSchema =
   | TTuple<[TNumber, TNumber, TNumber, TNumber]>
   | TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>
   | TUnion<
-      [TTuple<[TNumber, TNumber, TNumber, TNumber]>, TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>]
-    >;
+    [TTuple<[TNumber, TNumber, TNumber, TNumber]>, TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>]
+  >;
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
 export const FeatureCollectionTypeLiteral = () => Type.Literal("FeatureCollection");
@@ -75,10 +75,11 @@ export const FeatureId = () =>
  * GeoJSON Latitude json-schema
  * @returns {TNumber} GeoJSON Latitude json-schema
  */
-export const Latitude = () =>
+export const Latitude = (options?: SchemaOptions) =>
   Type.Number({
     title: "Latitude",
     description: "Longitude",
+    ...options,
   });
 
 /**
@@ -92,89 +93,115 @@ export const Longitude = (options?: SchemaOptions) =>
     ...options,
   });
 
-export const LatitudeWgs84 = () =>
-  Type.Number({
+export const LatitudeWgs84 = (options?: SchemaOptions) => Latitude(
+  {
     minimum: -90,
     maximum: 90,
     title: "LatitudeWgs84",
     description: "WGS84 latitude; -90 to 90 degrees",
-  });
+    ...options,
+  }
+);
 
-export const LongitudeWgs84 = () =>
-  Type.Number({
+export const LongitudeWgs84 = (
+  options?: SchemaOptions
+) =>
+  Longitude({
     minimum: -180,
     maximum: 180,
     title: "LongitudeWgs84",
     description: "WGS84 longitude; -180 to 180 degrees",
+    ...options,
   });
-export const Coordinate2d = () =>
+export const Coordinate2d = (
+  options?: SchemaOptions
+) =>
   Type.Tuple([Longitude(), Latitude()], {
     title: "GeoJSON coordinate 2d",
     description: "coordinate: [longitude, latitude]",
-  });
-export const Coordinate3d = () =>
+    ...options
+  },
+  );
+export const Coordinate3d = (options?: SchemaOptions) =>
   Type.Tuple([...Type.Rest(Coordinate2d()), Type.Number()], {
     title: "GeoJSON coordinate 3d",
     description: "coordinate: [longitude, latitude, elevation/z]",
+    ...options
   });
-export const Coordinate = () =>
+export const Coordinate = (
+  options?: SchemaOptions
+) =>
   Type.Union([Coordinate2d(), Coordinate3d()], {
     title: "GeoJSON coordinate",
     description: "coordinate: [longitude, latitude] or [longitude, latitude, elevation/z]",
+    ...options
   });
 
-export const Coordinate2dWgs84 = () =>
+export const Coordinate2dWgs84 = (options?: SchemaOptions) =>
   Type.Tuple([LongitudeWgs84(), LatitudeWgs84()], {
     title: "GeoJSON coordinate 2d WGS84",
     description: "coordinate: [longitude, latitude]",
+    ...options
   });
-export const Coordinate3dWgs84 = () =>
+
+export const Coordinate3dWgs84 = (options?: SchemaOptions) =>
   Type.Tuple([...Type.Rest(Coordinate2dWgs84()), Type.Number()], {
     title: "GeoJSON coordinate 3d WGS84",
     description: "coordinate: [longitude, latitude, elevation/z]",
+    ...options
   });
-export const CoordinateWgs84 = () =>
+export const CoordinateWgs84 = (options?: SchemaOptions) =>
   Type.Union([Coordinate2dWgs84(), Coordinate3dWgs84()], {
     title: "GeoJSON coordinate WGS84",
     description: "coordinate: [longitude, latitude] or [longitude, latitude, elevation/z]",
+    ...options
   });
 
-export const BBox2d = () =>
+export const BBox2d = (options?: SchemaOptions) =>
   Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
     title: "GeoJSON BBox 2d",
     description: "bbox: [west, south, east, north]",
+    ...options
   });
-export const BBox3d = () =>
+export const BBox3d = (options?: SchemaOptions) =>
   Type.Tuple([...Type.Rest(BBox2d()), Type.Number(), Type.Number()], {
     title: "GeoJSON BBox 3d",
     description: "bbox: [west, south, east, north, min-z, max-z]",
+    ...options
   });
-export const BBox = () =>
+export const BBox = (options?: SchemaOptions) =>
   Type.Union([BBox2d(), BBox3d()], {
     title: "GeoJSON BBox",
     description: "bbox: [west, south, east, north] or [west, south, east, north, min-z, max-z]",
+    ...options
   });
 
-export const BBox2dWgs84 = () =>
+export const BBox2dWgs84 = (options?: SchemaOptions) =>
   Type.Tuple([LongitudeWgs84(), LatitudeWgs84(), LongitudeWgs84(), LatitudeWgs84()], {
     title: "GeoJSON BBox 2d WGS84",
     description: "bbox: [west, south, east, north]",
+    ...options
   });
-export const BBox3dWgs84 = () =>
+export const BBox3dWgs84 = (options?: SchemaOptions) =>
   Type.Tuple([...Type.Rest(BBox2dWgs84()), Type.Number(), Type.Number()], {
     title: "GeoJSON BBox 3d WGS84",
     description: "bbox: [west, south, east, north, min-z, max-z]",
+    ...options
   });
-export const BBoxWgs84 = () =>
+export const BBoxWgs84 = (options?: SchemaOptions) =>
   Type.Union([BBox2dWgs84(), BBox3dWgs84()], {
     title: "GeoJSON BBox WGS84",
     description: "bbox: [west, south, east, north] or [west, south, east, north, min-z, max-z]",
+    ...options
   });
 
-export const GeojsonProperties = () =>
+export const GeojsonProperties = (options?: SchemaOptions) =>
   Nullable(Type.Record(Type.String(), Type.Unknown()), {
     default: null,
-  });
+    title: "GeoJSON properties",
+    ...options,
+  },
+  );
 
 /**
  * type inference for coordinate(s)
