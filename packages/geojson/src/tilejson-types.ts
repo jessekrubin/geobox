@@ -1,5 +1,5 @@
-export type TilejsonRasterFormat = 'png' | 'jpg' | 'webp';
-export type TilejsonVectorFormat = 'pbf';
+export type TilejsonRasterFormat = "png" | "jpg" | "webp";
+export type TilejsonVectorFormat = "pbf";
 
 export type Nullable<T> = T | null;
 
@@ -36,7 +36,7 @@ export type TilejsonCommon = {
   grids?: Nullable<string[]>;
   data?: Nullable<string[]>;
   fillzoom?: Nullable<number>;
-}
+};
 
 export type Tilejson300Raster = {
   format: TilejsonRasterFormat;
@@ -47,7 +47,6 @@ export type Tilejson300Vector = {
   format: TilejsonVectorFormat;
   vector_layers: VectorLayers;
 } & TilejsonCommon;
-
 
 export type Tilejson300 = Tilejson300Raster | Tilejson300Vector;
 

@@ -1,12 +1,12 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ['src/geojson.ts', 'src/types.ts'],
+  entry: ["src/geojson.ts", "src/types.ts"],
   splitting: false,
-  format: ['cjs', 'esm'],
+  format: ["cjs", "esm"],
   dts: true,
-  outDir: 'dist',
+  outDir: "dist",
   clean: true,
-  target: 'esnext',
-  tsconfig: './tsconfig.json',
+  target: "esnext",
+  tsconfig: "./tsconfig.json",
 });
