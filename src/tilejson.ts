@@ -1,7 +1,6 @@
 import type { SchemaOptions } from "./typebox.js";
 import { Type } from "./typebox.js";
 import { Latitude, Longitude } from "./geojson-schema.js";
-import { tilejson } from "./index.js";
 
 export const Semver = () =>
   Type.String({
