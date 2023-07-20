@@ -1,5 +1,5 @@
 import type { SchemaOptions, Static } from "./typebox.js";
-import { Type } from "./typebox.js"
+import { Type } from "./typebox.js";
 import { Latitude, Longitude } from "./geojson-schema.js";
 
 export const Semver = () =>
@@ -181,4 +181,3 @@ export const Tilejson300 = (options?: SchemaOptions) =>
 //   {
 //     ...options,
 //   });
-
