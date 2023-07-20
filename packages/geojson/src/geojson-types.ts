@@ -1,9 +1,9 @@
 export type Coordinate2d = [number, number];
 export type Coordinate3d = [number, number, number];
-export type Coordinate = Coordinate2d | Coordinate3d;
+export type Coordinate = [number, number] | [number, number, number];
 export type BBox2d = [number, number, number, number];
 export type BBox3d = [number, number, number, number, number, number];
-export type BBox = BBox2d | BBox3d;
+export type BBox = [number, number, number, number] | [number, number, number, number, number, number];
 
 // 'type' property literals
 export type PointGeometryType = "Point";
@@ -12,13 +12,9 @@ export type PolygonGeometryType = "Polygon";
 export type MultiPointGeometryType = "MultiPoint";
 export type MultiLineStringGeometryType = "MultiLineString";
 export type MultiPolygonGeometryType = "MultiPolygon";
-export type GeometryType =
-  | PointGeometryType
-  | LineStringGeometryType
-  | PolygonGeometryType
-  | MultiPointGeometryType
-  | MultiLineStringGeometryType
-  | MultiPolygonGeometryType;
+
+export type GeometryType = "Point" | "LineString" | "Polygon" | "MultiPoint" | "MultiLineString" | "MultiPolygon";
+
 export type FeatureType = "Feature";
 export type FeatureCollectionType = "FeatureCollection";
 export type GeometryCollectionType = "GeometryCollection";
