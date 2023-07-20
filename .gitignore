@@ -4,4 +4,4 @@ dist
 *.log
 scratch/
 coverage
-src/dev/dev*
+src/dev/
