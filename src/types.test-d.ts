@@ -29,6 +29,17 @@ test("test point schema builder", () => {
   const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pDingo)) {
     const t = pDingo;
+    assertType<{
+      type: "Feature";
+      geometry: {
+        type: "Point";
+        coordinates: [number, number];
+      };
+      properties: {
+        dingo: string;
+      };
+    }>(t);
+
     expectTypeOf(t.properties).toEqualTypeOf<{
       dingo: string;
     }>();

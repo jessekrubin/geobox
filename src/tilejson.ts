@@ -1,4 +1,4 @@
-import type { SchemaOptions, Static } from "./typebox.js";
+import type { SchemaOptions } from "./typebox.js";
 import { Type } from "./typebox.js";
 import { Latitude, Longitude } from "./geojson-schema.js";
 
@@ -61,7 +61,7 @@ export const Tilejson220 = (options?: SchemaOptions) =>
     {
       additionalProperties: true,
       ...options,
-    }
+    },
   );
 
 export const VectorLayer = (options?: SchemaOptions) =>
@@ -77,7 +77,7 @@ export const VectorLayer = (options?: SchemaOptions) =>
     {
       additionalProperties: true,
       ...options,
-    }
+    },
   );
 
 export const VectorLayers = (options?: SchemaOptions) =>
@@ -117,11 +117,9 @@ export const Tilejson300Raster = (options?: SchemaOptions) =>
     {
       additionalProperties: true,
       ...options,
-    }
+    },
   );
 
-const thingy = Tilejson300Raster();
-type t = Static<typeof thingy>;
 export const Tilejson300Vector = (options?: SchemaOptions) =>
   Type.Object(
     {
@@ -151,13 +149,14 @@ export const Tilejson300Vector = (options?: SchemaOptions) =>
     {
       additionalProperties: true,
       ...options,
-    }
+    },
   );
 
 export const Tilejson300 = (options?: SchemaOptions) =>
   Type.Union([Tilejson300Raster(), Tilejson300Vector()], {
     ...options,
   });
+
 /**
  * Experimental
  */

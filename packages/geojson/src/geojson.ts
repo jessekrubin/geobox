@@ -70,7 +70,7 @@ export const isCoordinates3d = (value: unknown): value is Coordinate3d[] =>
       el.length === 3 &&
       typeof el[0] === "number" &&
       typeof el[1] === "number" &&
-      typeof el[2] === "number"
+      typeof el[2] === "number",
   );
 export const isCoordinates = (value: unknown): value is Coordinate[] =>
   Array.isArray(value) &&
@@ -79,7 +79,7 @@ export const isCoordinates = (value: unknown): value is Coordinate[] =>
     (el) =>
       Array.isArray(el) &&
       ((el.length === 2 && typeof el[0] === "number" && typeof el[1] === "number") ||
-        (el.length === 3 && typeof el[0] === "number" && typeof el[1] === "number" && typeof el[2] === "number"))
+        (el.length === 3 && typeof el[0] === "number" && typeof el[1] === "number" && typeof el[2] === "number")),
   );
 
 export const isBBox2d = (value: unknown): value is BBox2d =>
@@ -146,8 +146,8 @@ const optsBbox = (bbox: unknown): BBox => {
   if (!isBBox(bbox)) {
     throw new Error(
       `Invalid bbox: ${JSON.stringify(
-        bbox
-      )}; must be [number, number, number, number] or [number, number, number, number, number, number]`
+        bbox,
+      )}; must be [number, number, number, number] or [number, number, number, number, number, number]`,
     );
   }
   return bbox;
@@ -177,17 +177,17 @@ export const pointCoordinates = <TCoordinate extends Coordinate = Coordinate>(co
     return coordinates;
   }
   throw new Error(
-    `Invalid coordinates: ${JSON.stringify(coordinates)}; must be [number, number] or [number, number, number]`
+    `Invalid coordinates: ${JSON.stringify(coordinates)}; must be [number, number] or [number, number, number]`,
   );
 };
 
 export const isLineStringCoordinates = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: TCoordinate[]
+  coordinates: TCoordinate[],
 ): coordinates is LineStringCoordinates<TCoordinate> => {
   return isCoordinates(coordinates) && coordinates.length >= 2;
 };
 export const lineStringCoordinates = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: TCoordinate[]
+  coordinates: TCoordinate[],
 ): LineStringCoordinates<TCoordinate> => {
   if (coordinates.length < 2) {
     throw new Error(`Invalid coordinates: ${JSON.stringify(coordinates)}; must be an array of two or more coordinates`);
@@ -195,21 +195,21 @@ export const lineStringCoordinates = <TCoordinate extends Coordinate = Coordinat
   if (!isLineStringCoordinates(coordinates)) {
     throw new Error(
       `Invalid coordinates: ${JSON.stringify(
-        coordinates
-      )}; must be an array of [number, number] or [number, number, number]`
+        coordinates,
+      )}; must be an array of [number, number] or [number, number, number]`,
     );
   }
   return coordinates;
 };
 
 export const isPolygonCoordinates = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: unknown
+  coordinates: unknown,
 ): coordinates is PolygonCoordinates<TCoordinate> => {
   // return Array.isArray(coordinates) && coordinates.every((el) => isPolygonInnerCoordinates(el)
   return (
     Array.isArray(coordinates) &&
     coordinates.every(
-      (value) => Array.isArray(value) && value.length >= 4 && value.every((value) => isCoordinate(value))
+      (value) => Array.isArray(value) && value.length >= 4 && value.every((value) => isCoordinate(value)),
     ) &&
     coordinates[0].length === coordinates[coordinates.length - 1].length &&
     coordinates[0].every((el: Coordinate, index: number) => el === coordinates[coordinates.length - 1][index])
@@ -217,7 +217,7 @@ export const isPolygonCoordinates = <TCoordinate extends Coordinate = Coordinate
 };
 
 export const polygonCoordinates = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: unknown
+  coordinates: unknown,
 ): PolygonCoordinates<TCoordinate> => {
   if (!isPolygonCoordinates<TCoordinate>(coordinates)) {
     throw new Error(`Invalid polygon coordinates: ${JSON.stringify(coordinates)}`);
@@ -226,7 +226,7 @@ export const polygonCoordinates = <TCoordinate extends Coordinate = Coordinate>(
 };
 
 export const pointGeometry = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: TCoordinate
+  coordinates: TCoordinate,
 ): PointGeometry<TCoordinate> => {
   return {
     type: "Point",
@@ -234,14 +234,14 @@ export const pointGeometry = <TCoordinate extends Coordinate = Coordinate>(
   };
 };
 export const pointGeometry2d = <TCoordinate extends Coordinate2d = Coordinate2d>(
-  coordinates: TCoordinate
+  coordinates: TCoordinate,
 ): PointGeometry2d => pointGeometry(coordinates);
 export const pointGeometry3d = <TCoordinate extends Coordinate3d = Coordinate3d>(
-  coordinates: TCoordinate
+  coordinates: TCoordinate,
 ): PointGeometry3d => pointGeometry(coordinates);
 
 export const lineStringGeometry = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: LineStringCoordinates<TCoordinate>
+  coordinates: LineStringCoordinates<TCoordinate>,
 ): LineStringGeometry<TCoordinate> => {
   return {
     type: "LineString",
@@ -249,53 +249,53 @@ export const lineStringGeometry = <TCoordinate extends Coordinate = Coordinate>(
   };
 };
 export const lineStringGeometry2d = <TCoordinate extends Coordinate2d = Coordinate2d>(
-  coordinates: LineStringCoordinates<TCoordinate>
+  coordinates: LineStringCoordinates<TCoordinate>,
 ): LineStringGeometry2d => lineStringGeometry(coordinates);
 export const lineStringGeometry3d = <TCoordinate extends Coordinate3d = Coordinate3d>(
-  coordinates: LineStringCoordinates<TCoordinate>
+  coordinates: LineStringCoordinates<TCoordinate>,
 ): LineStringGeometry3d => lineStringGeometry(coordinates);
 
 export const polygonGeometry = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: PolygonCoordinates<TCoordinate>
+  coordinates: PolygonCoordinates<TCoordinate>,
 ): PolygonGeometry<TCoordinate> => ({
   type: "Polygon",
   coordinates: polygonCoordinates(coordinates),
 });
 export const polygonGeometry2d = <TCoordinate extends Coordinate2d = Coordinate2d>(
-  coordinates: PolygonCoordinates<TCoordinate>
+  coordinates: PolygonCoordinates<TCoordinate>,
 ): PolygonGeometry2d => polygonGeometry(coordinates);
 export const polygonGeometry3d = <TCoordinate extends Coordinate3d = Coordinate3d>(
-  coordinates: PolygonCoordinates<TCoordinate>
+  coordinates: PolygonCoordinates<TCoordinate>,
 ): PolygonGeometry3d => polygonGeometry(coordinates);
 
 export const multiPointGeometry = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: MultiPointCoordinates<TCoordinate>
+  coordinates: MultiPointCoordinates<TCoordinate>,
 ): MultiPointGeometry<TCoordinate> => ({
   type: "MultiPoint",
   coordinates,
 });
 export const multiPointGeometry2d = <TCoordinate extends Coordinate2d = Coordinate2d>(
-  coordinates: MultiPointCoordinates<TCoordinate>
+  coordinates: MultiPointCoordinates<TCoordinate>,
 ): MultiPointGeometry2d => multiPointGeometry(coordinates);
 export const multiPointGeometry3d = <TCoordinate extends Coordinate3d = Coordinate3d>(
-  coordinates: MultiPointCoordinates<TCoordinate>
+  coordinates: MultiPointCoordinates<TCoordinate>,
 ): MultiPointGeometry3d => multiPointGeometry(coordinates);
 
 export const multiLineStringGeometry = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: MultiLineStringCoordinates<TCoordinate>
+  coordinates: MultiLineStringCoordinates<TCoordinate>,
 ): MultiLineStringGeometry<TCoordinate> => ({
   type: "MultiLineString",
   coordinates,
 });
 export const multiLineStringGeometry2d = <TCoordinate extends Coordinate2d = Coordinate2d>(
-  coordinates: MultiLineStringCoordinates<TCoordinate>
+  coordinates: MultiLineStringCoordinates<TCoordinate>,
 ): MultiLineStringGeometry2d => multiLineStringGeometry(coordinates);
 export const multiLineStringGeometry3d = <TCoordinate extends Coordinate3d = Coordinate3d>(
-  coordinates: MultiLineStringCoordinates<TCoordinate>
+  coordinates: MultiLineStringCoordinates<TCoordinate>,
 ): MultiLineStringGeometry3d => multiLineStringGeometry(coordinates);
 
 export const multiPolygonGeometry = <TCoordinate extends Coordinate = Coordinate>(
-  coordinates: MultiPolygonCoordinates<TCoordinate>
+  coordinates: MultiPolygonCoordinates<TCoordinate>,
 ): MultiPolygonGeometry<TCoordinate> => ({
   type: "MultiPolygon",
   coordinates,
@@ -304,7 +304,7 @@ export const multiPolygonGeometry = <TCoordinate extends Coordinate = Coordinate
 export const point = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
   coordinates: TCoordinate,
   properties?: TProperties,
-  options?: FeatureOptions
+  options?: FeatureOptions,
 ): PointFeature<TCoordinate, TProperties> => ({
   type: "Feature",
   geometry: pointGeometry(coordinates),
@@ -315,7 +315,7 @@ export const point = <TCoordinate extends Coordinate = Coordinate, TProperties =
 export const lineString = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
   coordinates: LineStringCoordinates<TCoordinate>,
   properties?: TProperties,
-  options?: FeatureOptions
+  options?: FeatureOptions,
 ): LineStringFeature<TCoordinate, TProperties> => ({
   type: "Feature",
   geometry: lineStringGeometry(coordinates),
@@ -326,7 +326,7 @@ export const lineString = <TCoordinate extends Coordinate = Coordinate, TPropert
 export const polygon = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
   coordinates: PolygonCoordinates<TCoordinate>,
   properties?: TProperties,
-  options?: FeatureOptions
+  options?: FeatureOptions,
 ): PolygonFeature<TCoordinate, TProperties> => ({
   type: "Feature",
   geometry: polygonGeometry(coordinates),
@@ -337,7 +337,7 @@ export const polygon = <TCoordinate extends Coordinate = Coordinate, TProperties
 export const multiPoint = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
   coordinates: MultiPointCoordinates<TCoordinate>,
   properties?: TProperties,
-  options?: FeatureOptions
+  options?: FeatureOptions,
 ): MultiPointFeature<TCoordinate, TProperties> => ({
   type: "Feature",
   geometry: multiPointGeometry(coordinates),
@@ -348,7 +348,7 @@ export const multiPoint = <TCoordinate extends Coordinate = Coordinate, TPropert
 export const multiLineString = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
   coordinates: MultiLineStringCoordinates<TCoordinate>,
   properties?: TProperties,
-  options?: FeatureOptions
+  options?: FeatureOptions,
 ): MultiLineStringFeature<TCoordinate, TProperties> => ({
   type: "Feature",
   geometry: multiLineStringGeometry(coordinates),
@@ -359,7 +359,7 @@ export const multiLineString = <TCoordinate extends Coordinate = Coordinate, TPr
 export const multiPolygon = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
   coordinates: MultiPolygonCoordinates<TCoordinate>,
   properties?: TProperties,
-  options?: FeatureOptions
+  options?: FeatureOptions,
 ): MultiPolygonFeature<TCoordinate, TProperties> => ({
   type: "Feature",
   geometry: multiPolygonGeometry(coordinates),
@@ -368,7 +368,7 @@ export const multiPolygon = <TCoordinate extends Coordinate = Coordinate, TPrope
 });
 
 export const featureCollection = <TFeature extends Feature = Feature>(
-  features: TFeature[]
+  features: TFeature[],
 ): FeatureCollection<TFeature> => ({
   type: "FeatureCollection",
   features,

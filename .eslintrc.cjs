@@ -6,7 +6,22 @@ module.exports = {
   root: true,
   rules: {
     "@typescript-eslint/naming-convention": "off",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        prefer: "type-imports",
+        fixStyle: "separate-type-imports",
+      },
+    ],
     "new-cap": "off",
     "@typescript-eslint/quotes": "off",
   },
+  overrides: [
+    {
+      files: ["./src/dev/dev.ts", "./src/dev/dev.test.ts"],
+      rules: {
+        "@typescript-eslint/no-unused-vars": "off",
+      },
+    },
+  ],
 };

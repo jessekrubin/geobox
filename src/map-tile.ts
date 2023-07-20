@@ -95,6 +95,6 @@ export const TileAtZoom = (zoom: number, options?: SchemaOptions) => {
       //   }
       // ),
     },
-    options
+    options,
   );
 };

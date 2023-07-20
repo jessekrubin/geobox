@@ -62,7 +62,7 @@ describe("geojson-line", () => {
         [0, 0],
         [1, 1],
       ],
-      { dingo: "bash" }
+      { dingo: "bash" },
     );
     const expected = {
       type: "Feature",
@@ -87,7 +87,7 @@ describe("geojson-line", () => {
       gj.lineString([
         [0, 0],
         [1, 1, 1, 123],
-      ])
+      ]),
     ).toThrow();
   });
 });
@@ -130,7 +130,7 @@ describe("geojson-polygon", () => {
           [0, 0],
         ],
       ],
-      { dingo: "bash" }
+      { dingo: "bash" },
     );
     const expected = {
       type: "Feature",
@@ -163,7 +163,7 @@ describe("geojson-polygon", () => {
         ],
       ],
       undefined,
-      { bbox: [0, 0, 1, 1] }
+      { bbox: [0, 0, 1, 1] },
     );
     const expected = {
       type: "Feature",
@@ -195,7 +195,7 @@ describe("geojson-polygon", () => {
           [0, 1],
           [0, 0],
         ],
-      ])
+      ]),
     ).toThrow();
   });
 
@@ -208,7 +208,7 @@ describe("geojson-polygon", () => {
           [1, 1, 1, 123],
           [0, 1],
         ],
-      ])
+      ]),
     ).toThrow();
   });
 
@@ -225,8 +225,8 @@ describe("geojson-polygon", () => {
           ],
         ],
         undefined,
-        { bbox: [0, 0, 0] }
-      )
+        { bbox: [0, 0, 0] },
+      ),
     ).toThrow();
   });
 });

@@ -23,7 +23,7 @@ export type PointCoordinates<TCoordinate extends Coordinate = Coordinate> = TCoo
 export type LineStringCoordinates<TCoordinate extends Coordinate = Coordinate> = [
   TCoordinate,
   TCoordinate,
-  ...TCoordinate[]
+  ...TCoordinate[],
 ];
 
 export type PolygonCoordinatesRing<TCoordinate extends Coordinate = Coordinate> = [
@@ -31,18 +31,18 @@ export type PolygonCoordinatesRing<TCoordinate extends Coordinate = Coordinate> 
   TCoordinate,
   TCoordinate,
   TCoordinate,
-  ...TCoordinate[]
+  ...TCoordinate[],
 ];
 export type PolygonCoordinates<TCoordinate extends Coordinate = Coordinate> = [PolygonCoordinatesRing<TCoordinate>];
 
 export type MultiPointCoordinates<TCoordinate extends Coordinate = Coordinate> = TCoordinate[];
 export type MultiLineStringCoordinates<TCoordinate extends Coordinate = Coordinate> = [
   LineStringCoordinates<TCoordinate>,
-  ...LineStringCoordinates<TCoordinate>[]
+  ...LineStringCoordinates<TCoordinate>[],
 ];
 export type MultiPolygonCoordinates<TCoordinate extends Coordinate = Coordinate> = [
   PolygonCoordinates<TCoordinate>,
-  ...PolygonCoordinates<TCoordinate>[]
+  ...PolygonCoordinates<TCoordinate>[],
 ];
 
 // Geometry object types
@@ -133,7 +133,7 @@ export type MultiPointFeature<TCoordinate extends Coordinate = Coordinate, TProp
 
 export type MultiLineStringFeature<
   TCoordinate extends Coordinate = Coordinate,
-  TProperties = GeoJsonProperties
+  TProperties = GeoJsonProperties,
 > = Feature<MultiLineStringGeometry<TCoordinate>, TProperties>;
 
 export type MultiPolygonFeature<TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties> = Feature<
