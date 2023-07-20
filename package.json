@@ -1,6 +1,6 @@
 {
   "name": "@jsse/geobox",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "geo-json-schemas by way of typebox",
   "publishConfig": {
     "access": "public"
