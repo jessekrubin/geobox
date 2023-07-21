@@ -35,8 +35,10 @@ import type {
   PointGeometry3d,
   PolygonCoordinates,
   PolygonFeature,
-} from "./geojson-types.js";
-export * from "./geojson-types.js";
+} from "@jsse/geotypes";
+
+// } from "./geojson-types.js";
+// export * from "./geojson-types.js";
 
 export type FeatureOptions = {
   id?: string | number;
@@ -135,7 +137,7 @@ export const isBBox = (value: unknown): value is BBox2d =>
     typeof value[5] === "number" &&
     Number.isFinite(value[5]));
 
-export const featureProperties = <TProperties = GeoJsonProperties>(properties?: TProperties): TProperties => {
+export const featureProperties = <TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(properties?: TProperties): TProperties => {
   if (properties === undefined) {
     return {} as TProperties;
   }
@@ -301,7 +303,7 @@ export const multiPolygonGeometry = <TCoordinate extends Coordinate = Coordinate
   coordinates,
 });
 
-export const point = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
+export const point = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
   coordinates: TCoordinate,
   properties?: TProperties,
   options?: FeatureOptions,
@@ -312,7 +314,7 @@ export const point = <TCoordinate extends Coordinate = Coordinate, TProperties =
   ...featureOptions(options),
 });
 
-export const lineString = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
+export const lineString = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
   coordinates: LineStringCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,
@@ -323,7 +325,7 @@ export const lineString = <TCoordinate extends Coordinate = Coordinate, TPropert
   ...featureOptions(options),
 });
 
-export const polygon = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
+export const polygon = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
   coordinates: PolygonCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,
@@ -334,7 +336,7 @@ export const polygon = <TCoordinate extends Coordinate = Coordinate, TProperties
   ...featureOptions(options),
 });
 
-export const multiPoint = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
+export const multiPoint = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
   coordinates: MultiPointCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,
@@ -345,7 +347,7 @@ export const multiPoint = <TCoordinate extends Coordinate = Coordinate, TPropert
   ...featureOptions(options),
 });
 
-export const multiLineString = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
+export const multiLineString = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
   coordinates: MultiLineStringCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,
@@ -356,7 +358,7 @@ export const multiLineString = <TCoordinate extends Coordinate = Coordinate, TPr
   ...featureOptions(options),
 });
 
-export const multiPolygon = <TCoordinate extends Coordinate = Coordinate, TProperties = GeoJsonProperties>(
+export const multiPolygon = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
   coordinates: MultiPolygonCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,

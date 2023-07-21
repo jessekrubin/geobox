@@ -32,19 +32,26 @@
     "dev": "vitest watch --coverage",
     "lint": "eslint src/** --ext .ts",
     "fmt": "prettier --write .",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "prepare": "ts-patch install"
   },
   "license": "MIT",
+  "dependencies": {
+    "@jsse/geotypes": "workspace:*"
+  },
   "devDependencies": {
     "@types/geojson": "^7946.0.10",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "@typescript-eslint/parser": "^5.60.0",
     "@vitest/coverage-v8": "^0.32.2",
+    "esbuild": "^0.18.15",
     "eslint": "^8.43.0",
     "prettier": "2.8.8",
+    "ts-node": "^10.9.1",
+    "ts-patch": "^3.0.2",
     "tsup": "6.7.0",
     "tsx": "^3.12.7",
-    "typescript": "5.1.3",
+    "typescript": "5.1.6",
     "typia": "^4.1.7",
     "vitest": "0.32.2"
   }
