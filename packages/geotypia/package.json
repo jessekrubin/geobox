@@ -1,0 +1,57 @@
+{
+  "name": "@jsse/geotypia",
+  "version": "0.0.1",
+  "description": "@jsse/geotypes + typia",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./pacakge.json": "./package.json"
+  },
+  "scripts": {
+    "build-fast": "tsup src/index.ts --format cjs,esm",
+    "build": "pnpm run gen && pnpm run build:tsup",
+    "build:tsup": "tsup --format cjs,esm --dts",
+    "gen": "tsx build.mts && pnpm run gen:typia",
+    "gen:typia": "typia generate --input src/typia-input --output src/generated",
+    "test": "vitest run",
+    "dev": "vitest watch --coverage",
+    "lint": "eslint src/** --ext .ts",
+    "fmt": "prettier --write .",
+    "prepublishOnly": "pnpm run build",
+    "prepare": "ts-patch install"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@jsse/geotypes": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/geojson": "^7946.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@vitest/coverage-v8": "^0.32.4",
+    "esbuild": "^0.18.15",
+    "eslint": "^8.45.0",
+    "prettier": "2.8.8",
+    "ts-node": "^10.9.1",
+    "ts-patch": "^3.0.2",
+    "tsup": "6.7.0",
+    "tsx": "^3.12.7",
+    "typescript": "5.1.6",
+    "typia": "^4.1.7",
+    "vitest": "0.32.2",
+    "zx": "^7.2.3"
+  }
+}
