@@ -4,7 +4,10 @@ type FileTypeExports = {
   fspath: string;
   types: string[];
 };
-
+type GeotypesMetadata = {
+  files: FileTypeExports[];
+  geotypes: string[];
+}
 const exportedTypesForFile = async (file: string): Promise<FileTypeExports> => {
   const string = await fs.readFile(file, {
     encoding: "utf-8",
@@ -52,12 +55,13 @@ const typesIndex = async (files: FileTypeExports[]) => {
   const string = lines.join("\n");
   await fs.writeFile("./src/types/index.ts", string);
 
-  const geotypesMetadata = {
+  const geotypesMetadata: GeotypesMetadata = {
     files: files,
     geotypes: [
-      ...new Set(
-        ...files.map((file) => file.types),
-      ),
+      ...files.map((file) => file.types).flat(),
+      // ...new Set(
+      //   ...files.map((file) => file.types),
+      // ),
     ].sort(
       (a, b) => a.localeCompare(b),
     ),

@@ -83,23 +83,23 @@ export type PointGeometry<TCoordinate extends Coordinate = Coordinate> = {
   type: PointGeometryType;
   coordinates: PointCoordinates<TCoordinate>;
 };
-export type LineStringGeometry<TCoordinate extends Coordinate> = {
+export type LineStringGeometry<TCoordinate extends Coordinate = Coordinate> = {
   type: LineStringGeometryType;
   coordinates: LineStringCoordinates<TCoordinate>;
 };
-export type PolygonGeometry<TCoordinate extends Coordinate> = {
+export type PolygonGeometry<TCoordinate extends Coordinate = Coordinate> = {
   type: PolygonGeometryType;
   coordinates: PolygonCoordinates<TCoordinate>;
 };
-export type MultiPointGeometry<TCoordinate extends Coordinate> = {
+export type MultiPointGeometry<TCoordinate extends Coordinate = Coordinate> = {
   type: MultiPointGeometryType;
   coordinates: MultiPointCoordinates<TCoordinate>;
 };
-export type MultiLineStringGeometry<TCoordinate extends Coordinate> = {
+export type MultiLineStringGeometry<TCoordinate extends Coordinate = Coordinate> = {
   type: MultiLineStringGeometryType;
   coordinates: MultiLineStringCoordinates<TCoordinate>;
 };
-export type MultiPolygonGeometry<TCoordinate extends Coordinate> = {
+export type MultiPolygonGeometry<TCoordinate extends Coordinate = Coordinate> = {
   type: MultiPolygonGeometryType;
   coordinates: MultiPolygonCoordinates<TCoordinate>;
 };

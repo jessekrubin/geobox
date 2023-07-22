@@ -92,9 +92,9 @@
     {
       "fspath": "./src/types/geostats.ts",
       "types": [
-        "Attribute",
-        "Layer",
-        "MySchema"
+        "Geostats",
+        "GeostatsAttribute",
+        "GeostatsLayer"
       ]
     },
     {
@@ -108,31 +108,21 @@
     {
       "fspath": "./src/types/simplestyle.ts",
       "types": [
-        "Description",
-        "Fill",
-        "FillOpacity",
-        "MarkerColor",
-        "MarkerSymbol",
-        "SimpleStyleProperties",
-        "Stroke",
-        "StrokeOpacity",
-        "StrokeWidth",
-        "Title"
+        "SimpleStyleProperties"
       ]
     },
     {
       "fspath": "./src/types/tilejson.ts",
       "types": [
-        "DeckglTileJson",
-        "Nullable",
+        "DeckglTilejson",
         "Tilejson300",
         "Tilejson300Raster",
         "Tilejson300Vector",
         "TilejsonCommon",
         "TilejsonRasterFormat",
         "TilejsonVectorFormat",
-        "VectorLayer",
-        "VectorLayers"
+        "TilejsonVectorLayer",
+        "TilejsonVectorLayers"
       ]
     }
   ],
@@ -143,6 +133,7 @@
     "Coordinate",
     "Coordinate2d",
     "Coordinate3d",
+    "DeckglTilejson",
     "Feature",
     "FeatureCollection",
     "FeatureCollectionType",
@@ -154,6 +145,9 @@
     "GeometryCollection",
     "GeometryCollectionType",
     "GeometryType",
+    "Geostats",
+    "GeostatsAttribute",
+    "GeostatsLayer",
     "LineStringCoordinates",
     "LineStringFeature",
     "LineStringFeature2d",
@@ -165,6 +159,9 @@
     "LineStringGeometry2d",
     "LineStringGeometry3d",
     "LineStringGeometryType",
+    "MbtilesMetadata",
+    "MbtilesMetadataRow",
+    "MbtilesTilesRow",
     "MultiLineStringCoordinates",
     "MultiLineStringFeature",
     "MultiLineStringFeature2d",
@@ -220,6 +217,15 @@
     "PolygonGeometry",
     "PolygonGeometry2d",
     "PolygonGeometry3d",
-    "PolygonGeometryType"
+    "PolygonGeometryType",
+    "SimpleStyleProperties",
+    "Tilejson300",
+    "Tilejson300Raster",
+    "Tilejson300Vector",
+    "TilejsonCommon",
+    "TilejsonRasterFormat",
+    "TilejsonVectorFormat",
+    "TilejsonVectorLayer",
+    "TilejsonVectorLayers"
   ]
 }

@@ -1,9 +1,10 @@
+import type { Nullable } from "../utility-types.js";
+
 export type TilejsonRasterFormat = "png" | "jpg" | "webp";
 export type TilejsonVectorFormat = "pbf";
 
-export type Nullable<T> = T | null;
 
-export type VectorLayer = {
+export type TilejsonVectorLayer = {
   id: string;
   fields: Record<string, string>;
   description?: string | null;
@@ -11,7 +12,7 @@ export type VectorLayer = {
   minzoom?: number | null;
 };
 
-export type VectorLayers = VectorLayer[];
+export type TilejsonVectorLayers = TilejsonVectorLayer[];
 
 export type TilejsonCommon = {
   // required
@@ -20,7 +21,7 @@ export type TilejsonCommon = {
   tilejson: string;
   tiles: string[];
   // eslint-disable-next-line camelcase
-  vector_layers: VectorLayers;
+  vector_layers: TilejsonVectorLayers;
 
   // optional
   version?: Nullable<string>;
@@ -40,17 +41,17 @@ export type TilejsonCommon = {
 
 export type Tilejson300Raster = {
   format: TilejsonRasterFormat;
-  vector_layers?: VectorLayers;
+  vector_layers?: TilejsonVectorLayers;
 } & TilejsonCommon;
 
 export type Tilejson300Vector = {
   format: TilejsonVectorFormat;
-  vector_layers: VectorLayers;
+  vector_layers: TilejsonVectorLayers;
 } & TilejsonCommon;
 
 export type Tilejson300 = Tilejson300Raster | Tilejson300Vector;
 
-export type DeckglTileJson = {
+export type DeckglTilejson = {
   tilejson: string;
   tiles: string[];
   // eslint-disable-next-line camelcase, @typescript-eslint/no-explicit-any

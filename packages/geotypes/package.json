@@ -29,8 +29,7 @@
     "dev": "vitest watch --coverage",
     "lint": "eslint src/** --ext .ts",
     "fmt": "prettier --write .",
-    "prepublishOnly": "pnpm run build",
-    "prepare": "ts-patch install"
+    "prepublishOnly": "pnpm run build"
   },
   "license": "MIT",
   "devDependencies": {

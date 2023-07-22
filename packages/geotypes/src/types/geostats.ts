@@ -1,4 +1,4 @@
-export type Attribute = {
+export type GeostatsAttribute = {
   attribute: string
   count: number
   type: "string" | "number" | "boolean" | "null" | "mixed"
@@ -9,16 +9,16 @@ export type Attribute = {
 }
 
 
-export type Layer = {
+export type GeostatsLayer = {
   layer: string
   count: number
   geometry: "Point" | "LineString" | "Polygon"
   attributeCount: number
-  attributes?: Attribute[]
+  attributes?: GeostatsAttribute[]
   [k: string]: unknown
 }
-export interface MySchema {
+export interface Geostats {
   layerCount: number
-  layers: Layer[]
+  layers: GeostatsLayer[]
   [k: string]: unknown
 }
