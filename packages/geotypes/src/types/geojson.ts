@@ -1,25 +1,33 @@
-export type Coordinate2d = [x: number, y: number];
-export type Coordinate3d = [x: number, y: number, z: number];
-export type Coordinate = [x: number, y: number] | [x: number, y: number, z: number];
-export type BBox2d = [west: number, south: number, east: number, north: number];
+export type Longitude = number;
+export type Latitude = number;
+
+/**
+ * WGS84 longitude
+ * @minimum -180
+ * @maximum 180
+ */
+export type LongitudeWgs84 = number;
+
+/**
+ * WGS84 latitude
+ * @minimum -90
+ * @maximum 90
+ */
+export type LatitudeWgs84 = number;
+
+export type Coordinate2d = [x: Longitude, y: Latitude];
+export type Coordinate3d = [x: Longitude, y: Latitude, z: number];
+export type Coordinate = [x: Longitude, y: Latitude] | [x: Longitude, y: Latitude, z: number];
+export type BBox2d = [west: Longitude, south: Latitude, east: Longitude, north: Latitude];
 export type BBox3d = [
-  west: number,
-  south: number,
-  east: number,
-  north: number,
+  west: Longitude,
+  south: Latitude,
+  east: Longitude,
+  north: Latitude,
   minZ: number,
   maxZ: number,
 ];
-export type BBox =
-  | [west: number, south: number, east: number, north: number]
-  | [
-    west: number,
-    south: number,
-    east: number,
-    north: number,
-    minZ: number,
-    maxZ: number,
-  ];
+export type BBox = [west: Longitude, south: Latitude, east: Longitude, north: Latitude] | [west: Longitude, south: Latitude, east: Longitude, north: Latitude, minZ: number, maxZ: number];
 
 // 'type' property literals
 export type PointGeometryType = "Point";

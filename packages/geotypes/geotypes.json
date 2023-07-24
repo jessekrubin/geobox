@@ -1,6 +1,12 @@
 {
   "files": [
     {
+      "fspath": "./src/types/deckgl.ts",
+      "types": [
+        "DeckglTilejson"
+      ]
+    },
+    {
       "fspath": "./src/types/geojson.ts",
       "types": [
         "BBox",
@@ -20,6 +26,8 @@
         "GeometryCollection",
         "GeometryCollectionType",
         "GeometryType",
+        "Latitude",
+        "LatitudeWgs84",
         "LineStringCoordinates",
         "LineStringFeature",
         "LineStringFeature2d",
@@ -31,6 +39,8 @@
         "LineStringGeometry2d",
         "LineStringGeometry3d",
         "LineStringGeometryType",
+        "Longitude",
+        "LongitudeWgs84",
         "MultiLineStringCoordinates",
         "MultiLineStringFeature",
         "MultiLineStringFeature2d",
@@ -114,7 +124,6 @@
     {
       "fspath": "./src/types/tilejson.ts",
       "types": [
-        "DeckglTilejson",
         "Tilejson300",
         "Tilejson300Raster",
         "Tilejson300Vector",
@@ -148,6 +157,8 @@
     "Geostats",
     "GeostatsAttribute",
     "GeostatsLayer",
+    "Latitude",
+    "LatitudeWgs84",
     "LineStringCoordinates",
     "LineStringFeature",
     "LineStringFeature2d",
@@ -159,6 +170,8 @@
     "LineStringGeometry2d",
     "LineStringGeometry3d",
     "LineStringGeometryType",
+    "Longitude",
+    "LongitudeWgs84",
     "MbtilesMetadata",
     "MbtilesMetadataRow",
     "MbtilesTilesRow",

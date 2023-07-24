@@ -1,3 +1,4 @@
+export * from "./deckgl.js"
 export * from "./geojson.js"
 export * from "./geostats.js"
 export * from "./mbtiles.js"

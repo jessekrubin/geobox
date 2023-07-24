@@ -23,6 +23,8 @@ import type {
   Geostats,
   GeostatsAttribute,
   GeostatsLayer,
+  Latitude,
+  LatitudeWgs84,
   LineStringCoordinates,
   LineStringFeature,
   LineStringFeature2d,
@@ -34,6 +36,8 @@ import type {
   LineStringGeometry2d,
   LineStringGeometry3d,
   LineStringGeometryType,
+  Longitude,
+  LongitudeWgs84,
   MbtilesMetadata,
   MbtilesMetadataRow,
   MbtilesTilesRow,
@@ -294,6 +298,24 @@ export const stringifyGeostatsLayer = typia.createStringify<GeostatsLayer>()
 export const validateGeostatsLayer = typia.createValidate<GeostatsLayer>()
 
 
+// Latitude
+export const assertLatitude = typia.createAssert<Latitude>()
+export const equalsLatitude = typia.createEquals<Latitude>()
+export const isLatitude = typia.createIs<Latitude>()
+export const randomLatitude = typia.createRandom<Latitude>()
+export const stringifyLatitude = typia.createStringify<Latitude>()
+export const validateLatitude = typia.createValidate<Latitude>()
+
+
+// LatitudeWgs84
+export const assertLatitudeWgs84 = typia.createAssert<LatitudeWgs84>()
+export const equalsLatitudeWgs84 = typia.createEquals<LatitudeWgs84>()
+export const isLatitudeWgs84 = typia.createIs<LatitudeWgs84>()
+export const randomLatitudeWgs84 = typia.createRandom<LatitudeWgs84>()
+export const stringifyLatitudeWgs84 = typia.createStringify<LatitudeWgs84>()
+export const validateLatitudeWgs84 = typia.createValidate<LatitudeWgs84>()
+
+
 // LineStringCoordinates
 export const assertLineStringCoordinates = typia.createAssert<LineStringCoordinates>()
 export const equalsLineStringCoordinates = typia.createEquals<LineStringCoordinates>()
@@ -391,6 +413,24 @@ export const isLineStringGeometryType = typia.createIs<LineStringGeometryType>()
 export const randomLineStringGeometryType = typia.createRandom<LineStringGeometryType>()
 export const stringifyLineStringGeometryType = typia.createStringify<LineStringGeometryType>()
 export const validateLineStringGeometryType = typia.createValidate<LineStringGeometryType>()
+
+
+// Longitude
+export const assertLongitude = typia.createAssert<Longitude>()
+export const equalsLongitude = typia.createEquals<Longitude>()
+export const isLongitude = typia.createIs<Longitude>()
+export const randomLongitude = typia.createRandom<Longitude>()
+export const stringifyLongitude = typia.createStringify<Longitude>()
+export const validateLongitude = typia.createValidate<Longitude>()
+
+
+// LongitudeWgs84
+export const assertLongitudeWgs84 = typia.createAssert<LongitudeWgs84>()
+export const equalsLongitudeWgs84 = typia.createEquals<LongitudeWgs84>()
+export const isLongitudeWgs84 = typia.createIs<LongitudeWgs84>()
+export const randomLongitudeWgs84 = typia.createRandom<LongitudeWgs84>()
+export const stringifyLongitudeWgs84 = typia.createStringify<LongitudeWgs84>()
+export const validateLongitudeWgs84 = typia.createValidate<LongitudeWgs84>()
 
 
 // MbtilesMetadata

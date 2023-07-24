@@ -50,15 +50,3 @@ export type Tilejson300Vector = {
 } & TilejsonCommon;
 
 export type Tilejson300 = Tilejson300Raster | Tilejson300Vector;
-
-export type DeckglTilejson = {
-  tilejson: string;
-  tiles: string[];
-  // eslint-disable-next-line camelcase, @typescript-eslint/no-explicit-any
-  vector_layers: any[];
-  attribution?: string;
-  scheme?: string;
-  maxzoom?: number;
-  minzoom?: number;
-  version?: string;
-};

@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import typia from 'typia';
-import type { BBox, BBox2d, BBox3d, Coordinate, Coordinate2d, Coordinate3d, DeckglTilejson, Feature, FeatureCollection, FeatureCollectionType, FeatureType, GeoJsonProperties, Geometry, Geometry2d, Geometry3d, GeometryCollection, GeometryCollectionType, GeometryType, Geostats, GeostatsAttribute, GeostatsLayer, LineStringCoordinates, LineStringFeature, LineStringFeature2d, LineStringFeature3d, LineStringFeatureCollection, LineStringFeatureCollection2d, LineStringFeatureCollection3d, LineStringGeometry, LineStringGeometry2d, LineStringGeometry3d, LineStringGeometryType, MbtilesMetadata, MbtilesMetadataRow, MbtilesTilesRow, MultiLineStringCoordinates, MultiLineStringFeature, MultiLineStringFeature2d, MultiLineStringFeature3d, MultiLineStringFeatureCollection, MultiLineStringFeatureCollection2d, MultiLineStringFeatureCollection3d, MultiLineStringGeometry, MultiLineStringGeometry2d, MultiLineStringGeometry3d, MultiLineStringGeometryType, MultiPointCoordinates, MultiPointFeature, MultiPointFeature2d, MultiPointFeature3d, MultiPointFeatureCollection, MultiPointFeatureCollection2d, MultiPointFeatureCollection3d, MultiPointGeometry, MultiPointGeometry2d, MultiPointGeometry3d, MultiPointGeometryType, MultiPolygonCoordinates, MultiPolygonFeature, MultiPolygonFeature2d, MultiPolygonFeature3d, MultiPolygonFeatureCollection, MultiPolygonFeatureCollection2d, MultiPolygonFeatureCollection3d, MultiPolygonGeometry, MultiPolygonGeometry2d, MultiPolygonGeometry3d, MultiPolygonGeometryType, PointCoordinates, PointFeature, PointFeature2d, PointFeature3d, PointFeatureCollection, PointFeatureCollection2d, PointFeatureCollection3d, PointGeometry, PointGeometry2d, PointGeometry3d, PointGeometryType, PolygonCoordinates, PolygonCoordinatesRing, PolygonFeature, PolygonFeature2d, PolygonFeature3d, PolygonFeatureCollection, PolygonFeatureCollection2d, PolygonFeatureCollection3d, PolygonGeometry, PolygonGeometry2d, PolygonGeometry3d, PolygonGeometryType, SimpleStyleProperties, Tilejson300, Tilejson300Raster, Tilejson300Vector, TilejsonCommon, TilejsonRasterFormat, TilejsonVectorFormat, TilejsonVectorLayer, TilejsonVectorLayers, } from '@jsse/geotypes';
+import type { BBox, BBox2d, BBox3d, Coordinate, Coordinate2d, Coordinate3d, DeckglTilejson, Feature, FeatureCollection, FeatureCollectionType, FeatureType, GeoJsonProperties, Geometry, Geometry2d, Geometry3d, GeometryCollection, GeometryCollectionType, GeometryType, Geostats, GeostatsAttribute, GeostatsLayer, Latitude, LatitudeWgs84, LineStringCoordinates, LineStringFeature, LineStringFeature2d, LineStringFeature3d, LineStringFeatureCollection, LineStringFeatureCollection2d, LineStringFeatureCollection3d, LineStringGeometry, LineStringGeometry2d, LineStringGeometry3d, LineStringGeometryType, Longitude, LongitudeWgs84, MbtilesMetadata, MbtilesMetadataRow, MbtilesTilesRow, MultiLineStringCoordinates, MultiLineStringFeature, MultiLineStringFeature2d, MultiLineStringFeature3d, MultiLineStringFeatureCollection, MultiLineStringFeatureCollection2d, MultiLineStringFeatureCollection3d, MultiLineStringGeometry, MultiLineStringGeometry2d, MultiLineStringGeometry3d, MultiLineStringGeometryType, MultiPointCoordinates, MultiPointFeature, MultiPointFeature2d, MultiPointFeature3d, MultiPointFeatureCollection, MultiPointFeatureCollection2d, MultiPointFeatureCollection3d, MultiPointGeometry, MultiPointGeometry2d, MultiPointGeometry3d, MultiPointGeometryType, MultiPolygonCoordinates, MultiPolygonFeature, MultiPolygonFeature2d, MultiPolygonFeature3d, MultiPolygonFeatureCollection, MultiPolygonFeatureCollection2d, MultiPolygonFeatureCollection3d, MultiPolygonGeometry, MultiPolygonGeometry2d, MultiPolygonGeometry3d, MultiPolygonGeometryType, PointCoordinates, PointFeature, PointFeature2d, PointFeature3d, PointFeatureCollection, PointFeatureCollection2d, PointFeatureCollection3d, PointGeometry, PointGeometry2d, PointGeometry3d, PointGeometryType, PolygonCoordinates, PolygonCoordinatesRing, PolygonFeature, PolygonFeature2d, PolygonFeature3d, PolygonFeatureCollection, PolygonFeatureCollection2d, PolygonFeatureCollection3d, PolygonGeometry, PolygonGeometry2d, PolygonGeometry3d, PolygonGeometryType, SimpleStyleProperties, Tilejson300, Tilejson300Raster, Tilejson300Vector, TilejsonCommon, TilejsonRasterFormat, TilejsonVectorFormat, TilejsonVectorLayer, TilejsonVectorLayers, } from '@jsse/geotypes';
 // BBox
 export const assertBBox = (input: any): BBox => {
     const __is = (input: any): input is BBox => {
@@ -16841,6 +16841,108 @@ export const validateGeostatsLayer = (input: any): typia.IValidation<GeostatsLay
         data: success ? input : undefined
     } as any;
 };
+// Latitude
+export const assertLatitude = (input: any): Latitude => {
+    const __is = (input: any): input is Latitude => {
+        return "number" === typeof input;
+    };
+    if (false === __is(input))
+        ((input: any, _path: string, _exceptionable: boolean = true): input is Latitude => {
+            const $guard = (typia.createAssert as any).guard;
+            return "number" === typeof input || $guard(true, {
+                path: _path + "",
+                expected: "number",
+                value: input
+            });
+        })(input, "$input", true);
+    return input;
+};
+export const equalsLatitude = (input: any, _exceptionable: boolean = true): input is Latitude => {
+    return "number" === typeof input;
+};
+export const isLatitude = (input: any): input is Latitude => {
+    return "number" === typeof input;
+};
+export const randomLatitude = (generator?: Partial<typia.IRandomGenerator>): typia.Primitive<Latitude> => {
+    const $generator = (typia.createRandom as any).generator;
+    return (generator?.customs ?? $generator.customs)?.number?.([]) ?? (generator?.number ?? $generator.number)(0, 100);
+};
+export const stringifyLatitude = (input: Latitude): string => {
+    return input.toString();
+};
+export const validateLatitude = (input: any): typia.IValidation<Latitude> => {
+    const errors = [] as any[];
+    const __is = (input: any): input is Latitude => {
+        return "number" === typeof input;
+    };
+    if (false === __is(input)) {
+        const $report = (typia.createValidate as any).report(errors);
+        ((input: any, _path: string, _exceptionable: boolean = true): input is Latitude => {
+            return "number" === typeof input || $report(true, {
+                path: _path + "",
+                expected: "number",
+                value: input
+            });
+        })(input, "$input", true);
+    }
+    const success = 0 === errors.length;
+    return {
+        success,
+        errors,
+        data: success ? input : undefined
+    } as any;
+};
+// LatitudeWgs84
+export const assertLatitudeWgs84 = (input: any): LatitudeWgs84 => {
+    const __is = (input: any): input is LatitudeWgs84 => {
+        return "number" === typeof input;
+    };
+    if (false === __is(input))
+        ((input: any, _path: string, _exceptionable: boolean = true): input is LatitudeWgs84 => {
+            const $guard = (typia.createAssert as any).guard;
+            return "number" === typeof input || $guard(true, {
+                path: _path + "",
+                expected: "number",
+                value: input
+            });
+        })(input, "$input", true);
+    return input;
+};
+export const equalsLatitudeWgs84 = (input: any, _exceptionable: boolean = true): input is LatitudeWgs84 => {
+    return "number" === typeof input;
+};
+export const isLatitudeWgs84 = (input: any): input is LatitudeWgs84 => {
+    return "number" === typeof input;
+};
+export const randomLatitudeWgs84 = (generator?: Partial<typia.IRandomGenerator>): typia.Primitive<LatitudeWgs84> => {
+    const $generator = (typia.createRandom as any).generator;
+    return (generator?.customs ?? $generator.customs)?.number?.([]) ?? (generator?.number ?? $generator.number)(0, 100);
+};
+export const stringifyLatitudeWgs84 = (input: LatitudeWgs84): string => {
+    return input.toString();
+};
+export const validateLatitudeWgs84 = (input: any): typia.IValidation<LatitudeWgs84> => {
+    const errors = [] as any[];
+    const __is = (input: any): input is LatitudeWgs84 => {
+        return "number" === typeof input;
+    };
+    if (false === __is(input)) {
+        const $report = (typia.createValidate as any).report(errors);
+        ((input: any, _path: string, _exceptionable: boolean = true): input is LatitudeWgs84 => {
+            return "number" === typeof input || $report(true, {
+                path: _path + "",
+                expected: "number",
+                value: input
+            });
+        })(input, "$input", true);
+    }
+    const success = 0 === errors.length;
+    return {
+        success,
+        errors,
+        data: success ? input : undefined
+    } as any;
+};
 // LineStringCoordinates
 export const assertLineStringCoordinates = (input: any): LineStringCoordinates => {
     const __is = (input: any): input is LineStringCoordinates => {
@@ -21606,6 +21708,108 @@ export const validateLineStringGeometryType = (input: any): typia.IValidation<Li
             return "LineString" === input || $report(true, {
                 path: _path + "",
                 expected: "\"LineString\"",
+                value: input
+            });
+        })(input, "$input", true);
+    }
+    const success = 0 === errors.length;
+    return {
+        success,
+        errors,
+        data: success ? input : undefined
+    } as any;
+};
+// Longitude
+export const assertLongitude = (input: any): Longitude => {
+    const __is = (input: any): input is Longitude => {
+        return "number" === typeof input;
+    };
+    if (false === __is(input))
+        ((input: any, _path: string, _exceptionable: boolean = true): input is Longitude => {
+            const $guard = (typia.createAssert as any).guard;
+            return "number" === typeof input || $guard(true, {
+                path: _path + "",
+                expected: "number",
+                value: input
+            });
+        })(input, "$input", true);
+    return input;
+};
+export const equalsLongitude = (input: any, _exceptionable: boolean = true): input is Longitude => {
+    return "number" === typeof input;
+};
+export const isLongitude = (input: any): input is Longitude => {
+    return "number" === typeof input;
+};
+export const randomLongitude = (generator?: Partial<typia.IRandomGenerator>): typia.Primitive<Longitude> => {
+    const $generator = (typia.createRandom as any).generator;
+    return (generator?.customs ?? $generator.customs)?.number?.([]) ?? (generator?.number ?? $generator.number)(0, 100);
+};
+export const stringifyLongitude = (input: Longitude): string => {
+    return input.toString();
+};
+export const validateLongitude = (input: any): typia.IValidation<Longitude> => {
+    const errors = [] as any[];
+    const __is = (input: any): input is Longitude => {
+        return "number" === typeof input;
+    };
+    if (false === __is(input)) {
+        const $report = (typia.createValidate as any).report(errors);
+        ((input: any, _path: string, _exceptionable: boolean = true): input is Longitude => {
+            return "number" === typeof input || $report(true, {
+                path: _path + "",
+                expected: "number",
+                value: input
+            });
+        })(input, "$input", true);
+    }
+    const success = 0 === errors.length;
+    return {
+        success,
+        errors,
+        data: success ? input : undefined
+    } as any;
+};
+// LongitudeWgs84
+export const assertLongitudeWgs84 = (input: any): LongitudeWgs84 => {
+    const __is = (input: any): input is LongitudeWgs84 => {
+        return "number" === typeof input;
+    };
+    if (false === __is(input))
+        ((input: any, _path: string, _exceptionable: boolean = true): input is LongitudeWgs84 => {
+            const $guard = (typia.createAssert as any).guard;
+            return "number" === typeof input || $guard(true, {
+                path: _path + "",
+                expected: "number",
+                value: input
+            });
+        })(input, "$input", true);
+    return input;
+};
+export const equalsLongitudeWgs84 = (input: any, _exceptionable: boolean = true): input is LongitudeWgs84 => {
+    return "number" === typeof input;
+};
+export const isLongitudeWgs84 = (input: any): input is LongitudeWgs84 => {
+    return "number" === typeof input;
+};
+export const randomLongitudeWgs84 = (generator?: Partial<typia.IRandomGenerator>): typia.Primitive<LongitudeWgs84> => {
+    const $generator = (typia.createRandom as any).generator;
+    return (generator?.customs ?? $generator.customs)?.number?.([]) ?? (generator?.number ?? $generator.number)(0, 100);
+};
+export const stringifyLongitudeWgs84 = (input: LongitudeWgs84): string => {
+    return input.toString();
+};
+export const validateLongitudeWgs84 = (input: any): typia.IValidation<LongitudeWgs84> => {
+    const errors = [] as any[];
+    const __is = (input: any): input is LongitudeWgs84 => {
+        return "number" === typeof input;
+    };
+    if (false === __is(input)) {
+        const $report = (typia.createValidate as any).report(errors);
+        ((input: any, _path: string, _exceptionable: boolean = true): input is LongitudeWgs84 => {
+            return "number" === typeof input || $report(true, {
+                path: _path + "",
+                expected: "number",
                 value: input
             });
         })(input, "$input", true);
