@@ -286,6 +286,14 @@ export const geometriez = <TCoord extends ZCoordinate | undefined, TBBox extends
   };
 };
 
+export const featureCollection = <TGeom extends ZGeometrySchema>(geometrySchema: TGeom) => {
+  return z.object({
+    type: z.literal("FeatureCollection"),
+    features: z.array(feature(geometrySchema)),
+    bbox: geojsonBoundingBox(),
+  });
+};
+
 export const featurez = <
   TCoord extends ZCoordinate | undefined,
   TBBox extends ZBBox | undefined,
@@ -306,12 +314,4 @@ export const featurez = <
     multiLineStringFeature: multiLineStringFeature(schemaz),
     multiPolygonFeature: multiPolygonFeature(schemaz),
   };
-};
-
-export const featureCollection = <TGeom extends ZGeometrySchema>(geometrySchema: TGeom) => {
-  return z.object({
-    type: z.literal("FeatureCollection"),
-    features: z.array(feature(geometrySchema)),
-    bbox: geojsonBoundingBox(),
-  });
 };
