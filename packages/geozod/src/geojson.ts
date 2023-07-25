@@ -307,3 +307,11 @@ export const featurez = <
     multiPolygonFeature: multiPolygonFeature(schemaz),
   };
 };
+
+export const featureCollection = <TGeom extends ZGeometrySchema>(geometrySchema: TGeom) => {
+  return z.object({
+    type: z.literal("FeatureCollection"),
+    features: z.array(feature(geometrySchema)),
+    bbox: geojsonBoundingBox(),
+  });
+};
