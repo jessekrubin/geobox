@@ -24,6 +24,9 @@
     "fmt": "prettier --write .",
     "prepublishOnly": "pnpm run build"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [],
   "author": "jessekrubin",
   "license": "ISC",
