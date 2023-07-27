@@ -1,4 +1,3 @@
-
 export type DeckglTilejson = {
   tilejson: string;
   tiles: string[];

@@ -3,7 +3,6 @@ import type { Nullable } from "../utility-types.js";
 export type TilejsonRasterFormat = "png" | "jpg" | "webp";
 export type TilejsonVectorFormat = "pbf";
 
-
 export type TilejsonVectorLayer = {
   id: string;
   fields: Record<string, string>;

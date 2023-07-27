@@ -82,7 +82,6 @@ describe("geojson-line", () => {
   });
 
   test("invalid coords", () => {
-    // @ts-expect-error - invalid coords
     expect(() =>
       gj.lineString([
         [0, 0],

@@ -2,9 +2,7 @@
   "files": [
     {
       "fspath": "./src/types/deckgl.ts",
-      "types": [
-        "DeckglTilejson"
-      ]
+      "types": ["DeckglTilejson"]
     },
     {
       "fspath": "./src/types/geojson.ts",
@@ -15,9 +13,12 @@
         "Coordinate",
         "Coordinate2d",
         "Coordinate3d",
+        "CoordinateReferenceSystem",
+        "CoordinateReferenceSystemNullable",
         "Feature",
         "FeatureCollection",
         "FeatureCollectionType",
+        "FeatureGeneric",
         "FeatureType",
         "GeoJsonProperties",
         "Geometry",
@@ -39,6 +40,7 @@
         "LineStringGeometry2d",
         "LineStringGeometry3d",
         "LineStringGeometryType",
+        "LinkedCoordinateReferenceSystem",
         "Longitude",
         "LongitudeWgs84",
         "MultiLineStringCoordinates",
@@ -74,6 +76,7 @@
         "MultiPolygonGeometry2d",
         "MultiPolygonGeometry3d",
         "MultiPolygonGeometryType",
+        "NamedCoordinateReferenceSystem",
         "PointCoordinates",
         "PointFeature",
         "PointFeature2d",
@@ -96,30 +99,21 @@
         "PolygonGeometry",
         "PolygonGeometry2d",
         "PolygonGeometry3d",
-        "PolygonGeometryType"
+        "PolygonGeometryType",
+        "type"
       ]
     },
     {
       "fspath": "./src/types/geostats.ts",
-      "types": [
-        "Geostats",
-        "GeostatsAttribute",
-        "GeostatsLayer"
-      ]
+      "types": ["Geostats", "GeostatsAttribute", "GeostatsLayer"]
     },
     {
       "fspath": "./src/types/mbtiles.ts",
-      "types": [
-        "MbtilesMetadata",
-        "MbtilesMetadataRow",
-        "MbtilesTilesRow"
-      ]
+      "types": ["MbtilesMetadata", "MbtilesMetadataRow", "MbtilesTilesRow"]
     },
     {
       "fspath": "./src/types/simplestyle.ts",
-      "types": [
-        "SimpleStyleProperties"
-      ]
+      "types": ["SimpleStyleProperties"]
     },
     {
       "fspath": "./src/types/tilejson.ts",
@@ -142,10 +136,13 @@
     "Coordinate",
     "Coordinate2d",
     "Coordinate3d",
+    "CoordinateReferenceSystem",
+    "CoordinateReferenceSystemNullable",
     "DeckglTilejson",
     "Feature",
     "FeatureCollection",
     "FeatureCollectionType",
+    "FeatureGeneric",
     "FeatureType",
     "GeoJsonProperties",
     "Geometry",
@@ -170,6 +167,7 @@
     "LineStringGeometry2d",
     "LineStringGeometry3d",
     "LineStringGeometryType",
+    "LinkedCoordinateReferenceSystem",
     "Longitude",
     "LongitudeWgs84",
     "MbtilesMetadata",
@@ -208,6 +206,7 @@
     "MultiPolygonGeometry2d",
     "MultiPolygonGeometry3d",
     "MultiPolygonGeometryType",
+    "NamedCoordinateReferenceSystem",
     "PointCoordinates",
     "PointFeature",
     "PointFeature2d",
@@ -239,6 +238,7 @@
     "TilejsonRasterFormat",
     "TilejsonVectorFormat",
     "TilejsonVectorLayer",
-    "TilejsonVectorLayers"
+    "TilejsonVectorLayers",
+    "type"
   ]
 }

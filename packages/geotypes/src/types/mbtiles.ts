@@ -10,4 +10,3 @@ export type MbtilesTilesRow<TTileData = unknown> = {
   tile_row: number;
   tile_data: TTileData;
 };
-

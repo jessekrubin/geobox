@@ -8,10 +8,13 @@ import type {
   Coordinate,
   Coordinate2d,
   Coordinate3d,
+  CoordinateReferenceSystem,
+  CoordinateReferenceSystemNullable,
   DeckglTilejson,
   Feature,
   FeatureCollection,
   FeatureCollectionType,
+  FeatureGeneric,
   FeatureType,
   GeoJsonProperties,
   Geometry,
@@ -36,6 +39,7 @@ import type {
   LineStringGeometry2d,
   LineStringGeometry3d,
   LineStringGeometryType,
+  LinkedCoordinateReferenceSystem,
   Longitude,
   LongitudeWgs84,
   MbtilesMetadata,
@@ -74,6 +78,7 @@ import type {
   MultiPolygonGeometry2d,
   MultiPolygonGeometry3d,
   MultiPolygonGeometryType,
+  NamedCoordinateReferenceSystem,
   PointCoordinates,
   PointFeature,
   PointFeature2d,
@@ -106,6 +111,7 @@ import type {
   TilejsonVectorFormat,
   TilejsonVectorLayer,
   TilejsonVectorLayers,
+  type,
 } from '@jsse/geotypes';
 
 
@@ -163,6 +169,24 @@ export const stringifyCoordinate3d = typia.createStringify<Coordinate3d>()
 export const validateCoordinate3d = typia.createValidate<Coordinate3d>()
 
 
+// CoordinateReferenceSystem
+export const assertCoordinateReferenceSystem = typia.createAssert<CoordinateReferenceSystem>()
+export const equalsCoordinateReferenceSystem = typia.createEquals<CoordinateReferenceSystem>()
+export const isCoordinateReferenceSystem = typia.createIs<CoordinateReferenceSystem>()
+export const randomCoordinateReferenceSystem = typia.createRandom<CoordinateReferenceSystem>()
+export const stringifyCoordinateReferenceSystem = typia.createStringify<CoordinateReferenceSystem>()
+export const validateCoordinateReferenceSystem = typia.createValidate<CoordinateReferenceSystem>()
+
+
+// CoordinateReferenceSystemNullable
+export const assertCoordinateReferenceSystemNullable = typia.createAssert<CoordinateReferenceSystemNullable>()
+export const equalsCoordinateReferenceSystemNullable = typia.createEquals<CoordinateReferenceSystemNullable>()
+export const isCoordinateReferenceSystemNullable = typia.createIs<CoordinateReferenceSystemNullable>()
+export const randomCoordinateReferenceSystemNullable = typia.createRandom<CoordinateReferenceSystemNullable>()
+export const stringifyCoordinateReferenceSystemNullable = typia.createStringify<CoordinateReferenceSystemNullable>()
+export const validateCoordinateReferenceSystemNullable = typia.createValidate<CoordinateReferenceSystemNullable>()
+
+
 // DeckglTilejson
 export const assertDeckglTilejson = typia.createAssert<DeckglTilejson>()
 export const equalsDeckglTilejson = typia.createEquals<DeckglTilejson>()
@@ -197,6 +221,15 @@ export const isFeatureCollectionType = typia.createIs<FeatureCollectionType>()
 export const randomFeatureCollectionType = typia.createRandom<FeatureCollectionType>()
 export const stringifyFeatureCollectionType = typia.createStringify<FeatureCollectionType>()
 export const validateFeatureCollectionType = typia.createValidate<FeatureCollectionType>()
+
+
+// FeatureGeneric
+export const assertFeatureGeneric = typia.createAssert<FeatureGeneric>()
+export const equalsFeatureGeneric = typia.createEquals<FeatureGeneric>()
+export const isFeatureGeneric = typia.createIs<FeatureGeneric>()
+export const randomFeatureGeneric = typia.createRandom<FeatureGeneric>()
+export const stringifyFeatureGeneric = typia.createStringify<FeatureGeneric>()
+export const validateFeatureGeneric = typia.createValidate<FeatureGeneric>()
 
 
 // FeatureType
@@ -413,6 +446,15 @@ export const isLineStringGeometryType = typia.createIs<LineStringGeometryType>()
 export const randomLineStringGeometryType = typia.createRandom<LineStringGeometryType>()
 export const stringifyLineStringGeometryType = typia.createStringify<LineStringGeometryType>()
 export const validateLineStringGeometryType = typia.createValidate<LineStringGeometryType>()
+
+
+// LinkedCoordinateReferenceSystem
+export const assertLinkedCoordinateReferenceSystem = typia.createAssert<LinkedCoordinateReferenceSystem>()
+export const equalsLinkedCoordinateReferenceSystem = typia.createEquals<LinkedCoordinateReferenceSystem>()
+export const isLinkedCoordinateReferenceSystem = typia.createIs<LinkedCoordinateReferenceSystem>()
+export const randomLinkedCoordinateReferenceSystem = typia.createRandom<LinkedCoordinateReferenceSystem>()
+export const stringifyLinkedCoordinateReferenceSystem = typia.createStringify<LinkedCoordinateReferenceSystem>()
+export const validateLinkedCoordinateReferenceSystem = typia.createValidate<LinkedCoordinateReferenceSystem>()
 
 
 // Longitude
@@ -757,6 +799,15 @@ export const stringifyMultiPolygonGeometryType = typia.createStringify<MultiPoly
 export const validateMultiPolygonGeometryType = typia.createValidate<MultiPolygonGeometryType>()
 
 
+// NamedCoordinateReferenceSystem
+export const assertNamedCoordinateReferenceSystem = typia.createAssert<NamedCoordinateReferenceSystem>()
+export const equalsNamedCoordinateReferenceSystem = typia.createEquals<NamedCoordinateReferenceSystem>()
+export const isNamedCoordinateReferenceSystem = typia.createIs<NamedCoordinateReferenceSystem>()
+export const randomNamedCoordinateReferenceSystem = typia.createRandom<NamedCoordinateReferenceSystem>()
+export const stringifyNamedCoordinateReferenceSystem = typia.createStringify<NamedCoordinateReferenceSystem>()
+export const validateNamedCoordinateReferenceSystem = typia.createValidate<NamedCoordinateReferenceSystem>()
+
+
 // PointCoordinates
 export const assertPointCoordinates = typia.createAssert<PointCoordinates>()
 export const equalsPointCoordinates = typia.createEquals<PointCoordinates>()
@@ -1043,3 +1094,12 @@ export const isTilejsonVectorLayers = typia.createIs<TilejsonVectorLayers>()
 export const randomTilejsonVectorLayers = typia.createRandom<TilejsonVectorLayers>()
 export const stringifyTilejsonVectorLayers = typia.createStringify<TilejsonVectorLayers>()
 export const validateTilejsonVectorLayers = typia.createValidate<TilejsonVectorLayers>()
+
+
+// type
+export const asserttype = typia.createAssert<type>()
+export const equalstype = typia.createEquals<type>()
+export const istype = typia.createIs<type>()
+export const randomtype = typia.createRandom<type>()
+export const stringifytype = typia.createStringify<type>()
+export const validatetype = typia.createValidate<type>()

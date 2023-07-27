@@ -307,7 +307,7 @@ export const point = <TCoordinate extends Coordinate = Coordinate, TProperties e
   coordinates: TCoordinate,
   properties?: TProperties,
   options?: FeatureOptions,
-): PointFeature<TCoordinate, TProperties> => ({
+): PointFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
   type: "Feature",
   geometry: pointGeometry(coordinates),
   properties: featureProperties(properties),
@@ -318,7 +318,7 @@ export const lineString = <TCoordinate extends Coordinate = Coordinate, TPropert
   coordinates: LineStringCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,
-): LineStringFeature<TCoordinate, TProperties> => ({
+): LineStringFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
   type: "Feature",
   geometry: lineStringGeometry(coordinates),
   properties: featureProperties(properties),
@@ -329,7 +329,7 @@ export const polygon = <TCoordinate extends Coordinate = Coordinate, TProperties
   coordinates: PolygonCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,
-): PolygonFeature<TCoordinate, TProperties> => ({
+): PolygonFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
   type: "Feature",
   geometry: polygonGeometry(coordinates),
   properties: featureProperties(properties),
@@ -340,7 +340,7 @@ export const multiPoint = <TCoordinate extends Coordinate = Coordinate, TPropert
   coordinates: MultiPointCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,
-): MultiPointFeature<TCoordinate, TProperties> => ({
+): MultiPointFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
   type: "Feature",
   geometry: multiPointGeometry(coordinates),
   properties: featureProperties(properties),
@@ -351,7 +351,7 @@ export const multiLineString = <TCoordinate extends Coordinate = Coordinate, TPr
   coordinates: MultiLineStringCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,
-): MultiLineStringFeature<TCoordinate, TProperties> => ({
+): MultiLineStringFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
   type: "Feature",
   geometry: multiLineStringGeometry(coordinates),
   properties: featureProperties(properties),
@@ -362,18 +362,23 @@ export const multiPolygon = <TCoordinate extends Coordinate = Coordinate, TPrope
   coordinates: MultiPolygonCoordinates<TCoordinate>,
   properties?: TProperties,
   options?: FeatureOptions,
-): MultiPolygonFeature<TCoordinate, TProperties> => ({
+): MultiPolygonFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
   type: "Feature",
   geometry: multiPolygonGeometry(coordinates),
-  properties,
+  properties: featureProperties(properties),
   ...featureOptions(options),
 });
 
-export const featureCollection = <TFeature extends Feature = Feature>(
+export const featureCollection = <TFeature extends Feature = Feature, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
   features: TFeature[],
-): FeatureCollection<TFeature> => ({
+  properties?: TProperties,
+  options?: FeatureOptions,
+): FeatureCollection<TFeature, TProperties, FeatureOptions['bbox']
+> => ({
   type: "FeatureCollection",
   features,
+  properties: featureProperties(properties),
+  ...featureOptions(options),
 });
 
 export {
