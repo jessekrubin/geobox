@@ -22,8 +22,8 @@ export type TBBoxSchema =
   | TTuple<[TNumber, TNumber, TNumber, TNumber]>
   | TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>
   | TUnion<
-      [TTuple<[TNumber, TNumber, TNumber, TNumber]>, TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>]
-    >;
+    [TTuple<[TNumber, TNumber, TNumber, TNumber]>, TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>]
+  >;
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
 export const FeatureCollectionTypeLiteral = () => Type.Literal("FeatureCollection");
@@ -183,6 +183,46 @@ export const GeojsonProperties = (options?: SchemaOptions) =>
     ...options,
   });
 
+export const NamedCoordinateReferenceSystem = (options?: SchemaOptions) =>
+  Type.Object(
+    {
+      type: Type.Literal("name"),
+      properties: Type.Object({
+        name: Type.String(),
+      }),
+    },
+    {
+      title: "Named Coordinate Reference System",
+      description: "Named Coordinate Reference System",
+      ...options,
+    },
+  );
+export const LinkedCoordinateReferenceSystem = (options?: SchemaOptions) =>
+  Type.Object(
+    {
+      type: Type.Literal("link"),
+      properties: Type.Object({
+        href: Type.String(),
+        type: Type.String(),
+      }),
+    },
+    {
+      title: "Linked Coordinate Reference System",
+      description: "Linked Coordinate Reference System",
+      ...options,
+    },
+  );
+export const CoordinateReferenceSystem = (options?: SchemaOptions) =>
+  Type.Optional(
+    Type.Union([NamedCoordinateReferenceSystem(), LinkedCoordinateReferenceSystem()], {
+      title: "Coordinate Reference System",
+      description: "Coordinate Reference System",
+      ...options,
+    }),
+  );
+
+export type TCoordinateReferenceSystemSchema = ReturnType<typeof CoordinateReferenceSystem>;
+
 /**
  * type inference for coordinate(s)
  */
@@ -213,8 +253,10 @@ export type TFeatureSchemas<
   TProperties extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
+  TCoordinateReferenceSystem extends TCoordinateReferenceSystemSchema | undefined,
 > = {
   properties?: TProperties;
+  crs?: TCoordinateReferenceSystem;
 } & TGeometrySchemas<TCoord, TBBox>;
 
 /**
@@ -451,9 +493,15 @@ export type GeometrySchema =
 export type GeojsonProperties<T extends TSchema | undefined> = IsDefined<T> extends true
   ? AssertType<T>
   : ReturnType<typeof GeojsonProperties>;
+export type GeojsonCrs<T extends TSchema | undefined> = IsDefined<T> extends true
+  ? AssertType<T>
+  : TCoordinateReferenceSystemSchema;
 
 export const FeatureProperties = <T extends TSchema | undefined>(schema?: T) =>
   (schema === undefined ? Type.Unknown() : schema) as GeojsonProperties<T>;
+
+export const FeatureCrs = <T extends TSchema | undefined>(schema?: T) =>
+  (schema === undefined ? Type.Optional(CoordinateReferenceSystem()) : schema) as GeojsonCrs<T>;
 
 export function Feature<Geom extends GeometrySchema, P extends TSchema | undefined>(
   {
@@ -479,7 +527,8 @@ export function PointFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
@@ -489,6 +538,7 @@ export function PointFeature<
         bbox: schemas?.bbox,
       }),
       properties: FeatureProperties(schemas?.properties),
+      crs: FeatureCrs(schemas?.crs),
     },
     options,
   );
@@ -498,7 +548,8 @@ export function LineStringFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
@@ -508,6 +559,7 @@ export function LineStringFeature<
         bbox: schemas?.bbox,
       }),
       properties: FeatureProperties(schemas?.properties),
+      crs: FeatureCrs(schemas?.crs),
     },
     options,
   );
@@ -517,7 +569,8 @@ export function PolygonFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
@@ -527,6 +580,7 @@ export function PolygonFeature<
         bbox: schemas?.bbox,
       }),
       properties: FeatureProperties(schemas?.properties),
+      crs: FeatureCrs(schemas?.crs),
     },
     options,
   );
@@ -536,7 +590,8 @@ export function MultiPointFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
@@ -546,6 +601,7 @@ export function MultiPointFeature<
         bbox: schemas?.bbox,
       }),
       properties: FeatureProperties(schemas?.properties),
+      crs: FeatureCrs(schemas?.crs),
     },
     options,
   );
@@ -555,7 +611,8 @@ export function MultiLineStringFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
@@ -565,6 +622,7 @@ export function MultiLineStringFeature<
         bbox: schemas?.bbox,
       }),
       properties: FeatureProperties(schemas?.properties),
+      crs: FeatureCrs(schemas?.crs),
     },
     options,
   );
@@ -574,7 +632,8 @@ export function MultiPolygonFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
@@ -584,6 +643,7 @@ export function MultiPolygonFeature<
         bbox: schemas?.bbox,
       }),
       properties: FeatureProperties(schemas?.properties),
+      crs: FeatureCrs(schemas?.crs),
     },
     {
       title: "GeoJSON MultiPolygon Feature",
@@ -600,94 +660,108 @@ export function MultiPolygonFeature<
 export type TFeatureSchemas2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-> = TFeatureSchemas<TProps, TCoordinateSchema2d, TBBox>;
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+> = TFeatureSchemas<TProps, TCoordinateSchema2d, TBBox, TCrs>;
 
 export type TFeatureSchemas3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-> = TFeatureSchemas<TProps, TCoordinateSchema3d, TBBox>;
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+> = TFeatureSchemas<TProps, TCoordinateSchema3d, TBBox, TCrs>;
 
-export function PointFeature2d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas2d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function PointFeature2d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return PointFeature(schemas, options);
 }
 
-export function PointFeature3d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas3d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function PointFeature3d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return PointFeature(schemas, options);
 }
 
-export function MultiPointFeature2d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas2d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function MultiPointFeature2d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiPointFeature(schemas, options);
 }
 
-export function MultiPointFeature3d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas3d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function MultiPointFeature3d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiPointFeature(schemas, options);
 }
 
-export function LineStringFeature2d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas2d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function LineStringFeature2d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return LineStringFeature(schemas, options);
 }
 
-export function LineStringFeature3d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas3d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function LineStringFeature3d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return LineStringFeature(schemas, options);
 }
 
-export function MultiLineStringFeature2d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas2d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function MultiLineStringFeature2d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiLineStringFeature(schemas, options);
 }
 
-export function MultiLineStringFeature3d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas3d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function MultiLineStringFeature3d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiLineStringFeature(schemas, options);
 }
 
-export function PolygonFeature2d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas2d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function PolygonFeature2d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return PolygonFeature(schemas, options);
 }
 
-export function PolygonFeature3d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas3d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function PolygonFeature3d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return PolygonFeature(schemas, options);
 }
 
-export function MultiPolygonFeature2d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas2d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function MultiPolygonFeature2d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiPolygonFeature(schemas, options);
 }
 
-export function MultiPolygonFeature3d<TProps extends TSchema | undefined, TBBox extends TBBoxSchema | undefined>(
-  schemas?: TFeatureSchemas3d<TProps, TBBox>,
-  options?: SchemaOptions,
-) {
+export function MultiPolygonFeature3d<
+  TProps extends TSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiPolygonFeature(schemas, options);
 }
 
@@ -701,7 +775,8 @@ export function FeatureSet<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>, options?: SchemaOptions) {
   return {
     point: PointFeature(schemas, options),
     line: LineStringFeature(schemas, options),
