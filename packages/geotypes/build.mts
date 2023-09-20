@@ -8,15 +8,20 @@ type GeotypesMetadata = {
   files: FileTypeExports[];
   geotypes: string[];
 };
+
+const lineStartsWithExportType = (line: string) => line.startsWith("export type");
 const exportedTypesForFile = async (file: string): Promise<FileTypeExports> => {
   const string = await fs.readFile(file, {
     encoding: "utf-8",
   });
   const lines = string.split("\n");
   const exportedTypes = lines
-    .filter((line) => line.includes("export type"))
+    .filter((line) => lineStartsWithExportType(line))
     .map((line) => line.split(" ")[2].replace(";", ""))
-    .map((typeAlias) => (typeAlias.includes("<") ? typeAlias.substring(0, typeAlias.indexOf("<")) : typeAlias));
+    .map((typeAlias) => {
+      return typeAlias.includes("<") ? typeAlias.substring(0, typeAlias.indexOf("<")) : typeAlias;
+    });
+  // .map((typeAlias) => (typeAlias.includes("<") ? typeAlias.substring(0, typeAlias.indexOf("<")) : typeAlias));
   const exportedInterfaces = lines
     .filter((line) => line.includes("export interface"))
     .map((line) => line.split(" ")[2].replace(";", ""))
@@ -28,10 +33,13 @@ const exportedTypesForFile = async (file: string): Promise<FileTypeExports> => {
   if (duplicates.length > 0) {
     throw new Error(`Duplicate types found in ${file}: ${duplicates.join(", ")}`);
   }
-
+  const typesFinal = types.sort((a, b) => a.localeCompare(b));
+  if (typesFinal.some((t) => t === "type")) {
+    throw new Error(`type is a reserved word, cannot export type named 'type' in ${file}`);
+  }
   return {
     fspath: file,
-    types: types.sort((a, b) => a.localeCompare(b)),
+    types: typesFinal,
   };
 };
 

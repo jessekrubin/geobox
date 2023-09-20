@@ -90,13 +90,19 @@ async function nuke_input_dir() {
   await $`mkdir ./src/typia-input`;
 }
 
+function filterTypes(tname: string) {
+  return !tname.includes("Hgt");
+}
+
 async function main() {
   const data = await fs.readJSON(
     "../geotypes/geotypes.json",
   ) as GeotypesMetadata;
   await nuke_input_dir();
 
+  data.geotypes = data.geotypes.filter(filterTypes);
   await bigAssFile(data);
+
 
   // // const
   // for (const tname of data.geotypes) {

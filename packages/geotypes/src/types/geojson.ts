@@ -42,7 +42,7 @@ export type PointCoordinates<TCoordinate extends Coordinate = Coordinate> = TCoo
 export type LineStringCoordinates<TCoordinate extends Coordinate = Coordinate> = [
   TCoordinate,
   TCoordinate,
-  ...TCoordinate[]
+  ...TCoordinate[],
 ];
 
 export type PolygonCoordinatesRing<TCoordinate extends Coordinate = Coordinate> = [
@@ -50,18 +50,18 @@ export type PolygonCoordinatesRing<TCoordinate extends Coordinate = Coordinate> 
   TCoordinate,
   TCoordinate,
   TCoordinate,
-  ...TCoordinate[]
+  ...TCoordinate[],
 ];
 export type PolygonCoordinates<TCoordinate extends Coordinate = Coordinate> = [PolygonCoordinatesRing<TCoordinate>];
 
 export type MultiPointCoordinates<TCoordinate extends Coordinate = Coordinate> = TCoordinate[];
 export type MultiLineStringCoordinates<TCoordinate extends Coordinate = Coordinate> = [
   LineStringCoordinates<TCoordinate>,
-  ...LineStringCoordinates<TCoordinate>[]
+  ...LineStringCoordinates<TCoordinate>[],
 ];
 export type MultiPolygonCoordinates<TCoordinate extends Coordinate = Coordinate> = [
   PolygonCoordinates<TCoordinate>,
-  ...PolygonCoordinates<TCoordinate>[]
+  ...PolygonCoordinates<TCoordinate>[],
 ];
 
 // Geometry object types
@@ -139,7 +139,7 @@ export type FeatureGeneric<
   TCoordinate extends Coordinate = Coordinate,
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable
+  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable,
 > = {
   Coordinate: TCoordinate;
   Geometry: Geometry<TCoordinate>;
@@ -164,7 +164,7 @@ export type Feature<
   TGeometry extends Geometry = Geometry,
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable
+  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable,
 > = {
   type: FeatureType;
   geometry: TGeometry;
@@ -178,42 +178,42 @@ export type PointFeature<
   TCoordinate extends Coordinate = Coordinate,
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable
+  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable,
 > = Feature<PointGeometry<TCoordinate>, TProperties, TBBox, TCrs>;
 
 export type LineStringFeature<
   TCoordinate extends Coordinate = Coordinate,
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable
+  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable,
 > = Feature<LineStringGeometry<TCoordinate>, TProperties, TBBox, TCrs>;
 
 export type PolygonFeature<
   TCoordinate extends Coordinate = Coordinate,
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable
+  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable,
 > = Feature<PolygonGeometry<TCoordinate>, TProperties, TBBox, TCrs>;
 
 export type MultiPointFeature<
   TCoordinate extends Coordinate = Coordinate,
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable
+  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable,
 > = Feature<MultiPointGeometry<TCoordinate>, TProperties, TBBox, TCrs>;
 
 export type MultiLineStringFeature<
   TCoordinate extends Coordinate = Coordinate,
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable
+  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable,
 > = Feature<MultiLineStringGeometry<TCoordinate>, TProperties, TBBox, TCrs>;
 
 export type MultiPolygonFeature<
   TCoordinate extends Coordinate = Coordinate,
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable
+  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable,
 > = Feature<MultiPolygonGeometry<TCoordinate>, TProperties, TBBox, TCrs>;
 
 // 2d Feature object types
@@ -221,71 +221,71 @@ export type MultiPolygonFeature<
 export type PointFeature2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<PointGeometry2d, TProperties, TBBox, TCrs>;
 export type LineStringFeature2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<LineStringGeometry2d, TProperties, TBBox, TCrs>;
 export type PolygonFeature2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<PolygonGeometry2d, TProperties, TBBox, TCrs>;
 export type MultiPointFeature2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<MultiPointGeometry2d, TProperties, TBBox, TCrs>;
 export type MultiLineStringFeature2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<MultiLineStringGeometry2d, TProperties, TBBox, TCrs>;
 export type MultiPolygonFeature2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<MultiPolygonGeometry2d, TProperties, TBBox, TCrs>;
 
 // 3d Feature object types
 export type PointFeature3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<PointGeometry3d, TProperties, TBBox, TCrs>;
 export type LineStringFeature3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<LineStringGeometry3d, TProperties, TBBox, TCrs>;
 export type PolygonFeature3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<PolygonGeometry3d, TProperties, TBBox, TCrs>;
 export type MultiPointFeature3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<MultiPointGeometry3d, TProperties, TBBox, TCrs>;
 export type MultiLineStringFeature3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<MultiLineStringGeometry3d, TProperties, TBBox, TCrs>;
 export type MultiPolygonFeature3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = Feature<MultiPolygonGeometry3d, TProperties, TBBox, TCrs>;
 
 export type FeatureCollection<
   TFeature extends Feature = Feature,
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = {
   type: FeatureCollectionType;
   features: TFeature[];
@@ -298,102 +298,102 @@ export type FeatureCollection<
 export type PointFeatureCollection<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<PointFeature<Coordinate, TProperties>, TProperties, TBBox, TCrs>;
 export type LineStringFeatureCollection<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<LineStringFeature<Coordinate, TProperties>, TProperties, TBBox, TCrs>;
 export type PolygonFeatureCollection<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<PolygonFeature<Coordinate, TProperties>, TProperties, TBBox, TCrs>;
 export type MultiPointFeatureCollection<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<MultiPointFeature<Coordinate, TProperties>, TProperties, TBBox, TCrs>;
 export type MultiLineStringFeatureCollection<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<MultiLineStringFeature<Coordinate, TProperties>, TProperties, TBBox, TCrs>;
 export type MultiPolygonFeatureCollection<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<MultiPolygonFeature<Coordinate, TProperties>, TProperties, TBBox, TCrs>;
 
 // 2d FeatureCollection object types
 export type PointFeatureCollection2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox2d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<PointFeature2d<TProperties>, TProperties, TBBox, TCrs>;
 export type LineStringFeatureCollection2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox2d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<LineStringFeature2d<TProperties>, TProperties, TBBox, TCrs>;
 export type PolygonFeatureCollection2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox2d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<PolygonFeature2d<TProperties>, TProperties, TBBox, TCrs>;
 export type MultiPointFeatureCollection2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox2d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<MultiPointFeature2d<TProperties>, TProperties, TBBox, TCrs>;
 export type MultiLineStringFeatureCollection2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox2d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<MultiLineStringFeature2d<TProperties>, TProperties, TBBox, TCrs>;
 export type MultiPolygonFeatureCollection2d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox2d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<MultiPolygonFeature2d<TProperties>, TProperties, TBBox, TCrs>;
 
 // 3d FeatureCollection object types
 export type PointFeatureCollection3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox3d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<PointFeature3d<TProperties>, TProperties, TBBox, TCrs>;
 export type LineStringFeatureCollection3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox3d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<LineStringFeature3d<TProperties>, TProperties, TBBox, TCrs>;
 export type PolygonFeatureCollection3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox3d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<PolygonFeature3d<TProperties>, TProperties, TBBox, TCrs>;
 export type MultiPointFeatureCollection3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox3d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<MultiPointFeature3d<TProperties>, TProperties, TBBox, TCrs>;
 export type MultiLineStringFeatureCollection3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox3d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<MultiLineStringFeature3d<TProperties>, TProperties, TBBox, TCrs>;
 export type MultiPolygonFeatureCollection3d<
   TProperties extends GeoJsonProperties | undefined = GeoJsonProperties,
   TBBox extends BBox3d | undefined = undefined,
-  TCrs extends CoordinateReferenceSystem | undefined | null = undefined
+  TCrs extends CoordinateReferenceSystem | undefined | null = undefined,
 > = FeatureCollection<MultiPolygonFeature3d<TProperties>, TProperties, TBBox, TCrs>;
 
 // 3d FeatureCollection object types
 export type GeometryCollection<
   TGeometry extends Geometry = Geometry,
-  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable
+  TCrs extends CoordinateReferenceSystem | undefined | null = CoordinateReferenceSystemNullable,
 > = {
   type: GeometryCollectionType;
   geometries: TGeometry[];
