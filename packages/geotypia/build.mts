@@ -42,6 +42,8 @@ const typename2filename = (tname: string) => {
 const bigAssFile = async (geotypes: GeotypesMetadata) => {
   const typeFunks = geotypes.geotypes.map((tname) => typeFunctions(tname));
   const lines = [
+    // turn off eslint explicit any
+    '/* eslint-disable @typescript-eslint/no-explicit-any,@typescript-eslint/no-unused-vars */',
     '// eslint-disable-next-line @typescript-eslint/ban-ts-comment',
     '// @ts-nocheck',
     TYPIA_IMPORT,

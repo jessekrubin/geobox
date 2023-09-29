@@ -9,6 +9,15 @@ type GeotypesMetadata = {
   geotypes: string[];
 };
 
+const lineIsCommentedOut = (line: string) => {
+  if (line.startsWith("//")) {
+    return true;
+  }
+  if (line.startsWith("/*")) {
+    return true;
+  }
+  return false
+}
 const lineStartsWithExportType = (line: string) => line.startsWith("export type");
 const exportedTypesForFile = async (file: string): Promise<FileTypeExports> => {
   const string = await fs.readFile(file, {
@@ -16,14 +25,26 @@ const exportedTypesForFile = async (file: string): Promise<FileTypeExports> => {
   });
   const lines = string.split("\n");
   const exportedTypes = lines
-    .filter((line) => lineStartsWithExportType(line))
-    .map((line) => line.split(" ")[2].replace(";", ""))
+    .filter((line) => {
+      const thingy = lineStartsWithExportType(line) && !lineIsCommentedOut(line)
+      // console.log(thingy, line)
+      return thingy
+    }
+    )
+    .map((line) => {
+      const split = line.split(" ")[2].replace(";", "")
+      console.log(split)
+      return split
+    })
     .map((typeAlias) => {
+
       return typeAlias.includes("<") ? typeAlias.substring(0, typeAlias.indexOf("<")) : typeAlias;
     });
   // .map((typeAlias) => (typeAlias.includes("<") ? typeAlias.substring(0, typeAlias.indexOf("<")) : typeAlias));
   const exportedInterfaces = lines
-    .filter((line) => line.includes("export interface"))
+    .filter((line) => line.includes("export interface") && line.startsWith(
+      "export interface",
+    ))
     .map((line) => line.split(" ")[2].replace(";", ""))
     .map((iname) => (iname.includes("<") ? iname.substring(0, iname.indexOf("<")) : iname));
   const types = [...exportedTypes, ...exportedInterfaces];
@@ -58,6 +79,7 @@ const typesIndex = async (files: FileTypeExports[]) => {
       // ),
     ].sort((a, b) => a.localeCompare(b)),
   };
+  console.log(geotypesMetadata.geotypes)
   await fs.writeFile("./geotypes.json", JSON.stringify(geotypesMetadata, undefined, 2));
 };
 
