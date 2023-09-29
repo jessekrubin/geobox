@@ -5,3 +5,6 @@ build-root:
 
 build-packages:
     pnpm run -r build
+
+build2typia:
+    pnpm run -r --filter \!geojson build

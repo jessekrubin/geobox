@@ -40,19 +40,19 @@
     "@jsse/geotypes": "workspace:*"
   },
   "devDependencies": {
-    "@types/geojson": "^7946.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "@vitest/coverage-v8": "^0.32.4",
-    "esbuild": "^0.18.16",
-    "eslint": "^8.45.0",
-    "prettier": "2.8.8",
+    "@types/geojson": "^7946.0.11",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "@vitest/coverage-v8": "^0.34.6",
+    "esbuild": "^0.19.4",
+    "eslint": "^8.50.0",
+    "prettier": "3.0.3",
     "ts-node": "^10.9.1",
     "ts-patch": "^3.0.2",
-    "tsup": "6.7.0",
-    "tsx": "^3.12.7",
-    "typescript": "5.1.6",
-    "typia": "^4.1.7",
-    "vitest": "0.32.2"
+    "tsup": "7.2.0",
+    "tsx": "^3.13.0",
+    "typescript": "5.2.2",
+    "typia": "^5.1.5",
+    "vitest": "0.34.6"
   }
 }
