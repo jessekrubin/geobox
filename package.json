@@ -1,7 +1,7 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "geo-json-schemas by way of typebox",
   "publishConfig": {
     "access": "public"
