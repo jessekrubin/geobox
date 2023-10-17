@@ -2,16 +2,16 @@
   "compilerOptions": {
     "target": "es2020",
     "module": "Node16",
-    "strict": true,
-    "esModuleInterop": true,
     "moduleResolution": "Node16",
-    "skipLibCheck": true,
-    "noUnusedLocals": false,
-    "noImplicitAny": true,
+    "resolveJsonModule": true,
     "allowJs": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
     "noEmit": false,
     "outDir": "dist",
-    "resolveJsonModule": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"]
 }
