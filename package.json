@@ -12,9 +12,11 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.mjs",
-    "types": "./dist/index.d.ts"
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
   },
   "types": "./dist/index.d.ts",
   "scripts": {
@@ -30,6 +32,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@jsse/eslint-config": "^0.0.1",
     "@turf/helpers": "^6.5.0",
     "@turf/turf": "^6.5.0",
     "@types/geojson": "^7946.0.11",

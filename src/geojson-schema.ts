@@ -490,6 +490,7 @@ export type GeometrySchema =
   | ReturnType<typeof MultiLineStringGeometry>
   | ReturnType<typeof MultiPolygonGeometry>;
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export type GeojsonProperties<T extends TSchema | undefined> = IsDefined<T> extends true
   ? AssertType<T>
   : ReturnType<typeof GeojsonProperties>;
@@ -506,7 +507,7 @@ export const FeatureCrs = <T extends TSchema | undefined>(schema?: T) =>
 export function Feature<Geom extends GeometrySchema, P extends TSchema | undefined>(
   {
     geometry: gemoetry,
-    properties: properties = undefined,
+    properties = undefined,
   }: {
     geometry: Geom;
     properties?: P;
@@ -769,7 +770,7 @@ export function MultiPolygonFeature3d<
  * Creates a set of GeoJSON Feature schemas for all geometry types.
  * @param schemas
  * @param options
- * @returns
+ * @returns GeoJSON Feature schemas for all geometry types
  */
 export function FeatureSet<
   TProps extends TSchema | undefined,
