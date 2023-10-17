@@ -15,5 +15,7 @@
     "allowSyntheticDefaultImports": true,
     "plugins": [],
     "strictNullChecks": true
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "./src/types-tests/**/*"]
 }

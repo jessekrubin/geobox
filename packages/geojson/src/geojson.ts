@@ -35,15 +35,17 @@ import type {
   PointGeometry3d,
   PolygonCoordinates,
   PolygonFeature,
+  FeatureOptions,
+  FeatureGenericOptions
 } from "@jsse/geotypes";
 
 // } from "./geojson-types.js";
 // export * from "./geojson-types.js";
 
-export type FeatureOptions = {
-  id?: string | number;
-  bbox?: BBox;
-};
+// export type FeatureOptions = {
+//   id?: string | number;
+//   bbox?: BBox;
+// };
 
 export const isCoordinate2d = (value: unknown): value is Coordinate2d =>
   Array.isArray(value) && value.length === 2 && typeof value[0] === "number" && typeof value[1] === "number";
@@ -161,7 +163,21 @@ const optsId = (id: unknown): string | number => {
   return id;
 };
 
-export const featureOptions = (options?: FeatureOptions) => {
+export const featureOptionsog = (options?: FeatureOptions) => {
+  if (options === undefined || (options.id === undefined && options.bbox === undefined)) {
+    return {};
+  }
+  if (options.id === undefined && options.bbox !== undefined) {
+    return { bbox: optsBbox(options.bbox) };
+  }
+  if (options.id !== undefined && options.bbox === undefined) {
+    return { id: optsId(options.id) };
+  }
+  return { id: optsId(optsId), bbox: optsBbox(options.bbox) };
+};
+export const featureOptions = <
+  TFeatureOptions extends Partial<FeatureGenericOptions> = FeatureGenericOptions
+>(options?: TFeatureOptions): FeatureOptions<TFeatureOptions> => {
   if (options === undefined || (options.id === undefined && options.bbox === undefined)) {
     return {};
   }
@@ -303,90 +319,122 @@ export const multiPolygonGeometry = <TCoordinate extends Coordinate = Coordinate
   coordinates,
 });
 
-export const point = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
-  coordinates: TCoordinate,
-  properties?: TProperties,
-  options?: FeatureOptions,
-): PointFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
-  type: "Feature",
-  geometry: pointGeometry(coordinates),
-  properties: featureProperties(properties),
-  ...featureOptions(options),
-});
+type PF<
+  TProperties extends GeoJsonProperties | null | undefined = GeoJsonProperties | null | undefined,
+  TFeatureOptions extends Partial<FeatureGenericOptions> = Partial<FeatureGenericOptions>
+> = PointFeature<TProperties, TFeatureOptions>
 
-export const lineString = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
-  coordinates: LineStringCoordinates<TCoordinate>,
+type thingy = PF['bbox']
+export function point<
+  TProperties extends GeoJsonProperties | null | undefined = GeoJsonProperties | null | undefined,
+  TFeatureOptions extends Partial<FeatureGenericOptions> = Partial<FeatureGenericOptions>
+>(
+  coordinates: Coordinate,
   properties?: TProperties,
-  options?: FeatureOptions,
-): LineStringFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
-  type: "Feature",
-  geometry: lineStringGeometry(coordinates),
-  properties: featureProperties(properties),
-  ...featureOptions(options),
-});
+  options?: TFeatureOptions,
+): Feature<PointGeometry<Coordinate>, TProperties, TFeatureOptions> {
+  // ) {
+  // ): PointFeature<TProperties, TFeatureOptions> {
+  const opts = {
+    ...(options !== undefined ? options : {}),
+  } satisfies Partial<FeatureGenericOptions>
+  const thingy = {
 
-export const polygon = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
-  coordinates: PolygonCoordinates<TCoordinate>,
-  properties?: TProperties,
-  options?: FeatureOptions,
-): PolygonFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
-  type: "Feature",
-  geometry: polygonGeometry(coordinates),
-  properties: featureProperties(properties),
-  ...featureOptions(options),
-});
+    type: "Feature" as const,
+    geometry: pointGeometry(coordinates),
+    properties: featureProperties(properties),
+  } satisfies Omit<Feature<PointGeometry<Coordinate>, TProperties, TFeatureOptions>, 'id' | 'crs' | 'bbox'>
+  return {
+    // type: "Feature" as const,
+    // geometry: pointGeometry(coordinates),
+    // properties: featureProperties(properties),
+    ...thingy,
+    ...opts,
+  }
+  //  satisfies Feature<PointGeometry, TProperties, TFeatureOptions>
+}
 
-export const multiPoint = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
-  coordinates: MultiPointCoordinates<TCoordinate>,
-  properties?: TProperties,
-  options?: FeatureOptions,
-): MultiPointFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
-  type: "Feature",
-  geometry: multiPointGeometry(coordinates),
-  properties: featureProperties(properties),
-  ...featureOptions(options),
-});
 
-export const multiLineString = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
-  coordinates: MultiLineStringCoordinates<TCoordinate>,
-  properties?: TProperties,
-  options?: FeatureOptions,
-): MultiLineStringFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
-  type: "Feature",
-  geometry: multiLineStringGeometry(coordinates),
-  properties: featureProperties(properties),
-  ...featureOptions(options),
+const p = point([1, 2], undefined, {
+  id: 'foo',
+  bbox: [1, 2, 3, 4]
 });
+type tp = typeof p
+type tp2 = tp['bbox']
 
-export const multiPolygon = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
-  coordinates: MultiPolygonCoordinates<TCoordinate>,
-  properties?: TProperties,
-  options?: FeatureOptions,
-): MultiPolygonFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
-  type: "Feature",
-  geometry: multiPolygonGeometry(coordinates),
-  properties: featureProperties(properties),
-  ...featureOptions(options),
-});
+// export const lineString = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
+//   coordinates: LineStringCoordinates<TCoordinate>,
+//   properties?: TProperties,
+//   options?: FeatureOptions,
+// ): LineStringFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
+//   type: "Feature",
+//   geometry: lineStringGeometry(coordinates),
+//   properties: featureProperties(properties),
+//   ...featureOptions(options),
+// });
 
-export const featureCollection = <TFeature extends Feature = Feature, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
-  features: TFeature[],
-  properties?: TProperties,
-  options?: FeatureOptions,
-): FeatureCollection<TFeature, TProperties, FeatureOptions['bbox']
-> => ({
-  type: "FeatureCollection",
-  features,
-  properties: featureProperties(properties),
-  ...featureOptions(options),
-});
+// export const polygon = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
+//   coordinates: PolygonCoordinates<TCoordinate>,
+//   properties?: TProperties,
+//   options?: FeatureOptions,
+// ): PolygonFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
+//   type: "Feature",
+//   geometry: polygonGeometry(coordinates),
+//   properties: featureProperties(properties),
+//   ...featureOptions(options),
+// });
 
-export {
-  point as pointFeature,
-  lineString as lineStringFeature,
-  polygon as polygonFeature,
-  multiPoint as multiPointFeature,
-  multiLineString as multiLineStringFeature,
-  multiPolygon as multiPolygonFeature,
-  featureCollection as featureCollectionFeature,
-};
+// export const multiPoint = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
+//   coordinates: MultiPointCoordinates<TCoordinate>,
+//   properties?: TProperties,
+//   options?: FeatureOptions,
+// ): MultiPointFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
+//   type: "Feature",
+//   geometry: multiPointGeometry(coordinates),
+//   properties: featureProperties(properties),
+//   ...featureOptions(options),
+// });
+
+// export const multiLineString = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
+//   coordinates: MultiLineStringCoordinates<TCoordinate>,
+//   properties?: TProperties,
+//   options?: FeatureOptions,
+// ): MultiLineStringFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
+//   type: "Feature",
+//   geometry: multiLineStringGeometry(coordinates),
+//   properties: featureProperties(properties),
+//   ...featureOptions(options),
+// });
+
+// export const multiPolygon = <TCoordinate extends Coordinate = Coordinate, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
+//   coordinates: MultiPolygonCoordinates<TCoordinate>,
+//   properties?: TProperties,
+//   options?: FeatureOptions,
+// ): MultiPolygonFeature<TCoordinate, TProperties, FeatureOptions['bbox']> => ({
+//   type: "Feature",
+//   geometry: multiPolygonGeometry(coordinates),
+//   properties: featureProperties(properties),
+//   ...featureOptions(options),
+// });
+
+// export const featureCollection = <TFeature extends Feature = Feature, TProperties extends GeoJsonProperties | undefined = GeoJsonProperties>(
+//   features: TFeature[],
+//   properties?: TProperties,
+//   options?: FeatureOptions,
+// ): FeatureCollection<TFeature, TProperties, FeatureOptions['bbox']
+// > => ({
+//   type: "FeatureCollection",
+//   features,
+//   properties: featureProperties(properties),
+//   ...featureOptions(options),
+// });
+
+// export {
+//   point as pointFeature,
+//   lineString as lineStringFeature,
+//   polygon as polygonFeature,
+//   multiPoint as multiPointFeature,
+//   multiLineString as multiLineStringFeature,
+//   multiPolygon as multiPolygonFeature,
+//   featureCollection as featureCollectionFeature,
+// };

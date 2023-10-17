@@ -1,15 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { FeatureOptions, PointGeometry, Feature } from "../types/geojson.js";
+import type { FeatureOptions, PointGeometry, Feature, PointFeature } from "../types/geojson.js";
+
+function noop(v: any) {
+  return v;
+}
 {
   // type ExampleOptions = FeatureOptionsGeneric;
 
   type FeatureOptionsNothing = FeatureOptions;
   type ExampleOptionsWithId = FeatureOptions<{
-    Id: string;
+    id: string;
   }>;
 }
 {
-  type FeatureWithId = Feature<PointGeometry, undefined, { Id: string }>;
+  type FeatureWithId = Feature<PointGeometry, undefined, { id: string }>;
   const featureWithNoProperties: FeatureWithId = {
     type: "Feature",
     geometry: {
@@ -29,6 +33,9 @@ import type { FeatureOptions, PointGeometry, Feature } from "../types/geojson.js
     },
     id: "some-id",
   };
+
+  noop(featureWithNoProperties);
+  noop(validFeature);
 
   // @ts-expect-error id is required
   const invalidFeature: FeatureWithId = {
@@ -70,4 +77,18 @@ import type { FeatureOptions, PointGeometry, Feature } from "../types/geojson.js
       howdy: "partner",
     },
   } satisfies Feature;
+}
+
+{
+  const pointFeature = {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [0, 0],
+    },
+    properties: {
+      howdy: "partner",
+    },
+    id: "some-id",
+  } satisfies PointFeature;
 }

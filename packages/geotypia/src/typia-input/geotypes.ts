@@ -11,6 +11,7 @@ import type {
   Coordinate3d,
   CoordinateReferenceSystem,
   CoordinateReferenceSystemNullable,
+  DeckglMapViewstate,
   DeckglTilejson,
   Feature,
   FeatureCollection,
@@ -33,6 +34,9 @@ import type {
   LatitudeWgs84,
   LinearRing,
   LineStringCoordinates,
+  LineStringFeature,
+  LineStringFeature2d,
+  LineStringFeature3d,
   LineStringGeometry,
   LineStringGeometry2d,
   LineStringGeometry3d,
@@ -44,16 +48,25 @@ import type {
   MbtilesMetadataRow,
   MbtilesTilesRow,
   MultiLineStringCoordinates,
+  MultiLineStringFeature,
+  MultiLineStringFeature2d,
+  MultiLineStringFeature3d,
   MultiLineStringGeometry,
   MultiLineStringGeometry2d,
   MultiLineStringGeometry3d,
   MultiLineStringGeometryType,
   MultiPointCoordinates,
+  MultiPointFeature,
+  MultiPointFeature2d,
+  MultiPointFeature3d,
   MultiPointGeometry,
   MultiPointGeometry2d,
   MultiPointGeometry3d,
   MultiPointGeometryType,
   MultiPolygonCoordinates,
+  MultiPolygonFeature,
+  MultiPolygonFeature2d,
+  MultiPolygonFeature3d,
   MultiPolygonGeometry,
   MultiPolygonGeometry2d,
   MultiPolygonGeometry3d,
@@ -61,11 +74,16 @@ import type {
   NamedCoordinateReferenceSystem,
   PointCoordinates,
   PointFeature,
+  PointFeature2d,
+  PointFeature3d,
   PointGeometry,
   PointGeometry2d,
   PointGeometry3d,
   PointGeometryType,
   PolygonCoordinates,
+  PolygonFeature,
+  PolygonFeature2d,
+  PolygonFeature3d,
   PolygonGeometry,
   PolygonGeometry2d,
   PolygonGeometry3d,
@@ -152,6 +170,15 @@ export const isCoordinateReferenceSystemNullable = typia.createIs<CoordinateRefe
 export const randomCoordinateReferenceSystemNullable = typia.createRandom<CoordinateReferenceSystemNullable>()
 export const stringifyCoordinateReferenceSystemNullable = typia.json.createStringify<CoordinateReferenceSystemNullable>()
 export const validateCoordinateReferenceSystemNullable = typia.createValidate<CoordinateReferenceSystemNullable>()
+
+
+// DeckglMapViewstate
+export const assertDeckglMapViewstate = typia.createAssert<DeckglMapViewstate>()
+export const equalsDeckglMapViewstate = typia.createEquals<DeckglMapViewstate>()
+export const isDeckglMapViewstate = typia.createIs<DeckglMapViewstate>()
+export const randomDeckglMapViewstate = typia.createRandom<DeckglMapViewstate>()
+export const stringifyDeckglMapViewstate = typia.json.createStringify<DeckglMapViewstate>()
+export const validateDeckglMapViewstate = typia.createValidate<DeckglMapViewstate>()
 
 
 // DeckglTilejson
@@ -352,6 +379,33 @@ export const stringifyLineStringCoordinates = typia.json.createStringify<LineStr
 export const validateLineStringCoordinates = typia.createValidate<LineStringCoordinates>()
 
 
+// LineStringFeature
+export const assertLineStringFeature = typia.createAssert<LineStringFeature>()
+export const equalsLineStringFeature = typia.createEquals<LineStringFeature>()
+export const isLineStringFeature = typia.createIs<LineStringFeature>()
+export const randomLineStringFeature = typia.createRandom<LineStringFeature>()
+export const stringifyLineStringFeature = typia.json.createStringify<LineStringFeature>()
+export const validateLineStringFeature = typia.createValidate<LineStringFeature>()
+
+
+// LineStringFeature2d
+export const assertLineStringFeature2d = typia.createAssert<LineStringFeature2d>()
+export const equalsLineStringFeature2d = typia.createEquals<LineStringFeature2d>()
+export const isLineStringFeature2d = typia.createIs<LineStringFeature2d>()
+export const randomLineStringFeature2d = typia.createRandom<LineStringFeature2d>()
+export const stringifyLineStringFeature2d = typia.json.createStringify<LineStringFeature2d>()
+export const validateLineStringFeature2d = typia.createValidate<LineStringFeature2d>()
+
+
+// LineStringFeature3d
+export const assertLineStringFeature3d = typia.createAssert<LineStringFeature3d>()
+export const equalsLineStringFeature3d = typia.createEquals<LineStringFeature3d>()
+export const isLineStringFeature3d = typia.createIs<LineStringFeature3d>()
+export const randomLineStringFeature3d = typia.createRandom<LineStringFeature3d>()
+export const stringifyLineStringFeature3d = typia.json.createStringify<LineStringFeature3d>()
+export const validateLineStringFeature3d = typia.createValidate<LineStringFeature3d>()
+
+
 // LineStringGeometry
 export const assertLineStringGeometry = typia.createAssert<LineStringGeometry>()
 export const equalsLineStringGeometry = typia.createEquals<LineStringGeometry>()
@@ -451,6 +505,33 @@ export const stringifyMultiLineStringCoordinates = typia.json.createStringify<Mu
 export const validateMultiLineStringCoordinates = typia.createValidate<MultiLineStringCoordinates>()
 
 
+// MultiLineStringFeature
+export const assertMultiLineStringFeature = typia.createAssert<MultiLineStringFeature>()
+export const equalsMultiLineStringFeature = typia.createEquals<MultiLineStringFeature>()
+export const isMultiLineStringFeature = typia.createIs<MultiLineStringFeature>()
+export const randomMultiLineStringFeature = typia.createRandom<MultiLineStringFeature>()
+export const stringifyMultiLineStringFeature = typia.json.createStringify<MultiLineStringFeature>()
+export const validateMultiLineStringFeature = typia.createValidate<MultiLineStringFeature>()
+
+
+// MultiLineStringFeature2d
+export const assertMultiLineStringFeature2d = typia.createAssert<MultiLineStringFeature2d>()
+export const equalsMultiLineStringFeature2d = typia.createEquals<MultiLineStringFeature2d>()
+export const isMultiLineStringFeature2d = typia.createIs<MultiLineStringFeature2d>()
+export const randomMultiLineStringFeature2d = typia.createRandom<MultiLineStringFeature2d>()
+export const stringifyMultiLineStringFeature2d = typia.json.createStringify<MultiLineStringFeature2d>()
+export const validateMultiLineStringFeature2d = typia.createValidate<MultiLineStringFeature2d>()
+
+
+// MultiLineStringFeature3d
+export const assertMultiLineStringFeature3d = typia.createAssert<MultiLineStringFeature3d>()
+export const equalsMultiLineStringFeature3d = typia.createEquals<MultiLineStringFeature3d>()
+export const isMultiLineStringFeature3d = typia.createIs<MultiLineStringFeature3d>()
+export const randomMultiLineStringFeature3d = typia.createRandom<MultiLineStringFeature3d>()
+export const stringifyMultiLineStringFeature3d = typia.json.createStringify<MultiLineStringFeature3d>()
+export const validateMultiLineStringFeature3d = typia.createValidate<MultiLineStringFeature3d>()
+
+
 // MultiLineStringGeometry
 export const assertMultiLineStringGeometry = typia.createAssert<MultiLineStringGeometry>()
 export const equalsMultiLineStringGeometry = typia.createEquals<MultiLineStringGeometry>()
@@ -496,6 +577,33 @@ export const stringifyMultiPointCoordinates = typia.json.createStringify<MultiPo
 export const validateMultiPointCoordinates = typia.createValidate<MultiPointCoordinates>()
 
 
+// MultiPointFeature
+export const assertMultiPointFeature = typia.createAssert<MultiPointFeature>()
+export const equalsMultiPointFeature = typia.createEquals<MultiPointFeature>()
+export const isMultiPointFeature = typia.createIs<MultiPointFeature>()
+export const randomMultiPointFeature = typia.createRandom<MultiPointFeature>()
+export const stringifyMultiPointFeature = typia.json.createStringify<MultiPointFeature>()
+export const validateMultiPointFeature = typia.createValidate<MultiPointFeature>()
+
+
+// MultiPointFeature2d
+export const assertMultiPointFeature2d = typia.createAssert<MultiPointFeature2d>()
+export const equalsMultiPointFeature2d = typia.createEquals<MultiPointFeature2d>()
+export const isMultiPointFeature2d = typia.createIs<MultiPointFeature2d>()
+export const randomMultiPointFeature2d = typia.createRandom<MultiPointFeature2d>()
+export const stringifyMultiPointFeature2d = typia.json.createStringify<MultiPointFeature2d>()
+export const validateMultiPointFeature2d = typia.createValidate<MultiPointFeature2d>()
+
+
+// MultiPointFeature3d
+export const assertMultiPointFeature3d = typia.createAssert<MultiPointFeature3d>()
+export const equalsMultiPointFeature3d = typia.createEquals<MultiPointFeature3d>()
+export const isMultiPointFeature3d = typia.createIs<MultiPointFeature3d>()
+export const randomMultiPointFeature3d = typia.createRandom<MultiPointFeature3d>()
+export const stringifyMultiPointFeature3d = typia.json.createStringify<MultiPointFeature3d>()
+export const validateMultiPointFeature3d = typia.createValidate<MultiPointFeature3d>()
+
+
 // MultiPointGeometry
 export const assertMultiPointGeometry = typia.createAssert<MultiPointGeometry>()
 export const equalsMultiPointGeometry = typia.createEquals<MultiPointGeometry>()
@@ -539,6 +647,33 @@ export const isMultiPolygonCoordinates = typia.createIs<MultiPolygonCoordinates>
 export const randomMultiPolygonCoordinates = typia.createRandom<MultiPolygonCoordinates>()
 export const stringifyMultiPolygonCoordinates = typia.json.createStringify<MultiPolygonCoordinates>()
 export const validateMultiPolygonCoordinates = typia.createValidate<MultiPolygonCoordinates>()
+
+
+// MultiPolygonFeature
+export const assertMultiPolygonFeature = typia.createAssert<MultiPolygonFeature>()
+export const equalsMultiPolygonFeature = typia.createEquals<MultiPolygonFeature>()
+export const isMultiPolygonFeature = typia.createIs<MultiPolygonFeature>()
+export const randomMultiPolygonFeature = typia.createRandom<MultiPolygonFeature>()
+export const stringifyMultiPolygonFeature = typia.json.createStringify<MultiPolygonFeature>()
+export const validateMultiPolygonFeature = typia.createValidate<MultiPolygonFeature>()
+
+
+// MultiPolygonFeature2d
+export const assertMultiPolygonFeature2d = typia.createAssert<MultiPolygonFeature2d>()
+export const equalsMultiPolygonFeature2d = typia.createEquals<MultiPolygonFeature2d>()
+export const isMultiPolygonFeature2d = typia.createIs<MultiPolygonFeature2d>()
+export const randomMultiPolygonFeature2d = typia.createRandom<MultiPolygonFeature2d>()
+export const stringifyMultiPolygonFeature2d = typia.json.createStringify<MultiPolygonFeature2d>()
+export const validateMultiPolygonFeature2d = typia.createValidate<MultiPolygonFeature2d>()
+
+
+// MultiPolygonFeature3d
+export const assertMultiPolygonFeature3d = typia.createAssert<MultiPolygonFeature3d>()
+export const equalsMultiPolygonFeature3d = typia.createEquals<MultiPolygonFeature3d>()
+export const isMultiPolygonFeature3d = typia.createIs<MultiPolygonFeature3d>()
+export const randomMultiPolygonFeature3d = typia.createRandom<MultiPolygonFeature3d>()
+export const stringifyMultiPolygonFeature3d = typia.json.createStringify<MultiPolygonFeature3d>()
+export const validateMultiPolygonFeature3d = typia.createValidate<MultiPolygonFeature3d>()
 
 
 // MultiPolygonGeometry
@@ -604,6 +739,24 @@ export const stringifyPointFeature = typia.json.createStringify<PointFeature>()
 export const validatePointFeature = typia.createValidate<PointFeature>()
 
 
+// PointFeature2d
+export const assertPointFeature2d = typia.createAssert<PointFeature2d>()
+export const equalsPointFeature2d = typia.createEquals<PointFeature2d>()
+export const isPointFeature2d = typia.createIs<PointFeature2d>()
+export const randomPointFeature2d = typia.createRandom<PointFeature2d>()
+export const stringifyPointFeature2d = typia.json.createStringify<PointFeature2d>()
+export const validatePointFeature2d = typia.createValidate<PointFeature2d>()
+
+
+// PointFeature3d
+export const assertPointFeature3d = typia.createAssert<PointFeature3d>()
+export const equalsPointFeature3d = typia.createEquals<PointFeature3d>()
+export const isPointFeature3d = typia.createIs<PointFeature3d>()
+export const randomPointFeature3d = typia.createRandom<PointFeature3d>()
+export const stringifyPointFeature3d = typia.json.createStringify<PointFeature3d>()
+export const validatePointFeature3d = typia.createValidate<PointFeature3d>()
+
+
 // PointGeometry
 export const assertPointGeometry = typia.createAssert<PointGeometry>()
 export const equalsPointGeometry = typia.createEquals<PointGeometry>()
@@ -647,6 +800,33 @@ export const isPolygonCoordinates = typia.createIs<PolygonCoordinates>()
 export const randomPolygonCoordinates = typia.createRandom<PolygonCoordinates>()
 export const stringifyPolygonCoordinates = typia.json.createStringify<PolygonCoordinates>()
 export const validatePolygonCoordinates = typia.createValidate<PolygonCoordinates>()
+
+
+// PolygonFeature
+export const assertPolygonFeature = typia.createAssert<PolygonFeature>()
+export const equalsPolygonFeature = typia.createEquals<PolygonFeature>()
+export const isPolygonFeature = typia.createIs<PolygonFeature>()
+export const randomPolygonFeature = typia.createRandom<PolygonFeature>()
+export const stringifyPolygonFeature = typia.json.createStringify<PolygonFeature>()
+export const validatePolygonFeature = typia.createValidate<PolygonFeature>()
+
+
+// PolygonFeature2d
+export const assertPolygonFeature2d = typia.createAssert<PolygonFeature2d>()
+export const equalsPolygonFeature2d = typia.createEquals<PolygonFeature2d>()
+export const isPolygonFeature2d = typia.createIs<PolygonFeature2d>()
+export const randomPolygonFeature2d = typia.createRandom<PolygonFeature2d>()
+export const stringifyPolygonFeature2d = typia.json.createStringify<PolygonFeature2d>()
+export const validatePolygonFeature2d = typia.createValidate<PolygonFeature2d>()
+
+
+// PolygonFeature3d
+export const assertPolygonFeature3d = typia.createAssert<PolygonFeature3d>()
+export const equalsPolygonFeature3d = typia.createEquals<PolygonFeature3d>()
+export const isPolygonFeature3d = typia.createIs<PolygonFeature3d>()
+export const randomPolygonFeature3d = typia.createRandom<PolygonFeature3d>()
+export const stringifyPolygonFeature3d = typia.json.createStringify<PolygonFeature3d>()
+export const validatePolygonFeature3d = typia.createValidate<PolygonFeature3d>()
 
 
 // PolygonGeometry

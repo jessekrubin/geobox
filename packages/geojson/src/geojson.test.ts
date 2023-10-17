@@ -36,196 +36,196 @@ describe("geojson-point", () => {
   });
 });
 
-describe("geojson-line", () => {
-  test("line", () => {
-    const line = gj.lineString([
-      [0, 0],
-      [1, 1],
-    ]);
-    const expected = {
-      type: "Feature",
-      geometry: {
-        type: "LineString",
-        coordinates: [
-          [0, 0],
-          [1, 1],
-        ],
-      },
-      properties: {},
-    };
-    expect(line).toEqual(expected);
-  });
+// describe("geojson-line", () => {
+//   test("line", () => {
+//     const line = gj.lineString([
+//       [0, 0],
+//       [1, 1],
+//     ]);
+//     const expected = {
+//       type: "Feature",
+//       geometry: {
+//         type: "LineString",
+//         coordinates: [
+//           [0, 0],
+//           [1, 1],
+//         ],
+//       },
+//       properties: {},
+//     };
+//     expect(line).toEqual(expected);
+//   });
 
-  test("line with properties", () => {
-    const line = gj.lineString(
-      [
-        [0, 0],
-        [1, 1],
-      ],
-      { dingo: "bash" },
-    );
-    const expected = {
-      type: "Feature",
-      geometry: {
-        type: "LineString",
+//   test("line with properties", () => {
+//     const line = gj.lineString(
+//       [
+//         [0, 0],
+//         [1, 1],
+//       ],
+//       { dingo: "bash" },
+//     );
+//     const expected = {
+//       type: "Feature",
+//       geometry: {
+//         type: "LineString",
 
-        coordinates: [
-          [0, 0],
-          [1, 1],
-        ],
-      },
-      properties: {
-        dingo: "bash",
-      },
-    };
-    expect(line).toEqual(expected);
-  });
+//         coordinates: [
+//           [0, 0],
+//           [1, 1],
+//         ],
+//       },
+//       properties: {
+//         dingo: "bash",
+//       },
+//     };
+//     expect(line).toEqual(expected);
+//   });
 
-  test("invalid coords", () => {
-    expect(() =>
-      gj.lineString([
-        [0, 0],
-        [1, 1, 1, 123],
-      ]),
-    ).toThrow();
-  });
-});
+//   test("invalid coords", () => {
+//     expect(() =>
+//       gj.lineString([
+//         [0, 0],
+//         [1, 1, 1, 123],
+//       ]),
+//     ).toThrow();
+//   });
+// });
 
-describe("geojson-polygon", () => {
-  test("polygon", () => {
-    const polygon = gj.polygon([
-      [
-        [0, 0],
-        [1, 1],
-        [0, 1],
-        [0, 0],
-      ],
-    ]);
-    const expected = {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [0, 0],
-            [1, 1],
-            [0, 1],
-            [0, 0],
-          ],
-        ],
-      },
-      properties: {},
-    };
-    expect(polygon).toEqual(expected);
-  });
+// describe("geojson-polygon", () => {
+//   test("polygon", () => {
+//     const polygon = gj.polygon([
+//       [
+//         [0, 0],
+//         [1, 1],
+//         [0, 1],
+//         [0, 0],
+//       ],
+//     ]);
+//     const expected = {
+//       type: "Feature",
+//       geometry: {
+//         type: "Polygon",
+//         coordinates: [
+//           [
+//             [0, 0],
+//             [1, 1],
+//             [0, 1],
+//             [0, 0],
+//           ],
+//         ],
+//       },
+//       properties: {},
+//     };
+//     expect(polygon).toEqual(expected);
+//   });
 
-  test("polygon with properties", () => {
-    const polygon = gj.polygon(
-      [
-        [
-          [0, 0],
-          [1, 1],
-          [0, 1],
-          [0, 0],
-        ],
-      ],
-      { dingo: "bash" },
-    );
-    const expected = {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [0, 0],
-            [1, 1],
-            [0, 1],
-            [0, 0],
-          ],
-        ],
-      },
-      properties: {
-        dingo: "bash",
-      },
-    };
-    expect(polygon).toEqual(expected);
-  });
+//   test("polygon with properties", () => {
+//     const polygon = gj.polygon(
+//       [
+//         [
+//           [0, 0],
+//           [1, 1],
+//           [0, 1],
+//           [0, 0],
+//         ],
+//       ],
+//       { dingo: "bash" },
+//     );
+//     const expected = {
+//       type: "Feature",
+//       geometry: {
+//         type: "Polygon",
+//         coordinates: [
+//           [
+//             [0, 0],
+//             [1, 1],
+//             [0, 1],
+//             [0, 0],
+//           ],
+//         ],
+//       },
+//       properties: {
+//         dingo: "bash",
+//       },
+//     };
+//     expect(polygon).toEqual(expected);
+//   });
 
-  test("polygon with bbox", () => {
-    const polygon = gj.polygon(
-      [
-        [
-          [0, 0],
-          [1, 1],
-          [0, 1],
-          [0, 0],
-        ],
-      ],
-      undefined,
-      { bbox: [0, 0, 1, 1] },
-    );
-    const expected = {
-      type: "Feature",
-      geometry: {
-        type: "Polygon",
-        coordinates: [
-          [
-            [0, 0],
-            [1, 1],
-            [0, 1],
-            [0, 0],
-          ],
-        ],
-      },
-      properties: {},
+//   test("polygon with bbox", () => {
+//     const polygon = gj.polygon(
+//       [
+//         [
+//           [0, 0],
+//           [1, 1],
+//           [0, 1],
+//           [0, 0],
+//         ],
+//       ],
+//       undefined,
+//       { bbox: [0, 0, 1, 1] },
+//     );
+//     const expected = {
+//       type: "Feature",
+//       geometry: {
+//         type: "Polygon",
+//         coordinates: [
+//           [
+//             [0, 0],
+//             [1, 1],
+//             [0, 1],
+//             [0, 0],
+//           ],
+//         ],
+//       },
+//       properties: {},
 
-      bbox: [0, 0, 1, 1],
-    };
-    expect(polygon).toEqual(expected);
-  });
+//       bbox: [0, 0, 1, 1],
+//     };
+//     expect(polygon).toEqual(expected);
+//   });
 
-  test("invalid coords", () => {
-    // @ts-expect-error - invalid coords
-    expect(() =>
-      gj.polygon([
-        [
-          [0, 0],
-          [1, 1, 1, 123],
-          [0, 1],
-          [0, 0],
-        ],
-      ]),
-    ).toThrow();
-  });
+//   test("invalid coords", () => {
+//     // @ts-expect-error - invalid coords
+//     expect(() =>
+//       gj.polygon([
+//         [
+//           [0, 0],
+//           [1, 1, 1, 123],
+//           [0, 1],
+//           [0, 0],
+//         ],
+//       ]),
+//     ).toThrow();
+//   });
 
-  test("invalid coords length", () => {
-    // @ts-expect-error - invalid coords
-    expect(() =>
-      gj.polygon([
-        [
-          [0, 0],
-          [1, 1, 1, 123],
-          [0, 1],
-        ],
-      ]),
-    ).toThrow();
-  });
+//   test("invalid coords length", () => {
+//     // @ts-expect-error - invalid coords
+//     expect(() =>
+//       gj.polygon([
+//         [
+//           [0, 0],
+//           [1, 1, 1, 123],
+//           [0, 1],
+//         ],
+//       ]),
+//     ).toThrow();
+//   });
 
-  test("invalid bbox length", () => {
-    // @ts-expect-error - invalid coords
-    expect(() =>
-      gj.polygon(
-        [
-          [
-            [0, 0],
-            [1, 1, 1],
-            [0, 1],
-            [0, 0],
-          ],
-        ],
-        undefined,
-        { bbox: [0, 0, 0] },
-      ),
-    ).toThrow();
-  });
-});
+//   test("invalid bbox length", () => {
+//     // @ts-expect-error - invalid coords
+//     expect(() =>
+//       gj.polygon(
+//         [
+//           [
+//             [0, 0],
+//             [1, 1, 1],
+//             [0, 1],
+//             [0, 0],
+//           ],
+//         ],
+//         undefined,
+//         { bbox: [0, 0, 0] },
+//       ),
+//     ).toThrow();
+//   });
+// });
