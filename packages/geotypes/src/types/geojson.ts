@@ -237,9 +237,6 @@ export type FeatureOptions<TOptions extends Partial<FeatureGenericOptions> | und
     ("bbox" extends keyof TOptions ? { bbox: TOptions["bbox"] } : { bbox?: BBox }) &
     ("crs" extends keyof TOptions ? { crs: TOptions["crs"] } : { crs?: CoordinateReferenceSystem | null }))
 
-// {
-//   // type ExampleOptions = FeatureOptionsGeneric;
-
 
 type FeatureProperties<TProperties> = IsUndefined<TProperties> extends true ? {
   properties?: GeoJsonProperties | null;
