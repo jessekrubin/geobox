@@ -42,8 +42,12 @@ import type {
   LineStringGeometry3d,
   LineStringGeometryType,
   LinkedCoordinateReferenceSystem,
+  LngLat,
+  LngLatZ,
   Longitude,
   LongitudeWgs84,
+  LonLat,
+  LonLatZ,
   MbtilesMetadata,
   MbtilesMetadataRow,
   MbtilesTilesRow,
@@ -97,6 +101,7 @@ import type {
   TilejsonVectorFormat,
   TilejsonVectorLayer,
   TilejsonVectorLayers,
+  Z,
 } from '@jsse/geotypes';
 
 
@@ -451,6 +456,24 @@ export const stringifyLinkedCoordinateReferenceSystem = typia.json.createStringi
 export const validateLinkedCoordinateReferenceSystem = typia.createValidate<LinkedCoordinateReferenceSystem>()
 
 
+// LngLat
+export const assertLngLat = typia.createAssert<LngLat>()
+export const equalsLngLat = typia.createEquals<LngLat>()
+export const isLngLat = typia.createIs<LngLat>()
+export const randomLngLat = typia.createRandom<LngLat>()
+export const stringifyLngLat = typia.json.createStringify<LngLat>()
+export const validateLngLat = typia.createValidate<LngLat>()
+
+
+// LngLatZ
+export const assertLngLatZ = typia.createAssert<LngLatZ>()
+export const equalsLngLatZ = typia.createEquals<LngLatZ>()
+export const isLngLatZ = typia.createIs<LngLatZ>()
+export const randomLngLatZ = typia.createRandom<LngLatZ>()
+export const stringifyLngLatZ = typia.json.createStringify<LngLatZ>()
+export const validateLngLatZ = typia.createValidate<LngLatZ>()
+
+
 // Longitude
 export const assertLongitude = typia.createAssert<Longitude>()
 export const equalsLongitude = typia.createEquals<Longitude>()
@@ -467,6 +490,24 @@ export const isLongitudeWgs84 = typia.createIs<LongitudeWgs84>()
 export const randomLongitudeWgs84 = typia.createRandom<LongitudeWgs84>()
 export const stringifyLongitudeWgs84 = typia.json.createStringify<LongitudeWgs84>()
 export const validateLongitudeWgs84 = typia.createValidate<LongitudeWgs84>()
+
+
+// LonLat
+export const assertLonLat = typia.createAssert<LonLat>()
+export const equalsLonLat = typia.createEquals<LonLat>()
+export const isLonLat = typia.createIs<LonLat>()
+export const randomLonLat = typia.createRandom<LonLat>()
+export const stringifyLonLat = typia.json.createStringify<LonLat>()
+export const validateLonLat = typia.createValidate<LonLat>()
+
+
+// LonLatZ
+export const assertLonLatZ = typia.createAssert<LonLatZ>()
+export const equalsLonLatZ = typia.createEquals<LonLatZ>()
+export const isLonLatZ = typia.createIs<LonLatZ>()
+export const randomLonLatZ = typia.createRandom<LonLatZ>()
+export const stringifyLonLatZ = typia.json.createStringify<LonLatZ>()
+export const validateLonLatZ = typia.createValidate<LonLatZ>()
 
 
 // MbtilesMetadata
@@ -944,3 +985,12 @@ export const isTilejsonVectorLayers = typia.createIs<TilejsonVectorLayers>()
 export const randomTilejsonVectorLayers = typia.createRandom<TilejsonVectorLayers>()
 export const stringifyTilejsonVectorLayers = typia.json.createStringify<TilejsonVectorLayers>()
 export const validateTilejsonVectorLayers = typia.createValidate<TilejsonVectorLayers>()
+
+
+// Z
+export const assertZ = typia.createAssert<Z>()
+export const equalsZ = typia.createEquals<Z>()
+export const isZ = typia.createIs<Z>()
+export const randomZ = typia.createRandom<Z>()
+export const stringifyZ = typia.json.createStringify<Z>()
+export const validateZ = typia.createValidate<Z>()

@@ -1,4 +1,4 @@
-import type { Nullable } from "../utility-types.js";
+import type { Nullable } from "../utypes.js";
 
 export type TilejsonRasterFormat = "png" | "jpg" | "webp";
 export type TilejsonVectorFormat = "pbf";

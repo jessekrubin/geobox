@@ -1,6 +1,16 @@
 {
   "files": [
     {
+      "fspath": "./src/types/coord.ts",
+      "types": [
+        "LngLat",
+        "LngLatZ",
+        "LonLat",
+        "LonLatZ",
+        "Z"
+      ]
+    },
+    {
       "fspath": "./src/types/deckgl.ts",
       "types": [
         "DeckglMapViewstate",
@@ -188,8 +198,12 @@
     "LineStringGeometry3d",
     "LineStringGeometryType",
     "LinkedCoordinateReferenceSystem",
+    "LngLat",
+    "LngLatZ",
     "Longitude",
     "LongitudeWgs84",
+    "LonLat",
+    "LonLatZ",
     "MbtilesMetadata",
     "MbtilesMetadataRow",
     "MbtilesTilesRow",
@@ -246,6 +260,7 @@
     "TilejsonRasterFormat",
     "TilejsonVectorFormat",
     "TilejsonVectorLayer",
-    "TilejsonVectorLayers"
+    "TilejsonVectorLayers",
+    "Z"
   ]
 }

@@ -1,4 +1,4 @@
-import type { IsUndefined, ExtendsUndefined } from "../utility-types.js";
+import type { IsUndefined, ExtendsUndefined } from "../utypes.js";
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export type Longitude = number;
