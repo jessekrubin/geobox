@@ -1,22 +1,25 @@
 {
   "name": "@jsse/geobox",
-  "version": "0.0.4",
+  "type": "module",
+  "version": "0.0.8",
   "description": "geo-json-schemas by way of typebox",
   "publishConfig": {
     "access": "public"
   },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.mjs",
-    "types": "./dist/index.d.ts"
-  },
-  "types": "./dist/index.d.ts",
   "scripts": {
     "prepublish": "pnpm run build",
     "build-fast": "tsup src/index.ts --format cjs,esm",
@@ -24,25 +27,25 @@
     "build:tsup": "tsup src/index.ts --format cjs,esm --dts",
     "test": "vitest run && vitest typecheck --run",
     "dev": "vitest watch",
-    "lint": "eslint src/** --ext .ts",
+    "lint": "eslint src/** ./package.json",
     "fmt": "prettier --write .",
     "prepublishOnly": "pnpm run build"
   },
-  "license": "MIT",
+  "dependencies": {
+    "@sinclair/typebox": "^0.31.17"
+  },
   "devDependencies": {
+    "@jsse/eslint-config": "^0.0.1",
     "@turf/helpers": "^6.5.0",
     "@turf/turf": "^6.5.0",
-    "@types/geojson": "^7946.0.10",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "@typescript-eslint/parser": "^6.1.0",
-    "eslint": "^8.45.0",
-    "prettier": "3.0.0",
-    "tsup": "7.1.0",
-    "tsx": "^3.12.7",
-    "typescript": "5.1.6",
-    "vitest": "0.33.0"
-  },
-  "dependencies": {
-    "@sinclair/typebox": "^0.29.6"
+    "@types/geojson": "^7946.0.11",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "prettier": "3.0.3",
+    "tsup": "7.2.0",
+    "tsx": "^3.13.0",
+    "typescript": "5.2.2",
+    "vitest": "0.34.6"
   }
 }

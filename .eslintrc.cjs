@@ -18,7 +18,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["./src/dev/dev.ts", "./src/dev/dev.test.ts"],
+      files: ["./src/dev/dev.ts", "./src/dev/dev.test.ts", "./src/scratch/**/*"],
       rules: {
         "@typescript-eslint/no-unused-vars": "off",
       },

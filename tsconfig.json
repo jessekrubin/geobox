@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "esnext",
-    "strict": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node16",
-    "skipLibCheck": true,
-    "noUnusedLocals": false,
-    "noImplicitAny": true,
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "resolveJsonModule": true,
     "allowJs": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": false,
     "noEmit": false,
     "outDir": "dist",
-    "resolveJsonModule": true
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"]
 }

@@ -54,12 +54,12 @@ export const SimpleStyleProperties = () =>
     ),
     "stroke-opacity": Type.Optional(
       Type.Number({
-        default: 1.0,
+        default: 1,
         title: "Stroke Opacity",
         description:
           "the opacity of the line component of a polygon, polyline, or multigeometry value must be a floating point number greater than or equal to zero and less or equal to than one",
-        minimum: 0.0,
-        maximum: 1.0,
+        minimum: 0,
+        maximum: 1,
       }),
     ),
     "stroke-width": Type.Optional(
@@ -82,8 +82,8 @@ export const SimpleStyleProperties = () =>
       Type.Number({
         default: 0.6,
         title: "Fill Opacity",
-        maximum: 1.0,
-        minimum: 0.0,
+        maximum: 1,
+        minimum: 0,
         description:
           "the opacity of the interior of a polygon. Implementations may choose to set this to 0 for line features value must be a floating point number greater than or equal to zero and less or equal to than one",
       }),

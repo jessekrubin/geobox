@@ -21,7 +21,7 @@ export type {
  * REF: https://github.com/sinclairzx81/typebox#unsafe-types
  *
  * @param schema Schema to make nullable
- * @param SchemaOptions Options to pass to the schema
+ * @param options Options to pass to the schema
  * @returns A schema that is either the original schema or null
  */
 export const Nullable = <T extends TSchema>(schema: T, options?: SchemaOptions) =>
