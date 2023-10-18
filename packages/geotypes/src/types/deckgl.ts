@@ -1,7 +1,7 @@
 export type DeckglTilejson = {
   tilejson: string;
   tiles: string[];
-  // eslint-disable-next-line camelcase, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   vector_layers: any[];
   attribution?: string;
   scheme?: string;
@@ -31,4 +31,4 @@ export type DeckglMapViewstate = {
   maxPitch?: number;
   /** Viewport center offsets from lng, lat in meters */
   position?: number[];
-}
+};

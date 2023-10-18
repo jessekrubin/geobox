@@ -2,6 +2,7 @@ import type { Nullable } from "../utypes.js";
 
 export type TilejsonRasterFormat = "png" | "jpg" | "webp";
 export type TilejsonVectorFormat = "pbf";
+export type TilejsonFormat = TilejsonRasterFormat | TilejsonVectorFormat;
 
 export type TilejsonVectorLayer = {
   id: string;
@@ -13,13 +14,13 @@ export type TilejsonVectorLayer = {
 
 export type TilejsonVectorLayers = TilejsonVectorLayer[];
 
-export type TilejsonCommon = {
+export type TilejsonCommon<TFormat extends TilejsonFormat = TilejsonFormat> = {
   // required
   name: string;
-  format: TilejsonRasterFormat | TilejsonVectorFormat;
+  format: TFormat;
   tilejson: string;
   tiles: string[];
-  // eslint-disable-next-line camelcase
+
   vector_layers: TilejsonVectorLayers;
 
   // optional
@@ -39,13 +40,11 @@ export type TilejsonCommon = {
 };
 
 export type Tilejson300Raster = {
-  format: TilejsonRasterFormat;
   vector_layers?: TilejsonVectorLayers;
-} & TilejsonCommon;
+} & TilejsonCommon<TilejsonRasterFormat>;
 
 export type Tilejson300Vector = {
-  format: TilejsonVectorFormat;
   vector_layers: TilejsonVectorLayers;
-} & TilejsonCommon;
+} & TilejsonCommon<TilejsonVectorFormat>;
 
 export type Tilejson300 = Tilejson300Raster | Tilejson300Vector;

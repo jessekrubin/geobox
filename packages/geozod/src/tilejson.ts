@@ -115,4 +115,4 @@ export const tilejson300Vector = () =>
     })
     .nonstrict();
 
-export const Tilejson300 = () => z.union([tilejson300Raster(), tilejson300Vector()]);
+export const tilejson300 = () => z.union([tilejson300Raster(), tilejson300Vector()]);

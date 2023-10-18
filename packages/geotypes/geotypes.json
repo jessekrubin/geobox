@@ -2,20 +2,11 @@
   "files": [
     {
       "fspath": "./src/types/coord.ts",
-      "types": [
-        "LngLat",
-        "LngLatZ",
-        "LonLat",
-        "LonLatZ",
-        "Z"
-      ]
+      "types": ["LngLat", "LngLatZ", "LonLat", "LonLatZ", "Z"]
     },
     {
       "fspath": "./src/types/deckgl.ts",
-      "types": [
-        "DeckglMapViewstate",
-        "DeckglTilejson"
-      ]
+      "types": ["DeckglMapViewstate", "DeckglTilejson"]
     },
     {
       "fspath": "./src/types/geojson.ts",
@@ -101,11 +92,7 @@
     },
     {
       "fspath": "./src/types/geostats.ts",
-      "types": [
-        "Geostats",
-        "GeostatsAttribute",
-        "GeostatsLayer"
-      ]
+      "types": ["Geostats", "GeostatsAttribute", "GeostatsLayer"]
     },
     {
       "fspath": "./src/types/hgt.ts",
@@ -125,17 +112,11 @@
     },
     {
       "fspath": "./src/types/mbtiles.ts",
-      "types": [
-        "MbtilesMetadata",
-        "MbtilesMetadataRow",
-        "MbtilesTilesRow"
-      ]
+      "types": ["MbtilesMetadata", "MbtilesMetadataRow", "MbtilesTilesRow"]
     },
     {
       "fspath": "./src/types/simplestyle.ts",
-      "types": [
-        "SimpleStyleProperties"
-      ]
+      "types": ["SimpleStyleProperties"]
     },
     {
       "fspath": "./src/types/tilejson.ts",
@@ -144,6 +125,7 @@
         "Tilejson300Raster",
         "Tilejson300Vector",
         "TilejsonCommon",
+        "TilejsonFormat",
         "TilejsonRasterFormat",
         "TilejsonVectorFormat",
         "TilejsonVectorLayer",
@@ -257,6 +239,7 @@
     "Tilejson300Raster",
     "Tilejson300Vector",
     "TilejsonCommon",
+    "TilejsonFormat",
     "TilejsonRasterFormat",
     "TilejsonVectorFormat",
     "TilejsonVectorLayer",

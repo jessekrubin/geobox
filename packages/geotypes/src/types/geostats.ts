@@ -16,8 +16,8 @@ export type GeostatsLayer = {
   attributes?: GeostatsAttribute[];
   [k: string]: unknown;
 };
-export interface Geostats {
+export type Geostats = {
   layerCount: number;
   layers: GeostatsLayer[];
   [k: string]: unknown;
-}
+};

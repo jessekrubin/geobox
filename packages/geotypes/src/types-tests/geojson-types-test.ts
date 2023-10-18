@@ -1,9 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { FeatureOptions, PointGeometry, Feature, PointFeature } from "../types/geojson.js";
+import type {
+  Feature,
+  FeatureOptions,
+  PointFeature,
+  PointFeature2d,
+  PointFeature3d,
+  PointGeometry,
+} from "../types/geojson.js";
 
-function noop(v: any) {
+function noop<T>(v: T): T {
   return v;
 }
+
 {
   // type ExampleOptions = FeatureOptionsGeneric;
 
@@ -49,9 +57,8 @@ function noop(v: any) {
     },
   };
 
-
-  type FeatureWithProperties = Feature<PointGeometry, { howdy: 'doody' } | undefined>;
-  type FeatureWithPropertiesProperties = FeatureWithProperties['properties'];
+  type FeatureWithProperties = Feature<PointGeometry, { howdy: "doody" } | undefined>;
+  type FeatureWithPropertiesProperties = FeatureWithProperties["properties"];
 
   const featureWithProperties: FeatureWithProperties = {
     type: "Feature",
@@ -63,7 +70,6 @@ function noop(v: any) {
       howdy: "doody",
     },
   };
-
 }
 
 {
@@ -91,4 +97,31 @@ function noop(v: any) {
     },
     id: "some-id",
   } satisfies PointFeature;
+}
+
+{
+  const pointFeature = {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [0, 0],
+    },
+    properties: {
+      howdy: "partner",
+    },
+  } satisfies PointFeature2d;
+}
+
+{
+  const pointFeature = {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      // @ts-expect-error 3d point
+      coordinates: [0, 0],
+    },
+    properties: {
+      howdy: "partner",
+    },
+  } satisfies PointFeature3d;
 }
