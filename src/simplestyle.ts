@@ -8,9 +8,16 @@ export const SimpleStyleMarkerSizeMedium = () => Type.Literal("medium");
 export const SimpleStyleMarkerSizeLarge = () => Type.Literal("large");
 
 export const SimpleStyleMarkerSize = () =>
-  Type.Union([SimpleStyleMarkerSizeSmall(), SimpleStyleMarkerSizeMedium(), SimpleStyleMarkerSizeLarge()], {
-    default: SimpleStyleMarkerSizeMedium(),
-  });
+  Type.Union(
+    [
+      SimpleStyleMarkerSizeSmall(),
+      SimpleStyleMarkerSizeMedium(),
+      SimpleStyleMarkerSizeLarge(),
+    ],
+    {
+      default: SimpleStyleMarkerSizeMedium(),
+    },
+  );
 
 export const SimpleStyleProperties = () =>
   Type.Object({
@@ -18,14 +25,16 @@ export const SimpleStyleProperties = () =>
       Type.String({
         default: "",
         title: "Title",
-        description: "A title to show when this item is clicked or hovered over",
+        description:
+          "A title to show when this item is clicked or hovered over",
       }),
     ),
     description: Type.Optional(
       Type.String({
         default: "",
         title: "Description",
-        description: "A description to show when this item is clicked or hovered over",
+        description:
+          "A description to show when this item is clicked or hovered over",
       }),
     ),
     "marker-size": Type.Optional(SimpleStyleMarkerSize()),
@@ -75,7 +84,8 @@ export const SimpleStyleProperties = () =>
       Type.String({
         default: "#555555",
         title: "Fill",
-        description: "the color of the interior of a polygon value must follow COLOR RULES",
+        description:
+          "the color of the interior of a polygon value must follow COLOR RULES",
       }),
     ),
     "fill-opacity": Type.Optional(

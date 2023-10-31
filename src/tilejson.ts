@@ -1,11 +1,37 @@
 import type { SchemaOptions } from "./typebox.js";
 import { Type } from "./typebox.js";
-import { Latitude, Longitude } from "./geojson-schema.js";
+import { Latitude, Longitude } from "./coord.js";
 
 export const Semver = () =>
   Type.String({
     pattern: "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
   });
+
+export const Tilejson100Version = (options?: SchemaOptions) =>
+  Type.Literal("1.0.0", { default: "1.0.0", ...options });
+export const Tilejson200Version = (options?: SchemaOptions) =>
+  Type.Literal("2.0.0", { default: "2.0.0", ...options });
+export const Tilejson201Version = (options?: SchemaOptions) =>
+  Type.Literal("2.0.1", { default: "2.0.1", ...options });
+export const Tilejson210Version = (options?: SchemaOptions) =>
+  Type.Literal("2.1.0", { default: "2.1.0", ...options });
+export const Tilejson220Version = (options?: SchemaOptions) =>
+  Type.Literal("2.2.0", { default: "2.2.0", ...options });
+export const Tilejson300Version = (options?: SchemaOptions) =>
+  Type.Literal("3.0.0", { default: "3.0.0", ...options });
+
+export const TilejsonVersion = (options?: SchemaOptions) =>
+  Type.Union(
+    [
+      Tilejson100Version(),
+      Tilejson200Version(),
+      Tilejson201Version(),
+      Tilejson210Version(),
+      Tilejson220Version(),
+      Tilejson300Version(),
+    ],
+    { default: "3.0.0", ...options },
+  );
 
 export const VersionLike = () => Type.Union([Semver(), Type.String({})]);
 export const TilejsonZoom = (options?: SchemaOptions) =>
@@ -16,14 +42,19 @@ export const TilejsonZoom = (options?: SchemaOptions) =>
   });
 
 // raster tiles
-export const FormatJpg = (options?: SchemaOptions) => Type.Literal("jpg", options);
-export const FormatPng = (options?: SchemaOptions) => Type.Literal("png", options);
+export const FormatJpg = (options?: SchemaOptions) =>
+  Type.Literal("jpg", options);
+export const FormatPng = (options?: SchemaOptions) =>
+  Type.Literal("png", options);
 // vector tiles
-export const FormatPbf = (options?: SchemaOptions) => Type.Literal("pbf", options);
+export const FormatPbf = (options?: SchemaOptions) =>
+  Type.Literal("pbf", options);
 
 // scheme
-export const SchemeTms = (options?: SchemaOptions) => Type.Literal("tms", options);
-export const SchemeXyz = (options?: SchemaOptions) => Type.Literal("xyz", options);
+export const SchemeTms = (options?: SchemaOptions) =>
+  Type.Literal("tms", options);
+export const SchemeXyz = (options?: SchemaOptions) =>
+  Type.Literal("xyz", options);
 export const Scheme = (options?: SchemaOptions) =>
   Type.Union([SchemeTms(), SchemeXyz()], {
     default: "xyz",
@@ -49,7 +80,7 @@ export const Tilejson220 = (options?: SchemaOptions) =>
       // MUST
       name: Type.String(),
       format: Format(),
-      tilejson: Type.String({ default: "2.2.0" }),
+      tilejson: Tilejson220Version(),
       tiles: Type.Array(Type.String(), {
         default: [],
       }),
@@ -59,7 +90,9 @@ export const Tilejson220 = (options?: SchemaOptions) =>
       center: Type.Optional(Type.Union([Center(), Type.Null()])),
       data: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
       description: Type.Optional(Type.Union([Type.String(), Type.Null()])),
-      grids: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
+      grids: Type.Optional(
+        Type.Union([Type.Array(Type.String()), Type.Null()]),
+      ),
       legend: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       maxzoom: Type.Optional(Type.Union([Type.Number(), Type.Null()])),
       minzoom: Type.Optional(Type.Union([Type.Number(), Type.Null()])),
@@ -101,7 +134,7 @@ export const Tilejson300Raster = (options?: SchemaOptions) =>
       // MUST
       name: Type.String(),
       format: Type.Union([Type.Literal("png"), Type.Literal("jpg")]),
-      tilejson: Type.String({ default: "3.0.0" }),
+      tilejson: Tilejson300Version(),
       tiles: Type.Array(Type.String(), {
         default: [],
       }),
@@ -115,7 +148,9 @@ export const Tilejson300Raster = (options?: SchemaOptions) =>
       data: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
       description: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       fillzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
-      grids: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
+      grids: Type.Optional(
+        Type.Union([Type.Array(Type.String()), Type.Null()]),
+      ),
       legend: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       maxzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
       minzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
@@ -135,7 +170,7 @@ export const Tilejson300Vector = (options?: SchemaOptions) =>
       // MUST
       name: Type.String(),
       format: Type.Literal("pbf"),
-      tilejson: Type.String({ default: "3.0.0" }),
+      tilejson: Tilejson300Version(),
       tiles: Type.Array(Type.String(), {
         default: [],
       }),
@@ -143,12 +178,18 @@ export const Tilejson300Vector = (options?: SchemaOptions) =>
       vector_layers: VectorLayers(),
       // OPTIONAL
       attribution: Type.Optional(Type.Union([Type.String(), Type.Null()])),
-      bounds: Type.Optional(Type.Union([Type.Array(Type.Number()), Type.Null()])),
-      center: Type.Optional(Type.Union([Type.Array(Type.Number()), Type.Null()])),
+      bounds: Type.Optional(
+        Type.Union([Type.Array(Type.Number()), Type.Null()]),
+      ),
+      center: Type.Optional(
+        Type.Union([Type.Array(Type.Number()), Type.Null()]),
+      ),
       data: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
       description: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       fillzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
-      grids: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
+      grids: Type.Optional(
+        Type.Union([Type.Array(Type.String()), Type.Null()]),
+      ),
       legend: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       maxzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
       minzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),

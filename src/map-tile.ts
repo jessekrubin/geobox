@@ -38,7 +38,12 @@ export type Zoom =
   | 31
   | 32;
 export const isZoom = (x: unknown): x is Zoom => {
-  return typeof x === "number" && Number.isInteger(x) && x >= MIN_ZOOM && x <= MAX_ZOOM;
+  return (
+    typeof x === "number" &&
+    Number.isInteger(x) &&
+    x >= MIN_ZOOM &&
+    x <= MAX_ZOOM
+  );
 };
 
 export type ZoomRange = {

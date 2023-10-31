@@ -32,12 +32,14 @@ indent_size = 4
 [*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}]
 indent_style = space
 indent_size = 2
-max_line_length = 120
+max_line_length = 80
+quote_type = double
+
 
 [*.{graphql,gqp}]
 indent_style = space
 indent_size = 2
-max_line_length = 120
+max_line_length = 80
 
 [*.{json,json5,ndjson,jsonc,webmanifest}]
 indent_size = 2

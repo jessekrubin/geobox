@@ -1,8 +1,7 @@
-// import { assertType, expectTypeOf } from "vitest";
 import { assertType, expectTypeOf, test } from "vitest";
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
-import * as geobox from "./geojson-schema.js";
+import * as geobox from "./index.js";
 
 test("test point schema builder", () => {
   const pDingo: {
@@ -24,7 +23,9 @@ test("test point schema builder", () => {
       dingo: "bash",
     },
   };
-  const pointSchemaBabydog = geobox.PointFeature({ properties: Type.Object({ dingo: Type.String() }) });
+  const pointSchemaBabydog = geobox.PointFeature({
+    properties: Type.Object({ dingo: Type.String() }),
+  });
   const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pDingo)) {
     const t = pDingo;

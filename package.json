@@ -1,7 +1,7 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "geo-json-schemas by way of typebox",
   "publishConfig": {
     "access": "public"
@@ -27,7 +27,7 @@
     "build:tsup": "tsup src/index.ts --format cjs,esm --dts",
     "test": "vitest run && vitest typecheck --run",
     "dev": "vitest watch",
-    "lint": "eslint src/** ./package.json",
+    "lint": "eslint .",
     "fmt": "prettier --write .",
     "prepublishOnly": "pnpm run build"
   },

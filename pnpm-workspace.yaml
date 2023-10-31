@@ -1,5 +1,2 @@
 packages:
-  - "packages/geozod"
-  - "packages/geotypes"
-  - "packages/geotypia"
   - "."
