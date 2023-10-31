@@ -49,6 +49,8 @@ export const FormatPng = (options?: SchemaOptions) =>
 // vector tiles
 export const FormatPbf = (options?: SchemaOptions) =>
   Type.Literal("pbf", options);
+export const TilejsonFormat = (options?: SchemaOptions) =>
+  Type.Union([FormatJpg(), FormatPng(), FormatPbf()], options);
 
 // scheme
 export const SchemeTms = (options?: SchemaOptions) =>
@@ -207,6 +209,40 @@ export const Tilejson300 = (options?: SchemaOptions) =>
   Type.Union([Tilejson300Raster(), Tilejson300Vector()], {
     ...options,
   });
+
+export const TilejsonLike = (options?: SchemaOptions) =>
+  Type.Object(
+    {
+      // MUST
+      name: Type.String(),
+      format: TilejsonFormat(),
+      tilejson: TilejsonVersion(),
+      tiles: Type.Array(Type.String(), {
+        default: [],
+      }),
+      maxzoom: TilejsonZoom(),
+      minzoom: TilejsonZoom(),
+      bounds: Bounds(),
+      center: Center(),
+      vector_layers: VectorLayers(),
+
+      // OPTIONAL
+      attribution: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+      data: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
+      description: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+      fillzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
+      grids: Type.Optional(
+        Type.Union([Type.Array(Type.String()), Type.Null()]),
+      ),
+      legend: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+      scheme: Type.Optional(Type.Union([Scheme(), Type.Null()])),
+      template: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+      version: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+    },
+    {
+      ...options,
+    },
+  );
 
 /**
  * Experimental
