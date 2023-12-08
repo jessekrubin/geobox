@@ -37,9 +37,9 @@ jobs:
             ${{ runner.os }}-${{ matrix.node-version }}-test-${{ env.cache-name }}-
             ${{ runner.os }}-${{ matrix.node-version }}-test-
             ${{ runner.os }}-
-
-      - name: Install pnpm
-        run: npm i -g pnpm
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
       - name: Install deps
         run: pnpm i
