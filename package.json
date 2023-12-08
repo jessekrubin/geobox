@@ -32,19 +32,19 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
-    "@sinclair/typebox": "^0.31.17"
+    "@sinclair/typebox": "^0.31.28"
   },
   "devDependencies": {
     "@jsse/eslint-config": "^0.0.1",
     "@turf/helpers": "^6.5.0",
     "@turf/turf": "^6.5.0",
-    "@types/geojson": "^7946.0.11",
-    "@typescript-eslint/eslint-plugin": "^6.7.3",
-    "@typescript-eslint/parser": "^6.7.3",
-    "eslint": "^8.50.0",
+    "@types/geojson": "^7946.0.13",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint": "^8.55.0",
     "prettier": "3.0.3",
     "tsup": "7.2.0",
-    "tsx": "^3.13.0",
+    "tsx": "^3.14.0",
     "typescript": "5.2.2",
     "vitest": "0.34.6"
   }
