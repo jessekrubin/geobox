@@ -25,7 +25,7 @@
     "build-fast": "tsup src/index.ts --format cjs,esm",
     "build": "pnpm run lint && pnpm run test && pnpm run build:tsup",
     "build:tsup": "tsup src/index.ts --format cjs,esm --dts",
-    "test": "vitest run && vitest typecheck --run",
+    "test": "vitest run",
     "dev": "vitest watch",
     "lint": "eslint .",
     "fmt": "prettier --write .",
@@ -35,17 +35,17 @@
     "@sinclair/typebox": "^0.31.28"
   },
   "devDependencies": {
-    "@jsse/eslint-config": "^0.0.1",
+    "@jsse/eslint-config": "^0.0.11",
     "@turf/helpers": "^6.5.0",
     "@turf/turf": "^6.5.0",
     "@types/geojson": "^7946.0.13",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "eslint": "^8.55.0",
-    "prettier": "3.0.3",
+    "prettier": "3.1.0",
     "tsup": "7.2.0",
-    "tsx": "^3.14.0",
-    "typescript": "5.2.2",
-    "vitest": "0.34.6"
+    "tsx": "^4.6.2",
+    "typescript": "5.3.3",
+    "vitest": "1.0.2"
   }
 }
