@@ -37,8 +37,8 @@ importers:
         specifier: 3.1.0
         version: 3.1.0
       tsup:
-        specifier: 7.2.0
-        version: 7.2.0(typescript@5.3.3)
+        specifier: 8.0.1
+        version: 8.0.1(typescript@5.3.3)
       tsx:
         specifier: ^4.6.2
         version: 4.6.2
@@ -574,7 +574,7 @@ packages:
     dependencies:
       '@jridgewell/set-array': 1.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
-      '@jridgewell/trace-mapping': 0.3.19
+      '@jridgewell/trace-mapping': 0.3.20
     dev: true
 
   /@jridgewell/resolve-uri@3.1.1:
@@ -591,8 +591,8 @@ packages:
     resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
     dev: true
 
-  /@jridgewell/trace-mapping@0.3.19:
-    resolution: {integrity: sha512-kf37QtfW+Hwx/buWGMPcR60iF9ziHa6r/CZJIHbmcm4+0qrXiVdxegAH0F6yddEVQ7zdkjcGCgCzUu+BcbhQxw==}
+  /@jridgewell/trace-mapping@0.3.20:
+    resolution: {integrity: sha512-R8LcPeWZol2zR8mmH3JeKQ6QRCFb7XgUhV9ZlGhHLGyg4wpPiPZNQOOWhFZhxKw8u//yTbNGI42Bx/3paXEQ+Q==}
     dependencies:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
@@ -2262,13 +2262,13 @@ packages:
       semver: 7.5.4
     dev: true
 
-  /bundle-require@4.0.2(esbuild@0.18.20):
+  /bundle-require@4.0.2(esbuild@0.19.8):
     resolution: {integrity: sha512-jwzPOChofl67PSTW2SGubV9HBQAhhR2i6nskiOThauo9dzwDUgOWQScFVaJkjEfYX+UXiD+LEx8EblQMc2wIag==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     peerDependencies:
       esbuild: '>=0.17'
     dependencies:
-      esbuild: 0.18.20
+      esbuild: 0.19.8
       load-tsconfig: 0.2.5
     dev: true
 
@@ -3205,17 +3205,6 @@ packages:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: true
 
-  /fast-glob@3.3.1:
-    resolution: {integrity: sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg==}
-    engines: {node: '>=8.6.0'}
-    dependencies:
-      '@nodelib/fs.stat': 2.0.5
-      '@nodelib/fs.walk': 1.2.8
-      glob-parent: 5.1.2
-      merge2: 1.4.1
-      micromatch: 4.0.5
-    dev: true
-
   /fast-glob@3.3.2:
     resolution: {integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==}
     engines: {node: '>=8.6.0'}
@@ -3442,8 +3431,8 @@ packages:
     dependencies:
       array-union: 2.1.0
       dir-glob: 3.0.1
-      fast-glob: 3.3.1
-      ignore: 5.2.4
+      fast-glob: 3.3.2
+      ignore: 5.3.0
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
@@ -3899,6 +3888,7 @@ packages:
   /lilconfig@2.1.0:
     resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
     engines: {node: '>=10'}
+    requiresBuild: true
     dev: true
 
   /lilconfig@3.0.0:
@@ -4396,22 +4386,6 @@ packages:
       postcss: 8.4.32
     dev: true
 
-  /postcss-load-config@4.0.1:
-    resolution: {integrity: sha512-vEJIc8RdiBRu3oRAI0ymerOn+7rPuMvRXslTvZUKZonDHFIczxztIyJ1urxM1x9JXEikvpWWTUUqal5j/8QgvA==}
-    engines: {node: '>= 14'}
-    peerDependencies:
-      postcss: '>=8.0.9'
-      ts-node: '>=9.0.0'
-    peerDependenciesMeta:
-      postcss:
-        optional: true
-      ts-node:
-        optional: true
-    dependencies:
-      lilconfig: 2.1.0
-      yaml: 2.3.2
-    dev: true
-
   /postcss-load-config@4.0.2(postcss@8.4.32):
     resolution: {integrity: sha512-bSVhyJGL00wMVoPUzAVAnbEoWyqRxkjv64tUl427SKnPrENtq6hJwUojroMz2VB+Q1edmi4IfrAPpami5VVgMQ==}
     engines: {node: '>= 14'}
@@ -4494,6 +4468,11 @@ packages:
 
   /punycode@2.3.0:
     resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
+    engines: {node: '>=6'}
+    dev: true
+
+  /punycode@2.3.1:
+    resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
     dev: true
 
@@ -4650,14 +4629,6 @@ packages:
 
   /robust-predicates@2.0.4:
     resolution: {integrity: sha512-l4NwboJM74Ilm4VKfbAtFeGq7aEjWL+5kVFcmgFA2MrdnQWx9iE/tUGvxY5HyMI7o/WpSIUFLbC5fbeaHgSCYg==}
-    dev: true
-
-  /rollup@3.29.4:
-    resolution: {integrity: sha512-oWzmBZwvYrU0iJHtDmhsm662rC15FRXmcjCk1xD771dFDx5jJ02ufAQQTn0etB2emNk4J9EZg/yWKpsn9BWGRw==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.3
     dev: true
 
   /rollup@4.7.0:
@@ -5029,7 +5000,7 @@ packages:
   /tr46@1.0.1:
     resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
     dependencies:
-      punycode: 2.3.0
+      punycode: 2.3.1
     dev: true
 
   /tree-kill@1.2.2:
@@ -5050,15 +5021,18 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /tsup@7.2.0(typescript@5.3.3):
-    resolution: {integrity: sha512-vDHlczXbgUvY3rWvqFEbSqmC1L7woozbzngMqTtL2PGBODTtWlRwGDDawhvWzr5c1QjKe4OAKqJGfE1xeXUvtQ==}
-    engines: {node: '>=16.14'}
+  /tsup@8.0.1(typescript@5.3.3):
+    resolution: {integrity: sha512-hvW7gUSG96j53ZTSlT4j/KL0q1Q2l6TqGBFc6/mu/L46IoNWqLLUzLRLP1R8Q7xrJTmkDxxDoojV5uCVs1sVOg==}
+    engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
+      '@microsoft/api-extractor': ^7.36.0
       '@swc/core': ^1
       postcss: ^8.4.12
-      typescript: '>=4.1.0'
+      typescript: '>=4.5.0'
     peerDependenciesMeta:
+      '@microsoft/api-extractor':
+        optional: true
       '@swc/core':
         optional: true
       postcss:
@@ -5066,17 +5040,17 @@ packages:
       typescript:
         optional: true
     dependencies:
-      bundle-require: 4.0.2(esbuild@0.18.20)
+      bundle-require: 4.0.2(esbuild@0.19.8)
       cac: 6.7.14
       chokidar: 3.5.3
       debug: 4.3.4
-      esbuild: 0.18.20
+      esbuild: 0.19.8
       execa: 5.1.1
       globby: 11.1.0
       joycon: 3.1.1
-      postcss-load-config: 4.0.1
+      postcss-load-config: 4.0.2(postcss@8.4.32)
       resolve-from: 5.0.0
-      rollup: 3.29.4
+      rollup: 4.7.0
       source-map: 0.8.0-beta.0
       sucrase: 3.34.0
       tree-kill: 1.2.2
@@ -5413,11 +5387,6 @@ packages:
       eslint-visitor-keys: 3.4.3
       lodash: 4.17.21
       yaml: 2.3.4
-    dev: true
-
-  /yaml@2.3.2:
-    resolution: {integrity: sha512-N/lyzTPaJasoDmfV7YTrYCI0G/3ivm/9wdG0aHuheKowWQwGTsK0Eoiw6utmzAnI6pkJa0DUVygvp3spqqEKXg==}
-    engines: {node: '>= 14'}
     dev: true
 
   /yaml@2.3.4:
