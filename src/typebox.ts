@@ -8,6 +8,7 @@ export type {
   TLiteral,
   TNumber,
   TObject,
+  TOptional,
   TSchema,
   TTuple,
   TUnion,

@@ -5,6 +5,7 @@ import type {
   AssertType,
   SchemaOptions,
   TNumber,
+  TOptional,
   TSchema,
   TTuple,
   TUnion,
@@ -193,13 +194,19 @@ export const GeojsonCoordinate = <
   schema?: T,
 ) => (schema === undefined ? Coordinate() : schema) as TGeojsonCoordinate<T>;
 
+export const BBoxDefault = () => Type.Optional(BBox());
 /** */
 export type TGeojsonBoundingBox<T extends TBBoxSchema | undefined> =
-  IsDefined<T> extends true ? AssertType<T> : ReturnType<typeof BBox>;
+  IsDefined<T> extends true
+    ? AssertType<T>
+    : TOptional<ReturnType<typeof BBox>>;
 
 export const GeojsonBoudingBox = <T extends TBBoxSchema | undefined>(
   schema?: T,
-) => (schema === undefined ? BBox() : schema) as TGeojsonBoundingBox<T>;
+) =>
+  (schema === undefined
+    ? Type.Optional(BBox())
+    : schema) as TGeojsonBoundingBox<T>;
 
 export type TGeometrySchemas<
   TCoord extends TCoordinateSchema | undefined,
@@ -238,7 +245,8 @@ export const PointGeometry = <
     {
       type: Type.Literal("Point"),
       coordinates: GeojsonCoordinate(schemas && schemas.coordinate),
-      bbox: Type.Optional(GeojsonBoudingBox(schemas && schemas.bbox)),
+      // bbox: Type.Optional(GeojsonBoudingBox(schemas && schemas.bbox)),
+      bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
       title: "GeoJSON Point",
@@ -281,7 +289,7 @@ export const LineStringGeometry = <
     {
       type: Type.Literal("LineString"),
       coordinates: GeojsonCoordinate(schemas && schemas.coordinate),
-      bbox: Type.Optional(GeojsonBoudingBox(schemas && schemas.bbox)),
+      bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
       title: "GeoJSON LineString",
@@ -303,7 +311,7 @@ export const PolygonGeometry = <
     {
       type: Type.Literal("Polygon"),
       coordinates: GeojsonCoordinate(schemas && schemas.coordinate),
-      bbox: Type.Optional(GeojsonBoudingBox(schemas && schemas.bbox)),
+      bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
       title: "GeoJSON Polygon",
@@ -348,7 +356,7 @@ export const MultiPointGeometry = <
     {
       type: Type.Literal("MultiPoint"),
       coordinates: GeojsonCoordinate(schemas && schemas.coordinate),
-      bbox: Type.Optional(GeojsonBoudingBox(schemas && schemas.bbox)),
+      bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
       title: "GeoJSON MultiPoint",
@@ -370,7 +378,7 @@ export const MultiLineStringGeometry = <
     {
       type: Type.Literal("MultiLineString"),
       coordinates: GeojsonCoordinate(schemas && schemas.coordinate),
-      bbox: Type.Optional(GeojsonBoudingBox(schemas && schemas.bbox)),
+      bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
       title: "GeoJSON MultiLineString",
@@ -392,7 +400,7 @@ export const MultiPolygonGeometry = <
     {
       type: Type.Literal("MultiPolygon"),
       coordinates: GeojsonCoordinate(schemas && schemas.coordinate),
-      bbox: Type.Optional(GeojsonBoudingBox(schemas && schemas.bbox)),
+      bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
       title: "GeoJSON MultiPolygon",
