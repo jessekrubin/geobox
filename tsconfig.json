@@ -11,7 +11,7 @@
     "noEmit": false,
     "outDir": "dist",
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
   },
-  "exclude": ["node_modules", "dist", "scratch"]
+  "exclude": ["node_modules", "dist", "scratch"],
 }
