@@ -3,11 +3,19 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+    groups:
+      dev-dependencies:
+        patterns:
+          - "*"
+      dependencies:
+        patterns:
+          - "*"
+
     reviewers:
       - "jessekrubin"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
