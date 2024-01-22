@@ -7,12 +7,12 @@ settings:
 dependencies:
   '@sinclair/typebox':
     specifier: ^0.32.10
-    version: 0.32.10
+    version: 0.32.12
 
 devDependencies:
   '@fastify/type-provider-typebox':
     specifier: ^4.0.0
-    version: 4.0.0(@sinclair/typebox@0.32.10)
+    version: 4.0.0(@sinclair/typebox@0.32.12)
   '@jsse/eslint-config':
     specifier: ^0.1.0
     version: 0.1.0(eslint@8.56.0)(typescript@5.3.3)(vitest@1.2.1)
@@ -773,12 +773,12 @@ packages:
       fast-json-stringify: 5.10.0
     dev: true
 
-  /@fastify/type-provider-typebox@4.0.0(@sinclair/typebox@0.32.10):
+  /@fastify/type-provider-typebox@4.0.0(@sinclair/typebox@0.32.12):
     resolution: {integrity: sha512-kTlN0saC/+xhcQPyBjb3YONQAMjiD/EHlCRjQjsr5E3NFjS5K8ZX5LGzXYDRjSa+sV4y8gTL5Q7FlObePv4iTA==}
     peerDependencies:
       '@sinclair/typebox': '>=0.26 <=0.32'
     dependencies:
-      '@sinclair/typebox': 0.32.10
+      '@sinclair/typebox': 0.32.12
     dev: true
 
   /@humanwhocodes/config-array@0.11.13:
@@ -1139,8 +1139,8 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
-  /@sinclair/typebox@0.32.10:
-    resolution: {integrity: sha512-CZwwK09fdC/uKPD/cCJbNBLPQww3gYl5bYu86cqfziPXTVatUGU/o+vqu84gDGuIDoQRIvCB0Uj0MvcgsCsb8g==}
+  /@sinclair/typebox@0.32.12:
+    resolution: {integrity: sha512-uKRQW9a+alkPwZMzQk6W8cCZC117kZJZ3GQx3Yn9unu2oWX09PxEsyMF7D9tuvoH8se1hIZqLRja+FtU7HKGhQ==}
 
   /@stylistic/eslint-plugin-js@1.5.4(eslint@8.56.0):
     resolution: {integrity: sha512-3ctWb3NvJNV1MsrZN91cYp2EGInLPSoZKphXIbIRx/zjZxKwLDr9z4LMOWtqjq14li/OgqUUcMq5pj8fgbLoTw==}
