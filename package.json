@@ -44,7 +44,7 @@
     "@typescript-eslint/parser": "^6.19.0",
     "eslint": "^8.56.0",
     "fastify": "^4.25.2",
-    "prettier": "3.2.4",
+    "prettier": "3.2.5",
     "tsup": "8.0.1",
     "tsx": "^4.7.0",
     "typescript": "5.3.3",
