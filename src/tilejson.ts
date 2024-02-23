@@ -2,23 +2,30 @@ import type { SchemaOptions } from "./typebox.js";
 import { Type } from "./typebox.js";
 import { Latitude, Longitude } from "./coord.js";
 
-export const Semver = () =>
-  Type.String({
+export function Semver() {
+  return Type.String({
     pattern: "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
   });
+}
 
-export const Tilejson100Version = (options?: SchemaOptions) =>
-  Type.Literal("1.0.0", { ...options });
-export const Tilejson200Version = (options?: SchemaOptions) =>
-  Type.Literal("2.0.0", { ...options });
-export const Tilejson201Version = (options?: SchemaOptions) =>
-  Type.Literal("2.0.1", { ...options });
-export const Tilejson210Version = (options?: SchemaOptions) =>
-  Type.Literal("2.1.0", { ...options });
-export const Tilejson220Version = (options?: SchemaOptions) =>
-  Type.Literal("2.2.0", { ...options });
-export const Tilejson300Version = (options?: SchemaOptions) =>
-  Type.Literal("3.0.0", { ...options });
+export function Tilejson100Version(options?: SchemaOptions) {
+  return Type.Literal("1.0.0", { ...options });
+}
+export function Tilejson200Version(options?: SchemaOptions) {
+  return Type.Literal("2.0.0", { ...options });
+}
+export function Tilejson201Version(options?: SchemaOptions) {
+  return Type.Literal("2.0.1", { ...options });
+}
+export function Tilejson210Version(options?: SchemaOptions) {
+  return Type.Literal("2.1.0", { ...options });
+}
+export function Tilejson220Version(options?: SchemaOptions) {
+  return Type.Literal("2.2.0", { ...options });
+}
+export function Tilejson300Version(options?: SchemaOptions) {
+  return Type.Literal("3.0.0", { ...options });
+}
 
 export const TilejsonVersion = (options?: SchemaOptions) =>
   Type.Union(
@@ -33,51 +40,65 @@ export const TilejsonVersion = (options?: SchemaOptions) =>
     { default: "3.0.0", ...options },
   );
 
-export const VersionLike = () => Type.Union([Semver(), Type.String({})]);
-export const TilejsonZoom = (options?: SchemaOptions) =>
-  Type.Integer({
+export function VersionLike() {
+  return Type.Union([Semver(), Type.String({})]);
+}
+export function TilejsonZoom(options?: SchemaOptions) {
+  return Type.Integer({
     minimum: 0,
     maximum: 30,
     ...options,
   });
+}
 
 // raster tiles
-export const FormatJpg = (options?: SchemaOptions) =>
-  Type.Literal("jpg", options);
-export const FormatPng = (options?: SchemaOptions) =>
-  Type.Literal("png", options);
+export function FormatJpg(options?: SchemaOptions) {
+  return Type.Literal("jpg", options);
+}
+export function FormatPng(options?: SchemaOptions) {
+  return Type.Literal("png", options);
+}
 // vector tiles
-export const FormatPbf = (options?: SchemaOptions) =>
-  Type.Literal("pbf", options);
-export const TilejsonFormat = (options?: SchemaOptions) =>
-  Type.Union([FormatJpg(), FormatPng(), FormatPbf()], options);
+export function FormatPbf(options?: SchemaOptions) {
+  return Type.Literal("pbf", options);
+}
+export function TilejsonFormat(options?: SchemaOptions) {
+  return Type.Union([FormatJpg(), FormatPng(), FormatPbf()], options);
+}
 
 // scheme
-export const SchemeTms = (options?: SchemaOptions) =>
-  Type.Literal("tms", options);
-export const SchemeXyz = (options?: SchemaOptions) =>
-  Type.Literal("xyz", options);
-export const Scheme = (options?: SchemaOptions) =>
-  Type.Union([SchemeTms(), SchemeXyz()], {
+export function SchemeTms(options?: SchemaOptions) {
+  return Type.Literal("tms", options);
+}
+export function SchemeXyz(options?: SchemaOptions) {
+  return Type.Literal("xyz", options);
+}
+export function Scheme(options?: SchemaOptions) {
+  return Type.Union([SchemeTms(), SchemeXyz()], {
     default: "xyz",
     ...options,
   });
+}
 
-export const Format = () => Type.Union([FormatJpg(), FormatPng(), FormatPbf()]);
+export function Format() {
+  return Type.Union([FormatJpg(), FormatPng(), FormatPbf()]);
+}
 
-export const Bounds = (options?: SchemaOptions) =>
-  Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
-    default: [-180, -85.051_128_779_806_59, 180, 85.051_128_779_806_6],
+export function Bounds(options?: SchemaOptions) {
+  return Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
+    default: [-180, -85.05112877980659, 180, 85.0511287798066],
     ...options,
   });
-export const Center = (options?: SchemaOptions) =>
-  Type.Tuple([Longitude(), Latitude(), TilejsonZoom()], {
+}
+export function Center(options?: SchemaOptions) {
+  return Type.Tuple([Longitude(), Latitude(), TilejsonZoom()], {
     default: [0, 0, 0],
     ...options,
   });
+}
 
-export const Tilejson220 = (options?: SchemaOptions) =>
-  Type.Object(
+export function Tilejson220(options?: SchemaOptions) {
+  return Type.Object(
     {
       // MUST
       name: Type.String(),
@@ -107,9 +128,10 @@ export const Tilejson220 = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}
 
-export const VectorLayer = (options?: SchemaOptions) =>
-  Type.Object(
+export function VectorLayer(options?: SchemaOptions) {
+  return Type.Object(
     {
       id: Type.String(),
       fields: Type.Record(Type.String(), Type.Optional(Type.String())),
@@ -122,15 +144,17 @@ export const VectorLayer = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}
 
-export const VectorLayers = (options?: SchemaOptions) =>
-  Type.Array(VectorLayer(), {
+export function VectorLayers(options?: SchemaOptions) {
+  return Type.Array(VectorLayer(), {
     default: [],
     ...options,
   });
+}
 
-export const Tilejson300Raster = (options?: SchemaOptions) =>
-  Type.Object(
+export function Tilejson300Raster(options?: SchemaOptions) {
+  return Type.Object(
     {
       // MUST
       name: Type.String(),
@@ -164,9 +188,10 @@ export const Tilejson300Raster = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}
 
-export const Tilejson300Vector = (options?: SchemaOptions) =>
-  Type.Object(
+export function Tilejson300Vector(options?: SchemaOptions) {
+  return Type.Object(
     {
       // MUST
       name: Type.String(),
@@ -203,14 +228,16 @@ export const Tilejson300Vector = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}
 
-export const Tilejson300 = (options?: SchemaOptions) =>
-  Type.Union([Tilejson300Raster(), Tilejson300Vector()], {
+export function Tilejson300(options?: SchemaOptions) {
+  return Type.Union([Tilejson300Raster(), Tilejson300Vector()], {
     ...options,
   });
+}
 
-export const TilejsonLike = (options?: SchemaOptions) =>
-  Type.Object(
+export function TilejsonLike(options?: SchemaOptions) {
+  return Type.Object(
     {
       // MUST
       name: Type.String(),
@@ -243,6 +270,7 @@ export const TilejsonLike = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}
 
 /**
  * Experimental
