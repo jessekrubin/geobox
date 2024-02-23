@@ -1,17 +1,5 @@
-// pub struct SpriteDescription {
-//     pub height: u32,
-//     pub pixel_ratio: u8,
-//     pub width: u32,
-//     pub x: u32,
-//     pub y: u32,
-//     pub content: Option<Rect>,
-//     pub stretch_x: Option<Vec<Rect>>,
-//     pub stretch_y: Option<Vec<Rect>>,
-//     pub sdf: bool,
-// }
 import type { SchemaOptions } from "./typebox.js";
 import { Type } from "./typebox.js";
-import { Latitude, Longitude } from "./coord.js";
 
 function SpriteDescriptionStretch() {
   return Type.Array(Type.Tuple([Type.Integer(), Type.Integer()]), {
