@@ -7,8 +7,8 @@ export const SimpleStyleMarkerSizeSmall = () => Type.Literal("small");
 export const SimpleStyleMarkerSizeMedium = () => Type.Literal("medium");
 export const SimpleStyleMarkerSizeLarge = () => Type.Literal("large");
 
-export const SimpleStyleMarkerSize = () =>
-  Type.Union(
+export function SimpleStyleMarkerSize() {
+  return Type.Union(
     [
       SimpleStyleMarkerSizeSmall(),
       SimpleStyleMarkerSizeMedium(),
@@ -18,9 +18,10 @@ export const SimpleStyleMarkerSize = () =>
       default: SimpleStyleMarkerSizeMedium(),
     },
   );
+}
 
-export const SimpleStyleProperties = () =>
-  Type.Object({
+export function SimpleStyleProperties() {
+  return Type.Object({
     title: Type.Optional(
       Type.String({
         default: "",
@@ -99,3 +100,4 @@ export const SimpleStyleProperties = () =>
       }),
     ),
   });
+}

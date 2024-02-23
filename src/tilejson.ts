@@ -27,8 +27,8 @@ export function Tilejson300Version(options?: SchemaOptions) {
   return Type.Literal("3.0.0", { ...options });
 }
 
-export const TilejsonVersion = (options?: SchemaOptions) =>
-  Type.Union(
+export function TilejsonVersion(options?: SchemaOptions) {
+  return Type.Union(
     [
       Tilejson100Version(),
       Tilejson200Version(),
@@ -39,6 +39,7 @@ export const TilejsonVersion = (options?: SchemaOptions) =>
     ],
     { default: "3.0.0", ...options },
   );
+}
 
 export function VersionLike() {
   return Type.Union([Semver(), Type.String({})]);

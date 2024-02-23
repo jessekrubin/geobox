@@ -1,5 +1,6 @@
 // eslint.config.js
 import jsse from "@jsse/eslint-config";
+import pluginAntfu from "eslint-plugin-antfu";
 
 export default [
   ...jsse({
@@ -17,6 +18,14 @@ export default [
     files: ["./src/dev/dev.ts", "./src/dev/dev.test.ts", "./src/scratch/**/*"],
     rules: {
       "@typescript-eslint/no-unused-vars": "off",
+    },
+  },
+  {
+    plugins: {
+      antfu: pluginAntfu,
+    },
+    rules: {
+      "antfu/top-level-function": "error",
     },
   },
 ];

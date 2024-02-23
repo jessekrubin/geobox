@@ -8,84 +8,94 @@ import { Type } from "./typebox.js";
  * GeoJSON Latitude json-schema
  * @returns {TNumber} GeoJSON Latitude json-schema
  */
-export const Latitude = (options?: SchemaOptions) =>
-  Type.Number({
+export function Latitude(options?: SchemaOptions) {
+  return Type.Number({
     title: "Latitude",
     description: "Longitude",
     ...options,
   });
+}
 
 /**
  * GeoJSON Longitude json-schema
  * @returns {TNumber} GeoJSON Longitude json-schema
  */
-export const Longitude = (options?: SchemaOptions) =>
-  Type.Number({
+export function Longitude(options?: SchemaOptions) {
+  return Type.Number({
     title: "Longitude",
     description: "Longitude",
     ...options,
   });
+}
 
-export const LatitudeWgs84 = (options?: SchemaOptions) =>
-  Latitude({
+export function LatitudeWgs84(options?: SchemaOptions) {
+  return Latitude({
     minimum: -90,
     maximum: 90,
     title: "LatitudeWgs84",
     description: "WGS84 latitude; -90 to 90 degrees",
     ...options,
   });
+}
 
-export const LongitudeWgs84 = (options?: SchemaOptions) =>
-  Longitude({
+export function LongitudeWgs84(options?: SchemaOptions) {
+  return Longitude({
     minimum: -180,
     maximum: 180,
     title: "LongitudeWgs84",
     description: "WGS84 longitude; -180 to 180 degrees",
     ...options,
   });
-export const Coordinate2d = (options?: SchemaOptions) =>
-  Type.Tuple([Longitude(), Latitude()], {
+}
+export function Coordinate2d(options?: SchemaOptions) {
+  return Type.Tuple([Longitude(), Latitude()], {
     title: "GeoJSON coordinate 2d",
     description: "coordinate: [longitude, latitude]",
     ...options,
   });
-export const Coordinate3d = (options?: SchemaOptions) =>
-  Type.Tuple([...Type.Rest(Coordinate2d()), Type.Number()], {
+}
+export function Coordinate3d(options?: SchemaOptions) {
+  return Type.Tuple([...Type.Rest(Coordinate2d()), Type.Number()], {
     title: "GeoJSON coordinate 3d",
     description: "coordinate: [longitude, latitude, elevation/z]",
     ...options,
   });
-export const Coordinate = (options?: SchemaOptions) =>
-  Type.Union([Coordinate2d(), Coordinate3d()], {
+}
+export function Coordinate(options?: SchemaOptions) {
+  return Type.Union([Coordinate2d(), Coordinate3d()], {
     title: "GeoJSON coordinate",
     description:
       "coordinate: [longitude, latitude] or [longitude, latitude, elevation/z]",
     ...options,
   });
+}
 
-export const Coordinate2dWgs84 = (options?: SchemaOptions) =>
-  Type.Tuple([LongitudeWgs84(), LatitudeWgs84()], {
+export function Coordinate2dWgs84(options?: SchemaOptions) {
+  return Type.Tuple([LongitudeWgs84(), LatitudeWgs84()], {
     title: "GeoJSON coordinate 2d WGS84",
     description: "coordinate: [longitude, latitude]",
     ...options,
   });
+}
 
-export const Coordinate3dWgs84 = (options?: SchemaOptions) =>
-  Type.Tuple([...Type.Rest(Coordinate2dWgs84()), Type.Number()], {
+export function Coordinate3dWgs84(options?: SchemaOptions) {
+  return Type.Tuple([...Type.Rest(Coordinate2dWgs84()), Type.Number()], {
     title: "GeoJSON coordinate 3d WGS84",
     description: "coordinate: [longitude, latitude, elevation/z]",
     ...options,
   });
-export const CoordinateWgs84 = (options?: SchemaOptions) =>
-  Type.Union([Coordinate2dWgs84(), Coordinate3dWgs84()], {
+}
+export function CoordinateWgs84(options?: SchemaOptions) {
+  return Type.Union([Coordinate2dWgs84(), Coordinate3dWgs84()], {
     title: "GeoJSON coordinate WGS84",
     description:
       "coordinate: [longitude, latitude] or [longitude, latitude, elevation/z]",
     ...options,
   });
+}
 
-export const LonLat = (options?: SchemaOptions) =>
-  Type.Object(
+export function LonLat(options?: SchemaOptions) {
+  return Type.Object(
     {
       lon: Longitude(options),
       lat: Latitude(options),
@@ -96,9 +106,10 @@ export const LonLat = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}
 
-export const LonLatZ = (options?: SchemaOptions) =>
-  Type.Object(
+export function LonLatZ(options?: SchemaOptions) {
+  return Type.Object(
     { lon: Longitude(options), lat: Latitude(options), z: Type.Number() },
     {
       title: "LonLatZ",
@@ -106,9 +117,10 @@ export const LonLatZ = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}
 
-export const LonLatWgs84 = (options?: SchemaOptions) =>
-  Type.Object(
+export function LonLatWgs84(options?: SchemaOptions) {
+  return Type.Object(
     {
       lon: LongitudeWgs84(options),
       lat: LatitudeWgs84(options),
@@ -119,9 +131,10 @@ export const LonLatWgs84 = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}
 
-export const LngLat = (options?: SchemaOptions) =>
-  Type.Object(
+export function LngLat(options?: SchemaOptions) {
+  return Type.Object(
     {
       lng: Longitude(options),
       lat: Latitude(options),
@@ -132,9 +145,10 @@ export const LngLat = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}
 
-export const LngLatWgs84 = (options?: SchemaOptions) =>
-  Type.Object(
+export function LngLatWgs84(options?: SchemaOptions) {
+  return Type.Object(
     {
       lng: LongitudeWgs84(options),
       lat: LatitudeWgs84(options),
@@ -145,3 +159,4 @@ export const LngLatWgs84 = (options?: SchemaOptions) =>
       ...options,
     },
   );
+}

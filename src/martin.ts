@@ -8,7 +8,7 @@ import { Type } from "./typebox.js";
 /**
  * Returns a schema for martin tile catalog entry
  * @param options
- * @returns
+ * @returns martins tile catalog entry json schema (typebox)
  */
 export function TileCatalogEntry(options?: SchemaOptions) {
   return Type.Object(
@@ -26,7 +26,7 @@ export function TileCatalogEntry(options?: SchemaOptions) {
 /**
  * Returns a schema for martin tile catalog
  * @param options
- * @returns
+ * @returns martins tile catalog json schema (typebox)
  */
 export function TileCatalog(options?: SchemaOptions) {
   return Type.Record(Type.String(), TileCatalogEntry(), options);
@@ -35,7 +35,7 @@ export function TileCatalog(options?: SchemaOptions) {
 /**
  * Returns a schema for martin sprite catalog entry
  * @param options
- * @returns
+ * @returns martins sprite catalog entry json schema (typebox)
  */
 export function SpriteCatalog(options?: SchemaOptions) {
   return Type.Record(
@@ -50,7 +50,7 @@ export function SpriteCatalog(options?: SchemaOptions) {
 /**
  * Returns a schema for martin font catalog entry
  * @param options
- * @returns
+ * @returns martins font catalog entry json schema (typebox)
  */
 export function FontCatalogEntry(options?: SchemaOptions) {
   return Type.Object(
@@ -68,7 +68,7 @@ export function FontCatalogEntry(options?: SchemaOptions) {
 /**
  * Returns a schema for martin font catalog
  * @param options
- * @returns
+ * @returns martins font catalog json schema (typebox)
  */
 export function FontCatalog(options?: SchemaOptions) {
   return Type.Record(Type.String(), FontCatalogEntry(), options);
@@ -77,7 +77,7 @@ export function FontCatalog(options?: SchemaOptions) {
 /**
  * Returns a schema for martin server catalog
  * @param options
- * @returns
+ * @returns martins server catalog json schema (typebox)
  */
 export function MartinCatalog(options?: SchemaOptions) {
   return Type.Object(

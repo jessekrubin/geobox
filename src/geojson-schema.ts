@@ -51,18 +51,20 @@ export type TBBoxSchema =
     >;
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
-export const FeatureCollectionTypeLiteral = () =>
-  Type.Literal("FeatureCollection");
-export const GeometryCollectionTypeLiteral = () =>
-  Type.Literal("GeometryCollection");
+export function FeatureCollectionTypeLiteral() {
+  return Type.Literal("FeatureCollection");
+}
+export function GeometryCollectionTypeLiteral() {
+  return Type.Literal("GeometryCollection");
+}
 export const PointTypeLiteral = () => Type.Literal("Point");
 export const MultiPointTypeLiteral = () => Type.Literal("MultiPoint");
 export const LineStringTypeLiteral = () => Type.Literal("LineString");
 export const MultiLineStringTypeLiteral = () => Type.Literal("MultiLineString");
 export const PolygonTypeLiteral = () => Type.Literal("Polygon");
 export const MultiPolygonTypeLiteral = () => Type.Literal("MultiPolygon");
-export const GeoJSONType = () =>
-  Type.Union(
+export function GeoJSONType() {
+  return Type.Union(
     [
       FeatureTypeLiteral(),
       FeatureCollectionTypeLiteral(),
@@ -80,35 +82,40 @@ export const GeoJSONType = () =>
         "GeoJSON type property: Feature, FeatureCollection, GeometryCollection, Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon",
     },
   );
+}
 
-export const FeatureId = () =>
-  Type.Union([Type.String(), Type.Number(), Type.Null()], {
+export function FeatureId() {
+  return Type.Union([Type.String(), Type.Number(), Type.Null()], {
     title: "Feature id",
     description: "Feature id",
   });
+}
 
-export const BBox2d = (options?: SchemaOptions) =>
-  Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
+export function BBox2d(options?: SchemaOptions) {
+  return Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
     title: "GeoJSON BBox 2d",
     description: "bbox: [west, south, east, north]",
     ...options,
   });
-export const BBox3d = (options?: SchemaOptions) =>
-  Type.Tuple([...Type.Rest(BBox2d()), Type.Number(), Type.Number()], {
+}
+export function BBox3d(options?: SchemaOptions) {
+  return Type.Tuple([...Type.Rest(BBox2d()), Type.Number(), Type.Number()], {
     title: "GeoJSON BBox 3d",
     description: "bbox: [west, south, east, north, min-z, max-z]",
     ...options,
   });
-export const BBox = (options?: SchemaOptions) =>
-  Type.Union([BBox2d(), BBox3d()], {
+}
+export function BBox(options?: SchemaOptions) {
+  return Type.Union([BBox2d(), BBox3d()], {
     title: "GeoJSON BBox",
     description:
       "bbox: [west, south, east, north] or [west, south, east, north, min-z, max-z]",
     ...options,
   });
+}
 
-export const BBox2dWgs84 = (options?: SchemaOptions) =>
-  Type.Tuple(
+export function BBox2dWgs84(options?: SchemaOptions) {
+  return Type.Tuple(
     [LongitudeWgs84(), LatitudeWgs84(), LongitudeWgs84(), LatitudeWgs84()],
     {
       title: "GeoJSON BBox 2d WGS84",
@@ -116,29 +123,36 @@ export const BBox2dWgs84 = (options?: SchemaOptions) =>
       ...options,
     },
   );
-export const BBox3dWgs84 = (options?: SchemaOptions) =>
-  Type.Tuple([...Type.Rest(BBox2dWgs84()), Type.Number(), Type.Number()], {
-    title: "GeoJSON BBox 3d WGS84",
-    description: "bbox: [west, south, east, north, min-z, max-z]",
-    ...options,
-  });
-export const BBoxWgs84 = (options?: SchemaOptions) =>
-  Type.Union([BBox2dWgs84(), BBox3dWgs84()], {
+}
+export function BBox3dWgs84(options?: SchemaOptions) {
+  return Type.Tuple(
+    [...Type.Rest(BBox2dWgs84()), Type.Number(), Type.Number()],
+    {
+      title: "GeoJSON BBox 3d WGS84",
+      description: "bbox: [west, south, east, north, min-z, max-z]",
+      ...options,
+    },
+  );
+}
+export function BBoxWgs84(options?: SchemaOptions) {
+  return Type.Union([BBox2dWgs84(), BBox3dWgs84()], {
     title: "GeoJSON BBox WGS84",
     description:
       "bbox: [west, south, east, north] or [west, south, east, north, min-z, max-z]",
     ...options,
   });
+}
 
-export const GeojsonProperties = (options?: SchemaOptions) =>
-  Nullable(Type.Record(Type.String(), Type.Unknown()), {
+export function GeojsonProperties(options?: SchemaOptions) {
+  return Nullable(Type.Record(Type.String(), Type.Unknown()), {
     default: null,
     title: "GeoJSON properties",
     ...options,
   });
+}
 
-export const NamedCoordinateReferenceSystem = (options?: SchemaOptions) =>
-  Type.Object(
+export function NamedCoordinateReferenceSystem(options?: SchemaOptions) {
+  return Type.Object(
     {
       type: Type.Literal("name"),
       properties: Type.Object({
@@ -151,8 +165,9 @@ export const NamedCoordinateReferenceSystem = (options?: SchemaOptions) =>
       ...options,
     },
   );
-export const LinkedCoordinateReferenceSystem = (options?: SchemaOptions) =>
-  Type.Object(
+}
+export function LinkedCoordinateReferenceSystem(options?: SchemaOptions) {
+  return Type.Object(
     {
       type: Type.Literal("link"),
       properties: Type.Object({
@@ -166,8 +181,9 @@ export const LinkedCoordinateReferenceSystem = (options?: SchemaOptions) =>
       ...options,
     },
   );
-export const CoordinateReferenceSystem = (options?: SchemaOptions) =>
-  Type.Optional(
+}
+export function CoordinateReferenceSystem(options?: SchemaOptions) {
+  return Type.Optional(
     Type.Union(
       [NamedCoordinateReferenceSystem(), LinkedCoordinateReferenceSystem()],
       {
@@ -177,6 +193,7 @@ export const CoordinateReferenceSystem = (options?: SchemaOptions) =>
       },
     ),
   );
+}
 
 export type TCoordinateReferenceSystemSchema = ReturnType<
   typeof CoordinateReferenceSystem
@@ -188,11 +205,13 @@ export type TCoordinateReferenceSystemSchema = ReturnType<
 export type TGeojsonCoordinate<T extends TCoordinateSchema | undefined> =
   IsDefined<T> extends true ? AssertType<T> : ReturnType<typeof Coordinate>;
 
-export const GeojsonCoordinate = <
+export function GeojsonCoordinate<
   T extends TCoordinateSchema | undefined = undefined,
->(
-  schema?: T,
-) => (schema === undefined ? Coordinate() : schema) as TGeojsonCoordinate<T>;
+>(schema?: T) {
+  return (
+    schema === undefined ? Coordinate() : schema
+  ) as TGeojsonCoordinate<T>;
+}
 
 export const BBoxDefault = () => Type.Optional(BBox());
 /** */
@@ -201,12 +220,13 @@ export type TGeojsonBoundingBox<T extends TBBoxSchema | undefined> =
     ? AssertType<T>
     : TOptional<ReturnType<typeof BBox>>;
 
-export const GeojsonBoudingBox = <T extends TBBoxSchema | undefined>(
+export function GeojsonBoudingBox<T extends TBBoxSchema | undefined>(
   schema?: T,
-) =>
-  (schema === undefined
-    ? Type.Optional(BBox())
-    : schema) as TGeojsonBoundingBox<T>;
+) {
+  return (
+    schema === undefined ? Type.Optional(BBox()) : schema
+  ) as TGeojsonBoundingBox<T>;
+}
 
 export type TGeometrySchemas<
   TCoord extends TCoordinateSchema | undefined,
@@ -234,13 +254,10 @@ export type TFeatureSchemas<
  * @param options schema options from typebox
  * @returns geojson point geometry typebox schema
  */
-export const PointGeometry = <
+export function PointGeometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(
-  schemas?: TGeometrySchemas<TCoord, TBBox>,
-  options?: SchemaOptions,
-) => {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Point"),
@@ -255,36 +272,35 @@ export const PointGeometry = <
       ...(options || {}),
     },
   );
-};
+}
 
-export const PointGeometry2d = (
+export function PointGeometry2d(
   schemas?: TGeometrySchemas<TCoordinateSchema2d>,
   options?: SchemaOptions,
-) =>
-  PointGeometry(
+) {
+  return PointGeometry(
     {
       coordinate: schemas && schemas.coordinate,
     },
     { title: "GeoJSON Point 2d", ...(options || {}) },
   );
-export const PointGeometry3d = (
+}
+export function PointGeometry3d(
   schemas?: TGeometrySchemas<TCoordinateSchema3d>,
   options?: SchemaOptions,
-) =>
-  PointGeometry(
+) {
+  return PointGeometry(
     {
       coordinate: schemas && schemas.coordinate,
     },
     { title: "GeoJSON Point 3d", ...(options || {}) },
   );
+}
 
-export const LineStringGeometry = <
+export function LineStringGeometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(
-  schemas?: TGeometrySchemas<TCoord, TBBox>,
-  options?: SchemaOptions,
-) => {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("LineString"),
@@ -298,15 +314,12 @@ export const LineStringGeometry = <
       ...(options || {}),
     },
   );
-};
+}
 
-export const PolygonGeometry = <
+export function PolygonGeometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(
-  schemas?: TGeometrySchemas<TCoord, TBBox>,
-  options?: SchemaOptions,
-) => {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Polygon"),
@@ -320,38 +333,35 @@ export const PolygonGeometry = <
       ...(options || {}),
     },
   );
-};
+}
 
-export const PolygonGeometry2d = (
+export function PolygonGeometry2d(
   schemas?: TGeometrySchemas<TCoordinateSchema2d>,
   options?: SchemaOptions,
-) => {
+) {
   return PolygonGeometry(
     {
       coordinate: schemas && schemas.coordinate,
     },
     { title: "GeoJSON Polygon 2d", ...(options || {}) },
   );
-};
-export const PolygonGeometry3d = (
+}
+export function PolygonGeometry3d(
   schemas?: TGeometrySchemas<TCoordinateSchema3d>,
   options?: SchemaOptions,
-) => {
+) {
   return PolygonGeometry(
     {
       coordinate: schemas && schemas.coordinate,
     },
     { title: "GeoJSON Polygon 3d", ...(options || {}) },
   );
-};
+}
 
-export const MultiPointGeometry = <
+export function MultiPointGeometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(
-  schemas?: TGeometrySchemas<TCoord, TBBox>,
-  options?: SchemaOptions,
-) => {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("MultiPoint"),
@@ -365,15 +375,12 @@ export const MultiPointGeometry = <
       ...(options || {}),
     },
   );
-};
+}
 
-export const MultiLineStringGeometry = <
+export function MultiLineStringGeometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(
-  schemas?: TGeometrySchemas<TCoord, TBBox>,
-  options?: SchemaOptions,
-) => {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("MultiLineString"),
@@ -387,15 +394,12 @@ export const MultiLineStringGeometry = <
       ...(options || {}),
     },
   );
-};
+}
 
-export const MultiPolygonGeometry = <
+export function MultiPolygonGeometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(
-  schemas?: TGeometrySchemas<TCoord, TBBox>,
-  options?: SchemaOptions,
-) => {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("MultiPolygon"),
@@ -409,15 +413,12 @@ export const MultiPolygonGeometry = <
       ...(options || {}),
     },
   );
-};
+}
 
-export const Geometry = <
+export function Geometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(
-  schemas?: TGeometrySchemas<TCoord, TBBox>,
-  options?: SchemaOptions,
-) => {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
   return Type.Union(
     [
       PointGeometry(schemas),
@@ -434,11 +435,11 @@ export const Geometry = <
       ...(options || {}),
     },
   );
-};
-export const FeatureSchema = (
+}
+export function FeatureSchema(
   propertiesSchema?: ReturnType<typeof GeojsonProperties>,
-) =>
-  Type.Object(
+) {
+  return Type.Object(
     {
       type: Type.Literal("Feature"),
       geometry: Geometry(),
@@ -449,12 +450,13 @@ export const FeatureSchema = (
       title: "GeoJSON Feature",
     },
   );
+}
 
-export const FeatureCollection = (
+export function FeatureCollection(
   featureSchema?: ReturnType<typeof FeatureSchema>,
   options?: SchemaOptions,
-) =>
-  Type.Object(
+) {
+  return Type.Object(
     {
       type: Type.Literal("FeatureCollection"),
       features: Type.Array(featureSchema || FeatureSchema()),
@@ -468,6 +470,7 @@ export const FeatureCollection = (
       ...(options || {}),
     },
   );
+}
 
 export type GeometrySchema =
   | ReturnType<typeof PointGeometry>
@@ -485,13 +488,17 @@ export type GeojsonProperties<T extends TSchema | undefined> =
 export type GeojsonCrs<T extends TSchema | undefined> =
   IsDefined<T> extends true ? AssertType<T> : TCoordinateReferenceSystemSchema;
 
-export const FeatureProperties = <T extends TSchema | undefined>(schema?: T) =>
-  (schema === undefined ? Type.Unknown() : schema) as GeojsonProperties<T>;
+export function FeatureProperties<T extends TSchema | undefined>(schema?: T) {
+  return (
+    schema === undefined ? Type.Unknown() : schema
+  ) as GeojsonProperties<T>;
+}
 
-export const FeatureCrs = <T extends TSchema | undefined>(schema?: T) =>
-  (schema === undefined
-    ? Type.Optional(CoordinateReferenceSystem())
-    : schema) as GeojsonCrs<T>;
+export function FeatureCrs<T extends TSchema | undefined>(schema?: T) {
+  return (
+    schema === undefined ? Type.Optional(CoordinateReferenceSystem()) : schema
+  ) as GeojsonCrs<T>;
+}
 
 export function Feature<
   Geom extends GeometrySchema,
