@@ -8,17 +8,17 @@ export const Semver = () =>
   });
 
 export const Tilejson100Version = (options?: SchemaOptions) =>
-  Type.Literal("1.0.0", { default: "1.0.0", ...options });
+  Type.Literal("1.0.0", { ...options });
 export const Tilejson200Version = (options?: SchemaOptions) =>
-  Type.Literal("2.0.0", { default: "2.0.0", ...options });
+  Type.Literal("2.0.0", { ...options });
 export const Tilejson201Version = (options?: SchemaOptions) =>
-  Type.Literal("2.0.1", { default: "2.0.1", ...options });
+  Type.Literal("2.0.1", { ...options });
 export const Tilejson210Version = (options?: SchemaOptions) =>
-  Type.Literal("2.1.0", { default: "2.1.0", ...options });
+  Type.Literal("2.1.0", { ...options });
 export const Tilejson220Version = (options?: SchemaOptions) =>
-  Type.Literal("2.2.0", { default: "2.2.0", ...options });
+  Type.Literal("2.2.0", { ...options });
 export const Tilejson300Version = (options?: SchemaOptions) =>
-  Type.Literal("3.0.0", { default: "3.0.0", ...options });
+  Type.Literal("3.0.0", { ...options });
 
 export const TilejsonVersion = (options?: SchemaOptions) =>
   Type.Union(
@@ -112,8 +112,7 @@ export const VectorLayer = (options?: SchemaOptions) =>
   Type.Object(
     {
       id: Type.String(),
-
-      fields: Type.Record(Type.String(), Type.String()),
+      fields: Type.Record(Type.String(), Type.Optional(Type.String())),
       description: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       maxzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
       minzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
@@ -223,10 +222,10 @@ export const TilejsonLike = (options?: SchemaOptions) =>
       maxzoom: TilejsonZoom(),
       minzoom: TilejsonZoom(),
       bounds: Bounds(),
-      center: Center(),
       vector_layers: VectorLayers(),
 
       // OPTIONAL
+      center: Type.Optional(Type.Union([Center(), Type.Null()])),
       attribution: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       data: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
       description: Type.Optional(Type.Union([Type.String(), Type.Null()])),
@@ -240,6 +239,7 @@ export const TilejsonLike = (options?: SchemaOptions) =>
       version: Type.Optional(Type.Union([Type.String(), Type.Null()])),
     },
     {
+      additionalProperties: true,
       ...options,
     },
   );
