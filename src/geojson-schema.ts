@@ -44,11 +44,11 @@ export type TBBoxSchema =
   | TTuple<[TNumber, TNumber, TNumber, TNumber]>
   | TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>
   | TUnion<
-      [
-        TTuple<[TNumber, TNumber, TNumber, TNumber]>,
-        TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>,
-      ]
-    >;
+    [
+      TTuple<[TNumber, TNumber, TNumber, TNumber]>,
+      TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>,
+    ]
+  >;
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
 export function FeatureCollectionTypeLiteral() {
@@ -217,8 +217,8 @@ export const BBoxDefault = () => Type.Optional(BBox());
 /** */
 export type TGeojsonBoundingBox<T extends TBBoxSchema | undefined> =
   IsDefined<T> extends true
-    ? AssertType<T>
-    : TOptional<ReturnType<typeof BBox>>;
+  ? AssertType<T>
+  : TOptional<ReturnType<typeof BBox>>;
 
 export function GeojsonBoudingBox<T extends TBBoxSchema | undefined>(
   schema?: T,
@@ -241,8 +241,8 @@ export type TFeatureSchemas<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
   TCoordinateReferenceSystem extends
-    | TCoordinateReferenceSystemSchema
-    | undefined,
+  | TCoordinateReferenceSystemSchema
+  | undefined,
 > = {
   properties?: TProperties;
   crs?: TCoordinateReferenceSystem;
@@ -483,8 +483,8 @@ export type GeometrySchema =
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export type GeojsonProperties<T extends TSchema | undefined> =
   IsDefined<T> extends true
-    ? AssertType<T>
-    : ReturnType<typeof GeojsonProperties>;
+  ? AssertType<T>
+  : ReturnType<typeof GeojsonProperties>;
 export type GeojsonCrs<T extends TSchema | undefined> =
   IsDefined<T> extends true ? AssertType<T> : TCoordinateReferenceSystemSchema;
 
