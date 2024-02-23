@@ -2,7 +2,7 @@
   "name": "@jsse/geobox",
   "type": "module",
   "version": "0.1.1",
-  "description": "geo-json-schemas by way of typebox",
+  "description": "geo + typebox => geo-schemas",
   "publishConfig": {
     "access": "public"
   },
@@ -29,6 +29,7 @@
     "dev": "vitest watch",
     "lint": "eslint .",
     "fmt": "prettier --write .",
+    "tsck": "tsc --noEmit",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
