@@ -2,7 +2,7 @@
   "name": "@jsse/geobox",
   "type": "module",
   "version": "0.1.1",
-  "description": "geo-json-schemas by way of typebox",
+  "description": "geo + typebox => geo-schemas",
   "publishConfig": {
     "access": "public"
   },
@@ -29,6 +29,7 @@
     "dev": "vitest watch",
     "lint": "eslint .",
     "fmt": "prettier --write .",
+    "tsck": "tsc --noEmit",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
@@ -43,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^7.0.1",
     "@typescript-eslint/parser": "^7.0.1",
     "eslint": "^8.56.0",
+    "eslint-plugin-antfu": "^2.1.2",
     "fastify": "^4.25.2",
     "prettier": "3.2.5",
     "tsup": "8.0.2",

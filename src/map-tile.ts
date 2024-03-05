@@ -37,36 +37,36 @@ export type Zoom =
   | 30
   | 31
   | 32;
-export const isZoom = (x: unknown): x is Zoom => {
+export function isZoom(x: unknown): x is Zoom {
   return (
     typeof x === "number" &&
     Number.isInteger(x) &&
     x >= MIN_ZOOM &&
     x <= MAX_ZOOM
   );
-};
+}
 
 export type ZoomRange = {
   minZoom: number;
   maxZoom: number;
 };
 
-export const TileZoom = (zoom: number, options?: SchemaOptions) => {
+export function TileZoom(zoom: number, options?: SchemaOptions) {
   if (!isZoom(zoom)) {
     throw new Error(`Invalid zoom: ${zoom}`);
   }
   return Type.Literal(zoom, options);
-};
+}
 
-export const TileZoomRange = (options?: SchemaOptions & ZoomRange) => {
+export function TileZoomRange(options?: SchemaOptions & ZoomRange) {
   return Type.Integer({
     minimum: MIN_ZOOM,
     maximum: MAX_ZOOM,
     ...options,
   });
-};
+}
 
-export const TileZoomXY = (zoom: number, options?: SchemaOptions) => {
+export function TileZoomXY(zoom: number, options?: SchemaOptions) {
   if (!isZoom(zoom)) {
     throw new Error(`Invalid zoom: ${zoom}`);
   }
@@ -75,9 +75,9 @@ export const TileZoomXY = (zoom: number, options?: SchemaOptions) => {
     maximum: 2 ** zoom - 1,
     ...options,
   });
-};
+}
 
-export const TileAtZoom = (zoom: number, options?: SchemaOptions) => {
+export function TileAtZoom(zoom: number, options?: SchemaOptions) {
   if (!isZoom(zoom)) {
     throw new Error(`Invalid zoom: ${zoom}`);
   }
@@ -102,4 +102,4 @@ export const TileAtZoom = (zoom: number, options?: SchemaOptions) => {
     },
     options,
   );
-};
+}

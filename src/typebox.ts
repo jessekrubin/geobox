@@ -25,15 +25,19 @@ export type {
  * @param options Options to pass to the schema
  * @returns A schema that is either the original schema or null
  */
-export const Nullable = <T extends TSchema>(
+export function Nullable<T extends TSchema>(
   schema: T,
   options?: SchemaOptions,
-) => Type.Union([schema, Type.Null()], options);
+) {
+  return Type.Union([schema, Type.Null()], options);
+}
 
-export const OptionalNullable = <T extends TSchema>(
+export function OptionalNullable<T extends TSchema>(
   schema: T,
   options?: SchemaOptions,
-) => Type.Optional(Nullable(schema, options));
+) {
+  return Type.Optional(Nullable(schema, options));
+}
 
 /**
  * StringEnum
@@ -41,6 +45,6 @@ export const OptionalNullable = <T extends TSchema>(
  * Also, taken from the schema god himself (sinclair)
  * REF: https://github.com/sinclairzx81/typebox#unsafe-types
  */
-export const StringEnum = <T extends string[]>(values: [...T]) => {
+export function StringEnum<T extends string[]>(values: [...T]) {
   return Type.Unsafe<T[number]>({ type: "string", enum: values });
-};
+}
