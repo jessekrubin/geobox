@@ -2,12 +2,12 @@
 import jsse from "@jsse/eslint-config";
 import pluginAntfu from "eslint-plugin-antfu";
 
-export default [
-  ...jsse({
+export default jsse(
+  {
     typescript: {
       tsconfig: ["./tsconfig.json", "./tsconfig.eslint.json"],
     },
-  }),
+  },
   {
     files: ["schemas/**/*.schema.json"],
     rules: {
@@ -28,4 +28,4 @@ export default [
       "antfu/top-level-function": "error",
     },
   },
-];
+);
