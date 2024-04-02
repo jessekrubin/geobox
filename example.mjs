@@ -6,7 +6,7 @@ const pointSchemaBabydog = geobox.PointFeature({
   properties: Type.Object({ dingo: Type.String() }),
 });
 
-console.log(JSON.stringify(pointSchemaBabydog, null, 2));
+console.log(JSON.stringify(pointSchemaBabydog, undefined, 2));
 
 // {
 //   "type": "object",
@@ -105,7 +105,7 @@ console.log(JSON.stringify(pointSchemaBabydog, null, 2));
 //   ]
 // }
 
-console.log(JSON.stringify(Type.Strict(pointSchemaBabydog), null, 2));
+console.log(JSON.stringify(Type.Strict(pointSchemaBabydog), undefined, 2));
 // {
 //   "type": "object",
 //   "properties": {

@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@fastify/type-provider-typebox": "^4.0.0",
-    "@jsse/eslint-config": "^0.1.0",
+    "@jsse/eslint-config": "^0.1.7",
     "@turf/helpers": "^6.5.0",
     "@turf/turf": "^6.5.0",
     "@types/geojson": "^7946.0.13",
