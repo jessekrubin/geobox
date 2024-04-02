@@ -38,9 +38,9 @@ function isCheckOptions(value: unknown): value is CheckOptions {
     !Array.isArray(value) &&
     // @ts-expect-error - compiled from typebox
     (value.limit === undefined
-      ? // @ts-expect-error - compiled from typebox
-        true
-      : typeof value.limit === "number" &&
+      ? true
+      : // @ts-expect-error - compiled from typebox
+        typeof value.limit === "number" &&
         // @ts-expect-error - compiled from typebox
         Number.isInteger(value.limit) &&
         // @ts-expect-error - compiled from typebox
@@ -173,7 +173,7 @@ export class JsonSchema<T extends TSchema> {
   public errorsArr = (value: unknown, options?: { limit?: number }) => {
     const it = this.typeguard.Errors(value);
     if (options && isCheckOptions(options)) {
-      const errorArray: Error[] = [];
+      const errorArray: ValueError[] = [];
       let i = 0;
       for (const error of it) {
         if (options?.limit && i >= options.limit) {
