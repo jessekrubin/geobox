@@ -1,8 +1,8 @@
 import { Type } from "./typebox.js";
 import type { SchemaOptions } from "./typebox.js";
 
-export const MIN_ZOOM = 0 as const;
-export const MAX_ZOOM = 32 as const;
+export const MIN_ZOOM = 0;
+export const MAX_ZOOM = 32;
 export type Zoom =
   | 0
   | 1

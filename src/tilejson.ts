@@ -87,7 +87,7 @@ export function Format() {
 
 export function Bounds(options?: SchemaOptions) {
   return Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
-    default: [-180, -85.05112877980659, 180, 85.0511287798066],
+    default: [-180, -85.051_128_779_806_59, 180, 85.051_128_779_806_6],
     ...options,
   });
 }

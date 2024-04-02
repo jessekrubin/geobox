@@ -8,7 +8,7 @@ export * as martin from "./martin.js";
 export {
   JsonSchema,
   jsonschema,
-  Result,
-  ResultErr,
-  ResultOk,
+  type Result,
+  type ResultErr,
+  type ResultOk,
 } from "./result-box.js";

@@ -37,14 +37,14 @@ function isCheckOptions(value: unknown): value is CheckOptions {
     value !== null &&
     !Array.isArray(value) &&
     // @ts-expect-error - compiled from typebox
-    (value.limit !== undefined
+    (value.limit === undefined
       ? // @ts-expect-error - compiled from typebox
-        typeof value.limit === "number" &&
+        true
+      : typeof value.limit === "number" &&
         // @ts-expect-error - compiled from typebox
         Number.isInteger(value.limit) &&
         // @ts-expect-error - compiled from typebox
-        value.limit >= 1
-      : true)
+        value.limit >= 1)
   );
 }
 
@@ -92,7 +92,9 @@ export class JsonSchema<T extends TSchema> {
    * Returns the typeguard.Check function for this schema
    */
   public get guard(): (data: unknown) => data is Static<T> {
-    return this.typeguard.Check;
+    return (data: unknown): data is Static<T> => {
+      return this.typeguard.Check(data);
+    };
   }
 
   /**
@@ -142,9 +144,6 @@ export class JsonSchema<T extends TSchema> {
   /**
    * Returns an iterator for each error in this value;
    * allows for max number of errors
-   *
-   * @param value
-   * @param options
    */
   public errors = (
     value: unknown,
@@ -153,26 +152,27 @@ export class JsonSchema<T extends TSchema> {
     },
   ) => {
     const it = this.typeguard.Errors(value);
-    return function* () {
-      let i = 0;
-      for (const e of it) {
-        if (options?.limit && i >= options.limit) {
-          break;
+    if (options && isCheckOptions(options)) {
+      return function* () {
+        let i = 0;
+        for (const e of it) {
+          if (options?.limit && i >= options.limit) {
+            break;
+          }
+          i++;
+          yield e;
         }
-        i++;
-        yield e;
-      }
-    };
+      };
+    }
+    return it;
   };
 
   /**
    * Returns an array of errors in this value; allows for max number of errors
-   * @param value
-   * @param options
    */
   public errorsArr = (value: unknown, options?: { limit?: number }) => {
     const it = this.typeguard.Errors(value);
-    if (options?.limit) {
+    if (options && isCheckOptions(options)) {
       const errorArray: Error[] = [];
       let i = 0;
       for (const error of it) {
@@ -227,9 +227,9 @@ export class JsonSchema<T extends TSchema> {
     return this.tryFrom(value);
   };
 
-  public strictSchema(): TSchema {
+  public strictSchema = (): TSchema => {
     return Type.Strict(this.schema);
-  }
+  };
 }
 
 /**
@@ -239,14 +239,3 @@ export function jsonschema<T extends TSchema>(schema: T): JsonSchema<T> {
   const t = JsonSchema.new(schema);
   return t;
 }
-
-const typethingy = Type.Object({
-  limit: Type.Optional(
-    Type.Integer({
-      minimum: 1,
-    }),
-  ),
-});
-
-const code = jsonschema(typethingy).code();
-console.log(code);
