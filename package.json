@@ -23,8 +23,9 @@
   "scripts": {
     "prepublish": "pnpm run build",
     "build-fast": "tsup src/index.ts --format cjs,esm",
-    "build": "pnpm run lint && pnpm run test && pnpm run build:tsup",
-    "build:tsup": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "pnpm run lint && pnpm run test && pnpm run build:tsup && pnpm run build:dts",
+    "build:tsup": "tsup src/index.ts --format cjs,esm",
+    "build:dts": "tsc --emitDeclarationOnly -p tsconfig.cjs.json",
     "test": "vitest run",
     "dev": "vitest watch",
     "lint": "eslint .",
