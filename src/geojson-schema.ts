@@ -145,7 +145,7 @@ export function BBoxWgs84(options?: SchemaOptions) {
 
 export function GeojsonProperties(options?: SchemaOptions) {
   return Nullable(Type.Record(Type.String(), Type.Unknown()), {
-    default: null,
+    // default: null,
     title: "GeoJSON properties",
     ...options,
   });
@@ -281,7 +281,7 @@ export function PointGeometry<
       title: "GeoJSON Point",
       description: "GeoJSON Point geometry",
       additionalProperties: false,
-      ...(options || {}),
+      ...options,
     },
   );
 }
@@ -294,7 +294,7 @@ export function PointGeometry2d(
     {
       coordinate: schemas && schemas.coordinate,
     },
-    { title: "GeoJSON Point 2d", ...(options || {}) },
+    { title: "GeoJSON Point 2d", ...options },
   );
 }
 export function PointGeometry3d(
@@ -305,7 +305,7 @@ export function PointGeometry3d(
     {
       coordinate: schemas && schemas.coordinate,
     },
-    { title: "GeoJSON Point 3d", ...(options || {}) },
+    { title: "GeoJSON Point 3d", ...options },
   );
 }
 
@@ -323,7 +323,7 @@ export function LineStringGeometry<
       title: "GeoJSON LineString",
       description: "GeoJSON LineString geometry",
       additionalProperties: false,
-      ...(options || {}),
+      ...options,
     },
   );
 }
@@ -342,7 +342,7 @@ export function PolygonGeometry<
       title: "GeoJSON Polygon",
       description: "GeoJSON Polygon geometry",
       additionalProperties: false,
-      ...(options || {}),
+      ...options,
     },
   );
 }
@@ -355,7 +355,7 @@ export function PolygonGeometry2d(
     {
       coordinate: schemas && schemas.coordinate,
     },
-    { title: "GeoJSON Polygon 2d", ...(options || {}) },
+    { title: "GeoJSON Polygon 2d", ...options },
   );
 }
 export function PolygonGeometry3d(
@@ -366,7 +366,7 @@ export function PolygonGeometry3d(
     {
       coordinate: schemas && schemas.coordinate,
     },
-    { title: "GeoJSON Polygon 3d", ...(options || {}) },
+    { title: "GeoJSON Polygon 3d", ...options },
   );
 }
 
@@ -384,7 +384,7 @@ export function MultiPointGeometry<
       title: "GeoJSON MultiPoint",
       description: "GeoJSON MultiPoint geometry",
       additionalProperties: false,
-      ...(options || {}),
+      ...options,
     },
   );
 }
@@ -403,7 +403,7 @@ export function MultiLineStringGeometry<
       title: "GeoJSON MultiLineString",
       description: "GeoJSON MultiLineString geometry",
       additionalProperties: false,
-      ...(options || {}),
+      ...options,
     },
   );
 }
@@ -422,7 +422,7 @@ export function MultiPolygonGeometry<
       title: "GeoJSON MultiPolygon",
       description: "GeoJSON MultiPolygon geometry",
       additionalProperties: false,
-      ...(options || {}),
+      ...options,
     },
   );
 }
@@ -444,7 +444,7 @@ export function Geometry<
       title: "GeoJSON Geometry",
       description: "GeoJSON Geometry",
       additionalProperties: false,
-      ...(options || {}),
+      ...options,
     },
   );
 }
@@ -479,7 +479,7 @@ export function FeatureCollection(
       title: "GeoJSON FeatureCollection",
       description: "GeoJSON FeatureCollection",
       additionalProperties: false,
-      ...(options || {}),
+      ...options,
     },
   );
 }
@@ -518,7 +518,7 @@ export function Feature<
 >(
   {
     geometry: gemoetry,
-    properties = undefined,
+    properties,
   }: {
     geometry: Geom;
     properties?: P;
@@ -677,7 +677,7 @@ export function MultiPolygonFeature<
     },
     {
       title: "GeoJSON MultiPolygon Feature",
-      ...(options || {}),
+      ...options,
     },
   );
 }
