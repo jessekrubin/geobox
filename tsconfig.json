@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "es2022",
+
+    "lib": ["ES2020"],
+    "moduleDetection": "auto",
     "baseUrl": ".",
     "rootDir": "src",
-    "module": "Node16",
-    "moduleResolution": "Node16",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "allowJs": true,
     "strict": true,
@@ -13,7 +16,11 @@
     "declaration": true,
     "noEmit": false,
     "outDir": "dist",
+    "sourceMap": true,
     "esModuleInterop": true,
+    // "moduleDetection": "force",
+    "isolatedModules": true,
+    // "esModuleInterop": true,
     "skipLibCheck": true
   },
   "include": ["src/**/*"],
