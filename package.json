@@ -1,7 +1,7 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "geo + typebox => geo-schemas",
   "publishConfig": {
     "access": "public"
@@ -12,6 +12,12 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json",
+    "./lib/*": {
+      "types": "./dist/lib/esm/*",
+      "import": "./dist/lib/esm/*",
+      "require": "./dist/lib/cjs/*"
     }
   },
   "main": "./dist/index.cjs",
@@ -23,9 +29,12 @@
   "scripts": {
     "prepublish": "pnpm run build",
     "build-fast": "tsup src/index.ts --format cjs,esm",
-    "build": "pnpm run lint && pnpm run test && pnpm run build:tsup",
-    "build:tsup": "tsup src/index.ts --format cjs,esm --dts",
-    "build:dts": "tsc --emitDeclarationOnly -p tsconfig.cjs.json",
+    "build": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
+    "build:tsup": "tsup src/index.ts --format cjs,esm",
+    "build:tsc": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:dts",
+    "build:dts": "tsc --emitDeclarationOnly -p tsconfig.dts.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json --outDir dist/lib/cjs --module commonjs",
+    "build:esm": "tsc -p tsconfig.json --outDir dist/lib/esm --module nodenext",
     "test": "vitest run",
     "dev": "vitest watch",
     "lint": "eslint .",
@@ -33,12 +42,13 @@
     "tsck": "tsc --noEmit",
     "prepublishOnly": "pnpm run build"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@sinclair/typebox": "^0.32.20"
   },
   "devDependencies": {
     "@fastify/type-provider-typebox": "^4.0.0",
-    "@jsse/eslint-config": "^0.1.7",
+    "@jsse/eslint-config": "^0.1.9",
+    "@sinclair/typebox": "^0.32.20",
     "@turf/helpers": "^6.5.0",
     "@turf/turf": "^6.5.0",
     "@types/geojson": "^7946.0.14",

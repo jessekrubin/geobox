@@ -1,20 +1,6 @@
 import { type SchemaOptions, type TSchema, Type } from "@sinclair/typebox";
 
-export { Type } from "@sinclair/typebox";
-export type {
-  AssertType,
-  SchemaOptions,
-  Static,
-  TLiteral,
-  TNumber,
-  TObject,
-  TOptional,
-  TSchema,
-  TTuple,
-  TUnion,
-  TUnknown,
-} from "@sinclair/typebox";
-
+export * from "@sinclair/typebox";
 /**
  * Nullable
  *
