@@ -8,5 +8,5 @@ export default defineConfig({
   outDir: "dist",
   clean: true,
   target: "esnext",
-  tsconfig: "./tsconfig.json",
+  tsconfig: "./tsconfig.cjs.json",
 });

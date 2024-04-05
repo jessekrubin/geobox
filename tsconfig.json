@@ -3,7 +3,6 @@
     "target": "es2022",
 
     "lib": ["ES2020"],
-    "moduleDetection": "auto",
     "baseUrl": ".",
     "rootDir": "src",
     "module": "NodeNext",
@@ -19,7 +18,7 @@
     "sourceMap": true,
     "esModuleInterop": true,
     // "moduleDetection": "force",
-    "isolatedModules": true,
+    "isolatedModules": false,
     // "esModuleInterop": true,
     "skipLibCheck": true
   },

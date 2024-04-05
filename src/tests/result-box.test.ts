@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import * as geobox from "./index.js";
+import * as geobox from "../index.js";
 
 describe("jsonschema", () => {
   const rawSchema = geobox.PointFeature();

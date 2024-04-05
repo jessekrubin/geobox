@@ -86,19 +86,6 @@ export function TileAtZoom(zoom: number, options?: SchemaOptions) {
       z: Type.Literal(zoom),
       x: TileZoomXY(zoom),
       y: TileZoomXY(zoom),
-      // z: TileZoom(zoom),
-      // x: Type.Integer(
-      //   {
-      //     minimum: 0,
-      //     maximum: 2 ** zoom - 1,
-      //   }
-      // ),
-      // y: Type.Integer(
-      //   {
-      //     minimum: 0,
-      //     maximum: 2 ** zoom - 1,
-      //   }
-      // ),
     },
     options,
   );

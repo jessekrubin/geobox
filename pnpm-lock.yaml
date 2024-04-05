@@ -4,11 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@sinclair/typebox':
-    specifier: ^0.32.20
-    version: 0.32.20
-
 devDependencies:
   '@fastify/type-provider-typebox':
     specifier: ^4.0.0
@@ -16,6 +11,9 @@ devDependencies:
   '@jsse/eslint-config':
     specifier: ^0.1.7
     version: 0.1.8(eslint@8.57.0)(typescript@5.4.4)(vitest@1.4.0)
+  '@sinclair/typebox':
+    specifier: ^0.32.20
+    version: 0.32.20
   '@turf/helpers':
     specifier: ^6.5.0
     version: 6.5.0
@@ -873,6 +871,7 @@ packages:
 
   /@sinclair/typebox@0.32.20:
     resolution: {integrity: sha512-ziK497ILSIYMxD/thl496idIb03IZPlha04itLQu1xAFQbumWZ+Dj4PMMCkDRpAYhvVSdmRlTjGu2B2MA5RplQ==}
+    dev: true
 
   /@stylistic/eslint-plugin-js@1.7.0(eslint@8.57.0):
     resolution: {integrity: sha512-PN6On/+or63FGnhhMKSQfYcWutRlzOiYlVdLM6yN7lquoBTqUJHYnl4TA4MHwiAt46X5gRxDr1+xPZ1lOLcL+Q==}
