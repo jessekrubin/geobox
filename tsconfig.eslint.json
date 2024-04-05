@@ -2,7 +2,9 @@
   "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "rootDir": "./",
+    "declaration": false,
     "noEmit": true
   },
-  "include": ["eslint.config.js", "./*.config.ts", "./*.mjs"]
+  "include": ["eslint.config.js", "./*.config.ts", "./*.mjs", "**/*.ts"]
 }

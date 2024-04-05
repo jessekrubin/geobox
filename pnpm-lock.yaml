@@ -9,8 +9,8 @@ devDependencies:
     specifier: ^4.0.0
     version: 4.0.0(@sinclair/typebox@0.32.20)
   '@jsse/eslint-config':
-    specifier: ^0.1.7
-    version: 0.1.8(eslint@8.57.0)(typescript@5.4.4)(vitest@1.4.0)
+    specifier: ^0.1.9
+    version: 0.1.9(eslint@8.57.0)(typescript@5.4.4)(vitest@1.4.0)
   '@sinclair/typebox':
     specifier: ^0.32.20
     version: 0.32.20
@@ -657,8 +657,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@jsse/eslint-config@0.1.8(eslint@8.57.0)(typescript@5.4.4)(vitest@1.4.0):
-    resolution: {integrity: sha512-3D5LJv/iW/VMo/vGqBZHtgilHoWqNABGOctneYqTetqGGm27GQGayzn5uaO04LbKunt9WMw07HCnZV9a/GxdRw==}
+  /@jsse/eslint-config@0.1.9(eslint@8.57.0)(typescript@5.4.4)(vitest@1.4.0):
+    resolution: {integrity: sha512-V53RM/+0TaYt9L1wctn5NLMGenkFzJn9LO1kjXtM6SQ/t50ZZ2lqd3gjM/e7GIdJ8F0xcXmIOnEZYJks2pMI1g==}
     hasBin: true
     peerDependencies:
       eslint: '>=8.40.0'
@@ -2446,8 +2446,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001605
-      electron-to-chromium: 1.4.728
+      caniuse-lite: 1.0.30001606
+      electron-to-chromium: 1.4.729
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.23.0)
     dev: true
@@ -2508,8 +2508,8 @@ packages:
     dev: true
     optional: true
 
-  /caniuse-lite@1.0.30001605:
-    resolution: {integrity: sha512-nXwGlFWo34uliI9z3n6Qc0wZaf7zaZWA1CPZ169La5mV3I/gem7bst0vr5XQH5TJXZIMfDeZyOrZnSlVzKxxHQ==}
+  /caniuse-lite@1.0.30001606:
+    resolution: {integrity: sha512-LPbwnW4vfpJId225pwjZJOgX1m9sGfbw/RKJvw/t0QhYOOaTXHvkjVGFGPpvwEzufrjvTlsULnVTxdy4/6cqkg==}
     dev: true
 
   /chai@4.4.1:
@@ -2786,8 +2786,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /electron-to-chromium@1.4.728:
-    resolution: {integrity: sha512-Ud1v7hJJYIqehlUJGqR6PF1Ek8l80zWwxA6nGxigBsGJ9f9M2fciHyrIiNMerSHSH3p+0/Ia7jIlnDkt41h5cw==}
+  /electron-to-chromium@1.4.729:
+    resolution: {integrity: sha512-bx7+5Saea/qu14kmPTDHQxkp2UnziG3iajUQu3BxFvCOnpAJdDbMV4rSl+EqFDkkpNNVUFlR1kDfpL59xfy1HA==}
     dev: true
 
   /emoji-regex@8.0.0:

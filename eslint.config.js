@@ -5,8 +5,10 @@ import pluginAntfu from "eslint-plugin-antfu";
 export default jsse(
   {
     typescript: {
-      tsconfig: ["./tsconfig.json", "./tsconfig.eslint.json"],
+      tsconfig: ["./tsconfig.eslint.json", "./tsconfig.json"],
     },
+    // TODO lint markdown files
+    markdown: false,
   },
   {
     files: ["schemas/**/*.schema.json"],
