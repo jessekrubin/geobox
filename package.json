@@ -47,20 +47,20 @@
   },
   "devDependencies": {
     "@fastify/type-provider-typebox": "^4.0.0",
-    "@jsse/eslint-config": "^0.1.9",
+    "@jsse/eslint-config": "^0.1.10",
     "@sinclair/typebox": "^0.32.20",
     "@turf/helpers": "^6.5.0",
     "@turf/turf": "^6.5.0",
     "@types/geojson": "^7946.0.14",
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/parser": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
     "eslint": "^8.57.0",
     "eslint-plugin-antfu": "^2.1.2",
     "fastify": "^4.26.2",
     "prettier": "3.2.5",
     "tsup": "8.0.2",
     "tsx": "^4.7.1",
-    "typescript": "~5.4.4",
+    "typescript": "~5.4.5",
     "vitest": "1.4.0"
   }
 }
