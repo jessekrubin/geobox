@@ -1,3 +1,4 @@
+export * from "./typebox.js";
 export * from "./coord.js";
 export * from "./geojson-schema.js";
 export * as geostats from "./geostats.js";
