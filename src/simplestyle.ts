@@ -52,6 +52,7 @@ export function SimpleStyleProperties() {
         default: "#7e7e7e",
         title: "Marker Color",
         description: "The marker's color; value must follow COLOR RULES",
+        pattern: "^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$",
       }),
     ),
     stroke: Type.Optional(
@@ -60,6 +61,7 @@ export function SimpleStyleProperties() {
         title: "Stroke",
         description:
           "the color of a line as part of a polygon, polyline, or multigeometry value must follow COLOR RULES",
+        pattern: "^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$",
       }),
     ),
     "stroke-opacity": Type.Optional(
@@ -87,6 +89,7 @@ export function SimpleStyleProperties() {
         title: "Fill",
         description:
           "the color of the interior of a polygon value must follow COLOR RULES",
+        pattern: "^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$",
       }),
     ),
     "fill-opacity": Type.Optional(

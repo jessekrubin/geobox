@@ -1,7 +1,8 @@
-import type { Static, TSchema } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
 import type { TypeCheck, ValueError } from "@sinclair/typebox/compiler";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
+import type { Static, TSchema } from "./typebox.js";
+import { Type } from "./typebox.js";
+import { GeoboxValueError } from "./errors.js";
 
 export type ResultOk<T> = {
   ok: true;
@@ -9,10 +10,20 @@ export type ResultOk<T> = {
   data: T;
 };
 
+// type ValueErrors = ValueError[];
+// export class GeoboxValueError extends Error {
+//   public errors: ValueErrors;
+
+//   public constructor(message: string, errors: ValueErrors) {
+//     super(message);
+//     this.errors = errors;
+//   }
+// }
+
 export type ResultErr = {
   ok: false;
   success: false;
-  error: Error;
+  error: GeoboxValueError;
 };
 export type Result<T> = ResultOk<T> | ResultErr;
 
@@ -47,15 +58,6 @@ function isCheckOptions(value: unknown): value is CheckOptions {
         value.limit >= 1)
   );
 }
-
-// function checkOptions(
-//   options?: CheckOptions,
-// ): { limit?: number } {
-
-//   return {
-//     limit: options?.limit,
-//   };
-// )
 
 export class JsonSchema<T extends TSchema> {
   public schema: T;
@@ -127,8 +129,9 @@ export class JsonSchema<T extends TSchema> {
   ): asserts value is Static<T> => {
     if (!this.is(value)) {
       const earr = this.errorsArr(value, options);
-      throw new Error(
-        `Invalid value: ${JSON.stringify(value)}\n${JSON.stringify(earr)}`,
+      throw new GeoboxValueError(
+        `geobox-assert: ${JSON.stringify(value)}`,
+        earr,
       );
     }
   };
@@ -192,9 +195,7 @@ export class JsonSchema<T extends TSchema> {
       return value;
     }
     const earr = this.errorsArr(value, options);
-    throw new Error(
-      `Invalid value: ${JSON.stringify(value)}\n${JSON.stringify(earr)}`,
-    );
+    throw new GeoboxValueError(`geobox-from: ${JSON.stringify(value)}`, earr);
   };
 
   public parse = (value: unknown, options?: { limit?: number }): Static<T> => {
@@ -207,12 +208,9 @@ export class JsonSchema<T extends TSchema> {
       return {
         ok: false,
         success: false,
-        error: new Error(
-          `Invalid value: ${JSON.stringify(value)}\n${JSON.stringify(
-            errors,
-            undefined,
-            2,
-          )}`,
+        error: new GeoboxValueError(
+          `geobox-tryFrom: ${JSON.stringify(value)}`,
+          errors,
         ),
       };
     }
