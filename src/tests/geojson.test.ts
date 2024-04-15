@@ -2,6 +2,7 @@ import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { assert, expect, test } from "vitest";
 import * as geobox from "../geojson-schema.js";
+import { jsonschema } from "../result-box.js";
 
 const simplePointFeature = {
   type: "Feature",
@@ -23,6 +24,30 @@ const pointFeatureDingoProps = {
     // My dog bash aka 'babydog'
     dingo: "bash",
   },
+};
+
+/**
+ * Nested geometry collection
+ *
+ */
+const nestedGeometryCollection = {
+  type: "GeometryCollection",
+  geometries: [
+    {
+      type: "GeometryCollection",
+      geometries: [
+        {
+          type: "GeometryCollection",
+          geometries: [
+            {
+              type: "Point",
+              coordinates: [0, 0],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 test("no-properties-schema", () => {
@@ -69,4 +94,12 @@ test("point-feature-schema-2d", () => {
 
   const badpoint = { ...simplePointFeature, properties: [123] };
   expect(pointSchemaDingoValidator.Check(badpoint)).toBe(false);
+});
+
+test("nested-geometry-collection", () => {
+  const geometryCollectionSchema = geobox.GeometryCollection();
+  const validator = jsonschema(geometryCollectionSchema);
+
+  const res = validator.tryFrom(nestedGeometryCollection);
+  expect(res.ok).toBe(true);
 });

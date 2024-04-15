@@ -51,18 +51,22 @@ export type TBBoxSchema =
     >;
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
+
 export function FeatureCollectionTypeLiteral() {
   return Type.Literal("FeatureCollection");
 }
+
 export function GeometryCollectionTypeLiteral() {
   return Type.Literal("GeometryCollection");
 }
+
 export const PointTypeLiteral = () => Type.Literal("Point");
 export const MultiPointTypeLiteral = () => Type.Literal("MultiPoint");
 export const LineStringTypeLiteral = () => Type.Literal("LineString");
 export const MultiLineStringTypeLiteral = () => Type.Literal("MultiLineString");
 export const PolygonTypeLiteral = () => Type.Literal("Polygon");
 export const MultiPolygonTypeLiteral = () => Type.Literal("MultiPolygon");
+
 export function GeoJSONType() {
   return Type.Union(
     [
@@ -98,6 +102,7 @@ export function BBox2d(options?: SchemaOptions) {
     ...options,
   });
 }
+
 export function BBox3d(options?: SchemaOptions) {
   return Type.Tuple([...Type.Rest(BBox2d()), Type.Number(), Type.Number()], {
     title: "GeoJSON BBox 3d",
@@ -105,6 +110,7 @@ export function BBox3d(options?: SchemaOptions) {
     ...options,
   });
 }
+
 export function BBox(options?: SchemaOptions) {
   return Type.Union([BBox2d(), BBox3d()], {
     title: "GeoJSON BBox",
@@ -124,6 +130,7 @@ export function BBox2dWgs84(options?: SchemaOptions) {
     },
   );
 }
+
 export function BBox3dWgs84(options?: SchemaOptions) {
   return Type.Tuple(
     [...Type.Rest(BBox2dWgs84()), Type.Number(), Type.Number()],
@@ -134,6 +141,7 @@ export function BBox3dWgs84(options?: SchemaOptions) {
     },
   );
 }
+
 export function BBoxWgs84(options?: SchemaOptions) {
   return Type.Union([BBox2dWgs84(), BBox3dWgs84()], {
     title: "GeoJSON BBox WGS84",
@@ -166,6 +174,7 @@ export function NamedCoordinateReferenceSystem(options?: SchemaOptions) {
     },
   );
 }
+
 export function LinkedCoordinateReferenceSystem(options?: SchemaOptions) {
   return Type.Object(
     {
@@ -182,6 +191,7 @@ export function LinkedCoordinateReferenceSystem(options?: SchemaOptions) {
     },
   );
 }
+
 export function CoordinateReferenceSystem(options?: SchemaOptions) {
   return Type.Optional(
     Type.Union(
@@ -220,9 +230,9 @@ export type TGeojsonBoundingBox<T extends TBBoxSchema | undefined> =
     ? AssertType<T>
     : TOptional<ReturnType<typeof BBox>>;
 
-export function GeojsonBoudingBox<T extends TBBoxSchema | undefined>(
-  schema?: T,
-) {
+export function GeojsonBoudingBox<
+  T extends TBBoxSchema | undefined = undefined,
+>(schema?: T): TGeojsonBoundingBox<T> {
   return (
     schema === undefined ? Type.Optional(BBox()) : schema
   ) as TGeojsonBoundingBox<T>;
@@ -297,6 +307,7 @@ export function PointGeometry2d(
     { title: "GeoJSON Point 2d", ...options },
   );
 }
+
 export function PointGeometry3d(
   schemas?: TGeometrySchemas<TCoordinateSchema3d>,
   options?: SchemaOptions,
@@ -358,6 +369,7 @@ export function PolygonGeometry2d(
     { title: "GeoJSON Polygon 2d", ...options },
   );
 }
+
 export function PolygonGeometry3d(
   schemas?: TGeometrySchemas<TCoordinateSchema3d>,
   options?: SchemaOptions,
@@ -448,6 +460,7 @@ export function Geometry<
     },
   );
 }
+
 export function FeatureSchema(
   propertiesSchema?: ReturnType<typeof GeojsonProperties>,
 ) {
@@ -484,6 +497,40 @@ export function FeatureCollection(
   );
 }
 
+export function GeometryCollection(
+  geometrySchema?: ReturnType<typeof Geometry>,
+  options?: SchemaOptions,
+) {
+  const s = Type.Recursive((This) =>
+    Type.Object(
+      {
+        type: Type.Literal("GeometryCollection"),
+        geometries: Type.Array(
+          geometrySchema ||
+            Type.Union([
+              This,
+              PointGeometry(),
+              MultiPointGeometry(),
+              LineStringGeometry(),
+              MultiLineStringGeometry(),
+              PolygonGeometry(),
+              MultiPolygonGeometry(),
+            ]),
+        ),
+        properties: Type.Optional(GeojsonProperties()),
+        bbox: Type.Optional(BBox()),
+      },
+      {
+        title: "GeoJSON GeometryCollection",
+        description: "GeoJSON GeometryCollection",
+        additionalProperties: false,
+        ...options,
+      },
+    ),
+  );
+  return s;
+}
+
 export type GeometrySchema =
   | ReturnType<typeof PointGeometry>
   | ReturnType<typeof LineStringGeometry>
@@ -517,7 +564,7 @@ export function Feature<
   P extends TSchema | undefined,
 >(
   {
-    geometry: gemoetry,
+    geometry,
     properties,
   }: {
     geometry: Geom;
@@ -528,7 +575,7 @@ export function Feature<
   return Type.Object(
     {
       type: Type.Literal("Feature"),
-      geometry: gemoetry,
+      geometry,
       properties: FeatureProperties(properties),
     },
     options,
