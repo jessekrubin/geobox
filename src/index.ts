@@ -1,10 +1,10 @@
 export * from "./typebox.js";
-export * from "./coord.js";
-export * from "./geojson-schema.js";
-export * as geostats from "./geostats.js";
-export * as simplestyle from "./simplestyle.js";
-export * as tilejson from "./tilejson.js";
-export * as martin from "./martin.js";
+export * from "./geo-type/geojson-schema.js";
+export * from "./geo-type/coord.js";
+export * as geostats from "./geo-type/geostats.js";
+export * as simplestyle from "./geo-type/simplestyle.js";
+export * as tilejson from "./geo-type/tilejson.js";
+export * as martin from "./geo-type/martin.js";
 
 export {
   JsonSchema,

@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "./typebox.js";
-import { Type } from "./typebox.js";
+import type { SchemaOptions } from "../typebox.js";
+import { Type } from "../typebox.js";
 
 function SpriteDescriptionStretch() {
   return Type.Array(Type.Tuple([Type.Integer(), Type.Integer()]), {

@@ -1,8 +1,8 @@
 /**
  * Turfbox = turf/geojson + typebox
  */
-import type { SchemaOptions } from "./typebox.js";
-import { Type } from "./typebox.js";
+import type { SchemaOptions } from "../typebox.js";
+import { Type } from "../typebox.js";
 
 /**
  * GeoJSON Latitude json-schema

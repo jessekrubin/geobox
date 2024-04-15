@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "./typebox.js";
-import { Type } from "./typebox.js";
+import type { SchemaOptions } from "../typebox.js";
+import { Type } from "../typebox.js";
 import { Latitude, Longitude } from "./coord.js";
 
 export function Semver() {

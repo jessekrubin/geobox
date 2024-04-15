@@ -9,7 +9,9 @@ import type {
   TSchema,
   TTuple,
   TUnion,
-} from "./typebox.js";
+} from "../typebox.js";
+import { Nullable, Type } from "../typebox.js";
+import type { IsDefined } from "../types.js";
 import {
   Coordinate,
   Latitude,
@@ -17,8 +19,6 @@ import {
   Longitude,
   LongitudeWgs84,
 } from "./coord.js";
-import { Nullable, Type } from "./typebox.js";
-import type { IsDefined } from "./types.js";
 
 export type TCoordinateSchema2d = TTuple<[TNumber, TNumber]>;
 export type TCoordinateSchema3d = TTuple<[TNumber, TNumber, TNumber]>;
