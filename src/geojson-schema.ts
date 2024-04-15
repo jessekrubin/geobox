@@ -230,9 +230,9 @@ export type TGeojsonBoundingBox<T extends TBBoxSchema | undefined> =
     ? AssertType<T>
     : TOptional<ReturnType<typeof BBox>>;
 
-export function GeojsonBoudingBox<T extends TBBoxSchema | undefined>(
-  schema?: T,
-) {
+export function GeojsonBoudingBox<
+  T extends TBBoxSchema | undefined = undefined,
+>(schema?: T): TGeojsonBoundingBox<T> {
   return (
     schema === undefined ? Type.Optional(BBox()) : schema
   ) as TGeojsonBoundingBox<T>;
@@ -564,7 +564,7 @@ export function Feature<
   P extends TSchema | undefined,
 >(
   {
-    geometry: gemoetry,
+    geometry,
     properties,
   }: {
     geometry: Geom;
@@ -575,7 +575,7 @@ export function Feature<
   return Type.Object(
     {
       type: Type.Literal("Feature"),
-      geometry: gemoetry,
+      geometry,
       properties: FeatureProperties(properties),
     },
     options,
