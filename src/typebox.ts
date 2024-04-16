@@ -1,14 +1,14 @@
 import {
   type SchemaOptions,
-  type TSchema,
   type Static,
+  type TSchema,
   Type,
 } from "@sinclair/typebox";
 
 export * from "@sinclair/typebox";
 export type { ValueError } from "@sinclair/typebox/value";
 
-export type StaticFn<T extends (...args: any) => TSchema> = Static<
+export type StaticFn<T extends (...args: never) => TSchema> = Static<
   ReturnType<T>
 >;
 
