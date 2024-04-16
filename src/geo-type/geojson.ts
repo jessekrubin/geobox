@@ -153,7 +153,6 @@ export function BBoxWgs84(options?: SchemaOptions) {
 
 export function GeojsonProperties(options?: SchemaOptions) {
   return Nullable(Type.Record(Type.String(), Type.Unknown()), {
-    // default: null,
     title: "GeoJSON properties",
     ...options,
   });
