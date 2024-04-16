@@ -1,7 +1,17 @@
-import { type SchemaOptions, type TSchema, Type } from "@sinclair/typebox";
+import {
+  type SchemaOptions,
+  type Static,
+  type TSchema,
+  Type,
+} from "@sinclair/typebox";
 
 export * from "@sinclair/typebox";
 export type { ValueError } from "@sinclair/typebox/value";
+
+export type StaticFn<T extends (...args: never) => TSchema> = Static<
+  ReturnType<T>
+>;
+
 /**
  * Nullable
  *

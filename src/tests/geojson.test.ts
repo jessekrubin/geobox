@@ -1,7 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { assert, expect, test } from "vitest";
-import * as geobox from "../geojson-schema.js";
+import * as geobox from "../index.js";
 import { jsonschema } from "../result-box.js";
 
 const simplePointFeature = {

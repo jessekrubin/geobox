@@ -1,6 +1,6 @@
 // REF: https://github.com/mapbox/mapbox-geostats
-import type { SchemaOptions } from "./typebox.js";
-import { Type } from "./typebox.js";
+import type { SchemaOptions } from "../typebox.js";
+import { Type } from "../typebox.js";
 
 export function GeostatsAttribute(options?: SchemaOptions) {
   return Type.Object(
@@ -13,7 +13,7 @@ export function GeostatsAttribute(options?: SchemaOptions) {
       max: Type.Number(),
     },
     {
-      $id: "/attribute",
+      $id: "/geostats/attribute",
       ...options,
     },
   );
@@ -29,7 +29,7 @@ export function GeostatsLayer(options?: SchemaOptions) {
       attributes: Type.Array(GeostatsAttribute()),
     },
     {
-      $id: "/layer",
+      $id: "/geostats/layer",
       ...options,
     },
   );
@@ -42,7 +42,7 @@ export function GeostatsTilestats(options?: SchemaOptions) {
       layers: Type.Array(GeostatsLayer()),
     },
     {
-      $id: "/tilestats",
+      $id: "/geostats/tilestats",
       ...options,
     },
   );
