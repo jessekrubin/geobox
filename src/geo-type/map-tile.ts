@@ -2,7 +2,7 @@ import { Type } from "../typebox.js";
 import type { SchemaOptions } from "../typebox.js";
 
 export const MIN_ZOOM = 0;
-export const MAX_ZOOM = 32;
+export const MAX_ZOOM = 31;
 export type Zoom =
   | 0
   | 1
@@ -35,8 +35,7 @@ export type Zoom =
   | 28
   | 29
   | 30
-  | 31
-  | 32;
+  | 31;
 export function isZoom(x: unknown): x is Zoom {
   return (
     typeof x === "number" &&
