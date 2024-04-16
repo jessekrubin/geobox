@@ -1,10 +1,10 @@
 name: CI
 
 on:
-  push:
-    branches: [main]
+  push: 
+    branches: *
   pull_request:
-    branches: [main]
+    branches: *
 
 jobs:
   test:
@@ -45,8 +45,14 @@ jobs:
         run: pnpm i
 
       # Runs a set of commands using the runners shell
-      - name: Build and Test
+      - name: test
         run: pnpm test
+      
+      - name: build
+        run: pnpm build
+      
+      - name: lint
+        run: pnpm lint
 
   # release:
   #   runs-on: ubuntu-latest
