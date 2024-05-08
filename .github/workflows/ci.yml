@@ -35,7 +35,7 @@ jobs:
             ${{ runner.os }}-${{ matrix.node-version }}-test-${{ env.cache-name }}-
             ${{ runner.os }}-${{ matrix.node-version }}-test-
             ${{ runner.os }}-
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         with:
           version: 8
 
