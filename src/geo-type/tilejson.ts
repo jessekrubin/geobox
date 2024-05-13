@@ -4,7 +4,7 @@ import { Latitude, Longitude } from "./coord.js";
 
 export function Semver() {
   return Type.String({
-    pattern: "\\d+\\.\\d+\\.\\d+\\w?[\\w\\d]*",
+    pattern: String.raw`\d+\.\d+\.\d+\w?[\w\d]*`,
   });
 }
 
