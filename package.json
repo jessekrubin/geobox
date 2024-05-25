@@ -48,7 +48,7 @@
   "devDependencies": {
     "@fastify/type-provider-typebox": "^4.0.0",
     "@jsse/eslint-config": "^0.1.13",
-    "@sinclair/typebox": "^0.32.28",
+    "@sinclair/typebox": "^0.32.31",
     "@turf/helpers": "^6.5.0",
     "@turf/turf": "^6.5.0",
     "@types/geojson": "^7946.0.14",
@@ -59,7 +59,7 @@
     "fastify": "^4.26.2",
     "prettier": "3.2.5",
     "tsup": "8.0.2",
-    "tsx": "^4.10.2",
+    "tsx": "^4.11.0",
     "typescript": "~5.4.5",
     "vitest": "1.6.0"
   }

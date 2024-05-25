@@ -547,7 +547,7 @@ export function Geometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
 >(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
-  return Type.Union([GeometryPrimitive(schemas), GeometryCollection()], {
+  return Type.Union([GeometryPrimitive(), GeometryCollection()], {
     title: "GeoJSON Geometry",
     description: "GeoJSON Geometry",
     additionalProperties: false,
@@ -567,25 +567,6 @@ export function FeatureSchema(
     },
     {
       title: "GeoJSON Feature",
-    },
-  );
-}
-
-export function FeatureCollection(
-  featureSchema?: ReturnType<typeof FeatureSchema>,
-  options?: SchemaOptions,
-) {
-  return Type.Object(
-    {
-      type: Type.Literal("FeatureCollection"),
-      features: Type.Array(featureSchema || FeatureSchema(GeojsonProperties())),
-      bbox: Type.Optional(BBox()),
-    },
-    {
-      title: "GeoJSON FeatureCollection",
-      description: "GeoJSON FeatureCollection",
-      additionalProperties: false,
-      ...options,
     },
   );
 }
@@ -621,23 +602,43 @@ export function FeatureCrs<T extends TSchema | undefined>(schema?: T) {
 export function Feature<
   Geom extends GeometrySchema,
   P extends TSchema | undefined,
->(
-  {
-    geometry,
-    properties,
-  }: {
-    geometry: Geom;
-    properties?: P;
-  },
+>(geometry?: Geom, properties?: P, options?: SchemaOptions) {
+  return Type.Object(
+    {
+      type: Type.Literal("Feature"),
+      geometry: geometry || Geometry(),
+      properties: FeatureProperties(properties),
+    },
+    options,
+  );
+}
+
+export function FeatureCollection(
+  feature?: ReturnType<typeof Feature>,
   options?: SchemaOptions,
 ) {
   return Type.Object(
     {
-      type: Type.Literal("Feature"),
-      geometry,
-      properties: FeatureProperties(properties),
+      type: Type.Literal("FeatureCollection"),
+      features: Type.Array(
+        feature ||
+          Type.Object(
+            {
+              type: Type.Literal("Feature"),
+              geometry: Geometry(),
+              properties: GeojsonProperties(),
+            },
+            options,
+          ),
+      ),
+      bbox: Type.Optional(BBox()),
     },
-    options,
+    {
+      title: "GeoJSON FeatureCollection",
+      description: "GeoJSON FeatureCollection",
+      additionalProperties: false,
+      ...options,
+    },
   );
 }
 

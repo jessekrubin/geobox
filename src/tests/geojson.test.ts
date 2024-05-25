@@ -60,9 +60,7 @@ const nestedGeometryCollection = {
   ],
 };
 test("no-properties-schema-feature-with-geometry-schema", () => {
-  const pointSchema = geobox.Feature({
-    geometry: geobox.PointGeometry(),
-  });
+  const pointSchema = geobox.Feature(geobox.PointGeometry());
   const pointSchemaValidator = TypeCompiler.Compile(pointSchema);
 
   assert.equal(pointSchemaValidator.Check(simplePointFeature), true);
