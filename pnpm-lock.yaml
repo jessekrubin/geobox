@@ -34,7 +34,7 @@ devDependencies:
     version: 8.57.0
   eslint-plugin-antfu:
     specifier: ^2.1.2
-    version: 2.2.0(eslint@8.57.0)
+    version: 2.3.0(eslint@8.57.0)
   fastify:
     specifier: ^4.26.2
     version: 4.27.0
@@ -710,7 +710,7 @@ packages:
       eslint: 8.57.0
       eslint-config-flat-gitignore: 0.1.5
       eslint-define-config: 2.1.0
-      eslint-plugin-antfu: 2.2.0(eslint@8.57.0)
+      eslint-plugin-antfu: 2.3.0(eslint@8.57.0)
       eslint-plugin-eslint-comments: 3.2.0(eslint@8.57.0)
       eslint-plugin-import-x: 0.5.0(eslint@8.57.0)(typescript@5.4.5)
       eslint-plugin-jsdoc: 48.2.5(eslint@8.57.0)
@@ -3024,8 +3024,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-antfu@2.2.0(eslint@8.57.0):
-    resolution: {integrity: sha512-QHzHYP+fyfhSkIdcuT9JZ4rCPuJOoHRE27gglPYHlJ6lxB7pO9i45yAy4aurx/rleBuEC27U4c//1Nwtbasj4Q==}
+  /eslint-plugin-antfu@2.3.0(eslint@8.57.0):
+    resolution: {integrity: sha512-Swf63oV4wq4/b0UvhVPcN+6xbH+O+HMUM6tPPf8ECVktEj5kqYSVS6RARw9dyKD1blnuCKNtxNATlI8WzqREuA==}
     peerDependencies:
       eslint: '*'
     dependencies:
