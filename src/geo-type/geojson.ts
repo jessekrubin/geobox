@@ -13,6 +13,8 @@ import { BBox } from "./bbox.js";
 import type { TBBoxSchema } from "./bbox.js";
 import type { TCoord2d, TCoord3d, TCoordinateSchema } from "./coord.js";
 import { Coord, LatitudeWgs84, LongitudeWgs84 } from "./coord.js";
+import type { TCoordinateReferenceSystemSchema } from "./geojson-crs.js";
+import { CoordinateReferenceSystem } from "./geojson-crs.js";
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
 
@@ -96,56 +98,6 @@ export function GeojsonProperties(options?: SchemaOptions) {
     ...options,
   });
 }
-
-export function NamedCoordinateReferenceSystem(options?: SchemaOptions) {
-  return Type.Object(
-    {
-      type: Type.Literal("name"),
-      properties: Type.Object({
-        name: Type.String(),
-      }),
-    },
-    {
-      title: "Named Coordinate Reference System",
-      description: "Named Coordinate Reference System",
-      ...options,
-    },
-  );
-}
-
-export function LinkedCoordinateReferenceSystem(options?: SchemaOptions) {
-  return Type.Object(
-    {
-      type: Type.Literal("link"),
-      properties: Type.Object({
-        href: Type.String(),
-        type: Type.String(),
-      }),
-    },
-    {
-      title: "Linked Coordinate Reference System",
-      description: "Linked Coordinate Reference System",
-      ...options,
-    },
-  );
-}
-
-export function CoordinateReferenceSystem(options?: SchemaOptions) {
-  return Type.Optional(
-    Type.Union(
-      [NamedCoordinateReferenceSystem(), LinkedCoordinateReferenceSystem()],
-      {
-        title: "Coordinate Reference System",
-        description: "Coordinate Reference System",
-        ...options,
-      },
-    ),
-  );
-}
-
-export type TCoordinateReferenceSystemSchema = ReturnType<
-  typeof CoordinateReferenceSystem
->;
 
 /**
  * type inference for coordinate(s)

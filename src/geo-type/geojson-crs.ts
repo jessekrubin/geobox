@@ -70,3 +70,7 @@ export function CoordinateReferenceSystem(
     },
   );
 }
+
+export type TCoordinateReferenceSystemSchema = ReturnType<
+  typeof CoordinateReferenceSystem
+>;
