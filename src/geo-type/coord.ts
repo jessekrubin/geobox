@@ -3,6 +3,36 @@
  */
 import type { SchemaOptions } from "../typebox.js";
 import { Type } from "../typebox.js";
+import type { TUnionVec2Vec3, TVec2, TVec3 } from "../types.js";
+
+export type TCoord2d = TVec2;
+export type TCoord3d = TVec3;
+export type TCoord = TUnionVec2Vec3;
+export type TCoordinateSchema = TCoord | TCoord2d | TCoord3d;
+
+export function Coord2d(options?: SchemaOptions): TCoord2d {
+  return Type.Tuple([Type.Number(), Type.Number()], {
+    title: "coordinate 2d",
+    description: "2d coordinate: [x, y]",
+    ...options,
+  });
+}
+
+export function Coord3d(options?: SchemaOptions): TCoord3d {
+  return Type.Tuple([Type.Number(), Type.Number(), Type.Number()], {
+    title: "coordinate 3d",
+    description: "3d coordinate: [x, y, z]",
+    ...options,
+  });
+}
+
+export function Coord(options?: SchemaOptions): TCoord {
+  return Type.Union([Coord2d(), Coord3d()], {
+    title: "coordinate",
+    description: "2d/3d coordinate: [x, y] or [x, y, z]",
+    ...options,
+  });
+}
 
 /**
  * GeoJSON Latitude json-schema
@@ -47,28 +77,6 @@ export function LongitudeWgs84(options?: SchemaOptions) {
     ...options,
   });
 }
-export function Coordinate2d(options?: SchemaOptions) {
-  return Type.Tuple([Longitude(), Latitude()], {
-    title: "GeoJSON coordinate 2d",
-    description: "coordinate: [longitude, latitude]",
-    ...options,
-  });
-}
-export function Coordinate3d(options?: SchemaOptions) {
-  return Type.Tuple([...Type.Rest(Coordinate2d()), Type.Number()], {
-    title: "GeoJSON coordinate 3d",
-    description: "coordinate: [longitude, latitude, elevation/z]",
-    ...options,
-  });
-}
-export function Coordinate(options?: SchemaOptions) {
-  return Type.Union([Coordinate2d(), Coordinate3d()], {
-    title: "GeoJSON coordinate",
-    description:
-      "coordinate: [longitude, latitude] or [longitude, latitude, elevation/z]",
-    ...options,
-  });
-}
 
 export function Coordinate2dWgs84(options?: SchemaOptions) {
   return Type.Tuple([LongitudeWgs84(), LatitudeWgs84()], {
@@ -85,6 +93,7 @@ export function Coordinate3dWgs84(options?: SchemaOptions) {
     ...options,
   });
 }
+
 export function CoordinateWgs84(options?: SchemaOptions) {
   return Type.Union([Coordinate2dWgs84(), Coordinate3dWgs84()], {
     title: "GeoJSON coordinate WGS84",
