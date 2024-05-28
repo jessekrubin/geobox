@@ -71,6 +71,19 @@ export function CoordinateReferenceSystem(
   );
 }
 
+export function CoordinateReferenceSystemOptional(options?: SchemaOptions) {
+  return Type.Optional(
+    CoordinateReferenceSystem({
+      title: "coordinate-reference-system-optional",
+      description: "Optional Coordinate Reference System",
+      ...options,
+    }),
+  );
+}
+
 export type TCoordinateReferenceSystemSchema = ReturnType<
   typeof CoordinateReferenceSystem
+>;
+export type TCoordinateReferenceSystemSchemaOptional = ReturnType<
+  typeof CoordinateReferenceSystemOptional
 >;

@@ -13,7 +13,7 @@ import { BBox } from "./bbox.js";
 import type { TBBoxSchema } from "./bbox.js";
 import type { TCoord2d, TCoord3d, TCoordinateSchema } from "./coord.js";
 import { Coord, LatitudeWgs84, LongitudeWgs84 } from "./coord.js";
-import type { TCoordinateReferenceSystemSchema } from "./geojson-crs.js";
+import type { TCoordinateReferenceSystemSchemaOptional } from "./geojson-crs.js";
 import { CoordinateReferenceSystem } from "./geojson-crs.js";
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
@@ -139,7 +139,7 @@ export type TFeatureSchemas<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
   TCoordinateReferenceSystem extends
-    | TCoordinateReferenceSystemSchema
+    | TCoordinateReferenceSystemSchemaOptional
     | undefined,
 > = {
   properties?: TProperties;
@@ -151,7 +151,7 @@ export type TFeatureSchemasV2<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
   TCoordinateReferenceSystem extends
-    | TCoordinateReferenceSystemSchema
+    | TCoordinateReferenceSystemSchemaOptional
     | undefined,
 > = {
   properties?: TProperties;
@@ -467,7 +467,9 @@ export type GeojsonProperties<T extends TSchema | undefined> =
     ? AssertType<T>
     : ReturnType<typeof GeojsonProperties>;
 export type GeojsonCrs<T extends TSchema | undefined> =
-  IsDefined<T> extends true ? AssertType<T> : TCoordinateReferenceSystemSchema;
+  IsDefined<T> extends true
+    ? AssertType<T>
+    : TCoordinateReferenceSystemSchemaOptional;
 
 export function FeatureProperties<T extends TSchema | undefined>(schema?: T) {
   return (
@@ -566,7 +568,7 @@ export function PointFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(
   schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>,
   options?: SchemaOptions,
@@ -590,7 +592,7 @@ export function LineStringFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(
   schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>,
   options?: SchemaOptions,
@@ -614,7 +616,7 @@ export function PolygonFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(
   schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>,
   options?: SchemaOptions,
@@ -638,7 +640,7 @@ export function MultiPointFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(
   schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>,
   options?: SchemaOptions,
@@ -662,7 +664,7 @@ export function MultiLineStringFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(
   schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>,
   options?: SchemaOptions,
@@ -686,7 +688,7 @@ export function MultiPolygonFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(
   schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>,
   options?: SchemaOptions,
@@ -717,19 +719,19 @@ export function MultiPolygonFeature<
 export type TFeatureSchemas2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 > = TFeatureSchemas<TProps, TCoord2d, TBBox, TCrs>;
 
 export type TFeatureSchemas3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 > = TFeatureSchemas<TProps, TCoord3d, TBBox, TCrs>;
 
 export function PointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return PointFeature(schemas, options);
 }
@@ -737,7 +739,7 @@ export function PointFeature2d<
 export function PointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return PointFeature(schemas, options);
 }
@@ -745,7 +747,7 @@ export function PointFeature3d<
 export function MultiPointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiPointFeature(schemas, options);
 }
@@ -753,7 +755,7 @@ export function MultiPointFeature2d<
 export function MultiPointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiPointFeature(schemas, options);
 }
@@ -761,7 +763,7 @@ export function MultiPointFeature3d<
 export function LineStringFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return LineStringFeature(schemas, options);
 }
@@ -769,7 +771,7 @@ export function LineStringFeature2d<
 export function LineStringFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return LineStringFeature(schemas, options);
 }
@@ -777,7 +779,7 @@ export function LineStringFeature3d<
 export function MultiLineStringFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiLineStringFeature(schemas, options);
 }
@@ -785,7 +787,7 @@ export function MultiLineStringFeature2d<
 export function MultiLineStringFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiLineStringFeature(schemas, options);
 }
@@ -793,7 +795,7 @@ export function MultiLineStringFeature3d<
 export function PolygonFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return PolygonFeature(schemas, options);
 }
@@ -801,7 +803,7 @@ export function PolygonFeature2d<
 export function PolygonFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return PolygonFeature(schemas, options);
 }
@@ -809,7 +811,7 @@ export function PolygonFeature3d<
 export function MultiPolygonFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiPolygonFeature(schemas, options);
 }
@@ -817,7 +819,7 @@ export function MultiPolygonFeature2d<
 export function MultiPolygonFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox, TCrs>, options?: SchemaOptions) {
   return MultiPolygonFeature(schemas, options);
 }
@@ -832,7 +834,7 @@ export function FeatureSet<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-  TCrs extends TCoordinateReferenceSystemSchema | undefined,
+  TCrs extends TCoordinateReferenceSystemSchemaOptional | undefined,
 >(
   schemas?: TFeatureSchemas<TProps, TCoord, TBBox, TCrs>,
   options?: SchemaOptions,
