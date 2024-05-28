@@ -4,51 +4,15 @@
 import type {
   AssertType,
   SchemaOptions,
-  TNumber,
   TOptional,
   TSchema,
-  TTuple,
-  TUnion,
 } from "../typebox.js";
 import { Nullable, Type } from "../typebox.js";
 import type { IsDefined } from "../types.js";
-import {
-  Coordinate,
-  Latitude,
-  LatitudeWgs84,
-  Longitude,
-  LongitudeWgs84,
-} from "./coord.js";
-
-export type TCoordinateSchema2d = TTuple<[TNumber, TNumber]>;
-export type TCoordinateSchema3d = TTuple<[TNumber, TNumber, TNumber]>;
-export type TCoordinateSchemaNd = TUnion<
-  [TTuple<[TNumber, TNumber]>, TTuple<[TNumber, TNumber, TNumber]>]
->;
-export type TCoordinateSchema =
-  | TTuple<[TNumber, TNumber]>
-  | TTuple<[TNumber, TNumber, TNumber]>
-  | TUnion<[TTuple<[TNumber, TNumber]>, TTuple<[TNumber, TNumber, TNumber]>]>;
-
-export type TBBoxSchema2d = TTuple<[TNumber, TNumber, TNumber, TNumber]>;
-export type TBBoxSchema3d = TTuple<
-  [TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]
->;
-export type TBBoxSchemaNd = TUnion<
-  [
-    TTuple<[TNumber, TNumber, TNumber, TNumber]>,
-    TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>,
-  ]
->;
-export type TBBoxSchema =
-  | TTuple<[TNumber, TNumber, TNumber, TNumber]>
-  | TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>
-  | TUnion<
-      [
-        TTuple<[TNumber, TNumber, TNumber, TNumber]>,
-        TTuple<[TNumber, TNumber, TNumber, TNumber, TNumber, TNumber]>,
-      ]
-    >;
+import { BBox } from "./bbox.js";
+import type { TBBoxSchema } from "./bbox.js";
+import type { TCoord2d, TCoord3d, TCoordinateSchema } from "./coord.js";
+import { Coord, LatitudeWgs84, LongitudeWgs84 } from "./coord.js";
 
 export const FeatureTypeLiteral = () => Type.Literal("Feature");
 
@@ -92,31 +56,6 @@ export function FeatureId() {
   return Type.Union([Type.String(), Type.Number(), Type.Null()], {
     title: "Feature id",
     description: "Feature id",
-  });
-}
-
-export function BBox2d(options?: SchemaOptions) {
-  return Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
-    title: "GeoJSON BBox 2d",
-    description: "bbox: [west, south, east, north]",
-    ...options,
-  });
-}
-
-export function BBox3d(options?: SchemaOptions) {
-  return Type.Tuple([...Type.Rest(BBox2d()), Type.Number(), Type.Number()], {
-    title: "GeoJSON BBox 3d",
-    description: "bbox: [west, south, east, north, min-z, max-z]",
-    ...options,
-  });
-}
-
-export function BBox(options?: SchemaOptions) {
-  return Type.Union([BBox2d(), BBox3d()], {
-    title: "GeoJSON BBox",
-    description:
-      "bbox: [west, south, east, north] or [west, south, east, north, min-z, max-z]",
-    ...options,
   });
 }
 
@@ -212,14 +151,12 @@ export type TCoordinateReferenceSystemSchema = ReturnType<
  * type inference for coordinate(s)
  */
 export type TGeojsonCoordinate<T extends TCoordinateSchema | undefined> =
-  IsDefined<T> extends true ? AssertType<T> : ReturnType<typeof Coordinate>;
+  IsDefined<T> extends true ? AssertType<T> : ReturnType<typeof Coord>;
 
 export function GeojsonCoordinate<
   T extends TCoordinateSchema | undefined = undefined,
 >(schema?: T) {
-  return (
-    schema === undefined ? Coordinate() : schema
-  ) as TGeojsonCoordinate<T>;
+  return (schema === undefined ? Coord() : schema) as TGeojsonCoordinate<T>;
 }
 
 export const BBoxDefault = () => Type.Optional(BBox());
@@ -296,7 +233,7 @@ export function PointGeometry<
 }
 
 export function PointGeometry2d(
-  schemas?: TGeometrySchemas<TCoordinateSchema2d>,
+  schemas?: TGeometrySchemas<TCoord2d>,
   options?: SchemaOptions,
 ) {
   return PointGeometry(
@@ -304,7 +241,6 @@ export function PointGeometry2d(
       coordinate: schemas && schemas.coordinate,
     },
     {
-      $id: "point-geometry-2d",
       title: "GeoJSON Point 2d",
       ...options,
     },
@@ -312,7 +248,7 @@ export function PointGeometry2d(
 }
 
 export function PointGeometry3d(
-  schemas?: TGeometrySchemas<TCoordinateSchema3d>,
+  schemas?: TGeometrySchemas<TCoord3d>,
   options?: SchemaOptions,
 ) {
   return PointGeometry(
@@ -320,7 +256,6 @@ export function PointGeometry3d(
       coordinate: schemas && schemas.coordinate,
     },
     {
-      $id: "point-geometry-3d",
       title: "GeoJSON Point 3d",
       ...options,
     },
@@ -343,7 +278,6 @@ export function LineStringGeometry<
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
-      $id: "line-string-geometry",
       title: "GeoJSON LineString",
       description: "GeoJSON LineString geometry",
       additionalProperties: false,
@@ -370,7 +304,6 @@ export function PolygonGeometry<
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
-      $id: "polygon-geometry",
       title: "GeoJSON Polygon",
       description: "GeoJSON Polygon geometry",
       additionalProperties: false,
@@ -380,7 +313,7 @@ export function PolygonGeometry<
 }
 
 export function PolygonGeometry2d(
-  schemas?: TGeometrySchemas<TCoordinateSchema2d>,
+  schemas?: TGeometrySchemas<TCoord2d>,
   options?: SchemaOptions,
 ) {
   return PolygonGeometry(
@@ -388,7 +321,6 @@ export function PolygonGeometry2d(
       coordinate: schemas && schemas.coordinate,
     },
     {
-      $id: "polygon-geometry-2d",
       title: "GeoJSON Polygon 2d",
       ...options,
     },
@@ -396,7 +328,7 @@ export function PolygonGeometry2d(
 }
 
 export function PolygonGeometry3d(
-  schemas?: TGeometrySchemas<TCoordinateSchema3d>,
+  schemas?: TGeometrySchemas<TCoord3d>,
   options?: SchemaOptions,
 ) {
   return PolygonGeometry(
@@ -424,7 +356,6 @@ export function MultiPointGeometry<
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
-      $id: "multi-point-geometry",
       title: "GeoJSON MultiPoint",
       description: "GeoJSON MultiPoint geometry",
       additionalProperties: false,
@@ -451,7 +382,6 @@ export function MultiLineStringGeometry<
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
-      $id: "multi-line-string-geometry",
       title: "GeoJSON MultiLineString",
       description: "GeoJSON MultiLineString geometry",
       additionalProperties: false,
@@ -483,7 +413,6 @@ export function MultiPolygonGeometry<
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
-      $id: "multi-polygon-geometry",
       title: "GeoJSON MultiPolygon",
       description: "GeoJSON MultiPolygon geometry",
       additionalProperties: false,
@@ -543,6 +472,7 @@ export function GeometryCollection(options?: SchemaOptions) {
   );
   return s;
 }
+
 export function Geometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
@@ -836,13 +766,13 @@ export type TFeatureSchemas2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
   TCrs extends TCoordinateReferenceSystemSchema | undefined,
-> = TFeatureSchemas<TProps, TCoordinateSchema2d, TBBox, TCrs>;
+> = TFeatureSchemas<TProps, TCoord2d, TBBox, TCrs>;
 
 export type TFeatureSchemas3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
   TCrs extends TCoordinateReferenceSystemSchema | undefined,
-> = TFeatureSchemas<TProps, TCoordinateSchema3d, TBBox, TCrs>;
+> = TFeatureSchemas<TProps, TCoord3d, TBBox, TCrs>;
 
 export function PointFeature2d<
   TProps extends TSchema | undefined,

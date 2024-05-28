@@ -13,7 +13,7 @@ export function GeostatsAttribute(options?: SchemaOptions) {
       max: Type.Number(),
     },
     {
-      $id: "/geostats/attribute",
+      title: "geostats-attribute",
       ...options,
     },
   );
@@ -29,7 +29,7 @@ export function GeostatsLayer(options?: SchemaOptions) {
       attributes: Type.Array(GeostatsAttribute()),
     },
     {
-      $id: "/geostats/layer",
+      title: "geostats-layer",
       ...options,
     },
   );
@@ -42,7 +42,7 @@ export function GeostatsTilestats(options?: SchemaOptions) {
       layers: Type.Array(GeostatsLayer()),
     },
     {
-      $id: "/geostats/tilestats",
+      title: "geostats-tilestats",
       ...options,
     },
   );
