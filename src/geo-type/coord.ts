@@ -12,29 +12,29 @@ export type TCoord = TUnionVec2Vec3;
 export type TCoordinateSchema = TCoord | TCoord2d | TCoord3d;
 
 export type CoordSchemaOptions = {
-  Tx?: TNumber;
-  Ty?: TNumber;
-  Tz?: TNumber;
+  x?: TNumber;
+  y?: TNumber;
+  z?: TNumber;
 } & SchemaOptions;
 
 function _coordOptions(options?: CoordSchemaOptions): {
-  Tx: TNumber;
-  Ty: TNumber;
-  Tz: TNumber;
+  x: TNumber;
+  y: TNumber;
+  z: TNumber;
   schemaOptions: SchemaOptions;
 } {
   const {
-    Tx = Type.Number(),
-    Ty = Type.Number(),
-    Tz = Type.Number(),
+    x = Type.Number(),
+    y = Type.Number(),
+    z = Type.Number(),
     ...schemaOptions
   } = options || {};
-  return { Tx, Ty, Tz, schemaOptions };
+  return { x, y, z, schemaOptions };
 }
 
 export function Coord2d(options?: CoordSchemaOptions): TCoord2d {
-  const { Tx, Ty, schemaOptions } = _coordOptions(options);
-  return Type.Tuple([Tx, Ty], {
+  const { x, y, schemaOptions } = _coordOptions(options);
+  return Type.Tuple([x, y], {
     title: "coordinate 2d",
     description: "2d coordinate: [x, y]",
     ...schemaOptions,
@@ -42,8 +42,8 @@ export function Coord2d(options?: CoordSchemaOptions): TCoord2d {
 }
 
 export function Coord3d(options?: CoordSchemaOptions): TCoord3d {
-  const { Tx, Ty, Tz, schemaOptions } = _coordOptions(options);
-  return Type.Tuple([Tx, Ty, Tz], {
+  const { x, y, z, schemaOptions } = _coordOptions(options);
+  return Type.Tuple([x, y, z], {
     title: "coordinate 3d",
     description: "3d coordinate: [x, y, z]",
     ...schemaOptions,
