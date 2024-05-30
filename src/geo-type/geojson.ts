@@ -9,42 +9,25 @@ import type {
 } from "../typebox.js";
 import { Nullable, Type } from "../typebox.js";
 import type { IsDefined } from "../types.js";
-import { BBox } from "./bbox.js";
 import type { TBBoxSchema } from "./bbox.js";
+import { BBox } from "./bbox.js";
 import type { TCoord2d, TCoord3d, TCoordinateSchema } from "./coord.js";
-import { Coord, LatitudeWgs84, LongitudeWgs84 } from "./coord.js";
+import { Coord } from "./coord.js";
 import type { TCoordinateReferenceSystemSchemaOptional } from "./geojson-crs.js";
 import { CoordinateReferenceSystem } from "./geojson-crs.js";
-
-export const FeatureTypeLiteral = () => Type.Literal("Feature");
-
-export function FeatureCollectionTypeLiteral() {
-  return Type.Literal("FeatureCollection");
-}
-
-export function GeometryCollectionTypeLiteral() {
-  return Type.Literal("GeometryCollection");
-}
-
-export const PointTypeLiteral = () => Type.Literal("Point");
-export const MultiPointTypeLiteral = () => Type.Literal("MultiPoint");
-export const LineStringTypeLiteral = () => Type.Literal("LineString");
-export const MultiLineStringTypeLiteral = () => Type.Literal("MultiLineString");
-export const PolygonTypeLiteral = () => Type.Literal("Polygon");
-export const MultiPolygonTypeLiteral = () => Type.Literal("MultiPolygon");
 
 export function GeoJSONType() {
   return Type.Union(
     [
-      FeatureTypeLiteral(),
-      FeatureCollectionTypeLiteral(),
-      GeometryCollectionTypeLiteral(),
-      PointTypeLiteral(),
-      MultiPointTypeLiteral(),
-      LineStringTypeLiteral(),
-      MultiLineStringTypeLiteral(),
-      PolygonTypeLiteral(),
-      MultiPolygonTypeLiteral(),
+      Type.Literal("Feature"),
+      Type.Literal("FeatureCollection"),
+      Type.Literal("GeometryCollection"),
+      Type.Literal("Point"),
+      Type.Literal("LineString"),
+      Type.Literal("Polygon"),
+      Type.Literal("MultiPoint"),
+      Type.Literal("MultiLineString"),
+      Type.Literal("MultiPolygon"),
     ],
     {
       title: "GeoJSON type",
@@ -58,37 +41,6 @@ export function FeatureId() {
   return Type.Union([Type.String(), Type.Number(), Type.Null()], {
     title: "Feature id",
     description: "Feature id",
-  });
-}
-
-export function BBox2dWgs84(options?: SchemaOptions) {
-  return Type.Tuple(
-    [LongitudeWgs84(), LatitudeWgs84(), LongitudeWgs84(), LatitudeWgs84()],
-    {
-      title: "GeoJSON BBox 2d WGS84",
-      description: "bbox: [west, south, east, north]",
-      ...options,
-    },
-  );
-}
-
-export function BBox3dWgs84(options?: SchemaOptions) {
-  return Type.Tuple(
-    [...Type.Rest(BBox2dWgs84()), Type.Number(), Type.Number()],
-    {
-      title: "GeoJSON BBox 3d WGS84",
-      description: "bbox: [west, south, east, north, min-z, max-z]",
-      ...options,
-    },
-  );
-}
-
-export function BBoxWgs84(options?: SchemaOptions) {
-  return Type.Union([BBox2dWgs84(), BBox3dWgs84()], {
-    title: "GeoJSON BBox WGS84",
-    description:
-      "bbox: [west, south, east, north] or [west, south, east, north, min-z, max-z]",
-    ...options,
   });
 }
 
@@ -172,7 +124,6 @@ export function PointGeometry<
     {
       type: Type.Literal("Point"),
       coordinates: GeojsonCoordinate(schemas && schemas.coordinate),
-      // bbox: Type.Optional(GeojsonBoudingBox(schemas && schemas.bbox)),
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
     {
