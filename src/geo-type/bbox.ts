@@ -7,46 +7,93 @@ export type TBBox3d = TVec6;
 export type TBBox = TUnionVec4Vec6;
 export type TBBoxSchema = TBBox | TBBox2d | TBBox3d;
 
-export type BBoxSchemaOptions = {
-  Tx?: TNumber;
-  Ty?: TNumber;
-  Tz?: TNumber;
-} & SchemaOptions;
+/**
+ * Bounding Box Options for X
+ *
+ * Overly complicated version:
+ *
+ * ```
+ * export type BBoxOptionsX<T> =
+ *   | { x: T; xmin?: T; xmax?: never }
+ *   | { x: T; xmin?: never; xmax?: T }
+ *   | { x?: never; xmin: T; xmax: T }
+ *   | { x?: never; xmin?: T; xmax?: never }
+ *   | { x?: never; xmin?: never; xmax?: T };
+ * export type BBoxOptionsY<T> =
+ *   | { y: T; ymin?: T; ymax?: never }
+ *   | { y: T; ymin?: never; ymax?: T }
+ *   | { y?: never; ymin: T; ymax: T }
+ *   | { y?: never; ymin?: T; ymax?: never }
+ *   | { y?: never; ymin?: never; ymax?: T };
+ * export type BBoxOptionsZ<T> =
+ *   | { z: T; zmin?: T; zmax?: never }
+ *   | { z: T; zmin?: never; zmax?: T }
+ *   | { z?: never; zmin: T; zmax: T }
+ *   | { z?: never; zmin?: T; zmax?: never }
+ *   | { z?: never; zmin?: never; zmax?: T };
+ *
+ * export type BBoxSchemaOptions =
+ *   BBoxOptionsX<TNumber>
+ *   & BBoxOptionsY<TNumber>
+ *   & BBoxOptionsZ<TNumber>
+ *   & SchemaOptions;
+ * ```
+ */
+export type BBoxOptions<T> = {
+  x?: T;
+  xmin?: T;
+  xmax?: T;
+  y?: T;
+  ymin?: T;
+  ymax?: T;
+  z?: T;
+  zmin?: T;
+  zmax?: T;
+};
+export type BBoxSchemaOptions = BBoxOptions<TNumber> & SchemaOptions;
 
-function _bboxOptions(options?: BBoxSchemaOptions): {
-  Tx: TNumber;
-  Ty: TNumber;
-  Tz: TNumber;
-  schemaOptions: SchemaOptions;
-} {
-  const {
-    Tx = Type.Number(),
-    Ty = Type.Number(),
-    Tz = Type.Number(),
-    ...schemaOptions
-  } = options || {};
+/**
+ * Bounding Box Options for x, y, z
+ *
+ * for each x, y, z, there are min/max/both options (eg(x): x, xmin, xmax);
+ * you can specify any of the three, but no more than 2
+ * @param options
+ */
+export function bboxOptions(options?: BBoxSchemaOptions): {
+  xmin: TNumber;
+  xmax: TNumber;
+  ymin: TNumber;
+  ymax: TNumber;
+  zmin: TNumber;
+  zmax: TNumber;
+} & SchemaOptions {
   return {
-    Tx,
-    Ty,
-    Tz,
-    schemaOptions,
+    xmin: options?.xmin || options?.x || Type.Number(),
+    xmax: options?.xmax || options?.x || Type.Number(),
+    ymin: options?.ymin || options?.y || Type.Number(),
+    ymax: options?.ymax || options?.y || Type.Number(),
+    zmin: options?.zmin || options?.z || Type.Number(),
+    zmax: options?.zmax || options?.z || Type.Number(),
+    ...options,
   };
 }
 
 export function BBox2d(options?: BBoxSchemaOptions): TBBox2d {
-  const { Tx, Ty, schemaOptions } = _bboxOptions(options);
-  return Type.Tuple([Tx, Ty, Tx, Ty], {
+  const { xmin, xmax, ymin, ymax, ...schemaOptions } = bboxOptions(options);
+  return Type.Tuple([xmin, ymin, xmax, ymax], {
     title: "bbox-2d",
-    description: "Bounding Box: [minX, minY, maxX, maxY]",
+    description: "Bounding Box: [minx, miny, maxx, maxy]",
     ...schemaOptions,
   });
 }
 
 export function BBox3d(options?: SchemaOptions): TBBox3d {
-  const { Tx, Ty, Tz, schemaOptions } = _bboxOptions(options);
-  return Type.Tuple([Tx, Ty, Tz, Tx, Ty, Tz], {
+  const { xmin, xmax, ymin, ymax, zmin, zmax, ...schemaOptions } =
+    bboxOptions(options);
+
+  return Type.Tuple([xmin, ymin, zmin, xmax, ymax, zmax], {
     title: "bbox-3d",
-    description: "Bounding Box: [minX, minY, minZ, maxX, maxY, maxZ]",
+    description: "Bounding Box: [minx, miny, minz, maxx, maxy, maxz]",
     ...schemaOptions,
   });
 }
@@ -55,19 +102,19 @@ export function BBox(options?: SchemaOptions) {
   return Type.Union([BBox2d(options), BBox3d(options)], {
     title: "bbox",
     description:
-      "Bounding Box: [minX, minY, maxX, maxY] or [minX, minY, minZ, maxX, maxY, maxZ]",
+      "Bounding Box: [minx, miny, maxx, maxy] | [minx, miny, minz, maxx, maxy, maxz]",
     ...options,
   });
 }
 
 export function GeoBoundingBox(options?: BBoxSchemaOptions) {
-  const { Tx = Type.Number(), Ty = Type.Number(), ..._options } = options || {};
+  const { xmin, xmax, ymin, ymax, ..._options } = bboxOptions(options);
   return Type.Object(
     {
-      west: Tx,
-      north: Ty,
-      east: Tx,
-      south: Ty,
+      west: xmin,
+      north: ymax,
+      east: xmax,
+      south: ymin,
     },
     {
       title: "geo-bounding-box",
@@ -78,13 +125,14 @@ export function GeoBoundingBox(options?: BBoxSchemaOptions) {
 }
 
 export function NonGeoBoundingBox(options?: BBoxSchemaOptions) {
-  const { Tx = Type.Number(), Ty = Type.Number(), ..._options } = options || {};
+  const { xmin, xmax, ymin, ymax, ..._options } = bboxOptions(options);
+
   return Type.Object(
     {
-      left: Tx,
-      top: Ty,
-      right: Tx,
-      bottom: Ty,
+      left: xmin,
+      top: ymax,
+      right: xmax,
+      bottom: ymin,
     },
     {
       title: "non-geo-bounding-box",
