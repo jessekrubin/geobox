@@ -30,21 +30,6 @@ describe("fastify-geobox", () => {
       };
     },
   );
-  test("point-schema", async () => {
-    const r = await fastify.inject("/point");
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const data = JSON.parse(r.payload);
-    expect(data).toEqual({
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [0, 0],
-      },
-      properties: {
-        dingo: "bash",
-      },
-    });
-  });
 
   // from https://github.com/mapbox/tilejson-spec/blob/master/3.0.0/example/osm.json
   const tilejsonSchema = geobox.tilejson.TilejsonLike({
@@ -116,6 +101,68 @@ describe("fastify-geobox", () => {
     },
   );
 
+  const bboxQuerySchema = Type.Intersect([
+    Type.Union([
+      Type.Partial(
+        geobox.GeoBoundingBox({
+          xmin: geobox.LonWgs84({ default: -180 }),
+          ymin: geobox.LatWgs84({ default: -90 }),
+          xmax: geobox.LonWgs84({ default: 180 }),
+          ymax: geobox.LatWgs84({ default: 90 }),
+        }),
+      ),
+    ]),
+    Type.Object({
+      group: Type.Optional(Type.String()),
+    }),
+  ]);
+  console.log(JSON.stringify(bboxQuerySchema, undefined, 2));
+
+  fastify.get(
+    "/bbox",
+    {
+      schema: {
+        querystring: bboxQuerySchema,
+      },
+    },
+    (_req, _res) => {
+      const bbox = {
+        west: _req.query.west,
+        south: _req.query.south,
+        east: _req.query.east,
+        north: _req.query.north,
+      };
+      return bbox;
+    },
+  );
+
+  test("bbox-schema", async () => {
+    const r = await fastify.inject("/bbox");
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const data = JSON.parse(r.payload);
+    expect(data).toEqual({
+      west: -180,
+      south: -90,
+      east: 180,
+      north: 90,
+    });
+  });
+
+  test("point-schema", async () => {
+    const r = await fastify.inject("/point");
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const data = JSON.parse(r.payload);
+    expect(data).toEqual({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: [0, 0],
+      },
+      properties: {
+        dingo: "bash",
+      },
+    });
+  });
   test("tilejson-schema", async () => {
     const r = await fastify.inject("/tilejson300");
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
