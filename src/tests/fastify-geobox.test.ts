@@ -116,8 +116,6 @@ describe("fastify-geobox", () => {
       group: Type.Optional(Type.String()),
     }),
   ]);
-  console.log(JSON.stringify(bboxQuerySchema, undefined, 2));
-
   fastify.get(
     "/bbox",
     {

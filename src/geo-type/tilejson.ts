@@ -247,7 +247,7 @@ export function TilejsonLike(options?: SchemaOptions) {
     {
       // MUST
       name: Type.String(),
-      format: TilejsonFormat(),
+      format: Format(),
       tilejson: TilejsonVersion(),
       tiles: Type.Array(Type.String(), {
         default: [],
