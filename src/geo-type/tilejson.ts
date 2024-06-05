@@ -59,12 +59,15 @@ export function FormatJpg(options?: SchemaOptions) {
 export function FormatPng(options?: SchemaOptions) {
   return Type.Literal("png", options);
 }
+export function FormatWebp(options?: SchemaOptions) {
+  return Type.Literal("webp", options);
+}
+export function FormatRaster(options?: SchemaOptions) {
+  return Type.Union([FormatJpg(), FormatPng(), FormatWebp()], options);
+}
 // vector tiles
 export function FormatPbf(options?: SchemaOptions) {
   return Type.Literal("pbf", options);
-}
-export function TilejsonFormat(options?: SchemaOptions) {
-  return Type.Union([FormatJpg(), FormatPng(), FormatPbf()], options);
 }
 
 // scheme
@@ -81,10 +84,12 @@ export function Scheme(options?: SchemaOptions) {
   });
 }
 
-export function Format() {
-  return Type.Union([FormatJpg(), FormatPng(), FormatPbf()]);
+export function Format(options?: SchemaOptions) {
+  return Type.Union(
+    [FormatJpg(), FormatPng(), FormatWebp(), FormatPbf()],
+    options,
+  );
 }
-
 export function Bounds(options?: SchemaOptions) {
   return Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
     default: [-180, -85.051_128_779_806_59, 180, 85.051_128_779_806_6],
@@ -159,7 +164,7 @@ export function Tilejson300Raster(options?: SchemaOptions) {
     {
       // MUST
       name: Type.String(),
-      format: Type.Union([Type.Literal("png"), Type.Literal("jpg")]),
+      format: FormatRaster(),
       tilejson: Tilejson300Version(),
       tiles: Type.Array(Type.String(), {
         default: [],
