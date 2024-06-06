@@ -1,6 +1,7 @@
 import type { SchemaOptions } from "../typebox.js";
 import { Type } from "../typebox.js";
 import { Latitude, Longitude } from "./lnglat.js";
+import { UInt32 } from "./int.js";
 
 export function Semver() {
   return Type.String({
@@ -279,25 +280,153 @@ export function TilejsonLike(options?: SchemaOptions) {
 }
 
 /**
- * Experimental
+ * UTileJson - More sane and strict `TileJson`
  */
-// export const Tilejson300Raster = () =>
-//   Type.Composite([
-//     Type.Object({
-//       // MUST
-//       format: Type.Union([Type.Literal("png"), Type.Literal("jpg")]),
-//     }),
-//     Tilejson300Base(),
-//   ]);
-// export const Tilejson300Vector = () =>
-//   Type.Composite([
-//     Type.Object({
-//       format: Type.Literal("pbf"),
-//       vector_layers: VectorLayers(),
-//     }),
-//     Tilejson300Base(),
-//   ]);
-// export const Tilejson300 = (options?: SchemaOptions) => Type.Union([Tilejson300Raster(), Tilejson300Vector()],
-//   {
-//     ...options,
-//   });
+
+export function ZoomSet(options?: SchemaOptions) {
+  return UInt32({
+    description:
+      "Zooms represented as an unsigned 32 bit int; 0-30 inclusive. 0b0000_0000_0000_0000_0000_0000_0000_0111 -> [0, 1, 2]",
+    ...options,
+  });
+}
+export function Zooms(options?: SchemaOptions) {
+  return Type.Union([
+    Type.Array(
+      Type.Integer({
+        minimum: 0,
+        maximum: 30,
+      }),
+      {
+        uniqueItems: true,
+        ...options,
+      },
+    ),
+    ZoomSet(options),
+  ]);
+}
+
+export function RasterTileSize(options?: SchemaOptions) {
+  return Type.Integer({
+    minimum: 256,
+    maximum: 4096,
+    multipleOf: 2,
+    default: 256,
+    description: "Tile size in pixels",
+    ...options,
+  });
+}
+
+function _UTilejsonCommonProps() {
+  return {
+    // MUST
+    name: Type.String(),
+    tilejson: TilejsonVersion(),
+    tiles: Type.Array(Type.String(), {
+      default: [],
+    }),
+    maxzoom: TilejsonZoom(),
+    minzoom: TilejsonZoom(),
+    bounds: Bounds(),
+    zooms: Type.Optional(Zooms()),
+
+    // OPTIONAL
+    center: Type.Optional(Type.Union([Center(), Type.Null()])),
+    attribution: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+    data: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
+    description: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+    fillzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
+    grids: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
+    legend: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+    scheme: Type.Optional(Type.Union([Scheme(), Type.Null()])),
+    template: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+    version: Type.Optional(Type.Union([Type.String(), Type.Null()])),
+  };
+}
+export function UTilejsonCommon(options?: SchemaOptions) {
+  return Type.Object(
+    {
+      ..._UTilejsonCommonProps(),
+    },
+    {
+      additionalProperties: true,
+      ...options,
+    },
+  );
+}
+
+export function UTilejsonRaster(options?: SchemaOptions) {
+  return Type.Object(
+    {
+      format: FormatRaster(),
+      tilesize: Type.Optional(RasterTileSize()),
+      ..._UTilejsonCommonProps(),
+    },
+    {
+      additionalProperties: true,
+      ...options,
+    },
+  );
+}
+
+export function UTilejsonVector(options?: SchemaOptions) {
+  return Type.Object(
+    {
+      format: FormatPbf(),
+      vector_layers: VectorLayers(),
+      ..._UTilejsonCommonProps(),
+    },
+    {
+      additionalProperties: true,
+      ...options,
+    },
+  );
+}
+
+/**
+ * Stricter `TileJson` schema with `raster` and `vector` types
+ * The spreading of the `UTilejsonCommon` properties is less fancy but results in more
+ * readable types... :/
+ */
+export function UTilejson(options?: SchemaOptions) {
+  return Type.Union([UTilejsonRaster(options), UTilejsonVector(options)]);
+}
+
+/**
+ * ```ts
+ * export function UTilejsonRaster(options?: SchemaOptions) {
+ *   return Type.Intersect(
+ *     [
+ *       Type.Object({
+ *         format: FormatRaster(),
+ *         tilesize: Type.Optional(
+ *           RasterTileSize(
+ *           ),
+ *         ),
+ *       }),
+ *       UTilejsonCommon(),
+ *     ],
+ *     {
+ *       additionalProperties: true,
+ *       ...options,
+ *     },
+ *   );
+ * }
+ *
+ * export function UTilejsonVector(options?: SchemaOptions) {
+ *   return Type.Intersect(
+ *     [
+ *       Type.Object({
+ *         format: FormatPbf(),
+ *         vector_layers: VectorLayers(),
+ *       }),
+ *       UTilejsonCommon(),
+ *     ],
+ *     {
+ *       additionalProperties: true,
+ *       ...options,
+ *     },
+ *   );
+ * }
+ * ```
+ */
