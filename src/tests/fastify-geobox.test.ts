@@ -101,6 +101,24 @@ describe("fastify-geobox", () => {
     },
   );
 
+  const utilejsonSchema = geobox.tilejson.UTilejson();
+  fastify.get(
+    "/utile.json",
+    {
+      schema: {
+        response: {
+          200: geobox.tilejson.UTilejson(),
+        },
+      },
+    },
+    (_req, _res) => {
+      if (!Value.Check(utilejsonSchema, exampleTilejson300)) {
+        throw new Error("bad tilejson");
+      }
+      return exampleTilejson300;
+    },
+  );
+
   const bboxQuerySchema = Type.Intersect([
     Type.Union([
       Type.Partial(
@@ -163,6 +181,13 @@ describe("fastify-geobox", () => {
   });
   test("tilejson-schema", async () => {
     const r = await fastify.inject("/tilejson300");
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const data = JSON.parse(r.payload);
+    expect(data).toEqual(exampleTilejson300);
+  });
+
+  test("utilejson-schema", async () => {
+    const r = await fastify.inject("/utile.json");
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = JSON.parse(r.payload);
     expect(data).toEqual(exampleTilejson300);
