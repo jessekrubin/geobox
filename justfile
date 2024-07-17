@@ -37,3 +37,6 @@ ruffmt:
 fmt:
     pnpm fmt
     just --fmt --unstable
+
+change *ARGS:
+    pnpm run change {{ARGS}}

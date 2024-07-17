@@ -38,6 +38,7 @@ export {
   type TCoordinateSchema,
 } from "./geo-type/coord.js";
 export * from "./geo-type/geojson.js";
+export { UTilejson, TilejsonLike, Tilejson } from "./geo-type/tilejson.js";
 export * as geostats from "./geo-type/geostats.js";
 export * as simplestyle from "./geo-type/simplestyle.js";
 export * as tilejson from "./geo-type/tilejson.js";

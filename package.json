@@ -27,26 +27,30 @@
     "dist"
   ],
   "scripts": {
-    "prepublish": "pnpm run build",
-    "build-fast": "tsup src/index.ts --format cjs,esm",
     "build": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
-    "build:tsup": "tsup src/index.ts --format cjs,esm",
-    "build:tsc": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:dts",
-    "build:dts": "tsc --emitDeclarationOnly -p tsconfig.dts.json",
+    "build:fast": "tsup src/index.ts --format cjs,esm",
     "build:cjs": "tsc -p tsconfig.cjs.json --outDir dist/lib/cjs --module commonjs",
+    "build:dts": "tsc --emitDeclarationOnly -p tsconfig.dts.json",
     "build:esm": "tsc -p tsconfig.json --outDir dist/lib/esm --module nodenext",
-    "test": "vitest run",
+    "build:tsc": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:dts",
+    "build:tsup": "tsup src/index.ts --format cjs,esm",
+    "ci:publish": "pnpm publish",
+    "ci:version": "changeset version && pnpm install --no-frozen-lockfile && pnpm fmt",
+    "change": "changeset",
     "cov": "vitest --coverage",
     "dev": "vitest watch --coverage",
-    "lint": "eslint .",
     "fmt": "prettier --write .",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm run build"
+    "lint": "eslint .",
+    "prepublish": "pnpm run build",
+    "prepublishOnly": "pnpm run build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "@sinclair/typebox": "^0.32.20"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.7",
     "@fastify/type-provider-typebox": "^4.0.0",
     "@jsse/eslint-config": "^0.1.19",
     "@sinclair/typebox": "^0.32.34",
