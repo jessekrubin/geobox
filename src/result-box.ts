@@ -117,6 +117,23 @@ export class JsonSchema<T extends TSchema> {
   // public is(value: unknown): value is Static<T> {
   // return this.typeguard.Check(value);
   // }
+  /**
+   * Asserts that the value is of this schema; throws an error if not
+   */
+  public check = (
+    value: unknown,
+    options?: {
+      limit?: number;
+    },
+  ): asserts value is Static<T> => {
+    if (!this.is(value)) {
+      const earr = this.errorsArr(value, options);
+      throw new GeoboxValueError(
+        `geobox-assert: ${JSON.stringify(value)}`,
+        earr,
+      );
+    }
+  };
 
   /**
    * Asserts that the value is of this schema; throws an error if not

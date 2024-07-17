@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { describe, expect, test } from "vitest";
 import Fastify from "fastify";
 import { Type } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import * as geobox from "../index.js";
+import { geoboxSchemaFns } from "./_utils.js";
 
 describe("fastify-geobox", () => {
   const fastify = Fastify().withTypeProvider<TypeBoxTypeProvider>();
@@ -154,7 +156,7 @@ describe("fastify-geobox", () => {
 
   test("bbox-schema", async () => {
     const r = await fastify.inject("/bbox");
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const data = JSON.parse(r.payload);
     expect(data).toEqual({
       west: -180,
@@ -166,7 +168,7 @@ describe("fastify-geobox", () => {
 
   test("point-schema", async () => {
     const r = await fastify.inject("/point");
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const data = JSON.parse(r.payload);
     expect(data).toEqual({
       type: "Feature",
@@ -181,15 +183,76 @@ describe("fastify-geobox", () => {
   });
   test("tilejson-schema", async () => {
     const r = await fastify.inject("/tilejson300");
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const data = JSON.parse(r.payload);
     expect(data).toEqual(exampleTilejson300);
   });
 
   test("utilejson-schema", async () => {
     const r = await fastify.inject("/utile.json");
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const data = JSON.parse(r.payload);
     expect(data).toEqual(exampleTilejson300);
+  });
+
+  // all schemas
+  const geoboxFunctions = geoboxSchemaFns().sort((a, b) => {
+    return a.key.localeCompare(b.key);
+  });
+  type UrlAndSchema = {
+    url: string;
+    schema: geobox.TSchema;
+  };
+  const urls2query: UrlAndSchema[] = [];
+  for (const { key, fn } of geoboxFunctions) {
+    if (["GeoJSON", "Geometry", "GeoJSON2d"].includes(key)) {
+      continue;
+    }
+    const gbSchema = fn();
+    const url = `/schema/${key}`;
+    fastify.get(
+      url,
+      {
+        schema: {
+          response: {
+            200: Type.Object({
+              data: gbSchema,
+            }),
+          },
+        },
+      },
+      (_req, _res) => {
+        if (key === "GeoJSON") {
+          return {
+            data: {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [0, 0],
+              },
+              properties: {},
+            },
+          };
+        }
+        const data = Value.Create(gbSchema);
+        return { data };
+      },
+    );
+    urls2query.push({ url, schema: gbSchema });
+  }
+
+  test("all-schema", async () => {
+    for (const { url, schema } of urls2query) {
+      const r = await fastify.inject(url);
+      try {
+        const { data } = JSON.parse(r.payload);
+        const validator = new geobox.JsonSchema(schema);
+        validator.parse(data);
+      } catch (e) {
+        console.error(e);
+        console.error(r.payload);
+        console.error(url);
+      }
+    }
   });
 });
