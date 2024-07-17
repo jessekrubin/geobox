@@ -60,7 +60,7 @@
     "eslint-plugin-antfu": "^2.3.4",
     "fastify": "^4.28.1",
     "prettier": "3.3.3",
-    "tsup": "8.1.0",
+    "tsup": "8.1.1",
     "tsx": "^4.16.2",
     "typescript": "~5.5.2",
     "vitest": "2.0.3"
