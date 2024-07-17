@@ -36,6 +36,7 @@
     "build:tsup": "tsup src/index.ts --format cjs,esm",
     "ci:publish": "pnpm publish",
     "ci:version": "changeset version && pnpm install --no-frozen-lockfile && pnpm fmt",
+    "change": "changeset",
     "cov": "vitest --coverage",
     "dev": "vitest watch --coverage",
     "fmt": "prettier --write .",
