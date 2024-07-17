@@ -66,9 +66,7 @@ export function GeojsonCoordinate<
 export const BBoxDefault = () => Type.Optional(BBox());
 /** */
 export type TGeojsonBoundingBox<T extends TBBoxSchema | undefined> =
-  IsDefined<T> extends true
-    ? AssertType<T>
-    : TOptional<ReturnType<typeof BBox>>;
+  IsDefined<T> extends true ? AssertType<T> : TOptional<TBBoxSchema>;
 
 export function GeojsonBoudingBox<
   T extends TBBoxSchema | undefined = undefined,

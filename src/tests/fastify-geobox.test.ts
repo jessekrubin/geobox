@@ -156,7 +156,7 @@ describe("fastify-geobox", () => {
 
   test("bbox-schema", async () => {
     const r = await fastify.inject("/bbox");
-     
+
     const data = JSON.parse(r.payload);
     expect(data).toEqual({
       west: -180,
@@ -168,7 +168,7 @@ describe("fastify-geobox", () => {
 
   test("point-schema", async () => {
     const r = await fastify.inject("/point");
-     
+
     const data = JSON.parse(r.payload);
     expect(data).toEqual({
       type: "Feature",
@@ -183,14 +183,14 @@ describe("fastify-geobox", () => {
   });
   test("tilejson-schema", async () => {
     const r = await fastify.inject("/tilejson300");
-     
+
     const data = JSON.parse(r.payload);
     expect(data).toEqual(exampleTilejson300);
   });
 
   test("utilejson-schema", async () => {
     const r = await fastify.inject("/utile.json");
-     
+
     const data = JSON.parse(r.payload);
     expect(data).toEqual(exampleTilejson300);
   });
