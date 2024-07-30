@@ -52,21 +52,21 @@
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
     "@fastify/type-provider-typebox": "^4.0.0",
-    "@jsse/eslint-config": "^0.1.19",
-    "@sinclair/typebox": "^0.32.34",
+    "@jsse/eslint-config": "^0.1.21",
+    "@sinclair/typebox": "^0.32.35",
     "@turf/helpers": "^7.0.0",
     "@turf/turf": "^7.0.0",
     "@types/geojson": "^7946.0.14",
-    "@typescript-eslint/eslint-plugin": "^7.16.1",
-    "@typescript-eslint/parser": "^7.16.1",
-    "@vitest/coverage-v8": "^2.0.2",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitest/coverage-v8": "^2.0.4",
     "eslint": "^8.57.0",
     "eslint-plugin-antfu": "^2.3.4",
     "fastify": "^4.28.1",
     "prettier": "3.3.3",
-    "tsup": "8.1.0",
+    "tsup": "8.2.3",
     "tsx": "^4.16.2",
-    "typescript": "~5.5.2",
-    "vitest": "2.0.3"
+    "typescript": "~5.5.4",
+    "vitest": "2.0.4"
   }
 }
