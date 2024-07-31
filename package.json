@@ -1,7 +1,7 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "geo + typebox => geo-schemas",
   "publishConfig": {
     "access": "public"
@@ -15,7 +15,7 @@
     },
     "./package.json": "./package.json",
     "./lib/*": {
-      "types": "./dist/lib/esm/*",
+      "types": "./dist/lib/cjs/*",
       "import": "./dist/lib/esm/*",
       "require": "./dist/lib/cjs/*"
     }
@@ -30,7 +30,7 @@
     "build": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
     "build:fast": "tsup src/index.ts --format cjs,esm",
     "build:cjs": "tsc -p tsconfig.cjs.json --outDir dist/lib/cjs --module commonjs",
-    "build:dts": "tsc --emitDeclarationOnly -p tsconfig.dts.json",
+    "build:dts": "tsc --emitDeclarationOnly -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.json --outDir dist/lib/esm --module nodenext",
     "build:tsc": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:dts",
     "build:tsup": "tsup src/index.ts --format cjs,esm",

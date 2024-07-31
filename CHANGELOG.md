@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.2.12
+
+### Patch Changes
+
+- Fix types resolution
+
 ## 0.2.11
 
 ### Patch Changes
