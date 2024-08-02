@@ -1,4 +1,4 @@
-import type { TNumber, TTuple, TUnion } from "./typebox.js";
+import type { TNumber, TTuple, TUnion } from "@sinclair/typebox";
 
 export type IsDefined<T> = Extract<T, undefined> extends never ? true : false;
 

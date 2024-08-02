@@ -1,8 +1,8 @@
 /**
  * Turfbox = turf/geojson + typebox
  */
-import type { SchemaOptions, TNumber } from "../typebox.js";
-import { Type } from "../typebox.js";
+import { Type } from "@sinclair/typebox";
+import type { SchemaOptions, TNumber } from "@sinclair/typebox";
 import type { TUnionVec2Vec3, TVec2, TVec3 } from "../types.js";
 import { LatitudeWgs84, LongitudeWgs84 } from "./lnglat.js";
 

@@ -1,7 +1,7 @@
 import type { TypeCheck, ValueError } from "@sinclair/typebox/compiler";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
-import type { Static, TSchema } from "./typebox.js";
-import { Type } from "./typebox.js";
+import type { Static, TSchema } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 import { GeoboxValueError } from "./errors.js";
 
 export type ResultOk<T> = {
@@ -184,7 +184,9 @@ export class JsonSchema<T extends TSchema> {
         }
       };
     }
-    return it;
+    return function* () {
+      yield* it;
+    };
   };
 
   /**

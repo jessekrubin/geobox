@@ -2,8 +2,8 @@
  * maplibre/martin server schemas
  */
 
-import type { SchemaOptions } from "../typebox.js";
-import { Type } from "../typebox.js";
+import type { SchemaOptions } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 
 /**
  * Returns a schema for martin tile catalog entry

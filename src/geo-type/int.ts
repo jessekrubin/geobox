@@ -1,8 +1,8 @@
 /**
  * Integer types
  */
-import type { IntegerOptions, TInteger } from "../typebox.js";
-import { Type } from "../typebox.js";
+import type { IntegerOptions, TInteger } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 
 export function UInt32(options?: IntegerOptions): TInteger {
   return Type.Integer({ minimum: 0, maximum: 4_294_967_295, ...options });

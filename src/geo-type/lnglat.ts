@@ -1,8 +1,8 @@
 /**
  * lng-lat schema builders
  */
-import type { SchemaOptions } from "../typebox.js";
-import { Type } from "../typebox.js";
+import type { SchemaOptions } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 
 /**
  * GeoJSON Latitude json-schema

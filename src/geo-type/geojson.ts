@@ -6,9 +6,10 @@ import type {
   SchemaOptions,
   TOptional,
   TSchema,
-} from "../typebox.js";
-import { Nullable, Type } from "../typebox.js";
+} from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 import type { IsDefined } from "../types.js";
+import { Nullable } from "../tb.js";
 import type { TBBoxSchema } from "./bbox.js";
 import { BBox } from "./bbox.js";
 import type { TCoord2d, TCoord3d, TCoordinateSchema } from "./coord.js";

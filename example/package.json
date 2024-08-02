@@ -1,0 +1,18 @@
+{
+  "name": "geobox-example",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@jsse/geobox": "file://..",
+    "@sinclair/typebox": "^0.32.35"
+  }
+}

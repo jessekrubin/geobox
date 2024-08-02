@@ -1,6 +1,6 @@
 // REF: https://github.com/mapbox/mapbox-geostats
-import type { SchemaOptions } from "../typebox.js";
-import { Type } from "../typebox.js";
+import type { SchemaOptions } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 
 export function GeostatsAttribute(options?: SchemaOptions) {
   return Type.Object(

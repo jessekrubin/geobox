@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { Value } from "@sinclair/typebox/value";
-import type { Static } from "../typebox.js";
+import type { Static } from "@sinclair/typebox";
 import * as geobox from "../index.js";
 
 test("bbox-options", () => {
