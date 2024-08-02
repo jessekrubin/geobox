@@ -7,6 +7,7 @@ export default jsse(
     typescript: {
       tsconfig: ["./tsconfig.eslint.json", "./tsconfig.json"],
     },
+    ignores: ["example/**/*"],
     // TODO lint markdown files
     markdown: false,
   },
