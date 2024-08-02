@@ -1,4 +1,4 @@
-import { type SchemaOptions, Type } from "../typebox.js";
+import { type SchemaOptions, Type } from "@sinclair/typebox";
 
 function SpriteDescriptionStretch() {
   return Type.Array(Type.Tuple([Type.Integer(), Type.Integer()]), {

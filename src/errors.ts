@@ -1,15 +1,13 @@
-import type { ValueError } from "./typebox.js";
-
-export type ValueErrors = ValueError[];
+import type { ValueError } from "@sinclair/typebox/value";
 
 /**
  * GeoboxValueError custom error class that contains
  *   a list of ValueError objects.
  */
 export class GeoboxValueError extends Error {
-  public errors: ValueErrors;
+  public errors: ValueError[];
 
-  public constructor(message: string, errors: ValueErrors) {
+  public constructor(message: string, errors: ValueError[]) {
     super(message);
     this.name = "GeoboxValueError";
     this.errors = errors;

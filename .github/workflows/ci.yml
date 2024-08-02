@@ -24,33 +24,29 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: install-pnpm
+        id: install-pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+      - name: pnpm-store-dir
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
       - name: Cache ~/.pnpm-store
         uses: actions/cache@v4
         env:
           cache-name: cache-pnpm-store
         with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ matrix.node-version }}-test-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.node-version }}-test-${{ env.cache-name }}-
-            ${{ runner.os }}-${{ matrix.node-version }}-test-
-            ${{ runner.os }}-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 8
+          path: ${{ env.STORE_PATH }}
+          key: pnpm-store-${{ runner.os }}-${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Install deps
         run: pnpm i
 
-      # Runs a set of commands using the runners shell
-      - name: test
-        run: pnpm test
-
-      - name: build
-        run: pnpm build
-
-      - name: lint
-        run: pnpm lint
+      - name: build-test-lint
+        run: pnpm run ci
 
   # release:
   #   runs-on: ubuntu-latest

@@ -4,8 +4,8 @@ import type {
   TObject,
   TString,
   TUnion,
-} from "../typebox.js";
-import { Type } from "../typebox.js";
+} from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 
 export type TNamedCoordinateReferenceSystem = TObject<{
   type: TLiteral<"name">;

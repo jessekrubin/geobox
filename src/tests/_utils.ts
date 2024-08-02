@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import * as tb from "@sinclair/typebox";
 import * as geobox from "../index.js";
-import * as tb from "../typebox.js";
 import * as GeoType from "../geo-type.js";
 
 export function geoboxSchemaFunctionNames(): string[] {

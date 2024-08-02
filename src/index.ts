@@ -1,4 +1,4 @@
-export * from "./typebox.js";
+export * from "./tb.js";
 export * from "./geo-type.js";
 export {
   JsonSchema,

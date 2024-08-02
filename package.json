@@ -2,6 +2,7 @@
   "name": "@jsse/geobox",
   "type": "module",
   "version": "0.2.12",
+  "packageManager": "pnpm@9.6.0+sha256.dae0f7e822c56b20979bb5965e3b73b8bdabb6b8b8ef121da6d857508599ca35",
   "description": "geo + typebox => geo-schemas",
   "publishConfig": {
     "access": "public"
@@ -9,34 +10,45 @@
   "license": "MIT",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/lib/cjs/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/lib/esm/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
     },
-    "./package.json": "./package.json",
-    "./lib/*": {
-      "types": "./dist/lib/cjs/*",
-      "import": "./dist/lib/esm/*",
-      "require": "./dist/lib/cjs/*"
-    }
+    "./lib/*.js": {
+      "import": {
+        "types": "./dist/lib/esm/*.d.ts",
+        "default": "./dist/lib/esm/*"
+      },
+      "require": {
+        "types": "./dist/lib/cjs/*",
+        "default": "./dist/lib/cjs/*"
+      }
+    },
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/lib/cjs/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
-    "build:fast": "tsup src/index.ts --format cjs,esm",
     "build:cjs": "tsc -p tsconfig.cjs.json --outDir dist/lib/cjs --module commonjs",
     "build:dts": "tsc --emitDeclarationOnly -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.json --outDir dist/lib/esm --module nodenext",
-    "build:tsc": "pnpm run build:cjs && pnpm run build:esm && pnpm run build:dts",
+    "build:esm": "tsc -p tsconfig.json --outDir dist/lib/esm --module nodenext --moduleResolution nodenext --declaration",
+    "build:fast": "tsup src/index.ts --format cjs,esm",
+    "build:tsc": "pnpm run build:cjs && pnpm run build:esm",
     "build:tsup": "tsup src/index.ts --format cjs,esm",
+    "change": "changeset",
+    "ci": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
     "ci:publish": "pnpm publish",
     "ci:version": "changeset version && pnpm install --no-frozen-lockfile && pnpm fmt",
-    "change": "changeset",
     "cov": "vitest --coverage",
     "dev": "vitest watch --coverage",
     "fmt": "prettier --write .",
@@ -47,26 +59,26 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "@sinclair/typebox": "^0.32.20"
+    "@sinclair/typebox": "^0.32.30"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
     "@fastify/type-provider-typebox": "^4.0.0",
-    "@jsse/eslint-config": "^0.1.21",
+    "@jsse/eslint-config": "^0.1.22",
     "@sinclair/typebox": "^0.32.35",
     "@turf/helpers": "^7.0.0",
     "@turf/turf": "^7.0.0",
     "@types/geojson": "^7946.0.14",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
-    "@vitest/coverage-v8": "^2.0.4",
+    "@vitest/coverage-v8": "^2.0.5",
     "eslint": "^8.57.0",
     "eslint-plugin-antfu": "^2.3.4",
     "fastify": "^4.28.1",
     "prettier": "3.3.3",
     "tsup": "8.2.3",
-    "tsx": "^4.16.2",
+    "tsx": "^4.16.5",
     "typescript": "~5.5.4",
-    "vitest": "2.0.4"
+    "vitest": "2.0.5"
   }
 }

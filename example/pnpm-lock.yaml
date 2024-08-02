@@ -1,0 +1,34 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@jsse/geobox':
+        specifier: file://..
+        version: file:..(@sinclair/typebox@0.32.35)
+      '@sinclair/typebox':
+        specifier: ^0.32.35
+        version: 0.32.35
+
+packages:
+
+  '@jsse/geobox@file:..':
+    resolution: {directory: .., type: directory}
+    peerDependencies:
+      '@sinclair/typebox': ^0.32.35
+
+  '@sinclair/typebox@0.32.35':
+    resolution: {integrity: sha512-Ul3YyOTU++to8cgNkttakC0dWvpERr6RYoHO2W47DLbFvrwBDJUY31B1sImH6JZSYc4Kt4PyHtoPNu+vL2r2dA==}
+
+snapshots:
+
+  '@jsse/geobox@file:..(@sinclair/typebox@0.32.35)':
+    dependencies:
+      '@sinclair/typebox': 0.32.35
+
+  '@sinclair/typebox@0.32.35': {}

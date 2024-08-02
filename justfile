@@ -39,4 +39,4 @@ fmt:
     just --fmt --unstable
 
 change *ARGS:
-    pnpm run change {{ARGS}}
+    pnpm run change {{ ARGS }}

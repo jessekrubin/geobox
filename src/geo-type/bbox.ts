@@ -1,5 +1,5 @@
-import type { SchemaOptions, TNumber } from "../typebox.js";
-import { Type } from "../typebox.js";
+import type { SchemaOptions, TNumber } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 import type { TUnionVec4Vec6, TVec4, TVec6 } from "../types.js";
 
 export type TBBox2d = TVec4;
@@ -39,7 +39,7 @@ export type TBBoxSchema = TBBox | TBBox2d | TBBox3d;
  *   & SchemaOptions;
  * ```
  */
-export type BBoxOptions<T> = {
+type BBoxOptions<T> = {
   x?: T;
   xmin?: T;
   xmax?: T;
