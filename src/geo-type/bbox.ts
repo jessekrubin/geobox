@@ -39,7 +39,7 @@ export type TBBoxSchema = TBBox | TBBox2d | TBBox3d;
  *   & SchemaOptions;
  * ```
  */
-export type BBoxOptions<T> = {
+type BBoxOptions<T> = {
   x?: T;
   xmin?: T;
   xmax?: T;
