@@ -2,6 +2,7 @@
   "name": "@jsse/geobox",
   "type": "module",
   "version": "0.2.12",
+  "packageManager": "pnpm@9.6.0+sha256.dae0f7e822c56b20979bb5965e3b73b8bdabb6b8b8ef121da6d857508599ca35",
   "description": "geo + typebox => geo-schemas",
   "publishConfig": {
     "access": "public"
@@ -79,6 +80,5 @@
     "tsx": "^4.16.5",
     "typescript": "~5.5.4",
     "vitest": "2.0.5"
-  },
-  "packageManager": "pnpm@9.6.0+sha256.dae0f7e822c56b20979bb5965e3b73b8bdabb6b8b8ef121da6d857508599ca35"
+  }
 }
