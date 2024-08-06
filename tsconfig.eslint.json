@@ -6,5 +6,11 @@
     "declaration": false,
     "noEmit": true
   },
-  "include": ["eslint.config.js", "./*.config.ts", "./*.mjs", "**/*.ts"]
+  "include": [
+    "eslint.config.js",
+    "./*.config.ts",
+    "./*.mjs",
+    "**/*.ts",
+    "*.mjs"
+  ]
 }
