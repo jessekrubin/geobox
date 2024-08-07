@@ -16,7 +16,7 @@ importers:
         version: 4.0.0(@sinclair/typebox@0.32.35)
       '@jsse/eslint-config':
         specifier: ^0.2.0
-        version: 0.2.0(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5)
+        version: 0.2.1(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5)
       '@sinclair/typebox':
         specifier: ^0.32.35
         version: 0.32.35
@@ -526,8 +526,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
-  '@jsse/eslint-config@0.2.0':
-    resolution: {integrity: sha512-CGdL+/FBW+j4bgadZ3stYZlaSTgZbBG5kS7KNr5+a0V3ftQ8dOzawYy3J/mp5pUDHBPjVvzmTxYXJCo0f3dUTQ==}
+  '@jsse/eslint-config@0.2.1':
+    resolution: {integrity: sha512-//jIpYFDGKjC3PVDAFzawIcsiykufEnKdZaASLloM2qL/0CB2EAtrkDAni2qc21LShi/JrUfBTf7f913vttfQg==}
     hasBin: true
     peerDependencies:
       eslint: '>=8.40.0'
@@ -1584,8 +1584,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  electron-to-chromium@1.5.4:
-    resolution: {integrity: sha512-orzA81VqLyIGUEA77YkVA1D+N+nNfl2isJVjjmOyrlxuooZ19ynb+dOlaDTqd/idKRS9lDCSBmtzM+kyCsMnkA==}
+  electron-to-chromium@1.5.5:
+    resolution: {integrity: sha512-QR7/A7ZkMS8tZuoftC/jfqNkZLQO779SSW3YuZHP4eXpj3EffGLFcB/Xu9AAZQzLccTiCV+EmUo3ha4mQ9wnlA==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -2386,10 +2386,6 @@ packages:
 
   micromark@2.11.4:
     resolution: {integrity: sha512-+WoovN/ppKolQOFIAajxi7Lu9kInbPxFuTBVEavFcL8eAfVstoc5MocPmqBeAdBOJV00uaVjegzH4+MA0DN/uA==}
-
-  micromatch@4.0.5:
-    resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
-    engines: {node: '>=8.6'}
 
   micromatch@4.0.7:
     resolution: {integrity: sha512-LPP/3KorzCwBxfeUuZmaR6bG2kdeHSbe0P2tY3FLRU4vYrjYz5hI4QZwV0njUx3jeuKe67YukQ1LSPZBKDqO/Q==}
@@ -3776,7 +3772,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@jsse/eslint-config@0.2.0(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5)':
+  '@jsse/eslint-config@0.2.1(eslint@9.8.0)(typescript@5.5.4)(vitest@2.0.5)':
     dependencies:
       '@eslint/js': 9.8.0
       '@stylistic/eslint-plugin': 2.6.1(eslint@9.8.0)(typescript@5.5.4)
@@ -5295,7 +5291,7 @@ snapshots:
   browserslist@4.23.3:
     dependencies:
       caniuse-lite: 1.0.30001649
-      electron-to-chromium: 1.5.4
+      electron-to-chromium: 1.5.5
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.3)
 
@@ -5500,7 +5496,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.5.4: {}
+  electron-to-chromium@1.5.5: {}
 
   emoji-regex@8.0.0: {}
 
@@ -5913,7 +5909,7 @@ snapshots:
       '@nodelib/fs.walk': 1.2.8
       glob-parent: 5.1.2
       merge2: 1.4.1
-      micromatch: 4.0.5
+      micromatch: 4.0.7
 
   fast-json-stable-stringify@2.1.0: {}
 
@@ -6429,11 +6425,6 @@ snapshots:
       parse-entities: 2.0.0
     transitivePeerDependencies:
       - supports-color
-
-  micromatch@4.0.5:
-    dependencies:
-      braces: 3.0.3
-      picomatch: 2.3.1
 
   micromatch@4.0.7:
     dependencies:
