@@ -5,7 +5,7 @@ import pluginAntfu from "eslint-plugin-antfu";
 export default jsse(
   {
     typescript: {
-      tsconfig: "tsconfig.eslint.json",
+      tsconfig: "tsconfig.json",
     },
     ignores: ["example/**/*"],
     // TODO lint markdown files
