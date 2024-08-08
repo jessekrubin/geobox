@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { describe, expect, test } from "vitest";
 import Fastify from "fastify";
 import { Type } from "@sinclair/typebox";

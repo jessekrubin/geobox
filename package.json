@@ -2,7 +2,7 @@
   "name": "@jsse/geobox",
   "type": "module",
   "version": "0.2.13",
-  "packageManager": "pnpm@9.6.0+sha256.dae0f7e822c56b20979bb5965e3b73b8bdabb6b8b8ef121da6d857508599ca35",
+  "packageManager": "pnpm@9.7.0+sha256.b35018fbfa8f583668b2649e407922a721355cd81f61beeb4ac1d4258e585559",
   "description": "geo + typebox => geo-schemas",
   "publishConfig": {
     "access": "public"
@@ -41,7 +41,7 @@
     "build": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
     "build:cjs": "tsc -p tsconfig.cjs.json --outDir dist/lib/cjs --module commonjs",
     "build:dts": "tsc --emitDeclarationOnly -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.json --outDir dist/lib/esm --module nodenext --moduleResolution nodenext --declaration",
+    "build:esm": "tsc -p tsconfig.esm.json --outDir dist/lib/esm --module nodenext --moduleResolution nodenext --declaration",
     "build:fast": "tsup src/index.ts --format cjs,esm",
     "build:tsc": "pnpm run build:cjs && pnpm run build:esm",
     "build:tsup": "tsup src/index.ts --format cjs,esm",
@@ -64,7 +64,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
     "@fastify/type-provider-typebox": "^4.0.0",
-    "@jsse/eslint-config": "^0.2.0",
+    "@jsse/eslint-config": "^0.2.4",
     "@sinclair/typebox": "^0.32.35",
     "@turf/helpers": "^7.0.0",
     "@turf/turf": "^7.0.0",
@@ -77,7 +77,7 @@
     "fastify": "^4.28.1",
     "prettier": "3.3.3",
     "tsup": "8.2.4",
-    "tsx": "^4.16.5",
+    "tsx": "^4.17.0",
     "typescript": "~5.5.4",
     "vitest": "2.0.5"
   }
