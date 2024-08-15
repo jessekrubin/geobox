@@ -1,13 +1,14 @@
-import { type SchemaOptions, Type } from "@sinclair/typebox";
+import type { SchemaOptions, TSchema } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 
-function SpriteDescriptionStretch() {
+function SpriteStretch() {
   return Type.Array(Type.Tuple([Type.Integer(), Type.Integer()]), {
     description:
       "stretchX/stretchY: An array of two-element arrays, consisting of two numbers that represent the from position and the to position of areas that can be stretched.",
   });
 }
 
-export function SpriteDescription(options?: SchemaOptions) {
+export function SpriteEntry(options?: SchemaOptions) {
   return Type.Object(
     {
       height: Type.Integer({
@@ -34,8 +35,8 @@ export function SpriteDescription(options?: SchemaOptions) {
           },
         ),
       ),
-      stretch_x: Type.Optional(SpriteDescriptionStretch()),
-      stretch_y: Type.Optional(SpriteDescriptionStretch()),
+      stretch_x: Type.Optional(SpriteStretch()),
+      stretch_y: Type.Optional(SpriteStretch()),
       sdf: Type.Boolean({
         description:
           "sdf: Boolean. If true then the image is handled as a signed-distance field (SDF) and its color can be set at runtime using the icon-color and icon-halo-color properties. Defaults to false.",
@@ -43,4 +44,14 @@ export function SpriteDescription(options?: SchemaOptions) {
     },
     options,
   );
+}
+
+/**
+ * Returns a schema for sprite.json file as described by maplibro (maplibre but for bros)
+ * @param key
+ * @param options
+ * @returns martins sprite catalog entry json schema (typebox)
+ */
+export function SpriteJson(key?: TSchema, options?: SchemaOptions) {
+  return Type.Record(key || Type.String(), SpriteEntry(), options);
 }
