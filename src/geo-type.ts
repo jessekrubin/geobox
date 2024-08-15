@@ -42,6 +42,7 @@ export { UTilejson, TilejsonLike, Tilejson } from "./geo-type/tilejson.js";
 export * as geostats from "./geo-type/geostats.js";
 export * as simplestyle from "./geo-type/simplestyle.js";
 export * as tilejson from "./geo-type/tilejson.js";
+export { SpriteJson, SpriteEntry } from "./geo-type/sprites.js";
 export * as martin from "./geo-type/martin.js";
 
 export {
