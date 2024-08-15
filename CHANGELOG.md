@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.2.14
+
+### Patch Changes
+
+- b7380cb: fix eslint internal settings
+
 ## 0.2.13
 
 ### Patch Changes
