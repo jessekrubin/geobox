@@ -65,7 +65,7 @@
     "@changesets/cli": "^2.27.7",
     "@fastify/type-provider-typebox": "^4.0.0",
     "@jsse/eslint-config": "^0.2.4",
-    "@sinclair/typebox": "^0.32.35",
+    "@sinclair/typebox": "^0.33.7",
     "@turf/helpers": "^7.0.0",
     "@turf/turf": "^7.0.0",
     "@types/geojson": "^7946.0.14",
