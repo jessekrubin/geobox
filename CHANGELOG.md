@@ -1,5 +1,12 @@
 # @jsse/geobox
 
+## 0.2.15
+
+### Patch Changes
+
+- c64a7aa: deprecate geojson crs and add compile-option to validator
+- 2b73eb4: Added sprite json schema
+
 ## 0.2.14
 
 ### Patch Changes
