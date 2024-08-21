@@ -2,6 +2,7 @@ import type { TypeCheck, ValueError } from "@sinclair/typebox/compiler";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import type { Static, TSchema } from "@sinclair/typebox";
 import { Type } from "@sinclair/typebox";
+import { Value } from "@sinclair/typebox/value";
 import { GeoboxValueError } from "./errors.js";
 
 export type ResultOk<T> = {
@@ -61,14 +62,23 @@ function isCheckOptions(value: unknown): value is CheckOptions {
 
 export class JsonSchema<T extends TSchema> {
   public schema: T;
+  public readonly options: { compile: boolean };
   private _typeguard?: TypeCheck<T>;
 
-  public constructor(schema: T) {
+  public constructor(schema: T, options?: { compile?: boolean }) {
     this.schema = schema;
+    this.options = {
+      compile: options?.compile ?? true,
+    };
   }
 
-  public static new<T extends TSchema>(schema: T): JsonSchema<T> {
-    return new JsonSchema(schema);
+  public static new<T extends TSchema>(
+    schema: T,
+    options?: {
+      compile?: boolean;
+    },
+  ): JsonSchema<T> {
+    return new JsonSchema(schema, options);
   }
 
   /**
@@ -94,6 +104,11 @@ export class JsonSchema<T extends TSchema> {
    * Returns the typeguard.Check function for this schema
    */
   public get guard(): (data: unknown) => data is Static<T> {
+    if (!this.options.compile) {
+      return (data: unknown): data is Static<T> => {
+        return Value.Check(this.schema, data);
+      };
+    }
     return (data: unknown): data is Static<T> => {
       return this.typeguard.Check(data);
     };
@@ -111,7 +126,7 @@ export class JsonSchema<T extends TSchema> {
    * Returns the typeguard.Decode function for this schema
    */
   public is = (value: unknown): value is Static<T> => {
-    return this.typeguard.Check(value);
+    return this.guard(value);
   };
 
   // public is(value: unknown): value is Static<T> {
@@ -193,6 +208,22 @@ export class JsonSchema<T extends TSchema> {
    * Returns an array of errors in this value; allows for max number of errors
    */
   public errorsArr = (value: unknown, options?: { limit?: number }) => {
+    if (!this.options.compile) {
+      const it = Value.Errors(this.schema, value);
+      if (options && isCheckOptions(options)) {
+        const errorArray: ValueError[] = [];
+        let i = 0;
+        for (const error of it) {
+          if (options?.limit && i >= options.limit) {
+            break;
+          }
+          i++;
+          errorArray.push(error);
+        }
+        return errorArray;
+      }
+      return [...it];
+    }
     const it = this.typeguard.Errors(value);
     if (options && isCheckOptions(options)) {
       const errorArray: ValueError[] = [];
