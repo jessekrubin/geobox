@@ -1,0 +1,14 @@
+{
+  "extends": "@jsse/tsconfig/tsconfig.json",
+  "buildOptions": {
+    "incremental": false
+  },
+  "compilerOptions": {
+    "incremental": false
+  },
+  "references": [
+    { "path": "./tsconfig.cjs.json" },
+    { "path": "./tsconfig.esm.json" }
+  ],
+  "files": []
+}

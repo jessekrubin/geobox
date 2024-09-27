@@ -117,7 +117,7 @@ export function LngLatWgs84(options?: SchemaOptions) {
 
 export {
   Latitude as Lat,
-  Longitude as Lon,
   LatitudeWgs84 as LatWgs84,
+  Longitude as Lon,
   LongitudeWgs84 as LonWgs84,
 };

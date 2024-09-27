@@ -1,4 +1,3 @@
-export * from "./tb.js";
 export * from "./geo-type.js";
 export {
   JsonSchema,
@@ -7,3 +6,4 @@ export {
   type ResultErr,
   type ResultOk,
 } from "./result-box.js";
+export * from "./tb.js";

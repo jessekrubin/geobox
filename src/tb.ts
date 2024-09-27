@@ -8,7 +8,7 @@ import {
   Unsafe,
 } from "@sinclair/typebox";
 
-export type { ValueError } from "@sinclair/typebox/value";
+export * from "@sinclair/typebox";
 
 export type StaticFn<T extends (...args: never) => TSchema> = Static<
   ReturnType<T>
@@ -51,4 +51,4 @@ export function StringEnum<T extends string[]>(values: [...T]) {
 // export { Type } from "@sinclair/typebox";
 // export type { Static, SchemaOptions, TSchema, TTuple, TNumber, AssertType, TOptional, TLiteral, TObject, TString, TUnion, IntegerOptions, TInteger } from "@sinclair/typebox";
 
-export * from "@sinclair/typebox";
+export type { ValueError } from "@sinclair/typebox/value";

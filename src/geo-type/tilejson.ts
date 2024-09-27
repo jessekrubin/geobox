@@ -1,7 +1,7 @@
 import type { SchemaOptions } from "@sinclair/typebox";
 import { Type } from "@sinclair/typebox";
-import { Latitude, Longitude } from "./lnglat.js";
 import { UInt32 } from "./int.js";
+import { Latitude, Longitude } from "./lnglat.js";
 
 export function Semver() {
   return Type.String({

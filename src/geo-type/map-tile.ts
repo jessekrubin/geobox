@@ -1,5 +1,5 @@
-import { Type } from "@sinclair/typebox";
 import type { SchemaOptions } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 
 export const MIN_ZOOM = 0;
 export const MAX_ZOOM = 31;

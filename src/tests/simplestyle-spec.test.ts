@@ -1,5 +1,5 @@
-import { expect, test } from "vitest";
 import { Kind, OptionalKind } from "@sinclair/typebox";
+import { expect, test } from "vitest";
 import * as geobox from "../index.js";
 
 /**
