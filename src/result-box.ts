@@ -1,7 +1,7 @@
-import type { TypeCheck, ValueError } from "@sinclair/typebox/compiler";
-import { TypeCompiler } from "@sinclair/typebox/compiler";
 import type { Static, TSchema } from "@sinclair/typebox";
+import type { TypeCheck, ValueError } from "@sinclair/typebox/compiler";
 import { Type } from "@sinclair/typebox";
+import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { Value } from "@sinclair/typebox/value";
 import { GeoboxValueError } from "./errors.js";
 

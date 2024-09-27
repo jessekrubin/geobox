@@ -2,7 +2,7 @@
   "name": "@jsse/geobox",
   "type": "module",
   "version": "0.2.15",
-  "packageManager": "pnpm@9.7.0+sha256.b35018fbfa8f583668b2649e407922a721355cd81f61beeb4ac1d4258e585559",
+  "packageManager": "pnpm@9.11.0",
   "description": "geo + typebox => geo-schemas",
   "publishConfig": {
     "access": "public"
@@ -29,12 +29,18 @@
         "default": "./dist/lib/cjs/*"
       }
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./dist/*": "./dist/*"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/lib/cjs/index.d.ts",
   "files": [
+    "!**/*.spec.*",
+    "!**/*.test-d.*",
+    "!**/*.test.*",
+    "!**/*.tsbuildinfo",
+    "README.md",
     "dist"
   ],
   "scripts": {
@@ -43,7 +49,7 @@
     "build:dts": "tsc --emitDeclarationOnly -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json --outDir dist/lib/esm --module nodenext --moduleResolution nodenext --declaration",
     "build:fast": "tsup src/index.ts --format cjs,esm",
-    "build:tsc": "pnpm run build:cjs && pnpm run build:esm",
+    "build:tsc": "tsc -b tsconfig.build.json && tsx scripts/post-build.mts",
     "build:tsup": "tsup src/index.ts --format cjs,esm",
     "change": "changeset",
     "ci": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
@@ -62,23 +68,24 @@
     "@sinclair/typebox": "^0.32.30"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.7",
+    "@changesets/cli": "^2.27.8",
     "@fastify/type-provider-typebox": "^4.1.0",
-    "@jsse/eslint-config": "^0.2.6",
+    "@jsse/eslint-config": "^0.2.17",
+    "@jsse/tsconfig": "^0.1.0",
     "@sinclair/typebox": "^0.32.35",
     "@turf/helpers": "^7.1.0",
     "@turf/turf": "^7.1.0",
     "@types/geojson": "^7946.0.14",
-    "@typescript-eslint/eslint-plugin": "^8.2.0",
-    "@typescript-eslint/parser": "^8.2.0",
-    "@vitest/coverage-v8": "^2.0.5",
-    "eslint": "^9.9.0",
-    "eslint-plugin-antfu": "^2.3.5",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "@vitest/coverage-v8": "^2.1.1",
+    "eslint": "^9.11.1",
+    "eslint-plugin-antfu": "^2.7.0",
     "fastify": "^4.28.1",
     "prettier": "3.3.3",
-    "tsup": "8.2.4",
-    "tsx": "^4.17.0",
-    "typescript": "~5.5.4",
-    "vitest": "2.0.5"
+    "tsup": "8.3.0",
+    "tsx": "^4.19.1",
+    "typescript": "~5.6.2",
+    "vitest": "2.1.1"
   }
 }

@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "es2022",
-
     "lib": ["ES2020", "DOM"],
     "baseUrl": ".",
     "rootDir": "src",
@@ -20,6 +19,6 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "**/*.mts"],
   "exclude": ["node_modules", "dist", "scratch"]
 }

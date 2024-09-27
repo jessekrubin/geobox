@@ -1,5 +1,5 @@
-import { describe, expect, test } from "vitest";
 import { TypeGuard } from "@sinclair/typebox";
+import { describe, expect, test } from "vitest";
 import { geoboxSchemaFns } from "./_utils.js";
 
 describe.each(geoboxSchemaFns())("schema-$key", ({ fn }) => {

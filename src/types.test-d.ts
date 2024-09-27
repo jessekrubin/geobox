@@ -1,6 +1,6 @@
-import { assertType, expectTypeOf, test } from "vitest";
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
+import { assertType, expectTypeOf, test } from "vitest";
 import * as geobox from "./index.js";
 
 test("test point schema builder", () => {

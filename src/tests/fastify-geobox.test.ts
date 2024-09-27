@@ -1,8 +1,8 @@
-import { describe, expect, test } from "vitest";
-import Fastify from "fastify";
+import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import { Type } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
-import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
+import Fastify from "fastify";
+import { describe, expect, test } from "vitest";
 import * as geobox from "../index.js";
 import { geoboxSchemaFns } from "./_utils.js";
 

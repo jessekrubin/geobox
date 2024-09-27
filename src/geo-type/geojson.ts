@@ -9,10 +9,10 @@ import type {
 } from "@sinclair/typebox";
 import { Type } from "@sinclair/typebox";
 import type { IsDefined } from "../types.js";
-import { Nullable } from "../tb.js";
 import type { TBBoxSchema } from "./bbox.js";
-import { BBox } from "./bbox.js";
 import type { TCoord2d, TCoord3d, TCoordinateSchema } from "./coord.js";
+import { Nullable } from "../tb.js";
+import { BBox } from "./bbox.js";
 import { Coord } from "./coord.js";
 
 export function GeoJSONType() {
