@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.2.16
+
+### Patch Changes
+
+- 145faa3: fix internal build and tsconfig setup
+
 ## 0.2.15
 
 ### Patch Changes
