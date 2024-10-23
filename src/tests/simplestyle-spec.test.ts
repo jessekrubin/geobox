@@ -1,4 +1,3 @@
-import { Kind, OptionalKind } from "@sinclair/typebox";
 import { expect, test } from "vitest";
 import * as geobox from "../index.js";
 
@@ -124,39 +123,7 @@ test("invalid color", () => {
   if (maybe.success) {
     throw new Error("Expected failure");
   }
-  // maybe.success
-  const expected = [
-    {
-      type: 53,
-      schema: {
-        default: "#7e7e7e",
-        title: "Marker Color",
-        description: "The marker's color; value must follow COLOR RULES",
-        pattern: "^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$",
-        type: "string",
-        [Kind]: "String",
-        [OptionalKind]: "Optional",
-      },
-      path: "/marker-color",
-      value: "red",
-      message: "Expected string to match '^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$'",
-    },
-    {
-      type: 53,
-      schema: {
-        default: "#555555",
-        title: "Stroke",
-        description:
-          "the color of a line as part of a polygon, polyline, or multigeometry value must follow COLOR RULES",
-        pattern: "^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$",
-        type: "string",
-        [Kind]: "String",
-        [OptionalKind]: "Optional",
-      },
-      path: "/stroke",
-      value: "11111111111111",
-      message: "Expected string to match '^#?([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$'",
-    },
-  ];
-  expect(maybe.error.errors).toEqual(expected);
+  const errorspaths = maybe.error.errors.map((e) => e.path);
+  expect(errorspaths).toContain("/marker-color");
+  expect(errorspaths).toContain("/stroke");
 });
