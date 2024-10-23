@@ -18,6 +18,7 @@ const packageJsonEsm = {
 
 const log: typeof console.log = (...args: Parameters<typeof console.log>) => {
   if (VERBOSE) {
+    // eslint-disable-next-line no-console
     console.log(...args);
   }
 };
