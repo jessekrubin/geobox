@@ -72,7 +72,7 @@
     "@fastify/type-provider-typebox": "^5.0.0",
     "@jsse/eslint-config": "^0.2.24",
     "@jsse/tsconfig": "^0.2.2",
-    "@sinclair/typebox": "^0.33.17",
+    "@sinclair/typebox": "^0.32.30",
     "@turf/helpers": "^7.1.0",
     "@turf/turf": "^7.1.0",
     "@types/geojson": "^7946.0.14",
