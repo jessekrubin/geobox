@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { assert, describe, expect, test } from "vitest";

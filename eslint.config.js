@@ -8,7 +8,6 @@ export default jsse(
       tsconfig: "tsconfig.json",
     },
     ignores: ["example/**/*"],
-    // TODO lint markdown files
     markdown: false,
   },
   {
