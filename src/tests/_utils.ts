@@ -1,7 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import path from "node:path";
 import * as tb from "@sinclair/typebox";
 import * as GeoType from "../geo-type.js";
 import * as geobox from "../index.js";
+
+export function reporoot(): string {
+  return path.resolve(__dirname, "..", "..");
+}
+
+export function resolveRepoPath(fspath: string): string {
+  return path.resolve(reporoot(), fspath);
+}
 
 export function geoboxSchemaFunctionNames(): string[] {
   return Object.entries(GeoType)
@@ -29,6 +38,7 @@ type GeoboxFn = {
   key: string;
   fn: (options?: any) => tb.TSchema;
 };
+
 export function geoboxSchemaFns(): GeoboxFn[] {
   const geoboxFnNames = geoboxSchemaFunctionNames();
   const geoboxFnNamesSet = new Set(geoboxFnNames);

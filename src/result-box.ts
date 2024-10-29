@@ -60,7 +60,7 @@ function isCheckOptions(value: unknown): value is CheckOptions {
   );
 }
 
-export class JsonSchema<T extends TSchema> {
+export class JsonSchemaValidator<T extends TSchema> {
   public schema: T;
   public readonly options: { compile: boolean };
   private _typeguard?: TypeCheck<T>;
@@ -77,8 +77,8 @@ export class JsonSchema<T extends TSchema> {
     options?: {
       compile?: boolean;
     },
-  ): JsonSchema<T> {
-    return new JsonSchema(schema, options);
+  ): JsonSchemaValidator<T> {
+    return new JsonSchemaValidator(schema, options);
   }
 
   /**
@@ -283,7 +283,9 @@ export class JsonSchema<T extends TSchema> {
 /**
  * Alias/shortcut for creating a new JsonSchema instance
  */
-export function jsonschema<T extends TSchema>(schema: T): JsonSchema<T> {
-  const t = JsonSchema.new(schema);
+export function jsonschema<T extends TSchema>(
+  schema: T,
+): JsonSchemaValidator<T> {
+  const t = JsonSchemaValidator.new(schema);
   return t;
 }

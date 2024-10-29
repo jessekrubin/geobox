@@ -245,7 +245,7 @@ describe("fastify-geobox", () => {
       const r = await fastify.inject(url);
       try {
         const { data } = JSON.parse(r.payload);
-        const validator = new geobox.JsonSchema(schema);
+        const validator = new geobox.JsonSchemaValidator(schema);
         validator.parse(data);
       } catch (e) {
         console.error(e);
