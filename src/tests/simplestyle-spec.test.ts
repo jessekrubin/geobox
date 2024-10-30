@@ -120,7 +120,7 @@ test("invalid color", () => {
   };
   expect(c.is(invalidColors)).toBe(false);
   const maybe = c.tryFrom(invalidColors);
-  if (maybe.success) {
+  if (maybe.ok) {
     throw new Error("Expected failure");
   }
   const errorspaths = maybe.error.errors.map((e) => e.path);
