@@ -1,5 +1,12 @@
 # @jsse/geobox
 
+## 0.2.18
+
+### Patch Changes
+
+- 813a563: Added tms (tile matrix set) related schemas
+- remove `success` from result type... added some of those words between code lines
+
 ## 0.2.17
 
 ### Patch Changes

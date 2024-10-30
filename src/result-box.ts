@@ -5,28 +5,30 @@ import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { Value } from "@sinclair/typebox/value";
 import { GeoboxValueError } from "./errors.js";
 
-export type ResultOk<T> = {
+/**
+ * Result is A-OK!
+ */
+export type ResultOk<TData> = {
   ok: true;
-  success: true;
-  data: T;
+  data: TData;
 };
 
-// type ValueErrors = ValueError[];
-// export class GeoboxValueError extends Error {
-//   public errors: ValueErrors;
-
-//   public constructor(message: string, errors: ValueErrors) {
-//     super(message);
-//     this.errors = errors;
-//   }
-// }
-
-export type ResultErr = {
+/**
+ * Result Error
+ */
+export type ResultErr<TErr = GeoboxValueError> = {
   ok: false;
-  success: false;
-  error: GeoboxValueError;
+  error: TErr;
 };
-export type Result<T> = ResultOk<T> | ResultErr;
+
+/**
+ * Result type
+ * @param T - Type of data
+ * @returns ResultOk<T> | ResultErr
+ */
+export type Result<TData, TErr = GeoboxValueError> =
+  | ResultOk<TData>
+  | ResultErr<TErr>;
 
 /**
  * Options for checking/validating
@@ -38,11 +40,23 @@ export type CheckOptions = {
   limit?: number;
 };
 
+/**
+ * Formats an array of ValueError into a JSON string.
+ *
+ * @param errors - Array of ValueError instances.
+ * @returns A formatted JSON string representing the errors.
+ */
 export function fmterr(...errors: ValueError[]) {
   // TODO: maybe make fast via string concat
   return JSON.stringify(errors, undefined, 2);
 }
 
+/**
+ * Type guard to check if a value is of type CheckOptions (compiled via typebox)
+ *
+ * @param value - The value to check.
+ * @returns True if the value is a CheckOptions object, false otherwise.
+ */
 function isCheckOptions(value: unknown): value is CheckOptions {
   return (
     typeof value === "object" &&
@@ -60,23 +74,40 @@ function isCheckOptions(value: unknown): value is CheckOptions {
   );
 }
 
+/**
+ * A JSON Schema Validator class for TypeBox schemas.
+ *
+ * @typeParam T - The TypeBox schema type.
+ */
 export class JsonSchemaValidator<T extends TSchema> {
   public schema: T;
-  public readonly options: { compile: boolean };
+  public readonly options: { compile: boolean; limit?: number };
   private _typeguard?: TypeCheck<T>;
 
-  public constructor(schema: T, options?: { compile?: boolean }) {
+  /**
+   * Creates a new JsonSchemaValidator instance.
+   *
+   * @param schema - The TypeBox schema to validate.
+   * @param options - Optional options for the validator.
+   * @param options.compile - Whether to compile the schema (default: true).
+   * @param options.limit - default maximum number of errors to return (default: undefined).
+   */
+  public constructor(
+    schema: T,
+    options?: { compile?: boolean; limit?: number },
+  ) {
     this.schema = schema;
     this.options = {
       compile: options?.compile ?? true,
     };
   }
 
+  /**
+   * Alias for calling `new JsonSchemaValidator(yer-schema)`
+   */
   public static new<T extends TSchema>(
     schema: T,
-    options?: {
-      compile?: boolean;
-    },
+    options?: { compile?: boolean; limit?: number },
   ): JsonSchemaValidator<T> {
     return new JsonSchemaValidator(schema, options);
   }
@@ -124,14 +155,12 @@ export class JsonSchemaValidator<T extends TSchema> {
 
   /**
    * Returns the typeguard.Decode function for this schema
+   * @returns typeguard.Decode() for this schema
    */
   public is = (value: unknown): value is Static<T> => {
     return this.guard(value);
   };
 
-  // public is(value: unknown): value is Static<T> {
-  // return this.typeguard.Check(value);
-  // }
   /**
    * Asserts that the value is of this schema; throws an error if not
    */
@@ -168,10 +197,22 @@ export class JsonSchemaValidator<T extends TSchema> {
     }
   };
 
+  /**
+   * Decodes a value according to the schema.
+   *
+   * @param value - The value to decode.
+   * @returns The decoded value.
+   */
   public decode = (value: unknown): Static<T> => {
     return this.typeguard.Decode(value);
   };
 
+  /**
+   * Encodes a value according to the schema.
+   *
+   * @param value - The value to encode.
+   * @returns The encoded value.
+   */
   public encode = (value: unknown): Static<T> => {
     return this.typeguard.Encode(value);
   };
@@ -213,8 +254,9 @@ export class JsonSchemaValidator<T extends TSchema> {
       if (options && isCheckOptions(options)) {
         const errorArray: ValueError[] = [];
         let i = 0;
+        const limit = options.limit ?? this.options.limit;
         for (const error of it) {
-          if (options?.limit && i >= options.limit) {
+          if (limit && i >= limit) {
             break;
           }
           i++;
@@ -228,8 +270,9 @@ export class JsonSchemaValidator<T extends TSchema> {
     if (options && isCheckOptions(options)) {
       const errorArray: ValueError[] = [];
       let i = 0;
+      const limit = options.limit ?? this.options.limit;
       for (const error of it) {
-        if (options?.limit && i >= options.limit) {
+        if (limit && i >= limit) {
           break;
         }
         i++;
@@ -240,6 +283,13 @@ export class JsonSchemaValidator<T extends TSchema> {
     return [...it];
   };
 
+  /**
+   * TypeGuards the value; throws an error if not of this schema
+   * @param value
+   * @param options - Validation options
+   * @param options.limit - Maximum number of errors to return
+   * @returns Static<T> if value is of this schema or throws err
+   */
   public from = (value: unknown, options?: { limit?: number }): Static<T> => {
     if (this.is(value)) {
       return value;
@@ -248,16 +298,24 @@ export class JsonSchemaValidator<T extends TSchema> {
     throw new GeoboxValueError(`geobox-from: ${JSON.stringify(value)}`, earr);
   };
 
+  /**
+   * Alias for from()
+   * @deprecated Use from() instead
+   */
   public parse = (value: unknown, options?: { limit?: number }): Static<T> => {
     return this.from(value, options);
   };
 
+  /**
+   * Tries to typeguard the value; returns a Result
+   * @param value
+   * @returns Result<Static<T>>
+   */
   public tryFrom = (value: unknown): Result<Static<T>> => {
     const errors = [...this.typeguard.Errors(value)];
     if (errors.length > 0) {
       return {
         ok: false,
-        success: false,
         error: new GeoboxValueError(
           `geobox-tryFrom: ${JSON.stringify(value)}`,
           errors,
@@ -266,15 +324,21 @@ export class JsonSchemaValidator<T extends TSchema> {
     }
     return {
       ok: true,
-      success: true,
       data: value as Static<typeof this.schema>,
     };
   };
 
+  /**
+   * Alias for tryFrom()
+   * @deprecated Use tryFrom() instead
+   */
   public safeParse = (value: unknown): Result<Static<T>> => {
     return this.tryFrom(value);
   };
 
+  /**
+   * Returns a "strict" schema for this schema with typebox attributes/symbols removed
+   */
   public strictSchema = (): TSchema => {
     return Type.Strict(this.schema);
   };

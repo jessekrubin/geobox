@@ -11,7 +11,11 @@ export default jsse(
     markdown: false,
   },
   {
-    files: ["schemas/**/*.schema.json", "test-data/**/*.json", "schemas/**/*.json"],
+    files: [
+      "schemas/**/*.schema.json",
+      "test-data/**/*.json",
+      "schemas/**/*.json",
+    ],
     rules: {
       "unicorn/filename-case": "off",
     },
