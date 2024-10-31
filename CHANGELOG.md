@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.2.19
+
+### Patch Changes
+
+- fix sprite sheet schema as used by maplibre/mapbox/deckgl
+
 ## 0.2.18
 
 ### Patch Changes

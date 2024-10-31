@@ -300,7 +300,6 @@ export class JsonSchemaValidator<T extends TSchema> {
 
   /**
    * Alias for from()
-   * @deprecated Use from() instead
    */
   public parse = (value: unknown, options?: { limit?: number }): Static<T> => {
     return this.from(value, options);
@@ -330,7 +329,6 @@ export class JsonSchemaValidator<T extends TSchema> {
 
   /**
    * Alias for tryFrom()
-   * @deprecated Use tryFrom() instead
    */
   public safeParse = (value: unknown): Result<Static<T>> => {
     return this.tryFrom(value);
@@ -350,6 +348,5 @@ export class JsonSchemaValidator<T extends TSchema> {
 export function jsonschema<T extends TSchema>(
   schema: T,
 ): JsonSchemaValidator<T> {
-  const t = JsonSchemaValidator.new(schema);
-  return t;
+  return JsonSchemaValidator.new(schema);
 }
