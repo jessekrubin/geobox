@@ -50,7 +50,7 @@
     "build:esm": "tsc -p tsconfig.esm.json --outDir dist/lib/esm --module nodenext --moduleResolution nodenext --declaration",
     "build:fast": "tsup src/index.ts --format cjs,esm",
     "build:tsc": "tsc -b tsconfig.build.json && tsx scripts/post-build.mts",
-    "build:tsup": "tsup src/index.ts --format cjs,esm",
+    "build:tsup": "tsup src/index.ts --format cjs,esm --dts",
     "change": "changeset",
     "ci": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
     "ci:publish": "pnpm publish",

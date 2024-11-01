@@ -1,6 +1,8 @@
 # `@jsse/geobox`
 
-geo-json-schemas (and maybe more to come!)
+![NPM Version](https://img.shields.io/npm/v/%40jsse%2Fgeobox?style=flat-square&logo=npm&cacheSeconds=600&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40jsse%2Fgeobox)
+
+geo-spatial json-schemas à la [typebox](https://github.com/sinclairzx81/typebox)
 
 ## Install
 
@@ -10,6 +12,8 @@ pnpm add @jsse/geobox
 npm i @jsse/geobox
 # or
 yarn add @jsse/geobox
+# or (if gen-z)
+bun add @jsse/geobox
 ```
 
 ## Example (wip)
