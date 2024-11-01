@@ -1,15 +1,22 @@
 import type { Static, TSchema } from "@sinclair/typebox";
 import type { TypeCheck, ValueError } from "@sinclair/typebox/compiler";
-import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { Value } from "@sinclair/typebox/value";
+import type { TSchemaStrict } from "./tb.js";
 import { GeoboxValueError } from "./errors.js";
 
 /**
  * Result is A-OK!
  */
 export type ResultOk<TData> = {
+  /**
+   * Result is ok
+   */
   ok: true;
+  /**
+   * Alias for ok parity with other validation libraries (zod, typia)
+   */
+  success: true;
   data: TData;
 };
 
@@ -17,7 +24,15 @@ export type ResultOk<TData> = {
  * Result Error
  */
 export type ResultErr<TErr = GeoboxValueError> = {
+  /**
+   * Result is NOT-ok
+   */
   ok: false;
+
+  /**
+   * Alias for ok parity with other validation libraries (zod, typia)
+   */
+  success: false;
   error: TErr;
 };
 
@@ -315,6 +330,7 @@ export class JsonSchemaValidator<T extends TSchema> {
     if (errors.length > 0) {
       return {
         ok: false,
+        success: false,
         error: new GeoboxValueError(
           `geobox-tryFrom: ${JSON.stringify(value)}`,
           errors,
@@ -323,6 +339,7 @@ export class JsonSchemaValidator<T extends TSchema> {
     }
     return {
       ok: true,
+      success: true,
       data: value as Static<typeof this.schema>,
     };
   };
@@ -337,8 +354,9 @@ export class JsonSchemaValidator<T extends TSchema> {
   /**
    * Returns a "strict" schema for this schema with typebox attributes/symbols removed
    */
-  public strictSchema = (): TSchema => {
-    return Type.Strict(this.schema);
+  public strictSchema = (): TSchemaStrict => {
+    // eslint-disable-next-line unicorn/prefer-structured-clone
+    return JSON.parse(JSON.stringify(this.schema));
   };
 }
 

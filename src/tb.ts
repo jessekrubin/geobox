@@ -1,14 +1,25 @@
-import {
-  Null,
-  Optional,
-  type SchemaOptions,
-  type Static,
-  type TSchema,
-  Union,
-  Unsafe,
+import type {
+  Hint,
+  Kind,
+  OptionalKind,
+  ReadonlyKind,
+  SchemaOptions,
+  Static,
+  TransformKind,
+  TSchema,
 } from "@sinclair/typebox";
+import { Null, Optional, Union, Unsafe } from "@sinclair/typebox";
 
 export * from "@sinclair/typebox";
+
+export type TypeboxSymbols =
+  | typeof Hint
+  | typeof Kind
+  | typeof OptionalKind
+  | typeof ReadonlyKind
+  | typeof TransformKind;
+
+export type TSchemaStrict = Omit<TSchema, typeof ReadonlyKind>;
 
 export type StaticFn<T extends (...args: never) => TSchema> = Static<
   ReturnType<T>
