@@ -1,37 +1,3 @@
-# `@jsse/geobox`
-
-[![NPM Version](https://img.shields.io/npm/v/%40jsse%2Fgeobox?style=flat-square&logo=npm&cacheSeconds=600&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40jsse%2Fgeobox)](https://www.npmjs.com/package/@jsse/geobox)
-
-geo-spatial json-schemas à la [typebox](https://github.com/sinclairzx81/typebox)
-
-## Features
-
-- Schema fns:
-    - customizable geojson-schema functions for geometry types, feature types, and feature-collection types
-    - customizable coordinate types for 2d and 3d coordinates
-    - TileJSON schema(s)
-    - geojson simplestyle-spec properties schema(s) as defined by [mapbox](https://github.com/mapbox/simplestyle-spec)
-    - mapbox-geostats schema(s) as defined by [mapbox](https://github.com/mapbox/mapbox-geostats)
-    - sprite-sheet schema builders for maplibre/mapbox/deck.gl spritesheets
-    - Tile-Matrix-Set schema(s) as defined by [OGC](https://www.ogc.org/our-work/standard/tms/)
-- basic validator class to wrap schemas and validate typebox schemas using typebox's
-
-
-## Install
-
-```bash
-pnpm add @jsse/geobox
-# or
-npm i @jsse/geobox
-# or
-yarn add @jsse/geobox
-# or (if gen-z)
-bun add @jsse/geobox
-```
-
-## Example (wip)
-
-```ts
 import { Type, type Static } from "@sinclair/typebox";
 import * as geobox from "@jsse/geobox";
 
@@ -75,11 +41,3 @@ type Point2dGeometrySchema = Static<typeof point2dGeometrySchema>;
 //   bbox?: [number, number, number, number] | [number, number, number, number, number, number] | undefined;
 //   coordinates: [number, number];
 // }
-```
-
-___
-
-## TODO
-
-- [ ] projjson schema(s)
-- [ ] maplibre/mapbox stylespec schema(s)
