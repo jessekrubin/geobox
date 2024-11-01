@@ -33,7 +33,7 @@ describe("fastify-geobox", () => {
   );
 
   // from https://github.com/mapbox/tilejson-spec/blob/master/3.0.0/example/osm.json
-  const tilejsonSchema = geobox.tilejson.TilejsonLike({
+  const tilejsonSchema = geobox.tilejson.Tilejson({
     additionalProperties: Type.String(),
   });
   const exampleTilejson300 = {
@@ -90,7 +90,7 @@ describe("fastify-geobox", () => {
     {
       schema: {
         response: {
-          200: geobox.tilejson.TilejsonLike(),
+          200: geobox.tilejson.Tilejson(),
         },
       },
     },

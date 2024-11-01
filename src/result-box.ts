@@ -354,12 +354,11 @@ export class JsonSchemaValidator<T extends TSchema> {
   /**
    * Returns a "strict" schema for this schema with typebox attributes/symbols removed
    */
-  public strictSchema = (): TSchemaStrict => {
+  public strictSchema(): TSchemaStrict {
     // eslint-disable-next-line unicorn/prefer-structured-clone
     return JSON.parse(JSON.stringify(this.schema));
-  };
+  }
 }
-
 /**
  * Alias/shortcut for creating a new JsonSchema instance
  */
