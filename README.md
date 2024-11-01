@@ -1,6 +1,6 @@
 # `@jsse/geobox`
 
-![NPM Version](https://img.shields.io/npm/v/%40jsse%2Fgeobox?style=flat-square&logo=npm&cacheSeconds=600&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40jsse%2Fgeobox)
+[![NPM Version](https://img.shields.io/npm/v/%40jsse%2Fgeobox?style=flat-square&logo=npm&cacheSeconds=600&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2F%40jsse%2Fgeobox)](https://www.npmjs.com/package/@jsse/geobox)
 
 geo-spatial json-schemas à la [typebox](https://github.com/sinclairzx81/typebox)
 
