@@ -239,7 +239,16 @@ describe("geojson-geometry-validation", () => {
     //
     expect(res.ok).toBe(true);
   });
+  test("geometry-collection-2d", () => {
+    const geometryCollectionSchema = geobox.GeometryCollection2d();
+    const validator = jsonschema(geometryCollectionSchema);
 
+    const res = validator.tryFrom(GEOMETRY_COLLECTION);
+    if (!res.ok) {
+      console.log(JSON.stringify(res.error, null, 2));
+    }
+    expect(res.ok).toBe(true);
+  });
   test("feature-collection-val", () => {
     const featureCollectionSchema = geobox.FeatureCollection();
     const validator = jsonschema(featureCollectionSchema);

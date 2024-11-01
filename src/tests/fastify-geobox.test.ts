@@ -204,7 +204,11 @@ describe("fastify-geobox", () => {
   };
   const urls2query: UrlAndSchema[] = [];
   for (const { key, fn } of geoboxFunctions) {
-    if (["GeoJSON", "Geometry", "GeoJSON2d"].includes(key)) {
+    if (
+      ["GeoJSON", "Geometry", "GeoJSON2d", "Geometry2d", "Geometry3d"].includes(
+        key,
+      )
+    ) {
       continue;
     }
     const gbSchema = fn();

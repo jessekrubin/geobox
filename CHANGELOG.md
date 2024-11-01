@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.2.21
+
+### Patch Changes
+
+- removed properties from geometry collection as not per spec
+
 ## 0.2.20
 
 ### Patch Changes

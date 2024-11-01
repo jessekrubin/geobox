@@ -13,7 +13,7 @@ import type { TBBoxSchema } from "./bbox.js";
 import type { TCoord2d, TCoord3d, TCoordinateSchema } from "./coord.js";
 import { Nullable } from "../tb.js";
 import { BBox } from "./bbox.js";
-import { Coord } from "./coord.js";
+import { Coord, Coord2d } from "./coord.js";
 
 export function GeoJSONType() {
   return Type.Union(
@@ -334,7 +334,10 @@ export function GeometryPrimitive<
   );
 }
 
-export function GeometryCollection(options?: SchemaOptions) {
+export function GeometryCollection(
+  schemas?: TGeometrySchemas<TCoordinateSchema, TBBoxSchema>,
+  options?: SchemaOptions,
+) {
   const s = Type.Recursive((This) =>
     Type.Object(
       {
@@ -342,15 +345,14 @@ export function GeometryCollection(options?: SchemaOptions) {
         geometries: Type.Array(
           Type.Union([
             This,
-            PointGeometry(),
-            MultiPointGeometry(),
-            LineStringGeometry(),
-            MultiLineStringGeometry(),
-            PolygonGeometry(),
-            MultiPolygonGeometry(),
+            PointGeometry(schemas),
+            MultiPointGeometry(schemas),
+            LineStringGeometry(schemas),
+            MultiLineStringGeometry(schemas),
+            PolygonGeometry(schemas),
+            MultiPolygonGeometry(schemas),
           ]),
         ),
-        properties: Type.Optional(GeojsonProperties()),
         bbox: Type.Optional(BBox()),
       },
       {
@@ -364,6 +366,30 @@ export function GeometryCollection(options?: SchemaOptions) {
   return s;
 }
 
+export function GeometryCollection2d(options?: SchemaOptions) {
+  return GeometryCollection(
+    {
+      coordinate: Coord(),
+    },
+    {
+      title: "GeoJSON GeometryCollection 2d",
+      ...options,
+    },
+  );
+}
+
+export function GeometryCollection3d(options?: SchemaOptions) {
+  return GeometryCollection(
+    {
+      coordinate: Coord(),
+    },
+    {
+      title: "GeoJSON GeometryCollection 3d",
+      ...options,
+    },
+  );
+}
+
 export function Geometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
@@ -375,21 +401,37 @@ export function Geometry<
   });
 }
 
-// export function FeatureSchema(
-//   propertiesSchema?: ReturnType<typeof GeojsonProperties>,
-// ) {
-//   return Type.Object(
-//     {
-//       type: Type.Literal("Feature"),
-//       geometry: Geometry(),
-//       properties: Type.Optional(propertiesSchema || GeojsonProperties()),
-//       bbox: Type.Optional(BBox()),
-//     },
-//     {
-//       title: "GeoJSON Feature",
-//     },
-//   );
-// }
+export function Geometry2d(options?: SchemaOptions) {
+  return Type.Union(
+    [
+      GeometryPrimitive({
+        coordinate: Coord2d(),
+      }),
+      GeometryCollection2d(),
+    ],
+    {
+      title: "GeoJSON Geometry 2d",
+      description: "GeoJSON Geometry 2d",
+      ...options,
+    },
+  );
+}
+
+export function Geometry3d(options?: SchemaOptions) {
+  return Type.Union(
+    [
+      GeometryPrimitive({
+        coordinate: Coord(),
+      }),
+      GeometryCollection3d(),
+    ],
+    {
+      title: "GeoJSON Geometry 3d",
+      description: "GeoJSON Geometry 3d",
+      ...options,
+    },
+  );
+}
 
 export type GeometrySchema =
   | ReturnType<typeof PointGeometry>
