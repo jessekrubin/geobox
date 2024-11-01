@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.2.20
+
+### Patch Changes
+
+- add success back to result type for parity with other validation libs that we use
+
 ## 0.2.19
 
 ### Patch Changes

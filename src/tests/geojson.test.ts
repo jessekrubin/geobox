@@ -39,7 +39,6 @@ const pointFeatureDingoProps = {
 
 /**
  * Nested geometry collection
- *
  */
 const nestedGeometryCollection = {
   type: "GeometryCollection",

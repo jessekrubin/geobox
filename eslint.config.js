@@ -34,4 +34,10 @@ export default jsse(
       "antfu/top-level-function": "error",
     },
   },
+  {
+    files: ["./src/**/*.ts"],
+    rules: {
+      "@typescript-eslint/no-deprecated": "error",
+    },
+  },
 );
