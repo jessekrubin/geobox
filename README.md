@@ -15,11 +15,11 @@ yarn add @jsse/geobox
 ## Example (wip)
 
 ```ts
-import {Type } from "@sinclair/typebox";
+import { Type } from "@sinclair/typebox";
 import * as geobox from "./dist/index.js";
 
 const pointSchemaBabydog = geobox.PointFeature(
-    Type.Object({ dingo: Type.String() })
+  Type.Object({ dingo: Type.String() }),
 );
 
 console.log(JSON.stringify(pointSchemaBabydog, null, 2));

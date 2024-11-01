@@ -31,8 +31,13 @@ export default jsse(
       antfu: pluginAntfu,
     },
     rules: {
-      "@typescript-eslint/no-deprecated": "error",
       "antfu/top-level-function": "error",
+    },
+  },
+  {
+    files: ["./src/**/*.ts"],
+    rules: {
+      "@typescript-eslint/no-deprecated": "error",
     },
   },
 );

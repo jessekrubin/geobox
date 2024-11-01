@@ -1,4 +1,4 @@
-//{
+// {
 //   "$schema": "https://json-schema.org/draft/2019-09/schema",
 //   "description": "Variable Matrix Width data structure",
 //   "type": "object",
