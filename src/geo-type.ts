@@ -22,8 +22,7 @@ export {
   type TCoord3d,
   type TCoordinateSchema,
 } from "./geo-type/coord.js";
-export * from "./geo-type/geojson.js";
-export * from "./geo-type/geojson-crs.js";
+export * from "./geo-type/geojson/index.js";
 export * as geostats from "./geo-type/geostats.js";
 export {
   GeostatsAttribute,

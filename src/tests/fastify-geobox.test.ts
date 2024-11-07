@@ -7,7 +7,12 @@ import * as geobox from "../index.js";
 import { geoboxSchemaFns } from "./_utils.js";
 
 describe("fastify-geobox", () => {
-  const fastify = Fastify().withTypeProvider<TypeBoxTypeProvider>();
+  const fastify = Fastify({
+    logger: {
+      level: "trace",
+      file: "./logs.log",
+    },
+  }).withTypeProvider<TypeBoxTypeProvider>();
 
   fastify.get(
     "/point",
@@ -204,13 +209,9 @@ describe("fastify-geobox", () => {
   };
   const urls2query: UrlAndSchema[] = [];
   for (const { key, fn } of geoboxFunctions) {
-    if (
-      ["GeoJSON", "Geometry", "GeoJSON2d", "Geometry2d", "Geometry3d"].includes(
-        key,
-      )
-    ) {
-      continue;
-    }
+    // if (!["GeoJSON"].includes(key)) {
+    // continue;
+    // }
     const gbSchema = fn();
     const url = `/schema/${key}`;
     fastify.get(
@@ -226,16 +227,34 @@ describe("fastify-geobox", () => {
       },
       (_req, _res) => {
         if (key === "GeoJSON") {
-          return {
-            data: {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [0, 0],
+          const anyGeojson = {
+            type: "FeatureCollection",
+            features: [
+              {
+                type: "Feature",
+                geometry: {
+                  type: "Point",
+                  coordinates: [0, 0],
+                },
+                properties: {},
               },
-              properties: {},
-            },
+              // geom collection
+              {
+                type: "Feature",
+                geometry: {
+                  type: "GeometryCollection",
+                  geometries: [
+                    {
+                      type: "Point",
+                      coordinates: [0, 0],
+                    },
+                  ],
+                },
+                properties: {},
+              },
+            ],
           };
+          return { data: anyGeojson };
         }
         const data = Value.Create(gbSchema);
         return { data };
@@ -252,6 +271,9 @@ describe("fastify-geobox", () => {
         const validator = new geobox.JsonSchemaValidator(schema);
         validator.parse(data);
       } catch (e) {
+        // console.error(
+        //   JSON.stringify(e, null, 2)
+        // )
         console.error(e);
         console.error(r.payload);
         console.error(url);

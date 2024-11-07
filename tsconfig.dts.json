@@ -1,7 +1,9 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "./tsconfig.cjs.json",
-  "compilerOptions": {},
+  "compilerOptions": {
+    "noUnusedLocals": false
+  },
   "include": ["src/**/*"],
   "exclude": ["src/**/*.test.ts"]
 }

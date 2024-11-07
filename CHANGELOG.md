@@ -1,5 +1,15 @@
 # @jsse/geobox
 
+## 0.3.0
+
+### Minor Changes
+
+- 4c959ab: major refactoring and reorging as well as loosening a few types up a bit
+
+### Patch Changes
+
+- 4623d41: fixup over-arching geojson schema type
+
 ## 0.2.21
 
 ### Patch Changes
