@@ -1,7 +1,7 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.2.21",
+  "version": "0.3.0",
   "packageManager": "pnpm@9.11.0",
   "description": "geo + typebox => geo-schemas",
   "readme": "README.md",
@@ -45,7 +45,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
+    "build": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run typecheck && pnpm run lint",
     "build:cjs": "tsc -p tsconfig.cjs.json --outDir dist/lib/cjs --module commonjs",
     "build:dts": "tsc --emitDeclarationOnly -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json --outDir dist/lib/esm --module nodenext --moduleResolution nodenext --declaration",
@@ -63,7 +63,7 @@
     "prepublish": "pnpm run build",
     "prepublishOnly": "pnpm run build",
     "test": "vitest run",
-    "typecheck": "tsc -p tsconfig.esm.json --noEmit"
+    "typecheck": "tsc -p tsconfig.dts.json --noEmit"
   },
   "peerDependencies": {
     "@sinclair/typebox": "^0.32.30"

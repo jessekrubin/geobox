@@ -8,8 +8,7 @@ import type {
   TFeatureSchemas3d,
 } from "./types.js";
 import { Coord2d, Coord3d } from "../coord.js";
-import { FeatureId, GeojsonBoudingBox } from "./core.js";
-import { FeatureProperties } from "./index.js";
+import { FeatureId, FeatureProperties, GeojsonBoudingBox } from "./core.js";
 import { PointGeometry } from "./point-geometry.js";
 
 export function PointFeature<

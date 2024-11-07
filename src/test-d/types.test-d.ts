@@ -31,6 +31,15 @@ test("test point schema builder", () => {
 
   type PointFeatureBabydog = Static<typeof pointSchemaBabydog>;
   type PointFeatureBabydogBBox = PointFeatureBabydog["bbox"];
+
+  type BabydogProperties = PointFeatureBabydog["properties"];
+
+  // @ts-expect-error invalid properties
+  const _badProps: BabydogProperties = { dingo: 123 };
+  const _goodProps: BabydogProperties = {
+    dingo: "bash",
+  };
+
   const _bbox2: PointFeatureBabydogBBox = [0, 0, 0, 0];
   const _bbox3: PointFeatureBabydogBBox = [0, 0, 0, 0, 0, 0];
 
@@ -38,7 +47,6 @@ test("test point schema builder", () => {
 
   // @ts-expect-error invalid bbox...
   const _bboxBad = { a: 123 } satisfies PointFeatureBabydogBBox;
-
 
   console.debug({
     _bbox2,

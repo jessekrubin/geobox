@@ -6,5 +6,6 @@
     "moduleResolution": "Node",
     "outDir": "dist/lib/cjs"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.test-d.ts"]
 }
