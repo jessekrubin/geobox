@@ -33,6 +33,7 @@ test("test point schema builder", () => {
   const _bbox2: PointFeatureBabydogBBox = [0, 0, 0, 0];
   const _bbox3: PointFeatureBabydogBBox = [0, 0, 0, 0, 0, 0];
   const _bboxUndef: PointFeatureBabydogBBox = undefined;
+
   // @ts-expect-error invalid bbox...
   const _bboxBad = { a: 123 } satisfies PointFeatureBabydogBBox;
 
@@ -61,6 +62,16 @@ test("test point schema builder", () => {
     expectTypeOf(t.properties).toEqualTypeOf<{
       dingo: string;
     }>();
+
+    const pointSchemaBabydog2d = geobox.PointFeature2d({
+      properties: Type.Object({ dingo: Type.String() }),
+    });
+    const pointSchemaBabydog2dValidator =
+      TypeCompiler.Compile(pointSchemaBabydog2d);
+    type PointFeatureBabydog2d = Static<typeof pointSchemaBabydog2d>;
+    if (pointSchemaBabydog2dValidator.Check(pDingo)) {
+      const t = pDingo;
+    }
     // assertType<
     //   {
     //     type: "Feature";

@@ -13,7 +13,7 @@ import type { TBBoxSchema } from "./bbox.js";
 import type { TCoord2d, TCoord3d, TCoordinateSchema } from "./coord.js";
 import { Nullable } from "../tb.js";
 import { BBox } from "./bbox.js";
-import { Coord, Coord2d } from "./coord.js";
+import { Coord, Coord2d, Coord3d } from "./coord.js";
 
 export function GeoJSONType() {
   return Type.Union(
@@ -712,84 +712,150 @@ export function PointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return PointFeature(schemas, options);
+  return PointFeature(
+    {
+      coordinate: Coord2d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function PointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return PointFeature(schemas, options);
+  return PointFeature(
+    {
+      coordinate: Coord3d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function MultiPointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiPointFeature(schemas, options);
+  return MultiPointFeature(
+    {
+      coordinate: Coord2d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function MultiPointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiPointFeature(schemas, options);
+  return MultiPointFeature(
+    {
+      coordinate: Coord3d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function LineStringFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return LineStringFeature(schemas, options);
+  return LineStringFeature(
+    {
+      coordinate: Coord2d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function LineStringFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return LineStringFeature(schemas, options);
+  return LineStringFeature(
+    {
+      coordinate: Coord3d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function MultiLineStringFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiLineStringFeature(schemas, options);
+  return MultiLineStringFeature(
+    {
+      coordinate: Coord2d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function MultiLineStringFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiLineStringFeature(schemas, options);
+  return MultiLineStringFeature(
+    {
+      coordinate: Coord3d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function PolygonFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return PolygonFeature(schemas, options);
+  return PolygonFeature(
+    {
+      coordinate: Coord2d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function PolygonFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return PolygonFeature(schemas, options);
+  return PolygonFeature(
+    {
+      coordinate: Coord3d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 export function MultiPolygonFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiPolygonFeature(schemas, options);
+  return MultiPolygonFeature({ coordinate: Coord2d(), ...schemas }, options);
 }
 
 export function MultiPolygonFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiPolygonFeature(schemas, options);
+  return MultiPolygonFeature(
+    {
+      coordinate: Coord3d(),
+      ...schemas,
+    },
+    options,
+  );
 }
 
 /**
