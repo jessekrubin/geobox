@@ -38,7 +38,7 @@ export function GeoJSONType() {
 
 export function FeatureId() {
   return Type.Union([Type.String(), Type.Number(), Type.Null()], {
-    title: "Feature id",
+    title: "geojson-feature-id",
     description: "Feature id",
   });
 }
@@ -327,14 +327,40 @@ export function GeometryPrimitive<
       MultiPolygonGeometry(schemas),
     ],
     {
-      title: "GeoJSON Geometry",
-      description: "GeoJSON Geometry",
+      title: "GeoJSON Primitive Geometry",
+      description: "GeoJSON Primitive Geometry",
       ...options,
     },
   );
 }
 
-export function GeometryCollection(
+/**
+ * GeoJSON GeometryCollection of ONLY primitive geometries
+ * @param schemas
+ * @param options {SchemaOptions} typebox schema options
+ * @returns geojson geometry collection of primitives
+ */
+
+export function PrimitiveGeometryCollection<
+  TCoord extends TCoordinateSchema | undefined,
+  TBBox extends TBBoxSchema | undefined = undefined,
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
+  return Type.Object(
+    {
+      type: Type.Literal("GeometryCollection"),
+      geometries: Type.Array(GeometryPrimitive(schemas)),
+      bbox: Type.Optional(BBox()),
+    },
+    {
+      title: "GeoJSON GeometryCollection",
+      description: "GeoJSON GeometryCollection",
+      additionalProperties: false,
+      ...options,
+    },
+  );
+}
+
+export function GeometryCollectionRecursive(
   schemas?: TGeometrySchemas<TCoordinateSchema, TBBoxSchema>,
   options?: SchemaOptions,
 ) {
@@ -344,13 +370,13 @@ export function GeometryCollection(
         type: Type.Literal("GeometryCollection"),
         geometries: Type.Array(
           Type.Union([
-            This,
             PointGeometry(schemas),
             MultiPointGeometry(schemas),
             LineStringGeometry(schemas),
             MultiLineStringGeometry(schemas),
             PolygonGeometry(schemas),
             MultiPolygonGeometry(schemas),
+            This,
           ]),
         ),
         bbox: Type.Optional(BBox()),
@@ -358,12 +384,39 @@ export function GeometryCollection(
       {
         title: "GeoJSON GeometryCollection",
         description: "GeoJSON GeometryCollection",
-        additionalProperties: false,
         ...options,
       },
     ),
   );
   return s;
+}
+export function GeometryCollection<
+  TCoord extends TCoordinateSchema | undefined,
+  TBBox extends TBBoxSchema | undefined = undefined,
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
+  return Type.Object(
+    {
+      type: Type.Literal("GeometryCollection"),
+      geometries: Type.Array(
+        Type.Union([
+          PrimitiveGeometryCollection(schemas),
+          PointGeometry(schemas),
+          MultiPointGeometry(schemas),
+          LineStringGeometry(schemas),
+          MultiLineStringGeometry(schemas),
+          PolygonGeometry(schemas),
+          MultiPolygonGeometry(schemas),
+        ]),
+      ),
+      bbox: Type.Optional(BBox()),
+    },
+    {
+      title: "GeoJSON GeometryCollection",
+      description: "GeoJSON GeometryCollection",
+      additionalProperties: false,
+      ...options,
+    },
+  );
 }
 
 export function GeometryCollection2d(options?: SchemaOptions) {
@@ -394,6 +447,15 @@ export function Geometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
 >(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
+  return Type.Union([
+    PointGeometry(schemas),
+    MultiPointGeometry(schemas),
+    LineStringGeometry(schemas),
+    MultiLineStringGeometry(schemas),
+    PolygonGeometry(schemas),
+    MultiPolygonGeometry(schemas),
+    GeometryCollection(schemas),
+  ]);
   return Type.Union([GeometryPrimitive(), GeometryCollection()], {
     title: "GeoJSON Geometry",
     description: "GeoJSON Geometry",
@@ -452,44 +514,42 @@ export function FeatureProperties<T extends TSchema | undefined>(schema?: T) {
     schema === undefined ? Type.Unknown() : schema
   ) as GeojsonProperties<T>;
 }
-
 export function Feature<
-  Geom extends GeometrySchema,
-  P extends TSchema | undefined,
->(geometry?: Geom, properties?: P, options?: SchemaOptions) {
+  TProps extends TSchema | undefined,
+  TCoord extends TCoordinateSchema | undefined,
+  TBBox extends TBBoxSchema | undefined,
+>(
+  schemas?: TFeatureSchemas<TProps, TCoord, TBBox> & {
+    geometry?: GeometrySchema;
+  },
+  options?: SchemaOptions,
+) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
-      geometry: geometry || GeometryPrimitive(),
-      properties: FeatureProperties(properties),
+      id: Type.Optional(FeatureId()),
+      geometry: schemas?.geometry ?? Geometry(),
+      properties: FeatureProperties(schemas?.properties),
+      bbox: GeojsonBoudingBox(),
     },
-    options,
+    {
+      additionalProperties: false,
+      ...options,
+    },
   );
 }
 
-export function FeatureCollection(
-  feature?: ReturnType<typeof Feature>,
+export function FeatureCollection<FSchema extends TSchema>(
+  feature?: FSchema,
   options?: SchemaOptions,
 ) {
   return Type.Object(
     {
       type: Type.Literal("FeatureCollection"),
-      features: Type.Array(
-        feature ??
-          Type.Object(
-            {
-              type: Type.Literal("Feature"),
-              geometry: GeometryPrimitive(),
-              properties: GeojsonProperties(),
-            },
-            options,
-          ),
-      ),
+      features: Type.Array(feature ?? Feature()),
       bbox: Type.Optional(BBox()),
     },
     {
-      title: "GeoJSON FeatureCollection",
-      description: "GeoJSON FeatureCollection",
       additionalProperties: false,
       ...options,
     },
@@ -499,6 +559,7 @@ export function FeatureCollection(
 export function GeoJSON() {
   return Type.Union(
     [
+      Feature(),
       FeatureCollection(),
       GeometryCollection(),
       PointGeometry(),
@@ -511,25 +572,6 @@ export function GeoJSON() {
     {
       title: "GeoJSON",
       description: "GeoJSON",
-    },
-  );
-}
-
-export function GeoJSON2d() {
-  return Type.Union(
-    [
-      FeatureCollection(),
-      GeometryCollection(),
-      PointGeometry2d(),
-      LineStringGeometry(),
-      PolygonGeometry2d(),
-      MultiPointGeometry(),
-      MultiLineStringGeometry(),
-      MultiPolygonGeometry(),
-    ],
-    {
-      title: "GeoJSON 2d",
-      description: "GeoJSON 2d",
     },
   );
 }
@@ -767,11 +809,6 @@ export function features<
   const multiPoint = MultiPointFeature(schemas, options);
   const multiLine = MultiLineStringFeature(schemas, options);
   const multiPolygon = MultiPolygonFeature(schemas, options);
-  const featureCollection = FeatureCollection(
-    Type.Union([point, line, polygon, multiPoint, multiLine, multiPolygon], {
-      title: "FeatureCollection",
-    }),
-  );
   return {
     point,
     line,
@@ -779,7 +816,6 @@ export function features<
     multiPoint,
     multiLine,
     multiPolygon,
-    featureCollection,
   };
 }
 

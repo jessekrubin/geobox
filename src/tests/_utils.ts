@@ -42,6 +42,7 @@ type GeoboxFn = {
 
 export function geoboxSchemaFns(): GeoboxFn[] {
   const geoboxFnNames = geoboxSchemaFunctionNames();
+
   const geoboxFnNamesSet = new Set(geoboxFnNames);
   const gbfns: GeoboxFn[] = [];
   // add top-level functions

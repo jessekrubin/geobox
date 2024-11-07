@@ -36,33 +36,9 @@ const pointFeatureDingoProps = {
     dingo: "bash",
   },
 };
-
-/**
- * Nested geometry collection
- */
-const nestedGeometryCollection = {
-  type: "GeometryCollection",
-  geometries: [
-    {
-      type: "GeometryCollection",
-      geometries: [
-        {
-          type: "GeometryCollection",
-          geometries: [
-            {
-              type: "Point",
-              coordinates: [0, 0],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-};
 test("no-properties-schema-feature-with-geometry-schema", () => {
-  const pointSchema = geobox.Feature(geobox.PointGeometry());
+  const pointSchema = geobox.Feature({ geometry: geobox.PointGeometry() });
   const pointSchemaValidator = TypeCompiler.Compile(pointSchema);
-
   assert.equal(pointSchemaValidator.Check(simplePointFeature), true);
   if (pointSchemaValidator.Check(simplePointFeature)) {
     const t = simplePointFeature;
@@ -70,7 +46,6 @@ test("no-properties-schema-feature-with-geometry-schema", () => {
     expect(t.geometry.coordinates).toEqual([0, 0]);
   }
 });
-
 test("no-properties-schema", () => {
   const pointSchema = geobox.PointFeature();
   const pointSchemaValidator = TypeCompiler.Compile(pointSchema);
@@ -118,10 +93,34 @@ test("point-feature-schema-2d", () => {
 });
 
 test("nested-geometry-collection", () => {
-  const geometryCollectionSchema = geobox.GeometryCollection();
+  /**
+   * Nested geometry collection
+   */
+  const nestedGeometryCollection = {
+    type: "GeometryCollection",
+    geometries: [
+      {
+        type: "GeometryCollection",
+        geometries: [
+          {
+            type: "GeometryCollection",
+            geometries: [
+              {
+                type: "Point",
+                coordinates: [0, 0],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  };
+  const geometryCollectionSchema = geobox.GeometryCollectionRecursive();
   const validator = jsonschema(geometryCollectionSchema);
-
   const res = validator.tryFrom(nestedGeometryCollection);
+  if (!res.ok) {
+    console.log(JSON.stringify(res.error, null, 2));
+  }
   expect(res.ok).toBe(true);
 });
 
