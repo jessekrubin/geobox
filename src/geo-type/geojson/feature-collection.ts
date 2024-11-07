@@ -1,4 +1,4 @@
-import type { SchemaOptions, TSchema} from "@sinclair/typebox";
+import type { SchemaOptions, TSchema } from "@sinclair/typebox";
 import { Type } from "@sinclair/typebox";
 import { BBox } from "../bbox.js";
 import { Feature } from "./feature.js";

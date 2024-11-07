@@ -5,13 +5,13 @@ import type { TCoordinateSchema } from "../coord.js";
 import type {
   TFeatureSchemas,
   TFeatureSchemas2d,
-  TFeatureSchemas3d
+  TFeatureSchemas3d,
 } from "./types.js";
 import { Coord2d, Coord3d } from "../coord.js";
 import { FeatureId, FeatureProperties, GeojsonBoudingBox } from "./core.js";
-import { MultiPolygonGeometry } from "./multi-polygon-geometry.js";
+import { PolygonGeometry } from "./polygon-geometry.js";
 
-export function MultiPolygonFeature<
+export function PolygonFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
@@ -20,26 +20,21 @@ export function MultiPolygonFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: MultiPolygonGeometry({
+      geometry: PolygonGeometry({
         coordinate: schemas?.coordinate,
       }),
       properties: FeatureProperties(schemas?.properties),
       bbox: GeojsonBoudingBox(schemas?.bbox),
     },
-    {
-      title: "GeoJSON MultiPolygon Feature",
-      ...options,
-    },
+    options,
   );
 }
 
-export { MultiPolygonFeature as MultiPolygon };
-
-export function MultiPolygonFeature2d<
+export function PolygonFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiPolygonFeature(
+  return PolygonFeature(
     {
       coordinate: Coord2d(),
       ...schemas,
@@ -48,11 +43,11 @@ export function MultiPolygonFeature2d<
   );
 }
 
-export function MultiPolygonFeature3d<
+export function PolygonFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiPolygonFeature(
+  return PolygonFeature(
     {
       coordinate: Coord3d(),
       ...schemas,
@@ -61,5 +56,4 @@ export function MultiPolygonFeature3d<
   );
 }
 
-export { MultiPolygonFeature2d as MultiPolygon2d };
-export { MultiPolygonFeature3d as MultiPolygon3d };
+export { PolygonFeature as Polygon };

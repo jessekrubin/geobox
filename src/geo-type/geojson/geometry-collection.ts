@@ -11,9 +11,7 @@ import { MultiPointGeometry } from "./multi-point-geometry.js";
 import { MultiPolygonGeometry } from "./multi-polygon-geometry.js";
 import { PointGeometry } from "./point-geometry.js";
 import { PolygonGeometry } from "./polygon-geometry.js";
-import {
-  PrimitiveGeometryCollection
-} from "./primitive-geometry-collection.js";
+import { PrimitiveGeometryCollection } from "./primitive-geometry-collection.js";
 
 export function GeometryCollection<
   TCoord extends TCoordinateSchema | undefined,

@@ -1,11 +1,9 @@
+/* eslint-disable no-console */
 import type { Static } from "@sinclair/typebox";
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { assertType, expectTypeOf, test } from "vitest";
-import {
-  PointFeature,
-  PointFeature2d
-} from "../geo-type/_geojson/point-feature.js";
+import * as geobox from "../index.js";
 
 test("test point schema builder", () => {
   const pDingo: {
@@ -27,7 +25,7 @@ test("test point schema builder", () => {
       dingo: "bash",
     },
   };
-  const pointSchemaBabydog = PointFeature({
+  const pointSchemaBabydog = geobox.PointFeature({
     properties: Type.Object({ dingo: Type.String() }),
   });
 
@@ -35,6 +33,7 @@ test("test point schema builder", () => {
   type PointFeatureBabydogBBox = PointFeatureBabydog["bbox"];
   const _bbox2: PointFeatureBabydogBBox = [0, 0, 0, 0];
   const _bbox3: PointFeatureBabydogBBox = [0, 0, 0, 0, 0, 0];
+
   const _bboxUndef: PointFeatureBabydogBBox = undefined;
 
   // @ts-expect-error invalid bbox...
@@ -66,26 +65,23 @@ test("test point schema builder", () => {
       dingo: string;
     }>();
 
-    const pointSchemaBabydog2d = PointFeature2d({
+    // eslint-disable-next-line unused-imports/no-unused-vars,@typescript-eslint/no-unused-vars
+    const pointSchemaBabydog2d = geobox.PointFeature2d({
       properties: Type.Object({ dingo: Type.String() }),
     });
-    const pointSchemaBabydog2dValidator =
-      TypeCompiler.Compile(pointSchemaBabydog2d);
-    type PointFeatureBabydog2d = Static<typeof pointSchemaBabydog2d>;
-    if (pointSchemaBabydog2dValidator.Check(pDingo)) {
-      const t = pDingo;
-    }
-    // assertType<
-    //   {
-    //     type: "Feature";
-    //     geometry: {
-    //       type: "Point";
-    //       coordinates: [number, number];
-    //     };
-    //     properties: {
-    //       dingo: string;
-    //     };
-    //   }
-    // >(t);
+    type _PointFeatureBabydog2d = Static<typeof pointSchemaBabydog2d>;
+
+    const _test2dpoint: _PointFeatureBabydog2d["geometry"]["coordinates"] = [
+      0, 0,
+    ];
+
+    console.debug({
+      _test2dpoint,
+    });
+
+    // @ts-expect-error invalid coord
+    const _test2dpointBad: _PointFeatureBabydog2d["geometry"]["coordinates"] = [
+      0, 0, 0,
+    ];
   }
 });

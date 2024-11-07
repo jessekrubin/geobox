@@ -5,13 +5,13 @@ import type { TCoordinateSchema } from "../coord.js";
 import type {
   TFeatureSchemas,
   TFeatureSchemas2d,
-  TFeatureSchemas3d
+  TFeatureSchemas3d,
 } from "./types.js";
 import { Coord2d, Coord3d } from "../coord.js";
 import { FeatureId, FeatureProperties, GeojsonBoudingBox } from "./core.js";
-import { MultiPointGeometry } from "./multi-point-geometry.js";
+import { LineStringGeometry } from "./line-string-geometry.js";
 
-export function MultiPointFeature<
+export function LineStringFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
@@ -20,7 +20,7 @@ export function MultiPointFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: MultiPointGeometry({
+      geometry: LineStringGeometry({
         coordinate: schemas?.coordinate,
       }),
       properties: FeatureProperties(schemas?.properties),
@@ -30,13 +30,13 @@ export function MultiPointFeature<
   );
 }
 
-export { MultiPointFeature as MultiPoint };
+export { LineStringFeature as LineString };
 
-export function MultiPointFeature2d<
+export function LineStringFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiPointFeature(
+  return LineStringFeature(
     {
       coordinate: Coord2d(),
       ...schemas,
@@ -45,13 +45,13 @@ export function MultiPointFeature2d<
   );
 }
 
-export { MultiPointFeature2d as MultiPoint2d };
+export { LineStringFeature2d as LineString2d };
 
-export function MultiPointFeature3d<
+export function LineStringFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return MultiPointFeature(
+  return LineStringFeature(
     {
       coordinate: Coord3d(),
       ...schemas,
@@ -60,4 +60,4 @@ export function MultiPointFeature3d<
   );
 }
 
-export { MultiPointFeature3d as MultiPoint3d };
+export { LineStringFeature3d as LineString3d };

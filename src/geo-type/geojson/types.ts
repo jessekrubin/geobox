@@ -16,8 +16,7 @@ import type { GeojsonProperties } from "./properties.js";
 export type TGeojsonCoordinate<T extends TCoordinateSchema | undefined> =
   IsDefined<T> extends true ? AssertType<T> : ReturnType<typeof Coord>;
 
-
-export type TGeojsonBoundingBox<T extends TBBoxSchema | undefined> =
+export type TGeojsonBoundingBox<T extends TSchema | undefined> =
   IsDefined<T> extends true ? AssertType<T> : TOptional<TBBoxSchema>;
 export type TGeometrySchemas<
   TCoord extends TCoordinateSchema | undefined,

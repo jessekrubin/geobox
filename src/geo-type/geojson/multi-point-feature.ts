@@ -5,14 +5,13 @@ import type { TCoordinateSchema } from "../coord.js";
 import type {
   TFeatureSchemas,
   TFeatureSchemas2d,
-  TFeatureSchemas3d
+  TFeatureSchemas3d,
 } from "./types.js";
 import { Coord2d, Coord3d } from "../coord.js";
-import { FeatureId, GeojsonBoudingBox } from "./core.js";
-import { FeatureProperties } from "./index.js";
-import { PointGeometry } from "./point-geometry.js";
+import { FeatureId, FeatureProperties, GeojsonBoudingBox } from "./core.js";
+import { MultiPointGeometry } from "./multi-point-geometry.js";
 
-export function PointFeature<
+export function MultiPointFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
@@ -21,7 +20,7 @@ export function PointFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: PointGeometry({
+      geometry: MultiPointGeometry({
         coordinate: schemas?.coordinate,
       }),
       properties: FeatureProperties(schemas?.properties),
@@ -31,18 +30,13 @@ export function PointFeature<
   );
 }
 
-export { PointFeature as Point };
+export { MultiPointFeature as MultiPoint };
 
-/**
- * =====================================================
- * 2d and 3d feature variants
- * =====================================================
- */
-export function PointFeature2d<
+export function MultiPointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return PointFeature(
+  return MultiPointFeature(
     {
       coordinate: Coord2d(),
       ...schemas,
@@ -51,13 +45,13 @@ export function PointFeature2d<
   );
 }
 
-export { PointFeature2d as Point2d };
+export { MultiPointFeature2d as MultiPoint2d };
 
-export function PointFeature3d<
+export function MultiPointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return PointFeature(
+  return MultiPointFeature(
     {
       coordinate: Coord3d(),
       ...schemas,
@@ -66,4 +60,4 @@ export function PointFeature3d<
   );
 }
 
-export { PointFeature3d as Point3d };
+export { MultiPointFeature3d as MultiPoint3d };

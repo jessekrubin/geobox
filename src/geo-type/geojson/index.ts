@@ -8,6 +8,7 @@ export { LinkedCoordinateReferenceSystem } from "./crs.js";
 export { NamedCoordinateReferenceSystem } from "./crs.js";
 export { Feature } from "./feature.js";
 export { FeatureCollection } from "./feature-collection.js";
+export { GeoJSON } from "./geojson.js";
 export { GeoJSONType } from "./geojson-type.js";
 export { Geometry } from "./geometry.js";
 export { Geometry2d } from "./geometry.js";
@@ -15,9 +16,7 @@ export { Geometry3d } from "./geometry.js";
 export { GeometryCollection } from "./geometry-collection.js";
 export { GeometryCollection2d } from "./geometry-collection.js";
 export { GeometryCollection3d } from "./geometry-collection.js";
-export {
-  GeometryCollectionRecursive
-} from "./geometry-collection-recursive.js";
+export { GeometryCollectionRecursive } from "./geometry-collection-recursive.js";
 export { GeometryPrimitive } from "./geometry-primitive.js";
 export { LineString } from "./line-string-feature.js";
 export { LineString2d } from "./line-string-feature.js";
@@ -63,7 +62,5 @@ export { PolygonFeature3d } from "./polygon-feature.js";
 export { PolygonGeometry } from "./polygon-geometry.js";
 export { PolygonGeometry2d } from "./polygon-geometry.js";
 export { PolygonGeometry3d } from "./polygon-geometry.js";
-export {
-  PrimitiveGeometryCollection
-} from "./primitive-geometry-collection.js";
+export { PrimitiveGeometryCollection } from "./primitive-geometry-collection.js";
 export { GeojsonProperties } from "./properties.js";

@@ -5,7 +5,7 @@ import type { TCoordinateSchema } from "../coord.js";
 import type {
   TFeatureSchemas,
   TFeatureSchemas2d,
-  TFeatureSchemas3d
+  TFeatureSchemas3d,
 } from "./types.js";
 import { Coord2d, Coord3d } from "../coord.js";
 import { FeatureId, FeatureProperties } from "./core.js";
@@ -29,7 +29,6 @@ export function MultiLineStringFeature<
     options,
   );
 }
-
 
 export function MultiLineStringFeature2d<
   TProps extends TSchema | undefined,

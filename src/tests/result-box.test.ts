@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { PointFeature } from "../geo-type/_geojson/point-feature.js";
+import { PointFeature } from "../geo-type/geojson/point-feature.js";
 import * as geobox from "../index.js";
 
 describe("jsonschema", () => {

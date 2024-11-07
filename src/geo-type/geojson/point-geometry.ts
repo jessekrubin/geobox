@@ -32,8 +32,6 @@ export function PointGeometry<
 
 /** */
 
-
-
 export function PointGeometry2d(
   schemas?: TGeometrySchemas<TCoord2d>,
   options?: SchemaOptions,

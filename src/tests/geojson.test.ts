@@ -2,33 +2,23 @@
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { assert, describe, expect, test } from "vitest";
-import { Feature } from "../geo-type/_geojson/feature.js";
-import { FeatureCollection } from "../geo-type/_geojson/feature-collection.js";
-import { Geometry } from "../geo-type/_geojson/geometry.js";
+import { Feature } from "../geo-type/geojson/feature.js";
+import { FeatureCollection } from "../geo-type/geojson/feature-collection.js";
+import { Geometry } from "../geo-type/geojson/geometry.js";
 import {
   GeometryCollection,
-  GeometryCollection2d
-} from "../geo-type/_geojson/geometry-collection.js";
-import {
-  GeometryCollectionRecursive
-} from "../geo-type/_geojson/geometry-collection-recursive.js";
-import {
-  LineStringGeometry
-} from "../geo-type/_geojson/line-string-geometry.js";
-import {
-  MultiLineStringGeometry
-} from "../geo-type/_geojson/multi-line-string-geometry.js";
-import {
-  MultiPointGeometry
-} from "../geo-type/_geojson/multi-point-geometry.js";
-import {
-  MultiPolygonGeometry
-} from "../geo-type/_geojson/multi-polygon-geometry.js";
+  GeometryCollection2d,
+} from "../geo-type/geojson/geometry-collection.js";
+import { GeometryCollectionRecursive } from "../geo-type/geojson/geometry-collection-recursive.js";
+import { LineStringGeometry } from "../geo-type/geojson/line-string-geometry.js";
+import { MultiLineStringGeometry } from "../geo-type/geojson/multi-line-string-geometry.js";
+import { MultiPointGeometry } from "../geo-type/geojson/multi-point-geometry.js";
+import { MultiPolygonGeometry } from "../geo-type/geojson/multi-polygon-geometry.js";
 import {
   PointFeature,
-  PointFeature2d
-} from "../geo-type/_geojson/point-feature.js";
-import { PolygonGeometry } from "../geo-type/_geojson/polygon-geometry.js";
+  PointFeature2d,
+} from "../geo-type/geojson/point-feature.js";
+import { PolygonGeometry } from "../geo-type/geojson/polygon-geometry.js";
 import * as geobox from "../index.js";
 import { jsonschema } from "../result-box.js";
 import {
@@ -309,7 +299,7 @@ describe("geojson-geometry-validation", () => {
     expect(res.ok).toBe(true);
   });
 
-  const geojsonschema = geobox.Index();
+  const geojsonschema = geobox.GeoJSON();
   test.each([
     { name: "PointGeometry", data: POINT_GEOMETRY },
     { name: "LineStringGeometry", data: LINE_STRING_GEOMETRY },

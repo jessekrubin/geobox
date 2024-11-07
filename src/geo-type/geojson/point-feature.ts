@@ -5,13 +5,14 @@ import type { TCoordinateSchema } from "../coord.js";
 import type {
   TFeatureSchemas,
   TFeatureSchemas2d,
-  TFeatureSchemas3d
+  TFeatureSchemas3d,
 } from "./types.js";
 import { Coord2d, Coord3d } from "../coord.js";
-import { FeatureId, FeatureProperties, GeojsonBoudingBox } from "./core.js";
-import { PolygonGeometry } from "./polygon-geometry.js";
+import { FeatureId, GeojsonBoudingBox } from "./core.js";
+import { FeatureProperties } from "./index.js";
+import { PointGeometry } from "./point-geometry.js";
 
-export function PolygonFeature<
+export function PointFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
@@ -20,7 +21,7 @@ export function PolygonFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: PolygonGeometry({
+      geometry: PointGeometry({
         coordinate: schemas?.coordinate,
       }),
       properties: FeatureProperties(schemas?.properties),
@@ -30,11 +31,18 @@ export function PolygonFeature<
   );
 }
 
-export function PolygonFeature2d<
+export { PointFeature as Point };
+
+/**
+ * =====================================================
+ * 2d and 3d feature variants
+ * =====================================================
+ */
+export function PointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return PolygonFeature(
+  return PointFeature(
     {
       coordinate: Coord2d(),
       ...schemas,
@@ -43,11 +51,13 @@ export function PolygonFeature2d<
   );
 }
 
-export function PolygonFeature3d<
+export { PointFeature2d as Point2d };
+
+export function PointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return PolygonFeature(
+  return PointFeature(
     {
       coordinate: Coord3d(),
       ...schemas,
@@ -56,4 +66,4 @@ export function PolygonFeature3d<
   );
 }
 
-export { PolygonFeature as Polygon };
+export { PointFeature3d as Point3d };

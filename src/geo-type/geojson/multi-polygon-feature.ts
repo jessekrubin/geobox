@@ -5,13 +5,13 @@ import type { TCoordinateSchema } from "../coord.js";
 import type {
   TFeatureSchemas,
   TFeatureSchemas2d,
-  TFeatureSchemas3d
+  TFeatureSchemas3d,
 } from "./types.js";
 import { Coord2d, Coord3d } from "../coord.js";
 import { FeatureId, FeatureProperties, GeojsonBoudingBox } from "./core.js";
-import { LineStringGeometry } from "./line-string-geometry.js";
+import { MultiPolygonGeometry } from "./multi-polygon-geometry.js";
 
-export function LineStringFeature<
+export function MultiPolygonFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
@@ -20,23 +20,26 @@ export function LineStringFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: LineStringGeometry({
+      geometry: MultiPolygonGeometry({
         coordinate: schemas?.coordinate,
       }),
       properties: FeatureProperties(schemas?.properties),
       bbox: GeojsonBoudingBox(schemas?.bbox),
     },
-    options,
+    {
+      title: "GeoJSON MultiPolygon Feature",
+      ...options,
+    },
   );
 }
 
-export { LineStringFeature as LineString };
+export { MultiPolygonFeature as MultiPolygon };
 
-export function LineStringFeature2d<
+export function MultiPolygonFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
-  return LineStringFeature(
+  return MultiPolygonFeature(
     {
       coordinate: Coord2d(),
       ...schemas,
@@ -45,13 +48,11 @@ export function LineStringFeature2d<
   );
 }
 
-export { LineStringFeature2d as LineString2d };
-
-export function LineStringFeature3d<
+export function MultiPolygonFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
-  return LineStringFeature(
+  return MultiPolygonFeature(
     {
       coordinate: Coord3d(),
       ...schemas,
@@ -60,4 +61,5 @@ export function LineStringFeature3d<
   );
 }
 
-export { LineStringFeature3d as LineString3d };
+export { MultiPolygonFeature2d as MultiPolygon2d };
+export { MultiPolygonFeature3d as MultiPolygon3d };

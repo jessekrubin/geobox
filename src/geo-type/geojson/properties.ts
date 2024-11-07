@@ -1,4 +1,4 @@
-import type { SchemaOptions} from "@sinclair/typebox";
+import type { SchemaOptions } from "@sinclair/typebox";
 import { Type } from "@sinclair/typebox";
 import { Nullable } from "../../tb.js";
 
