@@ -5,5 +5,11 @@
     "outDir": "dist/lib/esm"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "scratch", "src/test-d/**/*.test-d.ts"]
+  "exclude": [
+    "src/**/*.test-d.ts",
+    "src/**/*.test.ts",
+    "src/**/*.spec.ts",
+    "dist",
+    "scratch"
+  ]
 }

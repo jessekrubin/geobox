@@ -18,6 +18,7 @@ export function geoboxSchemaFunctionNames(): string[] {
     .filter(
       ([k, v]) =>
         typeof v === "function" &&
+        k[0] !== undefined &&
         v.name[0] === k[0].toUpperCase() &&
         /[A-Z]/.test(v.name[0]),
     )
@@ -29,6 +30,7 @@ export function typeboxSchemaFunctionNames() {
     .filter(
       ([k, v]) =>
         typeof v === "function" &&
+        k[0] !== undefined &&
         v.name[0] === k[0].toUpperCase() &&
         /[A-Z]/.test(v.name[0]),
     )

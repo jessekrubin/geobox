@@ -4,8 +4,9 @@
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "outDir": "dist/lib/cjs"
+    "outDir": "dist/lib/cjs",
+    "verbatimModuleSyntax": null
   },
   "include": ["src/**/*"],
-  "exclude": ["src/**/*.test-d.ts"]
+  "exclude": ["src/**/*.test-d.ts", "src/**/*.test.ts"]
 }

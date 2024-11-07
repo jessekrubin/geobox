@@ -263,8 +263,8 @@ describe("fastify-geobox", () => {
     urls2query.push({ url, schema: gbSchema });
   }
 
-  test("all-schema", async () => {
-    for (const { url, schema } of urls2query) {
+  for (const { url, schema } of urls2query) {
+    test(url, async () => {
       const r = await fastify.inject(url);
       try {
         const { data } = JSON.parse(r.payload);
@@ -278,6 +278,6 @@ describe("fastify-geobox", () => {
         console.error(r.payload);
         console.error(url);
       }
-    }
-  });
+    });
+  }
 });

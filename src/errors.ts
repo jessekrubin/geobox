@@ -21,7 +21,7 @@ export class GeoboxValueError extends Error {
     return `${super.toString()}\n${JSON.stringify(this.errors, undefined, 2)}`;
   }
 
-  public toString() {
+  public override toString() {
     return this.fmt();
   }
 }
