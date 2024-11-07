@@ -2,7 +2,10 @@ import type { Static } from "@sinclair/typebox";
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { assertType, expectTypeOf, test } from "vitest";
-import * as geobox from "../index.js";
+import {
+  PointFeature,
+  PointFeature2d
+} from "../geo-type/_geojson/point-feature.js";
 
 test("test point schema builder", () => {
   const pDingo: {
@@ -24,7 +27,7 @@ test("test point schema builder", () => {
       dingo: "bash",
     },
   };
-  const pointSchemaBabydog = geobox.PointFeature({
+  const pointSchemaBabydog = PointFeature({
     properties: Type.Object({ dingo: Type.String() }),
   });
 
@@ -63,7 +66,7 @@ test("test point schema builder", () => {
       dingo: string;
     }>();
 
-    const pointSchemaBabydog2d = geobox.PointFeature2d({
+    const pointSchemaBabydog2d = PointFeature2d({
       properties: Type.Object({ dingo: Type.String() }),
     });
     const pointSchemaBabydog2dValidator =

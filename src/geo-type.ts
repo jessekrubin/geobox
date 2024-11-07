@@ -1,3 +1,4 @@
+export * from "./geo-type/_geojson/index.js";
 export {
   BBox,
   BBox2d,
@@ -22,8 +23,6 @@ export {
   type TCoord3d,
   type TCoordinateSchema,
 } from "./geo-type/coord.js";
-export * from "./geo-type/geojson.js";
-export * from "./geo-type/geojson-crs.js";
 export * as geostats from "./geo-type/geostats.js";
 export {
   GeostatsAttribute,

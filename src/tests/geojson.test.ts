@@ -2,6 +2,33 @@
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { assert, describe, expect, test } from "vitest";
+import { Feature } from "../geo-type/_geojson/feature.js";
+import { FeatureCollection } from "../geo-type/_geojson/feature-collection.js";
+import { Geometry } from "../geo-type/_geojson/geometry.js";
+import {
+  GeometryCollection,
+  GeometryCollection2d
+} from "../geo-type/_geojson/geometry-collection.js";
+import {
+  GeometryCollectionRecursive
+} from "../geo-type/_geojson/geometry-collection-recursive.js";
+import {
+  LineStringGeometry
+} from "../geo-type/_geojson/line-string-geometry.js";
+import {
+  MultiLineStringGeometry
+} from "../geo-type/_geojson/multi-line-string-geometry.js";
+import {
+  MultiPointGeometry
+} from "../geo-type/_geojson/multi-point-geometry.js";
+import {
+  MultiPolygonGeometry
+} from "../geo-type/_geojson/multi-polygon-geometry.js";
+import {
+  PointFeature,
+  PointFeature2d
+} from "../geo-type/_geojson/point-feature.js";
+import { PolygonGeometry } from "../geo-type/_geojson/polygon-geometry.js";
 import * as geobox from "../index.js";
 import { jsonschema } from "../result-box.js";
 import {
@@ -37,7 +64,7 @@ const pointFeatureDingoProps = {
   },
 };
 test("no-properties-schema-feature-with-geometry-schema", () => {
-  const pointSchema = geobox.Feature({ geometry: geobox.PointGeometry() });
+  const pointSchema = Feature({ geometry: geobox.PointGeometry() });
   const pointSchemaValidator = TypeCompiler.Compile(pointSchema);
   assert.equal(pointSchemaValidator.Check(simplePointFeature), true);
   if (pointSchemaValidator.Check(simplePointFeature)) {
@@ -47,7 +74,7 @@ test("no-properties-schema-feature-with-geometry-schema", () => {
   }
 });
 test("no-properties-schema", () => {
-  const pointSchema = geobox.PointFeature();
+  const pointSchema = PointFeature();
   const pointSchemaValidator = TypeCompiler.Compile(pointSchema);
 
   assert.equal(pointSchemaValidator.Check(simplePointFeature), true);
@@ -59,7 +86,7 @@ test("no-properties-schema", () => {
 });
 
 test("point-with-properties-schema", () => {
-  const pointSchemaBabydog = geobox.PointFeature({
+  const pointSchemaBabydog = PointFeature({
     properties: Type.Object({ dingo: Type.String() }),
   });
   const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
@@ -76,7 +103,7 @@ test("point-with-properties-schema", () => {
 });
 
 test("point-feature-schema-2d", () => {
-  const pointSchemaBabydog = geobox.PointFeature2d({
+  const pointSchemaBabydog = PointFeature2d({
     properties: Type.Object({ dingo: Type.String() }),
   });
   const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
@@ -115,7 +142,7 @@ test("nested-geometry-collection", () => {
       },
     ],
   };
-  const geometryCollectionSchema = geobox.GeometryCollectionRecursive();
+  const geometryCollectionSchema = GeometryCollectionRecursive();
   const validator = jsonschema(geometryCollectionSchema);
   const res = validator.tryFrom(nestedGeometryCollection);
   if (!res.ok) {
@@ -144,7 +171,7 @@ const aFeeeeetCollection = {
 };
 
 test("feature-collection", () => {
-  const featureCollectionSchema = geobox.FeatureCollection();
+  const featureCollectionSchema = FeatureCollection();
   const validator = jsonschema(featureCollectionSchema);
 
   const res = validator.tryFrom(aFeeeeetCollection);
@@ -169,7 +196,7 @@ describe("geojson-geometry-validation", () => {
   });
 
   test("line-string", () => {
-    const lineStringSchema = geobox.LineStringGeometry();
+    const lineStringSchema = LineStringGeometry();
     const validator = jsonschema(lineStringSchema);
 
     const res = validator.tryFrom(LINE_STRING_GEOMETRY);
@@ -180,7 +207,7 @@ describe("geojson-geometry-validation", () => {
   });
 
   test("polygon", () => {
-    const polygonSchema = geobox.PolygonGeometry();
+    const polygonSchema = PolygonGeometry();
     const validator = jsonschema(polygonSchema);
 
     const res = validator.tryFrom(POLYGON_GEOM);
@@ -192,7 +219,7 @@ describe("geojson-geometry-validation", () => {
   });
 
   test("multi-point", () => {
-    const multiPointSchema = geobox.MultiPointGeometry();
+    const multiPointSchema = MultiPointGeometry();
     const validator = jsonschema(multiPointSchema);
 
     const res = validator.tryFrom(MULTI_POINT_GEOMETRY);
@@ -204,7 +231,7 @@ describe("geojson-geometry-validation", () => {
   });
 
   test("multi-line-string", () => {
-    const multiLineStringSchema = geobox.MultiLineStringGeometry();
+    const multiLineStringSchema = MultiLineStringGeometry();
     const validator = jsonschema(multiLineStringSchema);
 
     const res = validator.tryFrom(MULTI_LINE_STRING_GEOM);
@@ -216,7 +243,7 @@ describe("geojson-geometry-validation", () => {
   });
 
   test("multi-polygon", () => {
-    const multiPolygonSchema = geobox.MultiPolygonGeometry();
+    const multiPolygonSchema = MultiPolygonGeometry();
     const validator = jsonschema(multiPolygonSchema);
 
     const res = validator.tryFrom(MULTI_POLYGON_GEOM);
@@ -228,7 +255,7 @@ describe("geojson-geometry-validation", () => {
   });
 
   test("geometry-collection", () => {
-    const geometryCollectionSchema = geobox.GeometryCollection();
+    const geometryCollectionSchema = GeometryCollection();
     const validator = jsonschema(geometryCollectionSchema);
 
     const res = validator.tryFrom(GEOMETRY_COLLECTION);
@@ -239,7 +266,7 @@ describe("geojson-geometry-validation", () => {
     expect(res.ok).toBe(true);
   });
   test("geometry-collection-2d", () => {
-    const geometryCollectionSchema = geobox.GeometryCollection2d();
+    const geometryCollectionSchema = GeometryCollection2d();
     const validator = jsonschema(geometryCollectionSchema);
 
     const res = validator.tryFrom(GEOMETRY_COLLECTION);
@@ -249,7 +276,7 @@ describe("geojson-geometry-validation", () => {
     expect(res.ok).toBe(true);
   });
   test("feature-collection-val", () => {
-    const featureCollectionSchema = geobox.FeatureCollection();
+    const featureCollectionSchema = FeatureCollection();
     const validator = jsonschema(featureCollectionSchema);
 
     const res = validator.tryFrom(FEATURE_COLLECTION);
@@ -260,7 +287,7 @@ describe("geojson-geometry-validation", () => {
     expect(res.ok).toBe(true);
   });
 
-  const geometrySchema = geobox.Geometry();
+  const geometrySchema = Geometry();
   test.each([
     { name: "PointGeometry", data: POINT_GEOMETRY },
     { name: "LineStringGeometry", data: LINE_STRING_GEOMETRY },
@@ -282,7 +309,7 @@ describe("geojson-geometry-validation", () => {
     expect(res.ok).toBe(true);
   });
 
-  const geojsonschema = geobox.GeoJSON();
+  const geojsonschema = geobox.Index();
   test.each([
     { name: "PointGeometry", data: POINT_GEOMETRY },
     { name: "LineStringGeometry", data: LINE_STRING_GEOMETRY },

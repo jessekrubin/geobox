@@ -1,8 +1,9 @@
 import { describe, expect, test } from "vitest";
+import { PointFeature } from "../geo-type/_geojson/point-feature.js";
 import * as geobox from "../index.js";
 
 describe("jsonschema", () => {
-  const rawSchema = geobox.PointFeature();
+  const rawSchema = PointFeature();
   const s = geobox.jsonschema(rawSchema);
 
   test("jsonschema", () => {
@@ -38,7 +39,7 @@ describe("jsonschema", () => {
 });
 
 describe("json-schema-destructure", () => {
-  const rawSchema = geobox.PointFeature();
+  const rawSchema = PointFeature();
   const s = geobox.jsonschema(rawSchema);
   const {
     schema,
