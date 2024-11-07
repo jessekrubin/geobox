@@ -39,7 +39,7 @@ test("test point schema builder", () => {
   // @ts-expect-error invalid bbox...
   const _bboxBad = { a: 123 } satisfies PointFeatureBabydogBBox;
 
-  // eslint-disable-next-line no-console
+
   console.debug({
     _bbox2,
     _bbox3,
