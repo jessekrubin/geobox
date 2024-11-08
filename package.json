@@ -1,8 +1,8 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.3.0",
-  "packageManager": "pnpm@9.11.0",
+  "version": "0.3.1",
+  "packageManager": "pnpm@9.12.3",
   "description": "geo + typebox => geo-schemas",
   "readme": "README.md",
   "publishConfig": {
@@ -18,6 +18,16 @@
       "require": {
         "types": "./dist/lib/esm/index.d.ts",
         "default": "./dist/index.cjs"
+      }
+    },
+    "./lite": {
+      "import": {
+        "types": "./dist/lib/cjs/index.d.ts",
+        "default": "./dist/lite.js"
+      },
+      "require": {
+        "types": "./dist/lib/esm/index.d.ts",
+        "default": "./dist/lite.cjs"
       }
     },
     "./lib/*.js": {
@@ -45,12 +55,13 @@
     "dist"
   ],
   "scripts": {
-    "build": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run typecheck && pnpm run lint",
+    "build": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run build:post && pnpm run typecheck && pnpm run lint",
     "build:cjs": "tsc -p tsconfig.cjs.json --outDir dist/lib/cjs --module commonjs",
     "build:dts": "tsc --emitDeclarationOnly -p tsconfig.cjs.json",
     "build:esm": "tsc -p tsconfig.esm.json --outDir dist/lib/esm --module nodenext --moduleResolution nodenext --declaration",
     "build:fast": "tsup src/index.ts --format cjs,esm",
-    "build:tsc": "tsc -b tsconfig.build.json && tsx scripts/post-build.mts",
+    "build:tsc": "tsc -b tsconfig.build.json",
+    "build:post": "tsx scripts/post-build.mts",
     "build:tsup": "tsup src/index.ts --format cjs,esm --dts",
     "change": "changeset",
     "ci": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",

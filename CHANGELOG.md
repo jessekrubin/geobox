@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.3.1
+
+### Patch Changes
+
+- 8d46a67: add lite version w/o descriptions
+
 ## 0.3.0
 
 ### Minor Changes
