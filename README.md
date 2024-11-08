@@ -7,16 +7,22 @@ geo-spatial json-schemas à la [typebox](https://github.com/sinclairzx81/typebox
 ## Features
 
 - Schema fns:
-    - customizable geojson-schema functions for geometry types, feature types, and feature-collection types
-    - customizable coordinate types for 2d and 3d coordinates
-    - TileJSON schema(s)
-    - geojson simplestyle-spec properties schema(s) as defined by [mapbox](https://github.com/mapbox/simplestyle-spec)
-    - mapbox-geostats schema(s) as defined by [mapbox](https://github.com/mapbox/mapbox-geostats)
-    - sprite-sheet schema builders for maplibre/mapbox/deck.gl spritesheets
-    - Tile-Matrix-Set schema(s) as defined by [OGC](https://www.ogc.org/our-work/standard/tms/)
-- basic validator class to wrap schemas and validate typebox schemas using typebox's
-- `@jsse/geobox/lite`: A bundled version of the library with the many description-strings stripped out for when you don't need/want them (this is done via a crude `sed`ing)
-
+  - customizable geojson-schema functions for geometry types, feature types, and
+    feature-collection types
+  - customizable coordinate types for 2d and 3d coordinates
+  - TileJSON schema(s)
+  - geojson simplestyle-spec properties schema(s) as defined by
+    [mapbox](https://github.com/mapbox/simplestyle-spec)
+  - mapbox-geostats schema(s) as defined by
+    [mapbox](https://github.com/mapbox/mapbox-geostats)
+  - sprite-sheet schema builders for maplibre/mapbox/deck.gl spritesheets
+  - Tile-Matrix-Set schema(s) as defined by
+    [OGC](https://www.ogc.org/our-work/standard/tms/)
+- basic validator class to wrap schemas and validate typebox schemas using
+  typebox's
+- `@jsse/geobox/lite`: A bundled version of the library with the many
+  description-strings stripped out for when you don't need/want them (this is
+  done via a crude `sed`ing)
 
 ## Install
 
@@ -78,7 +84,7 @@ type Point2dGeometrySchema = Static<typeof point2dGeometrySchema>;
 // }
 ```
 
-___
+---
 
 ## TODO
 

@@ -1,6 +1,5 @@
 **/.rush/temp/
 *.log
-*.md
 *.pid
 *.pid.lock
 *.py[co]
