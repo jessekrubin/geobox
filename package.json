@@ -2,7 +2,7 @@
   "name": "@jsse/geobox",
   "type": "module",
   "version": "0.3.0",
-  "packageManager": "pnpm@9.11.0",
+  "packageManager": "pnpm@9.12.3",
   "description": "geo + typebox => geo-schemas",
   "readme": "README.md",
   "publishConfig": {
@@ -64,7 +64,7 @@
     "build:post": "tsx scripts/post-build.mts",
     "build:tsup": "tsup src/index.ts --format cjs,esm --dts",
     "change": "changeset",
-    "ci": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run lint",
+    "ci": "pnpm run test && pnpm run build:tsup && pnpm run build:tsc && pnpm run linti",
     "ci:publish": "pnpm publish",
     "ci:version": "changeset version && pnpm install --no-frozen-lockfile && pnpm fmt",
     "cov": "vitest --coverage",
