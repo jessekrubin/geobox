@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.3.2
+
+### Patch Changes
+
+- Add deref/references to validator
+
 ## 0.3.1
 
 ### Patch Changes
