@@ -1,5 +1,5 @@
-import type { Static, TSchema } from "@sinclair/typebox";
 import type { TypeCheck, ValueError } from "@sinclair/typebox/compiler";
+import { type Static, type TSchema, Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { Value } from "@sinclair/typebox/value";
 import type { TSchemaStrict } from "./tb.js";
@@ -96,6 +96,7 @@ function isCheckOptions(value: unknown): value is CheckOptions {
  */
 export class JsonSchemaValidator<T extends TSchema> {
   public schema: T;
+  public references: TSchema[];
   public readonly options: { compile: boolean; limit?: number };
   private _typeguard?: TypeCheck<T>;
 
@@ -103,18 +104,21 @@ export class JsonSchemaValidator<T extends TSchema> {
    * Creates a new JsonSchemaValidator instance.
    *
    * @param schema - The TypeBox schema to validate.
+   * @param references - Optional array of referenced schemas.
    * @param options - Optional options for the validator.
    * @param options.compile - Whether to compile the schema (default: true).
    * @param options.limit - default maximum number of errors to return (default: undefined).
    */
   public constructor(
     schema: T,
+    references?: TSchema[],
     options?: { compile?: boolean; limit?: number },
   ) {
     this.schema = schema;
     this.options = {
       compile: options?.compile ?? true,
     };
+    this.references = references ?? [];
   }
 
   /**
@@ -122,16 +126,17 @@ export class JsonSchemaValidator<T extends TSchema> {
    */
   public static new<T extends TSchema>(
     schema: T,
+    references?: TSchema[],
     options?: { compile?: boolean; limit?: number },
   ): JsonSchemaValidator<T> {
-    return new JsonSchemaValidator(schema, options);
+    return new JsonSchemaValidator(schema, references, options);
   }
 
   /**
    * Compiles the schema and returns the typeguard
    */
-  public compile(): TypeCheck<T> {
-    const tg = TypeCompiler.Compile(this.schema);
+  public compile(references?: TSchema[]): TypeCheck<T> {
+    const tg = TypeCompiler.Compile(this.schema, references ?? this.references);
     this._typeguard = tg;
     return tg;
   }
@@ -152,7 +157,7 @@ export class JsonSchemaValidator<T extends TSchema> {
   public get guard(): (data: unknown) => data is Static<T> {
     if (!this.options.compile) {
       return (data: unknown): data is Static<T> => {
-        return Value.Check(this.schema, data);
+        return Value.Check(this.schema, this.references, data);
       };
     }
     return (data: unknown): data is Static<T> => {
@@ -352,6 +357,13 @@ export class JsonSchemaValidator<T extends TSchema> {
   };
 
   /**
+   * Deref the schema
+   */
+  public deref = (references?: TSchema[]) => {
+    return Type.Deref(this.schema, references ?? this.references);
+  };
+
+  /**
    * Returns a "strict" schema for this schema with typebox attributes/symbols removed
    */
   public strictSchema(): TSchemaStrict {
@@ -359,6 +371,7 @@ export class JsonSchemaValidator<T extends TSchema> {
     return JSON.parse(JSON.stringify(this.schema));
   }
 }
+
 /**
  * Alias/shortcut for creating a new JsonSchema instance
  */
