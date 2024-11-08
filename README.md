@@ -15,6 +15,7 @@ geo-spatial json-schemas à la [typebox](https://github.com/sinclairzx81/typebox
     - sprite-sheet schema builders for maplibre/mapbox/deck.gl spritesheets
     - Tile-Matrix-Set schema(s) as defined by [OGC](https://www.ogc.org/our-work/standard/tms/)
 - basic validator class to wrap schemas and validate typebox schemas using typebox's
+- `@jsse/geobox/lite`: A bundled version of the library with the many description-strings stripped out for when you don't need/want them (this is done via a crude `sed`ing)
 
 
 ## Install

@@ -21,6 +21,7 @@ end_of_line = lf
 # Markdown Files
 [*.{md,mdx}]
 trim_trailing_whitespace = false
+max_line_length = 80
 
 [*.{bat,cmd,ps1}]
 end_of_line = crlf

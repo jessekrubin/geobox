@@ -70,11 +70,9 @@ async function makeLite() {
   ]);
 }
 
-
 async function main() {
   await Promise.all([writeCjsPackageJson(), writeEsmPackageJson()]);
   await makeLite();
-
 }
 
 await main();
