@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.3.4
+
+### Patch Changes
+
+- fix exports
+
 ## 0.3.3
 
 ### Patch Changes

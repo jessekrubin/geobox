@@ -1,7 +1,7 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "packageManager": "pnpm@9.12.3",
   "description": "geo + typebox => geo-schemas",
   "readme": "README.md",
@@ -12,21 +12,21 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./dist/lib/cjs/index.d.ts",
+        "types": "./dist/lib/esm/index.d.ts",
         "default": "./dist/index.js"
       },
       "require": {
-        "types": "./dist/lib/esm/index.d.ts",
+        "types": "./dist/lib/cjs/index.d.ts",
         "default": "./dist/index.cjs"
       }
     },
     "./lite": {
       "import": {
-        "types": "./dist/lib/cjs/index.d.ts",
+        "types": "./dist/lib/esm/index.d.ts",
         "default": "./dist/lite.js"
       },
       "require": {
-        "types": "./dist/lib/esm/index.d.ts",
+        "types": "./dist/lib/cjs/index.d.ts",
         "default": "./dist/lite.cjs"
       }
     },
