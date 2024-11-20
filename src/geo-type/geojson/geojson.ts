@@ -1,6 +1,6 @@
 import { Type } from "@sinclair/typebox";
-import { Feature } from "./feature.js";
 import { FeatureCollection } from "./feature-collection.js";
+import { Feature } from "./feature.js";
 import { GeometryCollection } from "./geometry-collection.js";
 import { LineStringGeometry } from "./line-string-geometry.js";
 import { MultiLineStringGeometry } from "./multi-line-string-geometry.js";

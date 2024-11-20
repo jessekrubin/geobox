@@ -2,14 +2,14 @@
 import { Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { assert, describe, expect, test } from "vitest";
-import { Feature } from "../geo-type/geojson/feature.js";
 import { FeatureCollection } from "../geo-type/geojson/feature-collection.js";
-import { Geometry } from "../geo-type/geojson/geometry.js";
+import { Feature } from "../geo-type/geojson/feature.js";
+import { GeometryCollectionRecursive } from "../geo-type/geojson/geometry-collection-recursive.js";
 import {
   GeometryCollection,
   GeometryCollection2d,
 } from "../geo-type/geojson/geometry-collection.js";
-import { GeometryCollectionRecursive } from "../geo-type/geojson/geometry-collection-recursive.js";
+import { Geometry } from "../geo-type/geojson/geometry.js";
 import { LineStringGeometry } from "../geo-type/geojson/line-string-geometry.js";
 import { MultiLineStringGeometry } from "../geo-type/geojson/multi-line-string-geometry.js";
 import { MultiPointGeometry } from "../geo-type/geojson/multi-point-geometry.js";
