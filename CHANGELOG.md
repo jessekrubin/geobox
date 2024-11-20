@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.3.5
+
+### Patch Changes
+
+- eslint update and eslint fix
+
 ## 0.3.4
 
 ### Patch Changes
