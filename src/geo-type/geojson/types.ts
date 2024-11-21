@@ -34,14 +34,6 @@ export type TFeatureSchemas<
   properties?: TProperties;
 } & TGeometrySchemas<TCoord, TBBox>;
 
-export type TFeatureSchemasV2<
-  TProperties extends TSchema | undefined,
-  TCoord extends TCoordinateSchema | undefined,
-  TBBox extends TBBoxSchema | undefined,
-> = {
-  properties?: TProperties;
-} & TGeometrySchemas<TCoord, TBBox>;
-
 export type TProperties<T extends TSchema | undefined> =
   IsDefined<T> extends true
     ? AssertType<T>
