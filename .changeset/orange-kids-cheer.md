@@ -2,4 +2,4 @@
 "@jsse/geobox": patch
 ---
 
-null feature
+handle null geometry in Feature schema
