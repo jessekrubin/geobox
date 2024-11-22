@@ -30,5 +30,9 @@ export function FeatureId() {
 }
 
 export function FeatureProperties<T extends TSchema | undefined>(schema?: T) {
-  return (schema === undefined ? Type.Unknown() : schema) as TProperties<T>;
+  return (
+    schema === undefined
+      ? Type.Union([Type.Null(), Type.Record(Type.String(), Type.Any())])
+      : schema
+  ) as TProperties<T>;
 }
