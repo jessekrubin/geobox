@@ -1,7 +1,7 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "packageManager": "pnpm@9.12.3",
   "description": "geo + typebox => geo-schemas",
   "readme": "README.md",

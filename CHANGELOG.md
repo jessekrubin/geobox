@@ -1,5 +1,12 @@
 # @jsse/geobox
 
+## 0.3.6
+
+### Patch Changes
+
+- 5010c98: handle null geometry in Feature schema
+- 5010c98: merged in old geoparquet branch
+
 ## 0.3.5
 
 ### Patch Changes
