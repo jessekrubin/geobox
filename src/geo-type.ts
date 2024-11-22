@@ -23,6 +23,7 @@ export {
   type TCoordinateSchema,
 } from "./geo-type/coord.js";
 export * from "./geo-type/geojson/index.js";
+export * from "./geo-type/geoparquet.js";
 export * as geostats from "./geo-type/geostats.js";
 export {
   GeostatsAttribute,

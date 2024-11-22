@@ -29,6 +29,7 @@ export function Geometry<
     PolygonGeometry(schemas),
     MultiPolygonGeometry(schemas),
     GeometryCollection(schemas),
+    Type.Null(),
   ]);
   return Type.Union([GeometryPrimitive(), GeometryCollection()], {
     title: "GeoJSON Geometry",
