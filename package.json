@@ -97,10 +97,10 @@
     "eslint-plugin-antfu": "^2.7.0",
     "fastify": "^5.1.0",
     "glob": "^11.0.0",
-    "prettier": "3.4.0",
+    "prettier": "3.4.1",
     "tsup": "8.3.5",
     "tsx": "^4.19.2",
     "typescript": "~5.7.2",
-    "vitest": "2.1.5"
+    "vitest": "2.1.6"
   }
 }
