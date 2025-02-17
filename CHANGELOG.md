@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.4.0
+
+### Minor Changes
+
+- typebox support for version 0.34.x
+
 ## 0.3.6
 
 ### Patch Changes

@@ -1,5 +1,5 @@
+import type { Static, TSchema } from "@sinclair/typebox";
 import type { TypeCheck, ValueError } from "@sinclair/typebox/compiler";
-import { type Static, type TSchema, Type } from "@sinclair/typebox";
 import { TypeCompiler } from "@sinclair/typebox/compiler";
 import { Value } from "@sinclair/typebox/value";
 import type { TSchemaStrict } from "./tb.js";
@@ -354,13 +354,6 @@ export class JsonSchemaValidator<T extends TSchema> {
    */
   public safeParse = (value: unknown): Result<Static<T>> => {
     return this.tryFrom(value);
-  };
-
-  /**
-   * Deref the schema
-   */
-  public deref = (references?: TSchema[]) => {
-    return Type.Deref(this.schema, references ?? this.references);
   };
 
   /**
