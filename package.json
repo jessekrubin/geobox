@@ -83,7 +83,7 @@
     "@changesets/cli": "^2.28.0",
     "@fastify/type-provider-typebox": "^5.1.0",
     "@jsse/eslint-config": "^0.3.0",
-    "@jsse/tsconfig": "^0.2.4",
+    "@jsse/tsconfig": "^0.3.0",
     "@sinclair/typebox": "^0.34.25",
     "@turf/helpers": "^7.2.0",
     "@turf/turf": "^7.2.0",
@@ -101,6 +101,6 @@
     "tsup": "8.4.0",
     "tsx": "^4.19.2",
     "typescript": "~5.8.2",
-    "vitest": "3.0.8"
+    "vitest": "3.1.1"
   }
 }
