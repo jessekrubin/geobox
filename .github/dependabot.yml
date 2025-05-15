@@ -4,16 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    groups:
-      dev-dependencies:
-        patterns:
-          - "*"
-      dependencies:
-        patterns:
-          - "*"
-
-    reviewers:
-      - "jessekrubin"
 
   - package-ecosystem: "github-actions"
     directory: "/"
