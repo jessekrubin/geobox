@@ -87,7 +87,7 @@
     "@turf/helpers": "^7.2.0",
     "@turf/turf": "^7.2.0",
     "@types/geojson": "^7946.0.16",
-    "@types/node": "^22.15.18",
+    "@types/node": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
     "@vitest/coverage-v8": "^3.1.3",
