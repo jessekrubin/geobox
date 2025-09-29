@@ -1,12 +1,7 @@
-import type {
-  Static,
-  TSchema,
-  TSchemaOptions,
-} from "typebox";
+import type { Static, TSchema, TSchemaOptions } from "typebox";
 import { Null, Optional, Union, Unsafe } from "typebox";
 
 export * from "typebox";
-
 
 // export type TSchemaStrict = Omit<TSchema, typeof ReadonlyKind>;
 

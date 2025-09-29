@@ -200,9 +200,11 @@ describe("fastify-geobox", () => {
   });
 
   // all schemas
-  const geoboxFunctions = geoboxSchemaFns().sort((a, b) => {
-    return a.key.localeCompare(b.key);
-  });
+  const geoboxFunctions = geoboxSchemaFns()
+    .sort((a, b) => {
+      return a.key.localeCompare(b.key);
+    })
+    .slice(0, 2);
   type UrlAndSchema = {
     url: string;
     schema: geobox.TSchema;

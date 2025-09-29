@@ -65,7 +65,7 @@ test("no-properties-schema-feature-with-geometry-schema", () => {
 });
 test("no-properties-schema", () => {
   const pointSchema = PointFeature();
-  const pointSchemaValidator =Compile(pointSchema);
+  const pointSchemaValidator = Compile(pointSchema);
 
   assert.equal(pointSchemaValidator.Check(simplePointFeature), true);
   if (pointSchemaValidator.Check(simplePointFeature)) {
@@ -79,7 +79,7 @@ test("point-with-properties-schema", () => {
   const pointSchemaBabydog = PointFeature({
     properties: Type.Object({ dingo: Type.String() }),
   });
-  const pointSchemaDingoValidator =Compile(pointSchemaBabydog);
+  const pointSchemaDingoValidator = Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pointFeatureDingoProps)) {
     const t = pointFeatureDingoProps;
     expect(t.properties).toEqual({ dingo: "bash" });
@@ -96,7 +96,7 @@ test("point-feature-schema-2d", () => {
   const pointSchemaBabydog = PointFeature2d({
     properties: Type.Object({ dingo: Type.String() }),
   });
-  const pointSchemaDingoValidator =Compile(pointSchemaBabydog);
+  const pointSchemaDingoValidator = Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pointFeatureDingoProps)) {
     const t = pointFeatureDingoProps;
     expect(t.properties).toEqual({ dingo: "bash" });

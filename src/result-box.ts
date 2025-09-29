@@ -1,9 +1,14 @@
-import type { Static, StaticDecode, StaticEncode, TProperties, TSchema } from "typebox";
+import type {
+  Static,
+  StaticDecode,
+  StaticEncode,
+  TProperties,
+  TSchema,
+} from "typebox";
 import type { Validator } from "typebox/compile";
 import type { TLocalizedValidationError } from "typebox/error";
 import { Compile } from "typebox/compile";
 import { Value } from "typebox/value";
-import type { TSchemaStrict } from "./tb.js";
 import { GeoboxValueError } from "./errors.js";
 
 /**
@@ -82,11 +87,11 @@ function isCheckOptions(value: unknown): value is CheckOptions {
     (value.limit === undefined
       ? true
       : // @ts-expect-error - compiled from typebox
-      typeof value.limit === "number" &&
-      // @ts-expect-error - compiled from typebox
-      Number.isInteger(value.limit) &&
-      // @ts-expect-error - compiled from typebox
-      value.limit >= 1)
+        typeof value.limit === "number" &&
+        // @ts-expect-error - compiled from typebox
+        Number.isInteger(value.limit) &&
+        // @ts-expect-error - compiled from typebox
+        value.limit >= 1)
   );
 }
 
@@ -97,7 +102,7 @@ function isCheckOptions(value: unknown): value is CheckOptions {
  */
 export class JsonSchemaValidator<
   Context extends TProperties,
-  const T extends TSchema
+  const T extends TSchema,
 > {
   public schema: T;
   public references: Context;
@@ -122,38 +127,31 @@ export class JsonSchemaValidator<
     this.options = {
       compile: options?.compile ?? true,
     };
-    this.references = references ?? {} as Context;
+    this.references = references ?? ({} as Context);
   }
 
   /**
    * Alias for calling `new JsonSchemaValidator(yer-schema)`
    */
-  public static new<
-    Context extends TProperties,
-    const T extends TSchema>(
-      schema: T,
-      references?: Context,
-      options?: { compile?: boolean; limit?: number },
-    ): JsonSchemaValidator<
-      Context,
-      T
-    > {
+  public static new<Context extends TProperties, const T extends TSchema>(
+    schema: T,
+    references?: Context,
+    options?: { compile?: boolean; limit?: number },
+  ): JsonSchemaValidator<Context, T> {
     return new JsonSchemaValidator(schema, references, options);
   }
-
 
   /**
    * Compiles the schema and returns the typeguard
    */
-  public compile(
-  ): Validator<Context, T> {
-    if (this._typeguard) {
+  public compile(): Validator<Context, T> {
+    if (this._typeguard !== undefined) {
       return this._typeguard;
     }
-    const tg = Compile(
-      this.references,
-      this.schema,
-    );
+    const tg =
+      this.references === undefined
+        ? (Compile(this.schema) as Validator<Context, T>)
+        : (Compile(this.references, this.schema) as Validator<Context, T>);
     this._typeguard = tg;
     return this._typeguard;
   }
@@ -172,10 +170,7 @@ export class JsonSchemaValidator<
    * Returns the typeguard.Check function for this schema
    */
   public get guard(): (data: unknown) => data is StaticEncode<T, Context> {
-    if (!this._typeguard) {
-      return this.compile().Check;
-    }
-    return this._typeguard.Check;
+    return this.typeguard.Check.bind(this.typeguard);
   }
 
   /**
@@ -191,7 +186,7 @@ export class JsonSchemaValidator<
    * @returns typeguard.Decode() for this schema
    */
   public is = (value: unknown): value is Static<T> => {
-    return this.guard(value);
+    return this.typeguard.Check(value);
   };
 
   /**
@@ -372,7 +367,7 @@ export class JsonSchemaValidator<
   /**
    * Returns a "strict" schema for this schema with typebox attributes/symbols removed
    */
-  public strictSchema(): TSchemaStrict {
+  public strictSchema(): T {
     // eslint-disable-next-line unicorn/prefer-structured-clone
     return JSON.parse(JSON.stringify(this.schema));
   }
@@ -383,9 +378,7 @@ export class JsonSchemaValidator<
  */
 export function jsonschema<
   Context extends TProperties,
-  const T extends TSchema
->(
-  schema: T,
-): JsonSchemaValidator<Context, T> {
+  const T extends TSchema,
+>(schema: T): JsonSchemaValidator<Context, T> {
   return JsonSchemaValidator.new(schema);
 }

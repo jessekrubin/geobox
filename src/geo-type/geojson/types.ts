@@ -36,8 +36,8 @@ export type TFeatureSchemas<
 
 export type TProperties<T extends TSchema | undefined> =
   IsDefined<T> extends true
-  ? AssertType<T>
-  : ReturnType<typeof GeojsonProperties>;
+    ? AssertType<T>
+    : ReturnType<typeof GeojsonProperties>;
 
 export type TFeatureSchemas2d<
   TProps extends TSchema | undefined,

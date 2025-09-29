@@ -39,7 +39,7 @@ export function GeometryCollectionRecursive(
           description: "GeoJSON GeometryCollection",
           ...options,
         },
-      )
+      ),
     },
     "GeometryCollection",
   );

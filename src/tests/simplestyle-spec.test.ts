@@ -88,7 +88,7 @@ const SIMPLESTYLE_SPEC_EG = {
       },
     },
   ],
-};
+} as const;
 
 const schema = geobox.simplestyle.SimpleStyleProperties();
 const c = geobox.jsonschema(schema);
@@ -123,7 +123,7 @@ test("invalid color", () => {
   if (maybe.ok) {
     throw new Error("Expected failure");
   }
-  const errorspaths = maybe.error.errors.map((e) => e.path);
+  const errorspaths = maybe.error.errors.map((e) => e.instancePath);
   expect(errorspaths).toContain("/marker-color");
   expect(errorspaths).toContain("/stroke");
 });

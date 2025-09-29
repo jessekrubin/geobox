@@ -13,7 +13,6 @@ import { GeometryPrimitive } from "./geometry-primitive.js";
  * @returns geojson geometry collection of primitives
  */
 
-
 export function PrimitiveGeometryCollection<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
