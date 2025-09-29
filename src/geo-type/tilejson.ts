@@ -329,15 +329,6 @@ export function Tilejson(options?: SchemaOptions) {
 }
 
 /**
- * Old function for general purpose `Tilejson` schema
- * @returns {Type.Object} - Tilejson schema
- * @deprecated use `Tilejson` instead
- */
-export function TilejsonLike(options?: SchemaOptions) {
-  return Tilejson(options);
-}
-
-/**
  * UTileJson - More sane and strict `TileJson`
  */
 
