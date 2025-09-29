@@ -1,4 +1,4 @@
-import type { TSchemaOptions, TSchema } from "typebox";
+import type { TSchema, TSchemaOptions } from "typebox";
 import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoordinateSchema } from "../coord.js";

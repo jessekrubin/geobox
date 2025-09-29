@@ -12,6 +12,12 @@ describe("fastify-geobox", () => {
       level: "trace",
       file: "./logs.log",
     },
+    ajv: {
+      customOptions: {
+        strict: false,
+        useDefaults: true,
+      },
+    },
   }).withTypeProvider<TypeBoxTypeProvider>();
 
   fastify.get(
@@ -149,10 +155,10 @@ describe("fastify-geobox", () => {
     },
     (_req, _res) => {
       const bbox = {
-        west: _req.query.west,
-        south: _req.query.south,
-        east: _req.query.east,
-        north: _req.query.north,
+        west: _req.query.west ?? -180,
+        south: _req.query.south ?? -90,
+        east: _req.query.east ?? 180,
+        north: _req.query.north ?? 90,
       };
       return bbox;
     },
@@ -200,11 +206,9 @@ describe("fastify-geobox", () => {
   });
 
   // all schemas
-  const geoboxFunctions = geoboxSchemaFns()
-    .sort((a, b) => {
-      return a.key.localeCompare(b.key);
-    })
-    .slice(0, 2);
+  const geoboxFunctions = geoboxSchemaFns().toSorted((a, b) => {
+    return a.key.localeCompare(b.key);
+  });
   type UrlAndSchema = {
     url: string;
     schema: geobox.TSchema;
