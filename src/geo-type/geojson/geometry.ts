@@ -30,12 +30,7 @@ export function Geometry<
     MultiPolygonGeometry(schemas),
     GeometryCollection(schemas),
     Type.Null(),
-  ]);
-  return Type.Union([GeometryPrimitive(), GeometryCollection()], {
-    title: "GeoJSON Geometry",
-    description: "GeoJSON Geometry",
-    ...options,
-  });
+  ], options);
 }
 
 export function Geometry2d(options?: TSchemaOptions) {

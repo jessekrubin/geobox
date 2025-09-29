@@ -14,7 +14,7 @@ export function GeojsonCoordinate<
   return (schema === undefined ? Coord() : schema) as TGeojsonCoordinate<T>;
 }
 
-export function GeojsonBoudingBox<T extends TSchema | undefined>(
+export function GeojsonBoudingBox<T extends TSchema >(
   schema?: T,
 ): TGeojsonBoundingBox<T> {
   return (

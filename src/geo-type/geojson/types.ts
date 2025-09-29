@@ -14,10 +14,10 @@ import type { GeojsonProperties } from "./properties.js";
  * type inference for coordinate(s)
  */
 export type TGeojsonCoordinate<T extends TCoordinateSchema | undefined> =
-  IsDefined<T> extends true ? AssertType<T> : ReturnType<typeof Coord>;
+  IsDefined<T> extends true ? T : ReturnType<typeof Coord>;
 
 export type TGeojsonBoundingBox<T extends TSchema | undefined> =
-  IsDefined<T> extends true ? AssertType<T> : TOptional<TBBoxSchema>;
+  IsDefined<T> extends true ? T : TOptional<TBBoxSchema>;
 export type TGeometrySchemas<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
@@ -36,8 +36,8 @@ export type TFeatureSchemas<
 
 export type TProperties<T extends TSchema | undefined> =
   IsDefined<T> extends true
-    ? AssertType<T>
-    : ReturnType<typeof GeojsonProperties>;
+  ? T
+  : ReturnType<typeof GeojsonProperties>;
 
 export type TFeatureSchemas2d<
   TProps extends TSchema | undefined,
