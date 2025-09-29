@@ -1,5 +1,5 @@
-import type { SchemaOptions, TSchema } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchema, TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoordinateSchema } from "../coord.js";
 import type { TFeatureSchemas, TGeometrySchema } from "./types.js";
@@ -15,7 +15,7 @@ export function Feature<
   schemas?: TFeatureSchemas<TProps, TCoord, TBBox> & {
     geometry?: TGeometrySchema;
   },
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ) {
   return Type.Object(
     {

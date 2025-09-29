@@ -1,9 +1,9 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import { Tms2dPoint } from "./2d-point.js";
 import { TmsCrs } from "./crs.js";
 
-export function Tms2dBoundingBox(options?: SchemaOptions) {
+export function Tms2dBoundingBox(options?: TSchemaOptions) {
   return Type.Object(
     {
       lowerLeft: Tms2dPoint(),

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import type { Static } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
-import { TypeCompiler } from "@sinclair/typebox/compiler";
+import type { Static } from "typebox";
+import { Type } from "typebox";
+import { Compile } from "typebox/compile";
 import { assertType, expectTypeOf, test } from "vitest";
 import * as geobox from "../index.js";
 
@@ -45,7 +45,6 @@ test("test point schema builder", () => {
 
   const _bboxUndef: PointFeatureBabydogBBox = undefined;
 
-  // @ts-expect-error invalid bbox...
   const _bboxBad = { a: 123 } satisfies PointFeatureBabydogBBox;
 
   console.debug({
@@ -55,7 +54,7 @@ test("test point schema builder", () => {
     _bboxBad,
   });
 
-  const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
+  const pointSchemaDingoValidator = Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pDingo)) {
     const t = pDingo;
     assertType<{

@@ -1,7 +1,7 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "geo + typebox => geo-schemas",
   "readme": "README.md",
   "publishConfig": {
@@ -76,20 +76,19 @@
     "typecheck": "tsc -p tsconfig.dts.json --noEmit"
   },
   "peerDependencies": {
-    "@sinclair/typebox": ">=0.32 <=0.34"
+    "typebox": "^1.0.13"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
-    "@fastify/type-provider-typebox": "^5.1.0",
+    "@fastify/type-provider-typebox": "^6.0.0",
     "@jsse/eslint-config": "^0.4.15",
     "@jsse/tsconfig": "^0.4.0",
-    "@sinclair/typebox": "^0.34.41",
     "@turf/helpers": "^7.2.0",
     "@turf/turf": "^7.2.0",
     "@types/geojson": "^7946.0.16",
     "@types/node": "^24.5.2",
-    "@typescript-eslint/eslint-plugin": "^8.44.1",
-    "@typescript-eslint/parser": "^8.44.1",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
     "@vitest/coverage-v8": "^3.2.4",
     "esbuild": "^0.25.10",
     "eslint": "^9.36.0",
@@ -99,6 +98,7 @@
     "prettier": "3.6.2",
     "tsup": "8.5.0",
     "tsx": "^4.20.6",
+    "typebox": "^1.0.13",
     "typescript": "~5.9.2",
     "vitest": "3.2.4"
   }

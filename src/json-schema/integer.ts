@@ -1,9 +1,9 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import { JSON_SCHEMA_OPTIONS_SCHEMA } from "./common.js";
 
-export function JsonSchemaInteger(options?: SchemaOptions) {
-  return Type.Composite(
+export function JsonSchemaInteger(options?: TSchemaOptions) {
+  return Type.Interface(
     [
       JSON_SCHEMA_OPTIONS_SCHEMA,
       Type.Object(
@@ -17,6 +17,7 @@ export function JsonSchemaInteger(options?: SchemaOptions) {
         options,
       ),
     ],
+    {},
     {
       description: "JSON-Schema-Schema",
       ...options,

@@ -1,8 +1,8 @@
 // REF: https://github.com/mapbox/mapbox-geostats
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
-export function GeostatsAttribute(options?: SchemaOptions) {
+export function GeostatsAttribute(options?: TSchemaOptions) {
   return Type.Object(
     {
       attribute: Type.String(),
@@ -19,7 +19,7 @@ export function GeostatsAttribute(options?: SchemaOptions) {
   );
 }
 
-export function GeostatsLayer(options?: SchemaOptions) {
+export function GeostatsLayer(options?: TSchemaOptions) {
   return Type.Object(
     {
       layer: Type.String(),
@@ -35,7 +35,7 @@ export function GeostatsLayer(options?: SchemaOptions) {
   );
 }
 
-export function GeostatsTilestats(options?: SchemaOptions) {
+export function GeostatsTilestats(options?: TSchemaOptions) {
   return Type.Object(
     {
       layerCount: Type.Number(),

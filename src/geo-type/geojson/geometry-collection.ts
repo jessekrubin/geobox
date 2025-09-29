@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoordinateSchema } from "../coord.js";
 import type { TGeometrySchemas } from "./types.js";
@@ -16,7 +16,7 @@ import { PrimitiveGeometryCollection } from "./primitive-geometry-collection.js"
 export function GeometryCollection<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: TSchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("GeometryCollection"),
@@ -42,7 +42,7 @@ export function GeometryCollection<
   );
 }
 
-export function GeometryCollection2d(options?: SchemaOptions) {
+export function GeometryCollection2d(options?: TSchemaOptions) {
   return GeometryCollection(
     {
       coordinate: Coord(),
@@ -54,7 +54,7 @@ export function GeometryCollection2d(options?: SchemaOptions) {
   );
 }
 
-export function GeometryCollection3d(options?: SchemaOptions) {
+export function GeometryCollection3d(options?: TSchemaOptions) {
   return GeometryCollection(
     {
       coordinate: Coord(),

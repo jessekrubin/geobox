@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import { Type } from "@sinclair/typebox";
-import { TypeCompiler } from "@sinclair/typebox/compiler";
+import { Type } from "typebox";
+import { Compile } from "typebox/compile";
 import { assert, describe, expect, test } from "vitest";
 import { FeatureCollection } from "../geo-type/geojson/feature-collection.js";
 import { Feature } from "../geo-type/geojson/feature.js";
@@ -55,7 +55,7 @@ const pointFeatureDingoProps = {
 };
 test("no-properties-schema-feature-with-geometry-schema", () => {
   const pointSchema = Feature({ geometry: geobox.PointGeometry() });
-  const pointSchemaValidator = TypeCompiler.Compile(pointSchema);
+  const pointSchemaValidator = Compile(pointSchema);
   assert.equal(pointSchemaValidator.Check(simplePointFeature), true);
   if (pointSchemaValidator.Check(simplePointFeature)) {
     const t = simplePointFeature;
@@ -65,7 +65,7 @@ test("no-properties-schema-feature-with-geometry-schema", () => {
 });
 test("no-properties-schema", () => {
   const pointSchema = PointFeature();
-  const pointSchemaValidator = TypeCompiler.Compile(pointSchema);
+  const pointSchemaValidator = Compile(pointSchema);
 
   assert.equal(pointSchemaValidator.Check(simplePointFeature), true);
   if (pointSchemaValidator.Check(simplePointFeature)) {
@@ -79,7 +79,7 @@ test("point-with-properties-schema", () => {
   const pointSchemaBabydog = PointFeature({
     properties: Type.Object({ dingo: Type.String() }),
   });
-  const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
+  const pointSchemaDingoValidator = Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pointFeatureDingoProps)) {
     const t = pointFeatureDingoProps;
     expect(t.properties).toEqual({ dingo: "bash" });
@@ -96,7 +96,7 @@ test("point-feature-schema-2d", () => {
   const pointSchemaBabydog = PointFeature2d({
     properties: Type.Object({ dingo: Type.String() }),
   });
-  const pointSchemaDingoValidator = TypeCompiler.Compile(pointSchemaBabydog);
+  const pointSchemaDingoValidator = Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pointFeatureDingoProps)) {
     const t = pointFeatureDingoProps;
     expect(t.properties).toEqual({ dingo: "bash" });

@@ -1,14 +1,14 @@
 /**
  * lng-lat schema builders
  */
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
 /**
  * GeoJSON Latitude json-schema
  * @returns {TNumber} GeoJSON Latitude json-schema
  */
-export function Latitude(options?: SchemaOptions) {
+export function Latitude(options?: TSchemaOptions) {
   return Type.Number({
     title: "Latitude",
     description: "Longitude",
@@ -20,7 +20,7 @@ export function Latitude(options?: SchemaOptions) {
  * GeoJSON Longitude json-schema
  * @returns {TNumber} GeoJSON Longitude json-schema
  */
-export function Longitude(options?: SchemaOptions) {
+export function Longitude(options?: TSchemaOptions) {
   return Type.Number({
     title: "Longitude",
     description: "Longitude",
@@ -28,7 +28,7 @@ export function Longitude(options?: SchemaOptions) {
   });
 }
 
-export function LatitudeWgs84(options?: SchemaOptions) {
+export function LatitudeWgs84(options?: TSchemaOptions) {
   return Latitude({
     minimum: -90,
     maximum: 90,
@@ -38,7 +38,7 @@ export function LatitudeWgs84(options?: SchemaOptions) {
   });
 }
 
-export function LongitudeWgs84(options?: SchemaOptions) {
+export function LongitudeWgs84(options?: TSchemaOptions) {
   return Longitude({
     minimum: -180,
     maximum: 180,
@@ -48,7 +48,7 @@ export function LongitudeWgs84(options?: SchemaOptions) {
   });
 }
 
-export function LonLat(options?: SchemaOptions) {
+export function LonLat(options?: TSchemaOptions) {
   return Type.Object(
     {
       lon: Longitude(options),
@@ -62,7 +62,7 @@ export function LonLat(options?: SchemaOptions) {
   );
 }
 
-export function LonLatZ(options?: SchemaOptions) {
+export function LonLatZ(options?: TSchemaOptions) {
   return Type.Object(
     { lon: Longitude(options), lat: Latitude(options), z: Type.Number() },
     {
@@ -73,7 +73,7 @@ export function LonLatZ(options?: SchemaOptions) {
   );
 }
 
-export function LonLatWgs84(options?: SchemaOptions) {
+export function LonLatWgs84(options?: TSchemaOptions) {
   return Type.Object(
     {
       lon: LongitudeWgs84(options),
@@ -87,7 +87,7 @@ export function LonLatWgs84(options?: SchemaOptions) {
   );
 }
 
-export function LngLat(options?: SchemaOptions) {
+export function LngLat(options?: TSchemaOptions) {
   return Type.Object(
     {
       lng: Longitude(options),
@@ -101,7 +101,7 @@ export function LngLat(options?: SchemaOptions) {
   );
 }
 
-export function LngLatWgs84(options?: SchemaOptions) {
+export function LngLatWgs84(options?: TSchemaOptions) {
   return Type.Object(
     {
       lng: LongitudeWgs84(options),

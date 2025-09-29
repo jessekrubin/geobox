@@ -1,9 +1,9 @@
-import type { SchemaOptions, TNumber } from "@sinclair/typebox";
+import type { TNumber, TSchemaOptions } from "typebox";
 
 /**
  * Turfbox = turf/geojson + typebox
  */
-import { Type } from "@sinclair/typebox";
+import { Type } from "typebox";
 import type { TUnionVec2Vec3, TVec2, TVec3 } from "../types.js";
 import { LatitudeWgs84, LongitudeWgs84 } from "./lnglat.js";
 
@@ -16,13 +16,13 @@ export type CoordSchemaOptions = {
   x?: TNumber;
   y?: TNumber;
   z?: TNumber;
-} & SchemaOptions;
+} & TSchemaOptions;
 
 function coordSchemaOptions(options?: CoordSchemaOptions): {
   x: TNumber;
   y: TNumber;
   z: TNumber;
-  schemaOptions: SchemaOptions;
+  schemaOptions: TSchemaOptions;
 } {
   const {
     x = Type.Number(),
@@ -60,7 +60,7 @@ export function Coord(options?: CoordSchemaOptions): TCoord {
   });
 }
 
-export function Coord2dWgs84(options?: SchemaOptions) {
+export function Coord2dWgs84(options?: TSchemaOptions) {
   return Type.Tuple([LongitudeWgs84(), LatitudeWgs84()], {
     title: "GeoJSON coordinate 2d WGS84",
     description: "coordinate: [longitude, latitude]",
@@ -68,7 +68,7 @@ export function Coord2dWgs84(options?: SchemaOptions) {
   });
 }
 
-export function Coord3dWgs84(options?: SchemaOptions) {
+export function Coord3dWgs84(options?: TSchemaOptions) {
   return Type.Tuple([LongitudeWgs84(), LatitudeWgs84(), Type.Number()], {
     title: "GeoJSON coordinate 3d WGS84",
     description: "coordinate: [longitude, latitude, elevation/z]",

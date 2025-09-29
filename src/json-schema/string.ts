@@ -1,8 +1,8 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import { JSON_SCHEMA_OPTIONS_SCHEMA } from "./common.js";
 
-export function JsonSchemaStringFormat(options?: SchemaOptions) {
+export function JsonSchemaStringFormat(options?: TSchemaOptions) {
   return Type.Union(
     [
       Type.Literal("date-time"),
@@ -32,7 +32,7 @@ export function JsonSchemaStringFormat(options?: SchemaOptions) {
   );
 }
 
-export function JsonSchemaStringContentEncoding(options?: SchemaOptions) {
+export function JsonSchemaStringContentEncoding(options?: TSchemaOptions) {
   return Type.Union(
     [
       Type.Literal("7bit"),
@@ -49,25 +49,28 @@ export function JsonSchemaStringContentEncoding(options?: SchemaOptions) {
   );
 }
 
-export function JsonSchemaString(options?: SchemaOptions) {
-  return Type.Composite([
-    JSON_SCHEMA_OPTIONS_SCHEMA,
-    Type.Object(
-      {
-        type: Type.Literal("string"),
-        enum: Type.Optional(Type.Array(Type.String())),
-        minLength: Type.Optional(Type.Integer({ minimum: 0 })),
-        maxLength: Type.Optional(Type.Integer({ minimum: 0 })),
-        pattern: Type.Optional(Type.String()),
-        format: Type.Optional(JsonSchemaStringFormat()),
-        contentEncoding: Type.Optional(JsonSchemaStringContentEncoding()),
-        contentMediaType: Type.Optional(Type.String()),
-      },
-      {
-        ...options,
-        $schema: "https://json-schema.org/draft/2019-09/schema",
-        description: "JSON Schema string type",
-      },
-    ),
-  ]);
+export function JsonSchemaString(options?: TSchemaOptions) {
+  return Type.Interface(
+    [
+      JSON_SCHEMA_OPTIONS_SCHEMA,
+      Type.Object(
+        {
+          type: Type.Literal("string"),
+          enum: Type.Optional(Type.Array(Type.String())),
+          minLength: Type.Optional(Type.Integer({ minimum: 0 })),
+          maxLength: Type.Optional(Type.Integer({ minimum: 0 })),
+          pattern: Type.Optional(Type.String()),
+          format: Type.Optional(JsonSchemaStringFormat()),
+          contentEncoding: Type.Optional(JsonSchemaStringContentEncoding()),
+          contentMediaType: Type.Optional(Type.String()),
+        },
+        {
+          ...options,
+          $schema: "https://json-schema.org/draft/2019-09/schema",
+          description: "JSON Schema string type",
+        },
+      ),
+    ],
+    {},
+  );
 }

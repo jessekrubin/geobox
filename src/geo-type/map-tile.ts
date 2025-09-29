@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
 export const MIN_ZOOM = 0;
 export const MAX_ZOOM = 31;
@@ -50,14 +50,14 @@ export type ZoomRange = {
   maxZoom: number;
 };
 
-export function TileZoom(zoom: number, options?: SchemaOptions) {
+export function TileZoom(zoom: number, options?: TSchemaOptions) {
   if (!isZoom(zoom)) {
     throw new Error(`Invalid zoom: ${zoom}`);
   }
   return Type.Literal(zoom, options);
 }
 
-export function TileZoomRange(options?: SchemaOptions & ZoomRange) {
+export function TileZoomRange(options?: TSchemaOptions & ZoomRange) {
   return Type.Integer({
     minimum: MIN_ZOOM,
     maximum: MAX_ZOOM,
@@ -65,7 +65,7 @@ export function TileZoomRange(options?: SchemaOptions & ZoomRange) {
   });
 }
 
-export function TileZoomXY(zoom: number, options?: SchemaOptions) {
+export function TileZoomXY(zoom: number, options?: TSchemaOptions) {
   if (!isZoom(zoom)) {
     throw new Error(`Invalid zoom: ${zoom}`);
   }
@@ -76,7 +76,7 @@ export function TileZoomXY(zoom: number, options?: SchemaOptions) {
   });
 }
 
-export function TileAtZoom(zoom: number, options?: SchemaOptions) {
+export function TileAtZoom(zoom: number, options?: TSchemaOptions) {
   if (!isZoom(zoom)) {
     throw new Error(`Invalid zoom: ${zoom}`);
   }

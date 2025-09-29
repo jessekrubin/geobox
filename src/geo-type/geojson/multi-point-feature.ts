@@ -1,5 +1,5 @@
-import type { SchemaOptions, TSchema } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchema, TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoordinateSchema } from "../coord.js";
 import type {
@@ -15,7 +15,7 @@ export function MultiPointFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: TSchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
@@ -35,7 +35,7 @@ export { MultiPointFeature as MultiPoint };
 export function MultiPointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
+>(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: TSchemaOptions) {
   return MultiPointFeature(
     {
       coordinate: Coord2d(),
@@ -50,7 +50,7 @@ export { MultiPointFeature2d as MultiPoint2d };
 export function MultiPointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
+>(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: TSchemaOptions) {
   return MultiPointFeature(
     {
       coordinate: Coord3d(),

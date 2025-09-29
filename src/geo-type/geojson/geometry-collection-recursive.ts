@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoordinateSchema } from "../coord.js";
 import type { TGeometrySchemas } from "./types.js";
@@ -14,31 +14,34 @@ import { PolygonGeometry } from "./polygon-geometry.js";
 
 export function GeometryCollectionRecursive(
   schemas?: TGeometrySchemas<TCoordinateSchema, TBBoxSchema>,
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ) {
-  const s = Type.Recursive((This) =>
-    Type.Object(
-      {
-        type: Type.Literal("GeometryCollection"),
-        geometries: Type.Array(
-          Type.Union([
-            PointGeometry(schemas),
-            MultiPointGeometry(schemas),
-            LineStringGeometry(schemas),
-            MultiLineStringGeometry(schemas),
-            PolygonGeometry(schemas),
-            MultiPolygonGeometry(schemas),
-            This,
-          ]),
-        ),
-        bbox: Type.Optional(BBox()),
-      },
-      {
-        title: "GeoJSON GeometryCollection",
-        description: "GeoJSON GeometryCollection",
-        ...options,
-      },
-    ),
+  const s = Type.Cyclic(
+    {
+      GeometryCollection: Type.Object(
+        {
+          type: Type.Literal("GeometryCollection"),
+          geometries: Type.Array(
+            Type.Union([
+              PointGeometry(schemas),
+              MultiPointGeometry(schemas),
+              LineStringGeometry(schemas),
+              MultiLineStringGeometry(schemas),
+              PolygonGeometry(schemas),
+              MultiPolygonGeometry(schemas),
+              Type.Ref("GeometryCollection"),
+            ]),
+          ),
+          bbox: Type.Optional(BBox()),
+        },
+        {
+          title: "GeoJSON GeometryCollection",
+          description: "GeoJSON GeometryCollection",
+          ...options,
+        },
+      ),
+    },
+    "GeometryCollection",
   );
   return s;
 }

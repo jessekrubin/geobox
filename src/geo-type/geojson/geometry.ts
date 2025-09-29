@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoordinateSchema } from "../coord.js";
 import type { TGeometrySchemas } from "./types.js";
@@ -20,7 +20,7 @@ import { PolygonGeometry } from "./polygon-geometry.js";
 export function Geometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: TSchemaOptions) {
   return Type.Union([
     PointGeometry(schemas),
     MultiPointGeometry(schemas),
@@ -30,15 +30,10 @@ export function Geometry<
     MultiPolygonGeometry(schemas),
     GeometryCollection(schemas),
     Type.Null(),
-  ]);
-  return Type.Union([GeometryPrimitive(), GeometryCollection()], {
-    title: "GeoJSON Geometry",
-    description: "GeoJSON Geometry",
-    ...options,
-  });
+  ], options);
 }
 
-export function Geometry2d(options?: SchemaOptions) {
+export function Geometry2d(options?: TSchemaOptions) {
   return Type.Union(
     [
       GeometryPrimitive({
@@ -54,7 +49,7 @@ export function Geometry2d(options?: SchemaOptions) {
   );
 }
 
-export function Geometry3d(options?: SchemaOptions) {
+export function Geometry3d(options?: TSchemaOptions) {
   return Type.Union(
     [
       GeometryPrimitive({

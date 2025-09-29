@@ -1,7 +1,7 @@
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
-import { Type } from "@sinclair/typebox";
-import { Value } from "@sinclair/typebox/value";
 import Fastify from "fastify";
+import { Type } from "typebox";
+import { Value } from "typebox/value";
 import { describe, expect, test } from "vitest";
 import * as geobox from "../index.js";
 import { geoboxSchemaFns } from "./_utils.js";
@@ -11,6 +11,12 @@ describe("fastify-geobox", () => {
     logger: {
       level: "trace",
       file: "./logs.log",
+    },
+    ajv: {
+      customOptions: {
+        strict: false,
+        useDefaults: true,
+      },
     },
   }).withTypeProvider<TypeBoxTypeProvider>();
 
@@ -149,10 +155,10 @@ describe("fastify-geobox", () => {
     },
     (_req, _res) => {
       const bbox = {
-        west: _req.query.west,
-        south: _req.query.south,
-        east: _req.query.east,
-        north: _req.query.north,
+        west: _req.query.west ?? -180,
+        south: _req.query.south ?? -90,
+        east: _req.query.east ?? 180,
+        north: _req.query.north ?? 90,
       };
       return bbox;
     },

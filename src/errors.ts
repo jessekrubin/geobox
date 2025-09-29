@@ -1,13 +1,13 @@
-import type { ValueError } from "@sinclair/typebox/value";
+import type { TLocalizedValidationError } from "typebox/error";
 
 /**
  * GeoboxValueError custom error class that contains
  *   a list of ValueError objects.
  */
 export class GeoboxValueError extends Error {
-  public errors: ValueError[];
+  public errors: TLocalizedValidationError[];
 
-  public constructor(message: string, errors: ValueError[]) {
+  public constructor(message: string, errors: TLocalizedValidationError[]) {
     super(message);
     this.name = "GeoboxValueError";
     this.errors = errors;

@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.5.0
+
+### Minor Changes
+
+- update to typebox version 1
+
 ## 0.4.0
 
 ### Minor Changes

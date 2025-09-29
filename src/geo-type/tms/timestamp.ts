@@ -1,7 +1,7 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
-export function TmsTimestamp(options?: SchemaOptions) {
+export function TmsTimestamp(options?: TSchemaOptions) {
   return Type.String({
     format: "date-time",
     title: "Timestamp",

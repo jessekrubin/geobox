@@ -2,15 +2,15 @@
  * maplibre/martin server schemas
  */
 
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
 /**
  * Returns a schema for martin tile catalog entry
  * @param options
  * @returns martins tile catalog entry json schema (typebox)
  */
-export function TileCatalogEntry(options?: SchemaOptions) {
+export function TileCatalogEntry(options?: TSchemaOptions) {
   return Type.Object(
     {
       content_type: Type.String(),
@@ -28,7 +28,7 @@ export function TileCatalogEntry(options?: SchemaOptions) {
  * @param options
  * @returns martins tile catalog json schema (typebox)
  */
-export function TileCatalog(options?: SchemaOptions) {
+export function TileCatalog(options?: TSchemaOptions) {
   return Type.Record(Type.String(), TileCatalogEntry(), options);
 }
 
@@ -37,7 +37,7 @@ export function TileCatalog(options?: SchemaOptions) {
  * @param options
  * @returns martins sprite catalog entry json schema (typebox)
  */
-export function SpriteCatalog(options?: SchemaOptions) {
+export function SpriteCatalog(options?: TSchemaOptions) {
   return Type.Record(
     Type.String(),
     Type.Object({
@@ -52,7 +52,7 @@ export function SpriteCatalog(options?: SchemaOptions) {
  * @param options
  * @returns martins font catalog entry json schema (typebox)
  */
-export function FontCatalogEntry(options?: SchemaOptions) {
+export function FontCatalogEntry(options?: TSchemaOptions) {
   return Type.Object(
     {
       family: Type.String(),
@@ -70,7 +70,7 @@ export function FontCatalogEntry(options?: SchemaOptions) {
  * @param options
  * @returns martins font catalog json schema (typebox)
  */
-export function FontCatalog(options?: SchemaOptions) {
+export function FontCatalog(options?: TSchemaOptions) {
   return Type.Record(Type.String(), FontCatalogEntry(), options);
 }
 
@@ -79,7 +79,7 @@ export function FontCatalog(options?: SchemaOptions) {
  * @param options
  * @returns martins server catalog json schema (typebox)
  */
-export function MartinCatalog(options?: SchemaOptions) {
+export function MartinCatalog(options?: TSchemaOptions) {
   return Type.Object(
     {
       tiles: TileCatalog(),

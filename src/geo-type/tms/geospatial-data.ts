@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import { Tms2dBoundingBox } from "./2d-bounding-box.js";
 import { TmsCrs } from "./crs.js";
 import { TmsDataType } from "./data-type.js";
@@ -8,7 +8,7 @@ import { TmsStyle } from "./style.js";
 import { TmsTimestamp } from "./timestamp.js";
 import { TmsLink } from "./tms-link.js";
 
-export function TmsGeospatialData(options?: SchemaOptions) {
+export function TmsGeospatialData(options?: TSchemaOptions) {
   return Type.Object(
     {
       title: Type.Optional(

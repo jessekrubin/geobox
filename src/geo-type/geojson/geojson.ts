@@ -1,4 +1,4 @@
-import { Type } from "@sinclair/typebox";
+import { Type } from "typebox";
 import { FeatureCollection } from "./feature-collection.js";
 import { Feature } from "./feature.js";
 import { GeometryCollection } from "./geometry-collection.js";

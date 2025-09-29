@@ -1,11 +1,11 @@
 import type {
-  SchemaOptions,
   TLiteral,
   TObject,
+  TSchemaOptions,
   TString,
   TUnion,
-} from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+} from "typebox";
+import { Type } from "typebox";
 
 export type TNamedCoordinateReferenceSystem = TObject<{
   type: TLiteral<"name">;
@@ -22,7 +22,7 @@ export type TCoordinateReferenceSystem = TUnion<
 >;
 
 export function NamedCoordinateReferenceSystem(
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ): TNamedCoordinateReferenceSystem {
   return Type.Object(
     {
@@ -40,7 +40,7 @@ export function NamedCoordinateReferenceSystem(
 }
 
 export function LinkedCoordinateReferenceSystem(
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ): TLinkedCoordinateReferenceSystem {
   return Type.Object(
     {
@@ -59,7 +59,7 @@ export function LinkedCoordinateReferenceSystem(
 }
 
 export function CoordinateReferenceSystem(
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ): TCoordinateReferenceSystem {
   return Type.Union(
     [NamedCoordinateReferenceSystem(), LinkedCoordinateReferenceSystem()],
@@ -71,7 +71,7 @@ export function CoordinateReferenceSystem(
   );
 }
 
-export function CoordinateReferenceSystemOptional(options?: SchemaOptions) {
+export function CoordinateReferenceSystemOptional(options?: TSchemaOptions) {
   return Type.Optional(
     CoordinateReferenceSystem({
       title: "coordinate-reference-system-optional",

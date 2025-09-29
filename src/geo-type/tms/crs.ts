@@ -1,7 +1,7 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
-function TmsCrsUriObject(options?: SchemaOptions) {
+function TmsCrsUriObject(options?: TSchemaOptions) {
   return Type.Object(
     {
       uri: Type.String({ format: "uri" }),
@@ -13,7 +13,7 @@ function TmsCrsUriObject(options?: SchemaOptions) {
   );
 }
 
-function TmsCrsWktObject(options?: SchemaOptions) {
+function TmsCrsWktObject(options?: TSchemaOptions) {
   return Type.Object(
     {
       wkt: Type.Any(),
@@ -25,7 +25,7 @@ function TmsCrsWktObject(options?: SchemaOptions) {
   );
 }
 
-function TmsCrsReferenceSystemObject(options?: SchemaOptions) {
+function TmsCrsReferenceSystemObject(options?: TSchemaOptions) {
   return Type.Object(
     {
       referenceSystem: Type.Any(),
@@ -37,7 +37,7 @@ function TmsCrsReferenceSystemObject(options?: SchemaOptions) {
   );
 }
 
-function TmsCrsObject(options?: SchemaOptions) {
+function TmsCrsObject(options?: TSchemaOptions) {
   return Type.Union(
     [TmsCrsUriObject(), TmsCrsWktObject(), TmsCrsReferenceSystemObject()],
     {
@@ -46,7 +46,7 @@ function TmsCrsObject(options?: SchemaOptions) {
   );
 }
 
-export function TmsCrs(options?: SchemaOptions) {
+export function TmsCrs(options?: TSchemaOptions) {
   return Type.Union(
     [
       Type.String({

@@ -1,7 +1,7 @@
 /**
  * Reference: https://raw.githubusercontent.com/mapbox/simplestyle-spec/master/1.1.0/README.md
  */
-import { Type } from "@sinclair/typebox";
+import { Type } from "typebox";
 
 export const SimpleStyleMarkerSizeSmall = () => Type.Literal("small");
 export const SimpleStyleMarkerSizeMedium = () => Type.Literal("medium");
