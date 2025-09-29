@@ -1,7 +1,7 @@
 {
   "name": "@jsse/geobox",
   "type": "module",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "geo + typebox => geo-schemas",
   "readme": "README.md",
   "publishConfig": {

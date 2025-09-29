@@ -26,15 +26,18 @@ export function geoboxSchemaFunctionNames(): string[] {
 }
 
 export function typeboxSchemaFunctionNames() {
-  return Object.entries(tb)
-    .filter(
-      ([k, v]: [string, any]) =>
-        typeof v === "function" &&
-        k[0] !== undefined &&
-        v.name[0] === k[0].toUpperCase() &&
-        /[A-Z]/.test(v.name[0]),
-    )
-    .map(([k, _v]) => k);
+  const fns: string[] = [];
+  for (const [k, v] of Object.entries(tb)) {
+    if (
+      typeof v === "function" &&
+      k[0] !== undefined &&
+      v.name[0] === k[0].toUpperCase() &&
+      /[A-Z]/.test(v.name[0])
+    ) {
+      fns.push(k);
+    }
+  }
+  return fns;
 }
 
 type GeoboxFn = {

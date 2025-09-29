@@ -1,4 +1,4 @@
-import type { TOptional, TSchema } from "typebox";
+import type { TNever, TOptional, TSchema } from "typebox";
 import type { IsDefined } from "../../types.js";
 import type { TBBoxSchema } from "../bbox.js";
 import type { Coord, TCoord2d, TCoord3d, TCoordinateSchema } from "../coord.js";
@@ -10,14 +10,16 @@ import type { PointGeometry } from "./point-geometry.js";
 import type { PolygonGeometry } from "./polygon-geometry.js";
 import type { GeojsonProperties } from "./properties.js";
 
+type AssertType<T, E extends TSchema = TSchema> = T extends E ? T : TNever;
+
 /**
  * type inference for coordinate(s)
  */
 export type TGeojsonCoordinate<T extends TCoordinateSchema | undefined> =
-  IsDefined<T> extends true ? T : ReturnType<typeof Coord>;
+  IsDefined<T> extends true ? AssertType<T> : ReturnType<typeof Coord>;
 
 export type TGeojsonBoundingBox<T extends TSchema | undefined> =
-  IsDefined<T> extends true ? T : TOptional<TBBoxSchema>;
+  IsDefined<T> extends true ? AssertType<T> : TOptional<TBBoxSchema>;
 export type TGeometrySchemas<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
@@ -36,7 +38,7 @@ export type TFeatureSchemas<
 
 export type TProperties<T extends TSchema | undefined> =
   IsDefined<T> extends true
-  ? T
+  ? AssertType<T>
   : ReturnType<typeof GeojsonProperties>;
 
 export type TFeatureSchemas2d<
