@@ -1,25 +1,14 @@
 import type {
-  Hint,
-  Kind,
-  OptionalKind,
-  ReadonlyKind,
-  SchemaOptions,
   Static,
-  TransformKind,
   TSchema,
-} from "@sinclair/typebox";
-import { Null, Optional, Union, Unsafe } from "@sinclair/typebox";
+  TSchemaOptions,
+} from "typebox";
+import { Null, Optional, Union, Unsafe } from "typebox";
 
-export * from "@sinclair/typebox";
+export * from "typebox";
 
-export type TypeboxSymbols =
-  | typeof Hint
-  | typeof Kind
-  | typeof OptionalKind
-  | typeof ReadonlyKind
-  | typeof TransformKind;
 
-export type TSchemaStrict = Omit<TSchema, typeof ReadonlyKind>;
+// export type TSchemaStrict = Omit<TSchema, typeof ReadonlyKind>;
 
 export type StaticFn<T extends (...args: never) => TSchema> = Static<
   ReturnType<T>
@@ -37,14 +26,14 @@ export type StaticFn<T extends (...args: never) => TSchema> = Static<
  */
 export function Nullable<T extends TSchema>(
   schema: T,
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ) {
   return Union([schema, Null()], options);
 }
 
 export function OptionalNullable<T extends TSchema>(
   schema: T,
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ) {
   return Optional(Nullable(schema, options));
 }
@@ -59,7 +48,4 @@ export function StringEnum<T extends string[]>(values: [...T]) {
   return Unsafe<T[number]>({ type: "string", enum: values });
 }
 
-// export { Type } from "@sinclair/typebox";
-// export type { Static, SchemaOptions, TSchema, TTuple, TNumber, AssertType, TOptional, TLiteral, TObject, TString, TUnion, IntegerOptions, TInteger } from "@sinclair/typebox";
-
-export type { ValueError } from "@sinclair/typebox/value";
+export { IsLocalizedValidationError } from "typebox/error";

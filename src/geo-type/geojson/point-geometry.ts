@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoord2d, TCoord3d, TCoordinateSchema } from "../coord.js";
 import type { TGeometrySchemas } from "./types.js";
@@ -14,7 +14,7 @@ import { GeojsonBoudingBox, GeojsonCoordinate } from "./core.js";
 export function PointGeometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: TSchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Point"),
@@ -34,7 +34,7 @@ export function PointGeometry<
 
 export function PointGeometry2d(
   schemas?: TGeometrySchemas<TCoord2d>,
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ) {
   return PointGeometry(
     {
@@ -49,7 +49,7 @@ export function PointGeometry2d(
 
 export function PointGeometry3d(
   schemas?: TGeometrySchemas<TCoord3d>,
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ) {
   return PointGeometry(
     {

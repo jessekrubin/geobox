@@ -1,5 +1,5 @@
-import type { SchemaOptions, TSchema } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions, TSchema } from "typebox";
+import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoordinateSchema } from "../coord.js";
 import type {
@@ -15,7 +15,7 @@ export function LineStringFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: TSchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
@@ -35,7 +35,7 @@ export { LineStringFeature as LineString };
 export function LineStringFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
+>(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: TSchemaOptions) {
   return LineStringFeature(
     {
       coordinate: Coord2d(),
@@ -50,7 +50,7 @@ export { LineStringFeature2d as LineString2d };
 export function LineStringFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
+>(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: TSchemaOptions) {
   return LineStringFeature(
     {
       coordinate: Coord3d(),

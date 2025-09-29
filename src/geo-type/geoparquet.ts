@@ -1,4 +1,4 @@
-import { Type } from "@sinclair/typebox";
+import { Type } from "typebox";
 import { BBox } from "./bbox.js";
 
 export function GeoparquetColumn_v1_1_0() {
@@ -93,7 +93,7 @@ export function GeoparquetColumn_v1_1_0() {
 
 export function Geoparquet_v1_1_1() {
   return Type.Object({
-    version: Type.Const("1.1.0"),
+    version: Type.Literal("1.1.0"),
     primary_column: Type.String({
       minLength: 1,
     }),

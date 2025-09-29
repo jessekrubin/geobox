@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoord2d, TCoord3d, TCoordinateSchema } from "../coord.js";
 import type { TGeometrySchemas } from "./types.js";
@@ -8,7 +8,7 @@ import { GeojsonBoudingBox, GeojsonCoordinate } from "./core.js";
 export function PolygonGeometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
->(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: SchemaOptions) {
+>(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: TSchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Polygon"),
@@ -33,7 +33,7 @@ export function PolygonGeometry<
 
 export function PolygonGeometry2d(
   schemas?: TGeometrySchemas<TCoord2d>,
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ) {
   return PolygonGeometry(
     {
@@ -48,7 +48,7 @@ export function PolygonGeometry2d(
 
 export function PolygonGeometry3d(
   schemas?: TGeometrySchemas<TCoord3d>,
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ) {
   return PolygonGeometry(
     {

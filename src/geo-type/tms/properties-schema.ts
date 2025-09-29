@@ -1,8 +1,8 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import { JsonSchema } from "../../json-schema/index.js";
 
-export function TmsPropertiesSchema(options?: SchemaOptions) {
+export function TmsPropertiesSchema(options?: TSchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("object"),

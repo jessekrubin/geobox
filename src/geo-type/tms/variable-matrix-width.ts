@@ -1,7 +1,7 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
-export function VariableMatrixWidth(options?: SchemaOptions) {
+export function VariableMatrixWidth(options?: TSchemaOptions) {
   return Type.Object(
     {
       coalesce: Type.Integer({ minimum: 2 }),

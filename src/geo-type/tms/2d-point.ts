@@ -1,7 +1,7 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
-export function Tms2dPoint(options?: SchemaOptions) {
+export function Tms2dPoint(options?: TSchemaOptions) {
   return Type.Array(Type.Number(), {
     ...options,
     title: "2DPoint",

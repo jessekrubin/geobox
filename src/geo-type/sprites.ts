@@ -1,5 +1,5 @@
-import type { SchemaOptions, TSchema } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchema, TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
 function SpriteStretch() {
   return Type.Array(Type.Tuple([Type.Integer(), Type.Integer()]), {
@@ -8,7 +8,7 @@ function SpriteStretch() {
   });
 }
 
-function SpriteTextFit(options?: SchemaOptions) {
+function SpriteTextFit(options?: TSchemaOptions) {
   return Type.Union(
     [
       Type.Literal("stretchOrShrink", {
@@ -28,7 +28,7 @@ function SpriteTextFit(options?: SchemaOptions) {
   );
 }
 
-export function SpriteEntry(options?: SchemaOptions) {
+export function SpriteEntry(options?: TSchemaOptions) {
   return Type.Object(
     {
       height: Type.Integer({
@@ -94,6 +94,6 @@ export function SpriteEntry(options?: SchemaOptions) {
  * @param options
  * @returns martins sprite catalog entry json schema (typebox)
  */
-export function SpriteJson(key?: TSchema, options?: SchemaOptions) {
+export function SpriteJson(key?: TSchema, options?: TSchemaOptions) {
   return Type.Record(key || Type.String(), SpriteEntry(), options);
 }

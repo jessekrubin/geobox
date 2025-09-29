@@ -1,8 +1,8 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
 // TODO: Implement ProjJson schema FOR REAL
-export function ProjJson(options?: SchemaOptions) {
+export function ProjJson(options?: TSchemaOptions) {
   return Type.Any({
     ...options,
     title: "ProjJson",

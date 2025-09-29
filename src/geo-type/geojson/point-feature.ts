@@ -1,5 +1,5 @@
-import type { SchemaOptions, TSchema } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions, TSchema } from "typebox";
+import { Type } from "typebox";
 import type { TBBoxSchema } from "../bbox.js";
 import type { TCoordinateSchema } from "../coord.js";
 import type {
@@ -15,7 +15,7 @@ export function PointFeature<
   TProps extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: SchemaOptions) {
+>(schemas?: TFeatureSchemas<TProps, TCoord, TBBox>, options?: TSchemaOptions) {
   return Type.Object(
     {
       type: Type.Literal("Feature"),
@@ -40,7 +40,7 @@ export { PointFeature as Point };
 export function PointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: SchemaOptions) {
+>(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: TSchemaOptions) {
   return PointFeature(
     {
       coordinate: Coord2d(),
@@ -55,7 +55,7 @@ export { PointFeature2d as Point2d };
 export function PointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
->(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: SchemaOptions) {
+>(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: TSchemaOptions) {
   return PointFeature(
     {
       coordinate: Coord3d(),

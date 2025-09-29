@@ -1,5 +1,5 @@
-import type { SchemaOptions, TNumber } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TNumber, TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import type { TUnionVec4Vec6, TVec4, TVec6 } from "../types.js";
 
 export type TBBox2d = TVec4;
@@ -50,7 +50,7 @@ type BBoxOptions<T> = {
   zmin?: T;
   zmax?: T;
 };
-export type BBoxSchemaOptions = BBoxOptions<TNumber> & SchemaOptions;
+export type BBoxSchemaOptions = BBoxOptions<TNumber> & TSchemaOptions;
 
 /**
  * Bounding Box Options for x, y, z
@@ -66,7 +66,7 @@ export function bboxOptions(options?: BBoxSchemaOptions): {
   ymax: TNumber;
   zmin: TNumber;
   zmax: TNumber;
-  schemaOptions: SchemaOptions;
+  schemaOptions: TSchemaOptions;
 } {
   const {
     xmin = options?.xmin || options?.x || Type.Number(),
@@ -109,7 +109,7 @@ export function BBox3d(options?: BBoxSchemaOptions): TBBox3d {
   });
 }
 
-export function BBox(options?: SchemaOptions) {
+export function BBox(options?: TSchemaOptions) {
   const { xmin, xmax, ymin, ymax, zmin, zmax, schemaOptions } =
     bboxOptions(options);
   return Type.Union(

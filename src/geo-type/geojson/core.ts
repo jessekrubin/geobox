@@ -1,4 +1,4 @@
-import { type TSchema, Type } from "@sinclair/typebox";
+import { type TSchema, Type } from "typebox";
 import type { TCoordinateSchema } from "../coord.js";
 import type {
   TGeojsonBoundingBox,

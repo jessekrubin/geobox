@@ -1,9 +1,9 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import { Tms2dPoint } from "./2d-point.js";
 import { VariableMatrixWidth } from "./variable-matrix-width.js";
 
-export function TileMatrix(options?: SchemaOptions) {
+export function TileMatrix(options?: TSchemaOptions) {
   return Type.Object(
     {
       title: Type.Optional(

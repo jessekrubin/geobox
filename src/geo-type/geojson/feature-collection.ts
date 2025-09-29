@@ -1,11 +1,11 @@
-import type { SchemaOptions, TSchema } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchema, TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import { BBox } from "../bbox.js";
 import { Feature } from "./feature.js";
 
 export function FeatureCollection<FSchema extends TSchema>(
   feature?: FSchema,
-  options?: SchemaOptions,
+  options?: TSchemaOptions,
 ) {
   return Type.Object(
     {

@@ -1,4 +1,4 @@
-import type { AssertType, TOptional, TSchema } from "@sinclair/typebox";
+import type { TOptional, TSchema } from "typebox";
 import type { IsDefined } from "../../types.js";
 import type { TBBoxSchema } from "../bbox.js";
 import type { Coord, TCoord2d, TCoord3d, TCoordinateSchema } from "../coord.js";
@@ -36,8 +36,8 @@ export type TFeatureSchemas<
 
 export type TProperties<T extends TSchema | undefined> =
   IsDefined<T> extends true
-    ? AssertType<T>
-    : ReturnType<typeof GeojsonProperties>;
+  ? AssertType<T>
+  : ReturnType<typeof GeojsonProperties>;
 
 export type TFeatureSchemas2d<
   TProps extends TSchema | undefined,

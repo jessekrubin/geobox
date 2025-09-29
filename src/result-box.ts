@@ -1,7 +1,8 @@
-import type { Static, TSchema } from "@sinclair/typebox";
-import type { TypeCheck, ValueError } from "@sinclair/typebox/compiler";
-import { TypeCompiler } from "@sinclair/typebox/compiler";
-import { Value } from "@sinclair/typebox/value";
+import type { Static, StaticDecode, StaticEncode, TProperties, TSchema } from "typebox";
+import type { Validator } from "typebox/compile";
+import type { TLocalizedValidationError } from "typebox/error";
+import { Compile } from "typebox/compile";
+import { Value } from "typebox/value";
 import type { TSchemaStrict } from "./tb.js";
 import { GeoboxValueError } from "./errors.js";
 
@@ -61,7 +62,7 @@ export type CheckOptions = {
  * @param errors - Array of ValueError instances.
  * @returns A formatted JSON string representing the errors.
  */
-export function fmterr(...errors: ValueError[]) {
+export function fmterr(...errors: TLocalizedValidationError[]) {
   // TODO: maybe make fast via string concat
   return JSON.stringify(errors, undefined, 2);
 }
@@ -81,11 +82,11 @@ function isCheckOptions(value: unknown): value is CheckOptions {
     (value.limit === undefined
       ? true
       : // @ts-expect-error - compiled from typebox
-        typeof value.limit === "number" &&
-        // @ts-expect-error - compiled from typebox
-        Number.isInteger(value.limit) &&
-        // @ts-expect-error - compiled from typebox
-        value.limit >= 1)
+      typeof value.limit === "number" &&
+      // @ts-expect-error - compiled from typebox
+      Number.isInteger(value.limit) &&
+      // @ts-expect-error - compiled from typebox
+      value.limit >= 1)
   );
 }
 
@@ -94,11 +95,14 @@ function isCheckOptions(value: unknown): value is CheckOptions {
  *
  * @typeParam T - The TypeBox schema type.
  */
-export class JsonSchemaValidator<T extends TSchema> {
+export class JsonSchemaValidator<
+  Context extends TProperties,
+  const T extends TSchema
+> {
   public schema: T;
-  public references: TSchema[];
+  public references: Context;
   public readonly options: { compile: boolean; limit?: number };
-  private _typeguard?: TypeCheck<T>;
+  private _typeguard?: Validator<Context, T>;
 
   /**
    * Creates a new JsonSchemaValidator instance.
@@ -111,40 +115,53 @@ export class JsonSchemaValidator<T extends TSchema> {
    */
   public constructor(
     schema: T,
-    references?: TSchema[],
+    references?: Context,
     options?: { compile?: boolean; limit?: number },
   ) {
     this.schema = schema;
     this.options = {
       compile: options?.compile ?? true,
     };
-    this.references = references ?? [];
+    this.references = references ?? {} as Context;
   }
 
   /**
    * Alias for calling `new JsonSchemaValidator(yer-schema)`
    */
-  public static new<T extends TSchema>(
-    schema: T,
-    references?: TSchema[],
-    options?: { compile?: boolean; limit?: number },
-  ): JsonSchemaValidator<T> {
+  public static new<
+    Context extends TProperties,
+    const T extends TSchema>(
+      schema: T,
+      references?: Context,
+      options?: { compile?: boolean; limit?: number },
+    ): JsonSchemaValidator<
+      Context,
+      T
+    > {
     return new JsonSchemaValidator(schema, references, options);
   }
+
 
   /**
    * Compiles the schema and returns the typeguard
    */
-  public compile(references?: TSchema[]): TypeCheck<T> {
-    const tg = TypeCompiler.Compile(this.schema, references ?? this.references);
+  public compile(
+  ): Validator<Context, T> {
+    if (this._typeguard) {
+      return this._typeguard;
+    }
+    const tg = Compile(
+      this.references,
+      this.schema,
+    );
     this._typeguard = tg;
-    return tg;
+    return this._typeguard;
   }
 
   /**
    * Returns the typeguard for this schema; compiles if not already compiled
    */
-  public get typeguard(): TypeCheck<T> {
+  public get typeguard(): Validator<Context, T> {
     if (!this._typeguard) {
       return this.compile();
     }
@@ -154,15 +171,11 @@ export class JsonSchemaValidator<T extends TSchema> {
   /**
    * Returns the typeguard.Check function for this schema
    */
-  public get guard(): (data: unknown) => data is Static<T> {
-    if (!this.options.compile) {
-      return (data: unknown): data is Static<T> => {
-        return Value.Check(this.schema, this.references, data);
-      };
+  public get guard(): (data: unknown) => data is StaticEncode<T, Context> {
+    if (!this._typeguard) {
+      return this.compile().Check;
     }
-    return (data: unknown): data is Static<T> => {
-      return this.typeguard.Check(data);
-    };
+    return this._typeguard.Check;
   }
 
   /**
@@ -223,7 +236,7 @@ export class JsonSchemaValidator<T extends TSchema> {
    * @param value - The value to decode.
    * @returns The decoded value.
    */
-  public decode = (value: unknown): Static<T> => {
+  public decode = (value: unknown): StaticDecode<T, Context> => {
     return this.typeguard.Decode(value);
   };
 
@@ -233,7 +246,7 @@ export class JsonSchemaValidator<T extends TSchema> {
    * @param value - The value to encode.
    * @returns The encoded value.
    */
-  public encode = (value: unknown): Static<T> => {
+  public encode = (value: unknown): StaticEncode<T, Context> => {
     return this.typeguard.Encode(value);
   };
 
@@ -272,7 +285,7 @@ export class JsonSchemaValidator<T extends TSchema> {
     if (!this.options.compile) {
       const it = Value.Errors(this.schema, value);
       if (options && isCheckOptions(options)) {
-        const errorArray: ValueError[] = [];
+        const errorArray: TLocalizedValidationError[] = [];
         let i = 0;
         const limit = options.limit ?? this.options.limit;
         for (const error of it) {
@@ -288,7 +301,7 @@ export class JsonSchemaValidator<T extends TSchema> {
     }
     const it = this.typeguard.Errors(value);
     if (options && isCheckOptions(options)) {
-      const errorArray: ValueError[] = [];
+      const errorArray: TLocalizedValidationError[] = [];
       let i = 0;
       const limit = options.limit ?? this.options.limit;
       for (const error of it) {
@@ -368,8 +381,11 @@ export class JsonSchemaValidator<T extends TSchema> {
 /**
  * Alias/shortcut for creating a new JsonSchema instance
  */
-export function jsonschema<T extends TSchema>(
+export function jsonschema<
+  Context extends TProperties,
+  const T extends TSchema
+>(
   schema: T,
-): JsonSchemaValidator<T> {
+): JsonSchemaValidator<Context, T> {
   return JsonSchemaValidator.new(schema);
 }

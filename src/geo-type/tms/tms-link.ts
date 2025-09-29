@@ -1,7 +1,7 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
-export function TmsLink(options?: SchemaOptions) {
+export function TmsLink(options?: TSchemaOptions) {
   return Type.Object(
     {
       href: Type.String({

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Type } from "@sinclair/typebox";
+import { Type } from "typebox";
 import * as geobox from "./dist/index.js";
 
 const pointSchemaBabydog = geobox.PointFeature({

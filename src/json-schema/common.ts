@@ -1,4 +1,4 @@
-import { Type } from "@sinclair/typebox";
+import { Type } from "typebox";
 
 export const JSON_SCHEMA_OPTIONS = {
   $schema: Type.Optional(Type.String()),

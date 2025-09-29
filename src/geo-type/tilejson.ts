@@ -1,5 +1,5 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import { UInt32 } from "./int.js";
 import { Latitude, Longitude } from "./lnglat.js";
 
@@ -9,26 +9,26 @@ export function Semver() {
   });
 }
 
-export function Tilejson100Version(options?: SchemaOptions) {
+export function Tilejson100Version(options?: TSchemaOptions) {
   return Type.Literal("1.0.0", { ...options });
 }
-export function Tilejson200Version(options?: SchemaOptions) {
+export function Tilejson200Version(options?: TSchemaOptions) {
   return Type.Literal("2.0.0", { ...options });
 }
-export function Tilejson201Version(options?: SchemaOptions) {
+export function Tilejson201Version(options?: TSchemaOptions) {
   return Type.Literal("2.0.1", { ...options });
 }
-export function Tilejson210Version(options?: SchemaOptions) {
+export function Tilejson210Version(options?: TSchemaOptions) {
   return Type.Literal("2.1.0", { ...options });
 }
-export function Tilejson220Version(options?: SchemaOptions) {
+export function Tilejson220Version(options?: TSchemaOptions) {
   return Type.Literal("2.2.0", { ...options });
 }
-export function Tilejson300Version(options?: SchemaOptions) {
+export function Tilejson300Version(options?: TSchemaOptions) {
   return Type.Literal("3.0.0", { ...options });
 }
 
-export function TilejsonVersion(options?: SchemaOptions) {
+export function TilejsonVersion(options?: TSchemaOptions) {
   return Type.Union(
     [
       Tilejson100Version(),
@@ -45,7 +45,7 @@ export function TilejsonVersion(options?: SchemaOptions) {
 export function VersionLike() {
   return Type.Union([Semver(), Type.String({})]);
 }
-export function TilejsonZoom(options?: SchemaOptions) {
+export function TilejsonZoom(options?: TSchemaOptions) {
   return Type.Integer({
     minimum: 0,
     maximum: 30,
@@ -54,57 +54,57 @@ export function TilejsonZoom(options?: SchemaOptions) {
 }
 
 // raster tiles
-export function FormatJpg(options?: SchemaOptions) {
+export function FormatJpg(options?: TSchemaOptions) {
   return Type.Literal("jpg", options);
 }
-export function FormatPng(options?: SchemaOptions) {
+export function FormatPng(options?: TSchemaOptions) {
   return Type.Literal("png", options);
 }
-export function FormatWebp(options?: SchemaOptions) {
+export function FormatWebp(options?: TSchemaOptions) {
   return Type.Literal("webp", options);
 }
-export function FormatRaster(options?: SchemaOptions) {
+export function FormatRaster(options?: TSchemaOptions) {
   return Type.Union([FormatJpg(), FormatPng(), FormatWebp()], options);
 }
 // vector tiles
-export function FormatPbf(options?: SchemaOptions) {
+export function FormatPbf(options?: TSchemaOptions) {
   return Type.Literal("pbf", options);
 }
 
 // scheme
-export function SchemeTms(options?: SchemaOptions) {
+export function SchemeTms(options?: TSchemaOptions) {
   return Type.Literal("tms", options);
 }
-export function SchemeXyz(options?: SchemaOptions) {
+export function SchemeXyz(options?: TSchemaOptions) {
   return Type.Literal("xyz", options);
 }
-export function Scheme(options?: SchemaOptions) {
+export function Scheme(options?: TSchemaOptions) {
   return Type.Union([SchemeTms(), SchemeXyz()], {
     default: "xyz",
     ...options,
   });
 }
 
-export function Format(options?: SchemaOptions) {
+export function Format(options?: TSchemaOptions) {
   return Type.Union(
     [FormatJpg(), FormatPng(), FormatWebp(), FormatPbf()],
     options,
   );
 }
-export function Bounds(options?: SchemaOptions) {
+export function Bounds(options?: TSchemaOptions) {
   return Type.Tuple([Longitude(), Latitude(), Longitude(), Latitude()], {
     default: [-180, -85.051_128_779_806_59, 180, 85.051_128_779_806_6],
     ...options,
   });
 }
-export function Center(options?: SchemaOptions) {
+export function Center(options?: TSchemaOptions) {
   return Type.Tuple([Longitude(), Latitude(), TilejsonZoom()], {
     default: [0, 0, 0],
     ...options,
   });
 }
 
-export function Terrain(options?: SchemaOptions) {
+export function Terrain(options?: TSchemaOptions) {
   return Type.Union(
     [
       Type.Literal("mapbox"),
@@ -124,7 +124,7 @@ export function Terrain(options?: SchemaOptions) {
   );
 }
 
-export function Tilejson220(options?: SchemaOptions) {
+export function Tilejson220(options?: TSchemaOptions) {
   return Type.Object(
     {
       // MUST
@@ -157,7 +157,7 @@ export function Tilejson220(options?: SchemaOptions) {
   );
 }
 
-export function VectorLayer(options?: SchemaOptions) {
+export function VectorLayer(options?: TSchemaOptions) {
   return Type.Object(
     {
       id: Type.String(),
@@ -173,14 +173,14 @@ export function VectorLayer(options?: SchemaOptions) {
   );
 }
 
-export function VectorLayers(options?: SchemaOptions) {
+export function VectorLayers(options?: TSchemaOptions) {
   return Type.Array(VectorLayer(), {
     default: [],
     ...options,
   });
 }
 
-export function Tilejson300Raster(options?: SchemaOptions) {
+export function Tilejson300Raster(options?: TSchemaOptions) {
   return Type.Object(
     {
       // MUST
@@ -232,7 +232,7 @@ export function TilejsonId() {
   });
 }
 
-export function Tilejson300Vector(options?: SchemaOptions) {
+export function Tilejson300Vector(options?: TSchemaOptions) {
   return Type.Object(
     {
       // MUST
@@ -279,13 +279,13 @@ export function Tilejson300Vector(options?: SchemaOptions) {
   );
 }
 
-export function Tilejson300(options?: SchemaOptions) {
+export function Tilejson300(options?: TSchemaOptions) {
   return Type.Union([Tilejson300Raster(), Tilejson300Vector()], {
     ...options,
   });
 }
 
-export function Tilejson(options?: SchemaOptions) {
+export function Tilejson(options?: TSchemaOptions) {
   return Type.Object(
     {
       // MUST
@@ -332,14 +332,14 @@ export function Tilejson(options?: SchemaOptions) {
  * UTileJson - More sane and strict `TileJson`
  */
 
-export function ZoomSet(options?: SchemaOptions) {
+export function ZoomSet(options?: TSchemaOptions) {
   return UInt32({
     description:
       "Zooms represented as an unsigned 32 bit int; 0-30 inclusive. 0b0000_0000_0000_0000_0000_0000_0000_0111 -> [0, 1, 2]",
     ...options,
   });
 }
-export function Zooms(options?: SchemaOptions) {
+export function Zooms(options?: TSchemaOptions) {
   return Type.Union([
     Type.Array(
       Type.Integer({
@@ -355,7 +355,7 @@ export function Zooms(options?: SchemaOptions) {
   ]);
 }
 
-export function RasterTileSize(options?: SchemaOptions) {
+export function RasterTileSize(options?: TSchemaOptions) {
   return Type.Integer({
     minimum: 256,
     maximum: 4096,
@@ -399,7 +399,7 @@ function _UTilejsonCommonProps() {
     version: Type.Optional(Type.Union([Type.String(), Type.Null()])),
   };
 }
-export function UTilejsonCommon(options?: SchemaOptions) {
+export function UTilejsonCommon(options?: TSchemaOptions) {
   return Type.Object(
     {
       ..._UTilejsonCommonProps(),
@@ -411,7 +411,7 @@ export function UTilejsonCommon(options?: SchemaOptions) {
   );
 }
 
-export function UTilejsonRaster(options?: SchemaOptions) {
+export function UTilejsonRaster(options?: TSchemaOptions) {
   return Type.Object(
     {
       format: FormatRaster(),
@@ -424,7 +424,7 @@ export function UTilejsonRaster(options?: SchemaOptions) {
   );
 }
 
-export function UTilejsonVector(options?: SchemaOptions) {
+export function UTilejsonVector(options?: TSchemaOptions) {
   return Type.Object(
     {
       format: FormatPbf(),
@@ -443,7 +443,7 @@ export function UTilejsonVector(options?: SchemaOptions) {
  * The spreading of the `UTilejsonCommon` properties is less fancy but results in more
  * readable types... :/
  */
-export function UTilejson(options?: SchemaOptions) {
+export function UTilejson(options?: TSchemaOptions) {
   return Type.Union([UTilejsonRaster(options), UTilejsonVector(options)]);
 }
 

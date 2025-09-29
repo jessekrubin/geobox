@@ -1,7 +1,7 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
-export function TileMatrixLimits(options?: SchemaOptions) {
+export function TileMatrixLimits(options?: TSchemaOptions) {
   return Type.Object(
     {
       tileMatrix: Type.String(),

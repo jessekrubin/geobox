@@ -1,8 +1,8 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 import { TmsCrs } from "./crs.js";
 
-export function TmsTilePoint(options?: SchemaOptions) {
+export function TmsTilePoint(options?: TSchemaOptions) {
   return Type.Object(
     {
       coordinates: Type.Array(Type.Number(), { minItems: 2, maxItems: 2 }),

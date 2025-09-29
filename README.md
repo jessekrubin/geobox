@@ -39,7 +39,7 @@ bun add @jsse/geobox
 ## Example (wip)
 
 ```ts
-import { Type, type Static } from "@sinclair/typebox";
+import { Type, type Static } from "typebox";
 import * as geobox from "@jsse/geobox";
 
 // geojson-point-feature json-schema used by my (jesse) babydog

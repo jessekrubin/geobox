@@ -1,7 +1,7 @@
-import type { SchemaOptions } from "@sinclair/typebox";
-import { Type } from "@sinclair/typebox";
+import type { TSchemaOptions } from "typebox";
+import { Type } from "typebox";
 
-export function TmsDataType(options?: SchemaOptions) {
+export function TmsDataType(options?: TSchemaOptions) {
   return Type.Union(
     [
       Type.Literal("map"),

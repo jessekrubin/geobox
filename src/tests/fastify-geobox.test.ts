@@ -1,7 +1,7 @@
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
-import { Type } from "@sinclair/typebox";
-import { Value } from "@sinclair/typebox/value";
 import Fastify from "fastify";
+import { Type } from "typebox";
+import { Value } from "typebox/value";
 import { describe, expect, test } from "vitest";
 import * as geobox from "../index.js";
 import { geoboxSchemaFns } from "./_utils.js";
@@ -200,7 +200,7 @@ describe("fastify-geobox", () => {
   });
 
   // all schemas
-  const geoboxFunctions = geoboxSchemaFns().toSorted((a, b) => {
+  const geoboxFunctions = geoboxSchemaFns().sort((a, b) => {
     return a.key.localeCompare(b.key);
   });
   type UrlAndSchema = {
