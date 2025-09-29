@@ -49,6 +49,6 @@ export {
 export * as martin from "./geo-type/martin.js";
 export * as simplestyle from "./geo-type/simplestyle.js";
 export { SpriteEntry, SpriteJson } from "./geo-type/sprites.js";
-export { Tilejson, TilejsonLike, UTilejson } from "./geo-type/tilejson.js";
+export { Tilejson, UTilejson } from "./geo-type/tilejson.js";
 export * as tilejson from "./geo-type/tilejson.js";
 export * as tms from "./geo-type/tms/index.js";
