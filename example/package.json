@@ -13,6 +13,9 @@
   },
   "dependencies": {
     "@jsse/geobox": "file://..",
-    "@sinclair/typebox": "^0.32.35"
+    "typebox": "^1.0.53"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.6"
   }
 }
