@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.5.1
+
+### Patch Changes
+
+- update deps and use tsdown
+
 ## 0.5.0
 
 ### Minor Changes
