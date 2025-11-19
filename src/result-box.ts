@@ -63,7 +63,6 @@ export type CheckOptions = {
 
 /**
  * Formats an array of ValueError into a JSON string.
- *
  * @param errors - Array of ValueError instances.
  * @returns A formatted JSON string representing the errors.
  */
@@ -74,7 +73,6 @@ export function fmterr(...errors: TLocalizedValidationError[]) {
 
 /**
  * Type guard to check if a value is of type CheckOptions (compiled via typebox)
- *
  * @param value - The value to check.
  * @returns True if the value is a CheckOptions object, false otherwise.
  */
@@ -97,7 +95,6 @@ function isCheckOptions(value: unknown): value is CheckOptions {
 
 /**
  * A JSON Schema Validator class for TypeBox schemas.
- *
  * @typeParam T - The TypeBox schema type.
  */
 export class JsonSchemaValidator<
@@ -111,7 +108,6 @@ export class JsonSchemaValidator<
 
   /**
    * Creates a new JsonSchemaValidator instance.
-   *
    * @param schema - The TypeBox schema to validate.
    * @param references - Optional array of referenced schemas.
    * @param options - Optional options for the validator.
@@ -227,7 +223,6 @@ export class JsonSchemaValidator<
 
   /**
    * Decodes a value according to the schema.
-   *
    * @param value - The value to decode.
    * @returns The decoded value.
    */
@@ -237,7 +232,6 @@ export class JsonSchemaValidator<
 
   /**
    * Encodes a value according to the schema.
-   *
    * @param value - The value to encode.
    * @returns The encoded value.
    */
