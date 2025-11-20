@@ -13,7 +13,7 @@ importers:
         version: 2.29.7(@types/node@24.10.1)
       '@fastify/type-provider-typebox':
         specifier: ^6.1.0
-        version: 6.1.0(typebox@1.0.53)
+        version: 6.1.0(typebox@1.0.54)
       '@jsse/eslint-config':
         specifier: ^0.4.23
         version: 0.4.23(eslint@9.39.1)(typescript@5.9.3)(vitest@4.0.10(@types/debug@4.1.12)(@types/node@24.10.1)(tsx@4.20.6)(yaml@2.8.1))
@@ -67,26 +67,13 @@ importers:
         version: 4.20.6
       typebox:
         specifier: ^1.0.13
-        version: 1.0.53
+        version: 1.0.54
       typescript:
         specifier: ~5.9.2
         version: 5.9.3
       vitest:
         specifier: 4.0.10
         version: 4.0.10(@types/debug@4.1.12)(@types/node@24.10.1)(tsx@4.20.6)(yaml@2.8.1)
-
-  example:
-    dependencies:
-      '@jsse/geobox':
-        specifier: file://..
-        version: file:(typebox@1.0.53)
-      typebox:
-        specifier: ^1.0.53
-        version: 1.0.53
-    devDependencies:
-      tsx:
-        specifier: ^4.20.6
-        version: 4.20.6
 
 packages:
 
@@ -664,11 +651,6 @@ packages:
         optional: true
       eslint-plugin-react-refresh:
         optional: true
-
-  '@jsse/geobox@file:':
-    resolution: {directory: '', type: directory}
-    peerDependencies:
-      typebox: ^1.0.13
 
   '@jsse/tsconfig@0.4.0':
     resolution: {integrity: sha512-iMtBD6FaAQV7eS3IX7Qaml97CLthh1GPRBXCOh9X+cDrcAxQcLxJnX5vlyfd6VUuNpjrAmWczFLs9Z5hnRefAA==}
@@ -2935,8 +2917,8 @@ packages:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
 
-  typebox@1.0.53:
-    resolution: {integrity: sha512-fCi3wnKP4owdhs+LRIUfkPzR4p5RLa3tM4O6gqO7TeAo6SsamvqA59yPb1GyKDcCgB/ClmifVJ9BqQ128a4uvQ==}
+  typebox@1.0.54:
+    resolution: {integrity: sha512-NozIVC07ggyywGUBekk8tCOonu0fqaYMnR8m6xjGXPbNPUqvnEd2peQfkHeC2KIfGQ/tA2fiSiRi1nfM9brLJw==}
 
   typescript-eslint@8.47.0:
     resolution: {integrity: sha512-Lwe8i2XQ3WoMjua/r1PHrCTpkubPYJCAfOurtn+mtTzqB6jNd+14n9UN1bJ4s3F49x9ixAm0FLflB/JzQ57M8Q==}
@@ -3561,9 +3543,9 @@ snapshots:
       '@fastify/forwarded': 3.0.1
       ipaddr.js: 2.2.0
 
-  '@fastify/type-provider-typebox@6.1.0(typebox@1.0.53)':
+  '@fastify/type-provider-typebox@6.1.0(typebox@1.0.54)':
     dependencies:
-      typebox: 1.0.53
+      typebox: 1.0.54
 
   '@humanfs/core@0.19.1': {}
 
@@ -3641,10 +3623,6 @@ snapshots:
       - supports-color
       - typescript
       - vitest
-
-  '@jsse/geobox@file:(typebox@1.0.53)':
-    dependencies:
-      typebox: 1.0.53
 
   '@jsse/tsconfig@0.4.0': {}
 
@@ -6870,7 +6848,7 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
 
-  typebox@1.0.53: {}
+  typebox@1.0.54: {}
 
   typescript-eslint@8.47.0(eslint@9.39.1)(typescript@5.9.3):
     dependencies:
