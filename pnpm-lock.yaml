@@ -22,7 +22,7 @@ importers:
         version: 0.4.0
       '@turf/helpers':
         specifier: ^7.2.0
-        version: 7.3.0
+        version: 7.3.1
       '@turf/turf':
         specifier: ^7.3.0
         version: 7.3.1
@@ -1059,9 +1059,6 @@ packages:
 
   '@turf/great-circle@7.3.1':
     resolution: {integrity: sha512-pfs7PzBRgYEEyecM0ni6iEF19grn9FmbHyaLz7voYInmc2ZHfWQaxuY4dcf9cziWDaiPlbuyr/RyE6envg1xpw==}
-
-  '@turf/helpers@7.3.0':
-    resolution: {integrity: sha512-5kWdgwI6e2vGbkt2qOD+Z2BiKQ7dfKN/PtWRLCpvzyOO59rk19R53CHi8nUT/Y1vQLgWmT6eNpiKwsWwPZGIdg==}
 
   '@turf/helpers@7.3.1':
     resolution: {integrity: sha512-zkL34JVhi5XhsuMEO0MUTIIFEJ8yiW1InMu4hu/oRqamlY4mMoZql0viEmH6Dafh/p+zOl8OYvMJ3Vm3rFshgg==}
@@ -4287,11 +4284,6 @@ snapshots:
       '@turf/helpers': 7.3.1
       '@turf/invariant': 7.3.1
       '@types/geojson': 7946.0.16
-
-  '@turf/helpers@7.3.0':
-    dependencies:
-      '@types/geojson': 7946.0.16
-      tslib: 2.8.1
 
   '@turf/helpers@7.3.1':
     dependencies:
