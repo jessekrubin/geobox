@@ -13,7 +13,7 @@ importers:
         version: 2.29.8(@types/node@24.10.1)
       '@fastify/type-provider-typebox':
         specifier: ^6.1.0
-        version: 6.1.0(typebox@1.0.62)
+        version: 6.1.0(typebox@1.0.63)
       '@jsse/eslint-config':
         specifier: ^0.4.23
         version: 0.4.24(eslint@9.39.1)(typescript@5.9.3)(vitest@4.0.10(@types/debug@4.1.12)(@types/node@24.10.1)(tsx@4.21.0)(yaml@2.8.1))
@@ -67,7 +67,7 @@ importers:
         version: 4.21.0
       typebox:
         specifier: ^1.0.13
-        version: 1.0.62
+        version: 1.0.63
       typescript:
         specifier: ~5.9.2
         version: 5.9.3
@@ -2925,6 +2925,7 @@ packages:
   tsdown@0.17.4:
     resolution: {integrity: sha512-z+kNuv1rwM1POQIufDUVrdNc/uGy0ueRVafCyDH39IdHxin4JXgB8DNGSPoqdIpcOpqUoRbNreK8NxENFmlhKw==}
     engines: {node: '>=20.19.0'}
+    deprecated: Including an unexpected breaking change (copy behavior)
     hasBin: true
     peerDependencies:
       '@arethetypeswrong/core': ^0.18.1
@@ -2959,8 +2960,8 @@ packages:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
 
-  typebox@1.0.62:
-    resolution: {integrity: sha512-iWxUfvzC5tGZWFrhoPLUKQJgFif4aDVgyaBbCURFIswex8to1JsnwDtenM2GqNI1VC/vqNlHtGc0ZR5eh0vbww==}
+  typebox@1.0.63:
+    resolution: {integrity: sha512-qqQ1IePTIL3Illa9C5GToVAUM5qRwOaDN4x/V4jBIt4V0S3lqttJbUNIYm+u+QXvvVxOnTddWxa+6hGuujIEwA==}
 
   typescript-eslint@8.48.0:
     resolution: {integrity: sha512-fcKOvQD9GUn3Xw63EgiDqhvWJ5jsyZUaekl3KVpGsDJnN46WJTe3jWxtQP9lMZm1LJNkFLlTaWAxK2vUQR+cqw==}
@@ -3585,9 +3586,9 @@ snapshots:
       '@fastify/forwarded': 3.0.1
       ipaddr.js: 2.2.0
 
-  '@fastify/type-provider-typebox@6.1.0(typebox@1.0.62)':
+  '@fastify/type-provider-typebox@6.1.0(typebox@1.0.63)':
     dependencies:
-      typebox: 1.0.62
+      typebox: 1.0.63
 
   '@humanfs/core@0.19.1': {}
 
@@ -6968,7 +6969,7 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
 
-  typebox@1.0.62: {}
+  typebox@1.0.63: {}
 
   typescript-eslint@8.48.0(eslint@9.39.1)(typescript@5.9.3):
     dependencies:
