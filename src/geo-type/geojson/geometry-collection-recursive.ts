@@ -9,7 +9,6 @@ import { MultiLineStringGeometry } from "./multi-line-string-geometry.js";
 import { MultiPointGeometry } from "./multi-point-geometry.js";
 import { MultiPolygonGeometry } from "./multi-polygon-geometry.js";
 import { PointGeometry } from "./point-geometry.js";
-
 import { PolygonGeometry } from "./polygon-geometry.js";
 
 export function GeometryCollectionRecursive(
