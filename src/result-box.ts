@@ -6,8 +6,8 @@ import type {
   TSchema,
 } from "typebox";
 import type { Validator } from "typebox/compile";
-import type { TLocalizedValidationError } from "typebox/error";
 import { Compile } from "typebox/compile";
+import type { TLocalizedValidationError } from "typebox/error";
 import { Value } from "typebox/value";
 import { GeoboxValueError } from "./errors.js";
 

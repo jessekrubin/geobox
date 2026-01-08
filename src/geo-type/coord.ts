@@ -1,5 +1,4 @@
 import type { TNumber, TSchemaOptions } from "typebox";
-
 /**
  * Turfbox = turf/geojson + typebox
  */
