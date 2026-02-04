@@ -16,7 +16,7 @@ importers:
         version: 6.1.0(typebox@1.0.81)
       '@jsse/eslint-config':
         specifier: ^0.4.29
-        version: 0.4.29(eslint@9.39.2)(typescript@5.9.3)(vitest@4.0.10(@types/debug@4.1.12)(@types/node@24.10.10)(tsx@4.21.0)(yaml@2.8.2))
+        version: 0.4.30(eslint@9.39.2)(typescript@5.9.3)(vitest@4.0.10(@types/debug@4.1.12)(@types/node@24.10.10)(tsx@4.21.0)(yaml@2.8.2))
       '@jsse/tsconfig':
         specifier: ^0.4.0
         version: 0.4.0
@@ -498,8 +498,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@jsse/eslint-config@0.4.29':
-    resolution: {integrity: sha512-Gf3MhO1n9vgtWrGSoTYUr9zCv6p1GNj5mbX31TBfFchwh191BtatDfr96521jUz/QzmTa/ffCrZ1yjWIA5ojLQ==}
+  '@jsse/eslint-config@0.4.30':
+    resolution: {integrity: sha512-SwT1qFuEpCjwtOY0MSwLfjT3RHXJAqXE3CdPHL96ktQukMaMZWwXdmp8Kr1pMwQsDwmYEtLRbAfb+edPAUE3iA==}
     hasBin: true
     peerDependencies:
       '@eslint-react/eslint-plugin': ^2.0.4
@@ -3415,7 +3415,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@jsse/eslint-config@0.4.29(eslint@9.39.2)(typescript@5.9.3)(vitest@4.0.10(@types/debug@4.1.12)(@types/node@24.10.10)(tsx@4.21.0)(yaml@2.8.2))':
+  '@jsse/eslint-config@0.4.30(eslint@9.39.2)(typescript@5.9.3)(vitest@4.0.10(@types/debug@4.1.12)(@types/node@24.10.10)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments': 4.6.0(eslint@9.39.2)
       '@eslint/compat': 2.0.2(eslint@9.39.2)
