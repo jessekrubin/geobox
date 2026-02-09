@@ -49,7 +49,7 @@ importers:
         version: 9.39.2
       eslint-plugin-antfu:
         specifier: ^3.1.3
-        version: 3.1.3(eslint@9.39.2)
+        version: 3.2.0(eslint@9.39.2)
       fastify:
         specifier: ^5.7.4
         version: 5.7.4
@@ -1650,8 +1650,8 @@ packages:
     peerDependencies:
       eslint: '*'
 
-  eslint-plugin-antfu@3.1.3:
-    resolution: {integrity: sha512-Az1QuqQJ/c2efWCxVxF249u3D4AcAu1Y3VCGAlJm+x4cgnn1ybUAnCT5DWVcogeaWduQKeVw07YFydVTOF4xDw==}
+  eslint-plugin-antfu@3.2.0:
+    resolution: {integrity: sha512-JTvBcA+gc2hf1wz418dLYtt0GCE3ltrZuriA4KhP/nPbL8W6vZtcDlWUlUfghUTAAFpHh7gp+qN8BbK+jNifgg==}
     peerDependencies:
       eslint: '*'
 
@@ -3428,7 +3428,7 @@ snapshots:
       eslint: 9.39.2
       eslint-config-flat-gitignore: 2.1.0(eslint@9.39.2)
       eslint-merge-processors: 2.0.0(eslint@9.39.2)
-      eslint-plugin-antfu: 3.1.3(eslint@9.39.2)
+      eslint-plugin-antfu: 3.2.0(eslint@9.39.2)
       eslint-plugin-command: 3.4.0(eslint@9.39.2)
       eslint-plugin-de-morgan: 2.0.0(eslint@9.39.2)
       eslint-plugin-import-lite: 0.5.0(eslint@9.39.2)
@@ -5308,7 +5308,7 @@ snapshots:
     dependencies:
       eslint: 9.39.2
 
-  eslint-plugin-antfu@3.1.3(eslint@9.39.2):
+  eslint-plugin-antfu@3.2.0(eslint@9.39.2):
     dependencies:
       eslint: 9.39.2
 
