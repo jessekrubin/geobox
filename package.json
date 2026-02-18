@@ -81,7 +81,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.29.8",
     "@fastify/type-provider-typebox": "^6.1.0",
-    "@jsse/eslint-config": "^0.4.29",
+    "@jsse/eslint-config": "^0.5.1",
     "@jsse/tsconfig": "^0.4.0",
     "@turf/helpers": "^7.3.3",
     "@turf/turf": "^7.3.3",
