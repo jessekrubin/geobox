@@ -75,6 +75,23 @@ importers:
         specifier: 4.0.18
         version: 4.0.18(@types/node@24.11.2)(tsx@4.21.0)(yaml@2.8.2)
 
+  dist/lib/cjs: {}
+
+  dist/lib/esm: {}
+
+  example:
+    dependencies:
+      '@jsse/geobox':
+        specifier: file://..
+        version: file:(typebox@1.1.6)
+      typebox:
+        specifier: ^1.0.53
+        version: 1.1.6
+    devDependencies:
+      tsx:
+        specifier: ^4.20.6
+        version: 4.21.0
+
 packages:
 
   '@babel/generator@8.0.0-rc.2':
@@ -499,6 +516,11 @@ packages:
         optional: true
       eslint-plugin-react-refresh:
         optional: true
+
+  '@jsse/geobox@file:':
+    resolution: {directory: '', type: directory}
+    peerDependencies:
+      typebox: ^1.0.13
 
   '@jsse/tsconfig@0.4.0':
     resolution: {integrity: sha512-iMtBD6FaAQV7eS3IX7Qaml97CLthh1GPRBXCOh9X+cDrcAxQcLxJnX5vlyfd6VUuNpjrAmWczFLs9Z5hnRefAA==}
@@ -3454,6 +3476,10 @@ snapshots:
       - supports-color
       - typescript
       - vitest
+
+  '@jsse/geobox@file:(typebox@1.1.6)':
+    dependencies:
+      typebox: 1.1.6
 
   '@jsse/tsconfig@0.4.0': {}
 
