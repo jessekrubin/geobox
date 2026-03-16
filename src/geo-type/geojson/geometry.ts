@@ -21,26 +21,24 @@ export function Geometry<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
 >(schemas?: TGeometrySchemas<TCoord, TBBox>, options?: TSchemaOptions) {
-  return Type.Union([
-    PointGeometry(schemas),
-    MultiPointGeometry(schemas),
-    LineStringGeometry(schemas),
-    MultiLineStringGeometry(schemas),
-    PolygonGeometry(schemas),
-    MultiPolygonGeometry(schemas),
-    GeometryCollection(schemas),
-    Type.Null(),
-  ], options);
+  return Type.Union(
+    [
+      PointGeometry(schemas),
+      MultiPointGeometry(schemas),
+      LineStringGeometry(schemas),
+      MultiLineStringGeometry(schemas),
+      PolygonGeometry(schemas),
+      MultiPolygonGeometry(schemas),
+      GeometryCollection(schemas),
+      Type.Null(),
+    ],
+    options,
+  );
 }
 
 export function Geometry2d(options?: TSchemaOptions) {
   return Type.Union(
-    [
-      GeometryPrimitive({
-        coordinate: Coord2d(),
-      }),
-      GeometryCollection2d(),
-    ],
+    [GeometryPrimitive({ coordinate: Coord2d() }), GeometryCollection2d()],
     {
       title: "GeoJSON Geometry 2d",
       description: "GeoJSON Geometry 2d",
@@ -51,12 +49,7 @@ export function Geometry2d(options?: TSchemaOptions) {
 
 export function Geometry3d(options?: TSchemaOptions) {
   return Type.Union(
-    [
-      GeometryPrimitive({
-        coordinate: Coord(),
-      }),
-      GeometryCollection3d(),
-    ],
+    [GeometryPrimitive({ coordinate: Coord() }), GeometryCollection3d()],
     {
       title: "GeoJSON Geometry 3d",
       description: "GeoJSON Geometry 3d",

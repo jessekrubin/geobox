@@ -14,6 +14,6 @@
     "esModuleInterop": false,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.mts"],
+  "include": ["**/*.ts", "**/*.mts"],
   "exclude": ["node_modules", "dist", "scratch", "example/**"]
 }

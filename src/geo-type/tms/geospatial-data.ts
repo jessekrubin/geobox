@@ -62,9 +62,7 @@ export function TmsGeospatialData(options?: TSchemaOptions) {
         }),
       ),
       license: Type.Optional(
-        Type.String({
-          description: "License applicable to the tiles",
-        }),
+        Type.String({ description: "License applicable to the tiles" }),
       ),
       publisher: Type.Optional(
         Type.String({
@@ -73,9 +71,7 @@ export function TmsGeospatialData(options?: TSchemaOptions) {
         }),
       ),
       theme: Type.Optional(
-        Type.String({
-          description: "Category where the layer can be grouped",
-        }),
+        Type.String({ description: "Category where the layer can be grouped" }),
       ),
       crs: Type.Optional(
         TmsCrs({ description: "Coordinate Reference System (CRS)" }),
@@ -123,14 +119,10 @@ export function TmsGeospatialData(options?: TSchemaOptions) {
         }),
       ),
       created: Type.Optional(
-        TmsTimestamp({
-          description: "When the layer was first produced",
-        }),
+        TmsTimestamp({ description: "When the layer was first produced" }),
       ),
       updated: Type.Optional(
-        TmsTimestamp({
-          description: "Last layer change/revision",
-        }),
+        TmsTimestamp({ description: "Last layer change/revision" }),
       ),
       style: Type.Optional(TmsStyle()),
       geoDataClasses: Type.Optional(

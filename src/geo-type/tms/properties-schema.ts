@@ -7,12 +7,7 @@ export function TmsPropertiesSchema(options?: TSchemaOptions) {
     {
       type: Type.Literal("object"),
       required: Type.Optional(Type.Array(Type.String(), { minItems: 1 })),
-      properties: Type.Object(
-        {},
-        {
-          additionalProperties: JsonSchema(),
-        },
-      ),
+      properties: Type.Object({}, { additionalProperties: JsonSchema() }),
     },
     {
       ...options,

@@ -7,17 +7,9 @@ export function JsonSchemaBoolean(options?: TSchemaOptions) {
     Type.Intersect(
       [
         JSON_SCHEMA_OPTIONS_SCHEMA,
-        Type.Object(
-          {
-            type: Type.Literal("boolean"),
-          },
-          options,
-        ),
+        Type.Object({ type: Type.Literal("boolean") }, options),
       ],
-      {
-        description: "JSON-Schema-Schema",
-        ...options,
-      },
+      { description: "JSON-Schema-Schema", ...options },
     ),
   );
 }

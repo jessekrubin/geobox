@@ -25,9 +25,6 @@ export function Feature<
       properties: FeatureProperties(schemas?.properties),
       bbox: GeojsonBoudingBox(),
     },
-    {
-      additionalProperties: false,
-      ...options,
-    },
+    { additionalProperties: false, ...options },
   );
 }

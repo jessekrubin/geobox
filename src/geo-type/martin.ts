@@ -40,9 +40,7 @@ export function TileCatalog(options?: TSchemaOptions) {
 export function SpriteCatalog(options?: TSchemaOptions) {
   return Type.Record(
     Type.String(),
-    Type.Object({
-      images: Type.Array(Type.String()),
-    }),
+    Type.Object({ images: Type.Array(Type.String()) }),
     options,
   );
 }
@@ -81,14 +79,7 @@ export function FontCatalog(options?: TSchemaOptions) {
  */
 export function MartinCatalog(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      tiles: TileCatalog(),
-      sprites: SpriteCatalog(),
-      fonts: FontCatalog(),
-    },
-    {
-      description: "Martin server catalog",
-      ...options,
-    },
+    { tiles: TileCatalog(), sprites: SpriteCatalog(), fonts: FontCatalog() },
+    { description: "Martin server catalog", ...options },
   );
 }

@@ -15,10 +15,7 @@ describe("jsonschema", () => {
     expect(
       s.assert({
         type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [0, 0],
-        },
+        geometry: { type: "Point", coordinates: [0, 0] },
         properties: {},
       }),
     ).toBeUndefined();
@@ -26,15 +23,10 @@ describe("jsonschema", () => {
     expect(() =>
       s.assert({
         type: "Feature",
-        geometry: {
-          type: "LineString",
-          coordinates: [0, 0],
-        },
-        properties: {
-          dingo: "bash",
-        },
+        geometry: { type: "LineString", coordinates: [0, 0] },
+        properties: { dingo: "bash" },
       }),
-    ).toThrowError();
+    ).toThrow();
   });
 });
 
@@ -64,23 +56,15 @@ describe("json-schema-destructure", () => {
     expect(
       is({
         type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [0, 0],
-        },
+        geometry: { type: "Point", coordinates: [0, 0] },
         properties: {},
       }),
     ).toBe(true);
     expect(
       is({
         type: "Feature",
-        geometry: {
-          type: "LineString",
-          coordinates: [0, 0],
-        },
-        properties: {
-          dingo: "bash",
-        },
+        geometry: { type: "LineString", coordinates: [0, 0] },
+        properties: { dingo: "bash" },
       }),
     ).toBe(false);
   });

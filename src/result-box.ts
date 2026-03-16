@@ -120,9 +120,7 @@ export class JsonSchemaValidator<
     options?: { compile?: boolean; limit?: number },
   ) {
     this.schema = schema;
-    this.options = {
-      compile: options?.compile ?? true,
-    };
+    this.options = { compile: options?.compile ?? true };
     this.references = references ?? ({} as Context);
   }
 
@@ -144,12 +142,9 @@ export class JsonSchemaValidator<
     if (this._typeguard !== undefined) {
       return this._typeguard;
     }
-    const tg =
-      this.references === undefined
-        ? (Compile(this.schema) as Validator<Context, T>)
-        : (Compile(this.references, this.schema) as Validator<Context, T>);
+    const tg = Compile(this.references, this.schema);
     this._typeguard = tg;
-    return this._typeguard;
+    return tg;
   }
 
   /**
@@ -190,9 +185,7 @@ export class JsonSchemaValidator<
    */
   public check = (
     value: unknown,
-    options?: {
-      limit?: number;
-    },
+    options?: { limit?: number },
   ): asserts value is Static<T> => {
     if (!this.is(value)) {
       const earr = this.errorsArr(value, options);
@@ -208,9 +201,7 @@ export class JsonSchemaValidator<
    */
   public assert = (
     value: unknown,
-    options?: {
-      limit?: number;
-    },
+    options?: { limit?: number },
   ): asserts value is Static<T> => {
     if (!this.is(value)) {
       const earr = this.errorsArr(value, options);
@@ -227,6 +218,7 @@ export class JsonSchemaValidator<
    * @returns The decoded value.
    */
   public decode = (value: unknown): StaticDecode<T, Context> => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.typeguard.Decode(value);
   };
 
@@ -236,6 +228,7 @@ export class JsonSchemaValidator<
    * @returns The encoded value.
    */
   public encode = (value: unknown): StaticEncode<T, Context> => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.typeguard.Encode(value);
   };
 
@@ -243,12 +236,7 @@ export class JsonSchemaValidator<
    * Returns an iterator for each error in this value;
    * allows for max number of errors
    */
-  public errors = (
-    value: unknown,
-    options?: {
-      limit?: number;
-    },
-  ) => {
+  public errors = (value: unknown, options?: { limit?: number }) => {
     const it = this.typeguard.Errors(value);
     if (options && isCheckOptions(options)) {
       return function* () {
@@ -314,6 +302,7 @@ export class JsonSchemaValidator<
    */
   public from = (value: unknown, options?: { limit?: number }): Static<T> => {
     if (this.is(value)) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return value;
     }
     const earr = this.errorsArr(value, options);
@@ -324,6 +313,7 @@ export class JsonSchemaValidator<
    * Alias for from()
    */
   public parse = (value: unknown, options?: { limit?: number }): Static<T> => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.from(value, options);
   };
 
@@ -361,10 +351,10 @@ export class JsonSchemaValidator<
   /**
    * Returns a "strict" schema for this schema with typebox attributes/symbols removed
    */
-  public strictSchema(): T {
+  public strictSchema = (): T => {
     // eslint-disable-next-line unicorn/prefer-structured-clone
-    return JSON.parse(JSON.stringify(this.schema));
-  }
+    return JSON.parse(JSON.stringify(this.schema)) as T;
+  };
 }
 
 /**

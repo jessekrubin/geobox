@@ -12,9 +12,7 @@ export const JSON_SCHEMA_OPTIONS = {
 };
 
 export function JsonSchemaOptions() {
-  return Type.Object({
-    ...JSON_SCHEMA_OPTIONS,
-  });
+  return Type.Object({ ...JSON_SCHEMA_OPTIONS });
 }
 
 export const JSON_SCHEMA_OPTIONS_SCHEMA = JsonSchemaOptions();

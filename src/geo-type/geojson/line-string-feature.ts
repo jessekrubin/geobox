@@ -20,9 +20,7 @@ export function LineStringFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: LineStringGeometry({
-        coordinate: schemas?.coordinate,
-      }),
+      geometry: LineStringGeometry({ coordinate: schemas?.coordinate }),
       properties: FeatureProperties(schemas?.properties),
       bbox: GeojsonBoudingBox(schemas?.bbox),
     },
@@ -36,13 +34,7 @@ export function LineStringFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: TSchemaOptions) {
-  return LineStringFeature(
-    {
-      coordinate: Coord2d(),
-      ...schemas,
-    },
-    options,
-  );
+  return LineStringFeature({ coordinate: Coord2d(), ...schemas }, options);
 }
 
 export { LineStringFeature2d as LineString2d };
@@ -51,13 +43,7 @@ export function LineStringFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: TSchemaOptions) {
-  return LineStringFeature(
-    {
-      coordinate: Coord3d(),
-      ...schemas,
-    },
-    options,
-  );
+  return LineStringFeature({ coordinate: Coord3d(), ...schemas }, options);
 }
 
 export { LineStringFeature3d as LineString3d };

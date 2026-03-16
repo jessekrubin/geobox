@@ -20,9 +20,7 @@ export function PolygonFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: PolygonGeometry({
-        coordinate: schemas?.coordinate,
-      }),
+      geometry: PolygonGeometry({ coordinate: schemas?.coordinate }),
       properties: FeatureProperties(schemas?.properties),
       bbox: GeojsonBoudingBox(schemas?.bbox),
     },
@@ -34,26 +32,14 @@ export function PolygonFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: TSchemaOptions) {
-  return PolygonFeature(
-    {
-      coordinate: Coord2d(),
-      ...schemas,
-    },
-    options,
-  );
+  return PolygonFeature({ coordinate: Coord2d(), ...schemas }, options);
 }
 
 export function PolygonFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: TSchemaOptions) {
-  return PolygonFeature(
-    {
-      coordinate: Coord3d(),
-      ...schemas,
-    },
-    options,
-  );
+  return PolygonFeature({ coordinate: Coord3d(), ...schemas }, options);
 }
 
 export { PolygonFeature as Polygon };

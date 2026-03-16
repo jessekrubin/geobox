@@ -4,9 +4,7 @@ import { UInt32 } from "./int.js";
 import { Latitude, Longitude } from "./lnglat.js";
 
 export function Semver() {
-  return Type.String({
-    pattern: String.raw`\d+\.\d+\.\d+\w?[\w\d]*`,
-  });
+  return Type.String({ pattern: String.raw`\d+\.\d+\.\d+\w?[\w\d]*` });
 }
 
 export function Tilejson100Version(options?: TSchemaOptions) {
@@ -46,11 +44,7 @@ export function VersionLike() {
   return Type.Union([Semver(), Type.String({})]);
 }
 export function TilejsonZoom(options?: TSchemaOptions) {
-  return Type.Integer({
-    minimum: 0,
-    maximum: 30,
-    ...options,
-  });
+  return Type.Integer({ minimum: 0, maximum: 30, ...options });
 }
 
 // raster tiles
@@ -79,10 +73,7 @@ export function SchemeXyz(options?: TSchemaOptions) {
   return Type.Literal("xyz", options);
 }
 export function Scheme(options?: TSchemaOptions) {
-  return Type.Union([SchemeTms(), SchemeXyz()], {
-    default: "xyz",
-    ...options,
-  });
+  return Type.Union([SchemeTms(), SchemeXyz()], { default: "xyz", ...options });
 }
 
 export function Format(options?: TSchemaOptions) {
@@ -131,9 +122,7 @@ export function Tilejson220(options?: TSchemaOptions) {
       name: Type.String(),
       format: Format(),
       tilejson: Tilejson220Version(),
-      tiles: Type.Array(Type.String(), {
-        default: [],
-      }),
+      tiles: Type.Array(Type.String(), { default: [] }),
       // OPTIONAL
       attribution: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       bounds: Type.Optional(Type.Union([Bounds(), Type.Null()])),
@@ -150,10 +139,7 @@ export function Tilejson220(options?: TSchemaOptions) {
       template: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       version: Type.Optional(Type.Union([VersionLike(), Type.Null()])),
     },
-    {
-      additionalProperties: true,
-      ...options,
-    },
+    { additionalProperties: true, ...options },
   );
 }
 
@@ -166,18 +152,12 @@ export function VectorLayer(options?: TSchemaOptions) {
       maxzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
       minzoom: Type.Optional(Type.Union([TilejsonZoom(), Type.Null()])),
     },
-    {
-      additionalProperties: true,
-      ...options,
-    },
+    { additionalProperties: true, ...options },
   );
 }
 
 export function VectorLayers(options?: TSchemaOptions) {
-  return Type.Array(VectorLayer(), {
-    default: [],
-    ...options,
-  });
+  return Type.Array(VectorLayer(), { default: [], ...options });
 }
 
 export function Tilejson300Raster(options?: TSchemaOptions) {
@@ -187,20 +167,14 @@ export function Tilejson300Raster(options?: TSchemaOptions) {
       name: Type.String(),
       format: FormatRaster(),
       tilejson: Tilejson300Version(),
-      tiles: Type.Array(Type.String(), {
-        default: [],
-      }),
+      tiles: Type.Array(Type.String(), { default: [] }),
 
       // OPTIONAL
       vector_layers: Type.Optional(VectorLayers()),
       // COMMON
       id: Type.Optional(Type.String()),
       terrain: Type.Optional(Terrain()),
-      tilesize: Type.Optional(
-        Type.Integer({
-          minimum: 0,
-        }),
-      ),
+      tilesize: Type.Optional(Type.Integer({ minimum: 0 })),
       attribution: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       bounds: Type.Optional(Type.Union([Bounds(), Type.Null()])),
       center: Type.Optional(Type.Union([Center(), Type.Null()])),
@@ -217,19 +191,14 @@ export function Tilejson300Raster(options?: TSchemaOptions) {
       template: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       version: Type.Optional(Type.Union([Type.String(), Type.Null()])),
     },
-    {
-      additionalProperties: true,
-      ...options,
-    },
+    { additionalProperties: true, ...options },
   );
 }
 
 // any alphanumeric string as well as `-`, `_` and `.` but no spaces
 const TILEJSON_ID_RE = /^[\w.-]+$/;
 export function TilejsonId() {
-  return Type.String({
-    pattern: TILEJSON_ID_RE.source,
-  });
+  return Type.String({ pattern: TILEJSON_ID_RE.source });
 }
 
 export function Tilejson300Vector(options?: TSchemaOptions) {
@@ -239,19 +208,13 @@ export function Tilejson300Vector(options?: TSchemaOptions) {
       name: Type.String(),
       format: Type.Literal("pbf"),
       tilejson: Tilejson300Version(),
-      tiles: Type.Array(Type.String(), {
-        default: [],
-      }),
+      tiles: Type.Array(Type.String(), { default: [] }),
       // required for vector tiles
       vector_layers: VectorLayers(),
       // OPTIONAL
       id: Type.Optional(TilejsonId()),
       terrain: Type.Optional(Terrain()),
-      tilesize: Type.Optional(
-        Type.Integer({
-          minimum: 0,
-        }),
-      ),
+      tilesize: Type.Optional(Type.Integer({ minimum: 0 })),
       attribution: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       bounds: Type.Optional(
         Type.Union([Type.Array(Type.Number()), Type.Null()]),
@@ -272,17 +235,12 @@ export function Tilejson300Vector(options?: TSchemaOptions) {
       template: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       version: Type.Optional(Type.Union([Type.String(), Type.Null()])),
     },
-    {
-      additionalProperties: true,
-      ...options,
-    },
+    { additionalProperties: true, ...options },
   );
 }
 
 export function Tilejson300(options?: TSchemaOptions) {
-  return Type.Union([Tilejson300Raster(), Tilejson300Vector()], {
-    ...options,
-  });
+  return Type.Union([Tilejson300Raster(), Tilejson300Vector()], { ...options });
 }
 
 export function Tilejson(options?: TSchemaOptions) {
@@ -292,9 +250,7 @@ export function Tilejson(options?: TSchemaOptions) {
       name: Type.String(),
       format: Format(),
       tilejson: TilejsonVersion(),
-      tiles: Type.Array(Type.String(), {
-        default: [],
-      }),
+      tiles: Type.Array(Type.String(), { default: [] }),
       maxzoom: TilejsonZoom(),
       minzoom: TilejsonZoom(),
       bounds: Bounds(),
@@ -303,11 +259,7 @@ export function Tilejson(options?: TSchemaOptions) {
       // OPTIONAL
       id: Type.Optional(TilejsonId()),
       terrain: Type.Optional(Terrain()),
-      tilesize: Type.Optional(
-        Type.Integer({
-          minimum: 0,
-        }),
-      ),
+      tilesize: Type.Optional(Type.Integer({ minimum: 0 })),
       center: Type.Optional(Type.Union([Center(), Type.Null()])),
       attribution: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       data: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
@@ -321,10 +273,7 @@ export function Tilejson(options?: TSchemaOptions) {
       template: Type.Optional(Type.Union([Type.String(), Type.Null()])),
       version: Type.Optional(Type.Union([Type.String(), Type.Null()])),
     },
-    {
-      additionalProperties: true,
-      ...options,
-    },
+    { additionalProperties: true, ...options },
   );
 }
 
@@ -341,16 +290,10 @@ export function ZoomSet(options?: TSchemaOptions) {
 }
 export function Zooms(options?: TSchemaOptions) {
   return Type.Union([
-    Type.Array(
-      Type.Integer({
-        minimum: 0,
-        maximum: 30,
-      }),
-      {
-        uniqueItems: true,
-        ...options,
-      },
-    ),
+    Type.Array(Type.Integer({ minimum: 0, maximum: 30 }), {
+      uniqueItems: true,
+      ...options,
+    }),
     ZoomSet(options),
   ]);
 }
@@ -371,9 +314,7 @@ function _UTilejsonCommonProps() {
     // MUST
     name: Type.String(),
     tilejson: TilejsonVersion(),
-    tiles: Type.Array(Type.String(), {
-      default: [],
-    }),
+    tiles: Type.Array(Type.String(), { default: [] }),
     maxzoom: TilejsonZoom(),
     minzoom: TilejsonZoom(),
     bounds: Bounds(),
@@ -382,11 +323,7 @@ function _UTilejsonCommonProps() {
     // OPTIONAL
     id: Type.Optional(TilejsonId()),
     terrain: Type.Optional(Terrain()),
-    tilesize: Type.Optional(
-      Type.Integer({
-        minimum: 0,
-      }),
-    ),
+    tilesize: Type.Optional(Type.Integer({ minimum: 0 })),
     center: Type.Optional(Type.Union([Center(), Type.Null()])),
     attribution: Type.Optional(Type.Union([Type.String(), Type.Null()])),
     data: Type.Optional(Type.Union([Type.Array(Type.String()), Type.Null()])),
@@ -401,26 +338,15 @@ function _UTilejsonCommonProps() {
 }
 export function UTilejsonCommon(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      ..._UTilejsonCommonProps(),
-    },
-    {
-      additionalProperties: true,
-      ...options,
-    },
+    { ..._UTilejsonCommonProps() },
+    { additionalProperties: true, ...options },
   );
 }
 
 export function UTilejsonRaster(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      format: FormatRaster(),
-      ..._UTilejsonCommonProps(),
-    },
-    {
-      additionalProperties: true,
-      ...options,
-    },
+    { format: FormatRaster(), ..._UTilejsonCommonProps() },
+    { additionalProperties: true, ...options },
   );
 }
 
@@ -431,10 +357,7 @@ export function UTilejsonVector(options?: TSchemaOptions) {
       vector_layers: VectorLayers(),
       ..._UTilejsonCommonProps(),
     },
-    {
-      additionalProperties: true,
-      ...options,
-    },
+    { additionalProperties: true, ...options },
   );
 }
 

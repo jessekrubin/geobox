@@ -9,9 +9,7 @@ export function TmsStyle(options?: TSchemaOptions) {
           "An identifier for this style. Implementation of 'identifier'",
       }),
       title: Type.Optional(
-        Type.String({
-          description: "A title for this style",
-        }),
+        Type.String({ description: "A title for this style" }),
       ),
       description: Type.Optional(
         Type.String({
@@ -19,17 +17,10 @@ export function TmsStyle(options?: TSchemaOptions) {
         }),
       ),
       keywords: Type.Optional(
-        Type.Array(
-          Type.String({
-            description: "keywords about this style",
-          }),
-        ),
+        Type.Array(Type.String({ description: "keywords about this style" })),
       ),
       links: Type.Array(
-        Type.Object({
-          rel: Type.String(),
-          href: Type.String(),
-        }),
+        Type.Object({ rel: Type.String(), href: Type.String() }),
       ),
     },
     {

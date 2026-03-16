@@ -8,27 +8,13 @@ import { geoboxSchemaFns } from "./_utils.js";
 
 describe("fastify-geobox", () => {
   const fastify = Fastify({
-    logger: {
-      level: "trace",
-      file: "./logs.log",
-    },
-    ajv: {
-      customOptions: {
-        strict: false,
-        useDefaults: true,
-      },
-    },
+    logger: { level: "trace", file: "./logs.log" },
+    ajv: { customOptions: { strict: false, useDefaults: true } },
   }).withTypeProvider<TypeBoxTypeProvider>();
 
   fastify.get(
     "/point",
-    {
-      schema: {
-        response: {
-          200: geobox.Point(),
-        },
-      },
-    },
+    { schema: { response: { 200: geobox.Point() } } },
     (_req, _res) => {
       return {
         type: "Feature" as const,
@@ -36,9 +22,7 @@ describe("fastify-geobox", () => {
           type: "Point" as const,
           coordinates: [0, 0] satisfies [number, number],
         },
-        properties: {
-          dingo: "bash",
-        },
+        properties: { dingo: "bash" },
       };
     },
   );
@@ -68,10 +52,7 @@ describe("fastify-geobox", () => {
     vector_layers: [
       {
         id: "telephone",
-        fields: {
-          phone_number: "the phone number",
-          payment: "how to pay",
-        },
+        fields: { phone_number: "the phone number", payment: "how to pay" },
       },
       {
         id: "bicycle_parking",
@@ -98,13 +79,7 @@ describe("fastify-geobox", () => {
 
   fastify.get(
     "/tilejson300",
-    {
-      schema: {
-        response: {
-          200: geobox.tilejson.Tilejson(),
-        },
-      },
-    },
+    { schema: { response: { 200: geobox.tilejson.Tilejson() } } },
     (_req, _res) => {
       if (!Value.Check(tilejsonSchema, exampleTilejson300)) {
         throw new Error("bad tilejson");
@@ -116,13 +91,7 @@ describe("fastify-geobox", () => {
   const utilejsonSchema = geobox.tilejson.UTilejson();
   fastify.get(
     "/utile.json",
-    {
-      schema: {
-        response: {
-          200: geobox.tilejson.UTilejson(),
-        },
-      },
-    },
+    { schema: { response: { 200: geobox.tilejson.UTilejson() } } },
     (_req, _res) => {
       if (!Value.Check(utilejsonSchema, exampleTilejson300)) {
         throw new Error("bad tilejson");
@@ -142,17 +111,11 @@ describe("fastify-geobox", () => {
         }),
       ),
     ]),
-    Type.Object({
-      group: Type.Optional(Type.String()),
-    }),
+    Type.Object({ group: Type.Optional(Type.String()) }),
   ]);
   fastify.get(
     "/bbox",
-    {
-      schema: {
-        querystring: bboxQuerySchema,
-      },
-    },
+    { schema: { querystring: bboxQuerySchema } },
     (_req, _res) => {
       const bbox = {
         west: _req.query.west ?? -180,
@@ -167,33 +130,26 @@ describe("fastify-geobox", () => {
   test("bbox-schema", async () => {
     const r = await fastify.inject("/bbox");
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = JSON.parse(r.payload);
-    expect(data).toEqual({
-      west: -180,
-      south: -90,
-      east: 180,
-      north: 90,
-    });
+    expect(data).toEqual({ west: -180, south: -90, east: 180, north: 90 });
   });
 
   test("point-schema", async () => {
     const r = await fastify.inject("/point");
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = JSON.parse(r.payload);
     expect(data).toEqual({
       type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [0, 0],
-      },
-      properties: {
-        dingo: "bash",
-      },
+      geometry: { type: "Point", coordinates: [0, 0] },
+      properties: { dingo: "bash" },
     });
   });
   test("tilejson-schema", async () => {
     const r = await fastify.inject("/tilejson300");
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = JSON.parse(r.payload);
     expect(data).toEqual(exampleTilejson300);
   });
@@ -201,6 +157,7 @@ describe("fastify-geobox", () => {
   test("utilejson-schema", async () => {
     const r = await fastify.inject("/utile.json");
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const data = JSON.parse(r.payload);
     expect(data).toEqual(exampleTilejson300);
   });
@@ -209,10 +166,7 @@ describe("fastify-geobox", () => {
   const geoboxFunctions = geoboxSchemaFns().toSorted((a, b) => {
     return a.key.localeCompare(b.key);
   });
-  type UrlAndSchema = {
-    url: string;
-    schema: geobox.TSchema;
-  };
+  type UrlAndSchema = { url: string; schema: geobox.TSchema };
   const urls2query: UrlAndSchema[] = [];
   for (const { key, fn } of geoboxFunctions) {
     // if (!["GeoJSON"].includes(key)) {
@@ -222,15 +176,7 @@ describe("fastify-geobox", () => {
     const url = `/schema/${key}`;
     fastify.get(
       url,
-      {
-        schema: {
-          response: {
-            200: Type.Object({
-              data: gbSchema,
-            }),
-          },
-        },
-      },
+      { schema: { response: { 200: Type.Object({ data: gbSchema }) } } },
       (_req, _res) => {
         if (key === "GeoJSON") {
           const anyGeojson = {
@@ -238,10 +184,7 @@ describe("fastify-geobox", () => {
             features: [
               {
                 type: "Feature",
-                geometry: {
-                  type: "Point",
-                  coordinates: [0, 0],
-                },
+                geometry: { type: "Point", coordinates: [0, 0] },
                 properties: {},
               },
               // geom collection
@@ -249,12 +192,7 @@ describe("fastify-geobox", () => {
                 type: "Feature",
                 geometry: {
                   type: "GeometryCollection",
-                  geometries: [
-                    {
-                      type: "Point",
-                      coordinates: [0, 0],
-                    },
-                  ],
+                  geometries: [{ type: "Point", coordinates: [0, 0] }],
                 },
                 properties: {},
               },
@@ -273,6 +211,7 @@ describe("fastify-geobox", () => {
     test(url, async () => {
       const r = await fastify.inject(url);
       try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const { data } = JSON.parse(r.payload);
         const validator = new geobox.JsonSchemaValidator(schema);
         validator.parse(data);

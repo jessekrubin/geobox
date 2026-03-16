@@ -15,9 +15,7 @@ export function TileSet(options?: TSchemaOptions) {
   return Type.Object(
     {
       title: Type.Optional(
-        Type.String({
-          description: "A title for this tileset",
-        }),
+        Type.String({ description: "A title for this tileset" }),
       ),
       description: Type.Optional(
         Type.String({
@@ -25,11 +23,7 @@ export function TileSet(options?: TSchemaOptions) {
         }),
       ),
       keywords: Type.Optional(
-        Type.Array(
-          Type.String({
-            description: "keywords about this tileset",
-          }),
-        ),
+        Type.Array(Type.String({ description: "keywords about this tileset" })),
       ),
       version: Type.Optional(
         Type.String({
@@ -49,9 +43,7 @@ export function TileSet(options?: TSchemaOptions) {
         }),
       ),
       license: Type.Optional(
-        Type.String({
-          description: "License applicable to the tiles",
-        }),
+        Type.String({ description: "License applicable to the tiles" }),
       ),
       accessConstraints: Type.Optional(
         Type.Union(
@@ -62,17 +54,13 @@ export function TileSet(options?: TSchemaOptions) {
             Type.Literal("secret"),
             Type.Literal("topSecret"),
           ],
-          {
-            default: "unclassified",
-          },
+          { default: "unclassified" },
         ),
       ),
 
       mediaTypes: Type.Optional(
         Type.Array(
-          Type.String({
-            description: "Media types available for the tiles",
-          }),
+          Type.String({ description: "Media types available for the tiles" }),
         ),
       ),
       dataType: TmsDataType(),

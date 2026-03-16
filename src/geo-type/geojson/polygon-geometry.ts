@@ -16,9 +16,7 @@ export function PolygonGeometry<
         Type.Array(GeojsonCoordinate(schemas && schemas.coordinate), {
           minItems: 4,
         }),
-        {
-          minItems: 1,
-        },
+        { minItems: 1 },
       ),
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },
@@ -36,13 +34,8 @@ export function PolygonGeometry2d(
   options?: TSchemaOptions,
 ) {
   return PolygonGeometry(
-    {
-      coordinate: schemas && schemas.coordinate,
-    },
-    {
-      title: "GeoJSON Polygon 2d",
-      ...options,
-    },
+    { coordinate: schemas && schemas.coordinate },
+    { title: "GeoJSON Polygon 2d", ...options },
   );
 }
 
@@ -51,9 +44,7 @@ export function PolygonGeometry3d(
   options?: TSchemaOptions,
 ) {
   return PolygonGeometry(
-    {
-      coordinate: schemas && schemas.coordinate,
-    },
+    { coordinate: schemas && schemas.coordinate },
     { title: "GeoJSON Polygon 3d", ...options },
   );
 }

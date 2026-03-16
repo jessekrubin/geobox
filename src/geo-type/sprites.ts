@@ -31,15 +31,11 @@ function SpriteTextFit(options?: TSchemaOptions) {
 export function SpriteEntry(options?: TSchemaOptions) {
   return Type.Object(
     {
-      height: Type.Integer({
-        description: "Height of the icon in pixels.",
-      }),
+      height: Type.Integer({ description: "Height of the icon in pixels." }),
       pixel_ratio: Type.Integer({
         description: "Pixel ratio of the sprite. Defaults to 1.",
       }),
-      width: Type.Integer({
-        description: "Width of the icon in pixels.",
-      }),
+      width: Type.Integer({ description: "Width of the icon in pixels." }),
       x: Type.Integer({
         description: "X coordinate of the icon image in the sprite.",
       }),

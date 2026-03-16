@@ -16,9 +16,7 @@ export function MultiLineStringGeometry<
         Type.Array(GeojsonCoordinate(schemas && schemas.coordinate), {
           minItems: 2,
         }),
-        {
-          minItems: 1,
-        },
+        { minItems: 1 },
       ),
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },

@@ -10,10 +10,7 @@ export function Tms2dBoundingBox(options?: TSchemaOptions) {
       upperRight: Tms2dPoint(),
       crs: Type.Optional(TmsCrs()),
       orderedAxes: Type.Optional(
-        Type.Array(Type.String(), {
-          minItems: 2,
-          maxItems: 2,
-        }),
+        Type.Array(Type.String(), { minItems: 2, maxItems: 2 }),
       ),
     },
     {

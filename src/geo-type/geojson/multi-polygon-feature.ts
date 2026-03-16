@@ -20,16 +20,11 @@ export function MultiPolygonFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: MultiPolygonGeometry({
-        coordinate: schemas?.coordinate,
-      }),
+      geometry: MultiPolygonGeometry({ coordinate: schemas?.coordinate }),
       properties: FeatureProperties(schemas?.properties),
       bbox: GeojsonBoudingBox(schemas?.bbox),
     },
-    {
-      title: "GeoJSON MultiPolygon Feature",
-      ...options,
-    },
+    { title: "GeoJSON MultiPolygon Feature", ...options },
   );
 }
 
@@ -39,26 +34,14 @@ export function MultiPolygonFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: TSchemaOptions) {
-  return MultiPolygonFeature(
-    {
-      coordinate: Coord2d(),
-      ...schemas,
-    },
-    options,
-  );
+  return MultiPolygonFeature({ coordinate: Coord2d(), ...schemas }, options);
 }
 
 export function MultiPolygonFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: TSchemaOptions) {
-  return MultiPolygonFeature(
-    {
-      coordinate: Coord3d(),
-      ...schemas,
-    },
-    options,
-  );
+  return MultiPolygonFeature({ coordinate: Coord3d(), ...schemas }, options);
 }
 
 export { MultiPolygonFeature2d as MultiPolygon2d };

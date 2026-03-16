@@ -8,22 +8,12 @@ import * as geobox from "../index.js";
 test("test point schema builder", () => {
   const pDingo: {
     type: "Feature";
-    geometry: {
-      type: "Point";
-      coordinates: [number, number];
-    };
-    properties: {
-      dingo: string;
-    };
+    geometry: { type: "Point"; coordinates: [number, number] };
+    properties: { dingo: string };
   } = {
     type: "Feature",
-    geometry: {
-      type: "Point",
-      coordinates: [0, 0],
-    },
-    properties: {
-      dingo: "bash",
-    },
+    geometry: { type: "Point", coordinates: [0, 0] },
+    properties: { dingo: "bash" },
   };
   const pointSchemaBabydog = geobox.PointFeature({
     properties: Type.Object({ dingo: Type.String() }),
@@ -36,41 +26,29 @@ test("test point schema builder", () => {
 
   // @ts-expect-error invalid properties
   const _badProps: BabydogProperties = { dingo: 123 };
-  const _goodProps: BabydogProperties = {
-    dingo: "bash",
-  };
+  const _goodProps: BabydogProperties = { dingo: "bash" };
+  void _goodProps;
 
   const _bbox2: PointFeatureBabydogBBox = [0, 0, 0, 0];
   const _bbox3: PointFeatureBabydogBBox = [0, 0, 0, 0, 0, 0];
 
   const _bboxUndef: PointFeatureBabydogBBox = undefined;
 
+  // @ts-expect-error - invalid bbox value
   const _bboxBad = { a: 123 } satisfies PointFeatureBabydogBBox;
 
-  console.debug({
-    _bbox2,
-    _bbox3,
-    _bboxUndef,
-    _bboxBad,
-  });
+  console.debug({ _bbox2, _bbox3, _bboxUndef, _bboxBad });
 
   const pointSchemaDingoValidator = Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pDingo)) {
     const t = pDingo;
     assertType<{
       type: "Feature";
-      geometry: {
-        type: "Point";
-        coordinates: [number, number];
-      };
-      properties: {
-        dingo: string;
-      };
+      geometry: { type: "Point"; coordinates: [number, number] };
+      properties: { dingo: string };
     }>(t);
 
-    expectTypeOf(t.properties).toEqualTypeOf<{
-      dingo: string;
-    }>();
+    expectTypeOf(t.properties).toEqualTypeOf<{ dingo: string }>();
 
     // eslint-disable-next-line unused-imports/no-unused-vars,@typescript-eslint/no-unused-vars
     const pointSchemaBabydog2d = geobox.PointFeature2d({
@@ -82,9 +60,7 @@ test("test point schema builder", () => {
       0, 0,
     ];
 
-    console.debug({
-      _test2dpoint,
-    });
+    console.debug({ _test2dpoint });
 
     // @ts-expect-error invalid coord
     const _test2dpointBad: _PointFeatureBabydog2d["geometry"]["coordinates"] = [

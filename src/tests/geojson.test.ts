@@ -44,10 +44,7 @@ const simplePointFeature = {
 
 const pointFeatureDingoProps = {
   type: "Feature",
-  geometry: {
-    type: "Point",
-    coordinates: [0, 0],
-  },
+  geometry: { type: "Point", coordinates: [0, 0] },
   properties: {
     // My dog bash aka 'babydog'
     dingo: "bash",
@@ -121,12 +118,7 @@ test("nested-geometry-collection", () => {
         geometries: [
           {
             type: "GeometryCollection",
-            geometries: [
-              {
-                type: "Point",
-                coordinates: [0, 0],
-              },
-            ],
+            geometries: [{ type: "Point", coordinates: [0, 0] }],
           },
         ],
       },

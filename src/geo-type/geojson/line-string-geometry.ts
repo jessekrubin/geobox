@@ -14,9 +14,7 @@ export function LineStringGeometry<
       type: Type.Literal("LineString"),
       coordinates: Type.Array(
         GeojsonCoordinate(schemas && schemas.coordinate),
-        {
-          minItems: 2,
-        },
+        { minItems: 2 },
       ),
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },

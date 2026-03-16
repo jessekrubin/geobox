@@ -20,9 +20,7 @@ export function MultiPointFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: MultiPointGeometry({
-        coordinate: schemas?.coordinate,
-      }),
+      geometry: MultiPointGeometry({ coordinate: schemas?.coordinate }),
       properties: FeatureProperties(schemas?.properties),
       bbox: GeojsonBoudingBox(schemas?.bbox),
     },
@@ -36,13 +34,7 @@ export function MultiPointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: TSchemaOptions) {
-  return MultiPointFeature(
-    {
-      coordinate: Coord2d(),
-      ...schemas,
-    },
-    options,
-  );
+  return MultiPointFeature({ coordinate: Coord2d(), ...schemas }, options);
 }
 
 export { MultiPointFeature2d as MultiPoint2d };
@@ -51,13 +43,7 @@ export function MultiPointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: TSchemaOptions) {
-  return MultiPointFeature(
-    {
-      coordinate: Coord3d(),
-      ...schemas,
-    },
-    options,
-  );
+  return MultiPointFeature({ coordinate: Coord3d(), ...schemas }, options);
 }
 
 export { MultiPointFeature3d as MultiPoint3d };

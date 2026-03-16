@@ -1,7 +1,4 @@
-export const POINT_GEOMETRY = {
-  type: "Point",
-  coordinates: [30, 10],
-};
+export const POINT_GEOMETRY = { type: "Point", coordinates: [30, 10] };
 export const LINE_STRING_GEOMETRY = {
   type: "LineString",
   coordinates: [
@@ -76,10 +73,7 @@ export const MULTI_POLYGON_GEOM = {
 export const GEOMETRY_COLLECTION = {
   type: "GeometryCollection",
   geometries: [
-    {
-      type: "Point",
-      coordinates: [40, 10],
-    },
+    { type: "Point", coordinates: [40, 10] },
     {
       type: "LineString",
       coordinates: [
@@ -96,13 +90,8 @@ export const FEATURE_COLLECTION = {
   features: [
     {
       type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [102, 0.5],
-      },
-      properties: {
-        prop0: "value0",
-      },
+      geometry: { type: "Point", coordinates: [102, 0.5] },
+      properties: { prop0: "value0" },
     },
     {
       type: "Feature",
@@ -115,10 +104,7 @@ export const FEATURE_COLLECTION = {
           [105, 1],
         ],
       },
-      properties: {
-        prop0: "value0",
-        prop1: 0,
-      },
+      properties: { prop0: "value0", prop1: 0 },
     },
     {
       type: "Feature",
@@ -134,12 +120,7 @@ export const FEATURE_COLLECTION = {
           ],
         ],
       },
-      properties: {
-        prop0: "value0",
-        prop1: {
-          this: "that",
-        },
-      },
+      properties: { prop0: "value0", prop1: { this: "that" } },
     },
   ],
 };

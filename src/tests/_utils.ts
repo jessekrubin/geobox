@@ -40,10 +40,7 @@ export function typeboxSchemaFunctionNames() {
   return fns;
 }
 
-type GeoboxFn = {
-  key: string;
-  fn: (options?: any) => tb.TSchema;
-};
+type GeoboxFn = { key: string; fn: (options?: any) => tb.TSchema };
 
 export function geoboxSchemaFns(): GeoboxFn[] {
   const geoboxFnNames = geoboxSchemaFunctionNames();
@@ -53,10 +50,7 @@ export function geoboxSchemaFns(): GeoboxFn[] {
   // add top-level functions
   for (const [k, v] of Object.entries(geobox)) {
     if (typeof v === "function" && geoboxFnNamesSet.has(k)) {
-      gbfns.push({
-        key: k,
-        fn: v as (options?: any) => any,
-      });
+      gbfns.push({ key: k, fn: v as (options?: any) => any });
     }
   }
   return gbfns;

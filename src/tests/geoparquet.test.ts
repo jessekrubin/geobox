@@ -4,12 +4,7 @@ import * as geobox from "../index.js";
 const validator = new geobox.JsonSchemaValidator(geobox.Geoparquet());
 const geoparquetMetadataExamplePoint = {
   geo: {
-    columns: {
-      geometry: {
-        encoding: "point",
-        geometry_types: ["Point"],
-      },
-    },
+    columns: { geometry: { encoding: "point", geometry_types: ["Point"] } },
     primary_column: "geometry",
     version: "1.1.0",
   },
@@ -61,67 +56,40 @@ const geoparquetMetadataExample = {
               name: "WGS 84",
               semi_major_axis: 6_378_137,
             },
-            id: {
-              authority: "EPSG",
-              code: 6326,
-            },
+            id: { authority: "EPSG", code: 6326 },
             members: [
               {
-                id: {
-                  authority: "EPSG",
-                  code: 1166,
-                },
+                id: { authority: "EPSG", code: 1166 },
                 name: "World Geodetic System 1984 (Transit)",
               },
               {
-                id: {
-                  authority: "EPSG",
-                  code: 1152,
-                },
+                id: { authority: "EPSG", code: 1152 },
                 name: "World Geodetic System 1984 (G730)",
               },
               {
-                id: {
-                  authority: "EPSG",
-                  code: 1153,
-                },
+                id: { authority: "EPSG", code: 1153 },
                 name: "World Geodetic System 1984 (G873)",
               },
               {
-                id: {
-                  authority: "EPSG",
-                  code: 1154,
-                },
+                id: { authority: "EPSG", code: 1154 },
                 name: "World Geodetic System 1984 (G1150)",
               },
               {
-                id: {
-                  authority: "EPSG",
-                  code: 1155,
-                },
+                id: { authority: "EPSG", code: 1155 },
                 name: "World Geodetic System 1984 (G1674)",
               },
               {
-                id: {
-                  authority: "EPSG",
-                  code: 1156,
-                },
+                id: { authority: "EPSG", code: 1156 },
                 name: "World Geodetic System 1984 (G1762)",
               },
               {
-                id: {
-                  authority: "EPSG",
-                  code: 1309,
-                },
+                id: { authority: "EPSG", code: 1309 },
                 name: "World Geodetic System 1984 (G2139)",
               },
             ],
             name: "World Geodetic System 1984 ensemble",
           },
-          id: {
-            authority: "OGC",
-            code: "CRS84",
-          },
+          id: { authority: "OGC", code: "CRS84" },
           name: "WGS 84 (CRS84)",
           scope: "Not known.",
           type: "GeographicCRS",

@@ -46,10 +46,7 @@ export function JsonSchema(options?: TSchemaOptions) {
           JsonSchemaBoolean(),
           JsonSchemaNull(),
         ],
-        {
-          description: "JSON-Schema-Schema",
-          ...options,
-        },
+        { description: "JSON-Schema-Schema", ...options },
       ),
     },
     "JsonSchema",

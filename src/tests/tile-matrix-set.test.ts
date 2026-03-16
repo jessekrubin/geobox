@@ -33,6 +33,7 @@ test.each(TILE_MATRIX_SET_REGISTRY_FILES)("registry file %s", async (file) => {
     resolveRepoPath(`${TILE_MATRIX_SET_REGISTRY}/${file}`),
     "utf8",
   );
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const parsed = JSON.parse(raw);
   const valres = tileMatrixSetValidator.safeParse(parsed);
   if (!valres.ok) {
@@ -50,6 +51,7 @@ describe("example-files", () => {
           resolveRepoPath(`${TILE_MATRIX_SET_EXAMPLES}/${file}`),
           "utf8",
         );
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const parsed = JSON.parse(raw);
         const valres = tileMatrixSetValidator.safeParse(parsed);
         if (!valres.ok) {
@@ -68,6 +70,7 @@ describe("example-files", () => {
           resolveRepoPath(`${TILE_SET_EXAMPLES}/${file}`),
           "utf8",
         );
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const parsed = JSON.parse(raw);
         const valres = tileSetValidator.safeParse(parsed);
         if (!valres.ok) {

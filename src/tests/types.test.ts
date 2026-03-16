@@ -64,16 +64,11 @@ test("utile.json", () => {
     vector_layers: [
       {
         id: "telephone",
-        fields: {
-          phone_number: "the phone number",
-          payment: "how to pay",
-        },
+        fields: { phone_number: "the phone number", payment: "how to pay" },
       },
       {
         id: "bicycle_parking",
-        fields: {
-          year_installed: "the year the bike parking was installed",
-        },
+        fields: { year_installed: "the year the bike parking was installed" },
       },
       {
         id: "showers",

@@ -33,9 +33,7 @@ export function TileMatrix(options?: TSchemaOptions) {
       scaleDenominator: Type.Number({
         description: "Scale denominator of this tile matrix",
       }),
-      cellSize: Type.Number({
-        description: "Cell size of this tile matrix",
-      }),
+      cellSize: Type.Number({ description: "Cell size of this tile matrix" }),
       cornerOfOrigin: Type.String({
         description:
           "The corner of the tile matrix (_topLeft_ or _bottomLeft_) used as the origin for numbering tile rows and columns. This corner is also a corner of the (0, 0) tile.",

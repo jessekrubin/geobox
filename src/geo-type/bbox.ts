@@ -78,15 +78,7 @@ export function bboxOptions(options?: BBoxSchemaOptions): {
     ...schemaOptions
   } = options || {};
 
-  return {
-    xmin,
-    xmax,
-    ymin,
-    ymax,
-    zmin,
-    zmax,
-    schemaOptions,
-  };
+  return { xmin, xmax, ymin, ymax, zmin, zmax, schemaOptions };
 }
 
 export function BBox2d(options?: BBoxSchemaOptions): TBBox2d {
@@ -129,12 +121,7 @@ export function BBox(options?: TSchemaOptions) {
 export function GeoBoundingBox(options?: BBoxSchemaOptions) {
   const { xmin, xmax, ymin, ymax, schemaOptions } = bboxOptions(options);
   return Type.Object(
-    {
-      west: xmin,
-      north: ymax,
-      east: xmax,
-      south: ymin,
-    },
+    { west: xmin, north: ymax, east: xmax, south: ymin },
     {
       title: "geo-bounding-box",
       description: "GeoJSON Bounding Box",
@@ -147,12 +134,7 @@ export function NonGeoBoundingBox(options?: BBoxSchemaOptions) {
   const { xmin, xmax, ymin, ymax, schemaOptions } = bboxOptions(options);
 
   return Type.Object(
-    {
-      left: xmin,
-      top: ymax,
-      right: xmax,
-      bottom: ymin,
-    },
+    { left: xmin, top: ymax, right: xmax, bottom: ymin },
     {
       title: "non-geo-bounding-box",
       description: "Non-Geo Bounding Box",
