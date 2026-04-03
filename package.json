@@ -90,7 +90,7 @@
     "@typescript-eslint/eslint-plugin": "^8.57.1",
     "@typescript-eslint/parser": "^8.57.1",
     "@vitest/coverage-v8": "^4.1.0",
-    "esbuild": "^0.27.4",
+    "esbuild": "^0.28.0",
     "eslint": "^9.39.4",
     "eslint-plugin-antfu": "^3.2.2",
     "fastify": "^5.8.2",
