@@ -95,7 +95,7 @@
     "eslint-plugin-antfu": "^3.2.2",
     "fastify": "^5.8.2",
     "glob": "^13.0.6",
-    "prettier": "3.8.2",
+    "prettier": "3.8.3",
     "tsdown": "^0.21.4",
     "tsx": "^4.21.0",
     "typebox": "^1.1.6",
