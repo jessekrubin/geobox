@@ -18,8 +18,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.1(@typescript-eslint/typescript-estree@8.59.0(typescript@5.9.3))(@typescript-eslint/utils@8.59.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4)(typescript@5.9.3)(vitest@4.1.0(@types/node@24.12.2)(vite@7.3.1(@types/node@24.12.2)(tsx@4.21.0)(yaml@2.8.3)))
       '@jsse/tsconfig':
-        specifier: ^0.4.0
-        version: 0.4.1
+        specifier: ^0.5.0
+        version: 0.5.0
       '@turf/helpers':
         specifier: ^7.3.4
         version: 7.3.5
@@ -656,8 +656,8 @@ packages:
       eslint-plugin-react-refresh:
         optional: true
 
-  '@jsse/tsconfig@0.4.1':
-    resolution: {integrity: sha512-72n3PasGRMLRG8lDPW+pSbK9oOC5RCUDtIu18xSjXMlOVLv+cTFzTAICJ+9sYqfDu6bjQxqQZugvWXYjh2AIYQ==}
+  '@jsse/tsconfig@0.5.0':
+    resolution: {integrity: sha512-vEznUhpaKs2MShfU8KZ4hz591zkIrkpDoolKeGRnNwyUqxYdp89Q9PrmuBNhAshjhJh7E1a2lt3TMgHfLpGLTw==}
     engines: {node: '>=22'}
 
   '@manypkg/find-root@1.1.0':
@@ -3781,7 +3781,7 @@ snapshots:
       - typescript
       - vitest
 
-  '@jsse/tsconfig@0.4.1': {}
+  '@jsse/tsconfig@0.5.0': {}
 
   '@manypkg/find-root@1.1.0':
     dependencies:
