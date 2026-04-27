@@ -13,7 +13,7 @@ importers:
         version: 2.31.0(@types/node@24.12.2)
       '@fastify/type-provider-typebox':
         specifier: ^6.1.0
-        version: 6.1.0(typebox@1.1.33)
+        version: 6.1.0(typebox@1.1.34)
       '@jsse/eslint-config':
         specifier: ^0.7.0
         version: 0.7.1(@typescript-eslint/typescript-estree@8.59.0(typescript@5.9.3))(@typescript-eslint/utils@8.59.0(eslint@9.39.4)(typescript@5.9.3))(eslint@9.39.4)(typescript@5.9.3)(vitest@4.1.0(@types/node@24.12.2)(vite@7.3.1(@types/node@24.12.2)(tsx@4.21.0)(yaml@2.8.3)))
@@ -67,7 +67,7 @@ importers:
         version: 4.21.0
       typebox:
         specifier: ^1.1.6
-        version: 1.1.33
+        version: 1.1.34
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -2691,8 +2691,8 @@ packages:
   polyclip-ts@0.16.8:
     resolution: {integrity: sha512-JPtKbDRuPEuAjuTdhR62Gph7Is2BS1Szx69CFOO3g71lpJDFo78k4tFyi+qFOMVPePEzdSKkpGU3NBXPHHjvKQ==}
 
-  postcss@8.5.10:
-    resolution: {integrity: sha512-pMMHxBOZKFU6HgAZ4eyGnwXF/EvPGGqUr0MnZ5+99485wwW41kW91A4LOGxSHhgugZmSChL5AlElNdwlNgcnLQ==}
+  postcss@8.5.12:
+    resolution: {integrity: sha512-W62t/Se6rA0Az3DfCL0AqJwXuKwBeYg6nOaIgzP+xZ7N5BFCI7DYi1qs6ygUYT6rvfi6t9k65UMLJC+PHZpDAA==}
     engines: {node: ^10 || ^12 || >=14}
 
   prelude-ls@1.2.1:
@@ -3059,8 +3059,8 @@ packages:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
 
-  typebox@1.1.33:
-    resolution: {integrity: sha512-+/MWwlQ1q2GSVwoxi/+u5JsHkgLQKcCN2Nsjree9c+K7GJu40qbaHrFETmfV1i9Fs1TcOVfynW+jJvIWcXtvjw==}
+  typebox@1.1.34:
+    resolution: {integrity: sha512-V0fM5W5DTXlEMDxqtX1dQ25HR1RQ11DPUVrIup4sJi1yQtIyI30SHfxBy/HjXKL1CtUqc5or2igA/wa/v4hMKQ==}
 
   typescript-eslint@8.58.0:
     resolution: {integrity: sha512-e2TQzKfaI85fO+F3QywtX+tCTsu/D3WW5LVU6nz8hTFKFZ8yBJ6mSYRpXqdR3mFjPWmO0eWsTa5f+UpAOe/FMA==}
@@ -3703,9 +3703,9 @@ snapshots:
       '@fastify/forwarded': 3.0.1
       ipaddr.js: 2.3.0
 
-  '@fastify/type-provider-typebox@6.1.0(typebox@1.1.33)':
+  '@fastify/type-provider-typebox@6.1.0(typebox@1.1.34)':
     dependencies:
-      typebox: 1.1.33
+      typebox: 1.1.34
 
   '@humanfs/core@0.19.1': {}
 
@@ -6858,7 +6858,7 @@ snapshots:
       bignumber.js: 9.3.1
       splaytree-ts: 1.0.2
 
-  postcss@8.5.10:
+  postcss@8.5.12:
     dependencies:
       nanoid: 3.3.11
       picocolors: 1.1.1
@@ -7195,7 +7195,7 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
 
-  typebox@1.1.33: {}
+  typebox@1.1.34: {}
 
   typescript-eslint@8.58.0(eslint@9.39.4)(typescript@5.9.3):
     dependencies:
@@ -7264,7 +7264,7 @@ snapshots:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
-      postcss: 8.5.10
+      postcss: 8.5.12
       rollup: 4.60.2
       tinyglobby: 0.2.16
     optionalDependencies:
