@@ -85,11 +85,11 @@ function isCheckOptions(value: unknown): value is CheckOptions {
     (value.limit === undefined
       ? true
       : // @ts-expect-error - compiled from typebox
-      typeof value.limit === "number" &&
-      // @ts-expect-error - compiled from typebox
-      Number.isInteger(value.limit) &&
-      // @ts-expect-error - compiled from typebox
-      value.limit >= 1)
+        typeof value.limit === "number" &&
+        // @ts-expect-error - compiled from typebox
+        Number.isInteger(value.limit) &&
+        // @ts-expect-error - compiled from typebox
+        value.limit >= 1)
   );
 }
 

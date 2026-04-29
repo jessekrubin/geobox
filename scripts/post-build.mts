@@ -5,8 +5,6 @@ import process from "node:process";
 const VERBOSE =
   process.argv.includes("--verbose") || process.argv.includes("-v");
 
-
-
 const log: typeof console.log = (...args: Parameters<typeof console.log>) => {
   if (VERBOSE) {
     // eslint-disable-next-line no-console
@@ -29,7 +27,6 @@ const log: typeof console.log = (...args: Parameters<typeof console.log>) => {
 // }
 
 async function writeEsmPackageJson() {
-
   const esmOutDir = "dist/lib/esm";
   const packageJsonEsm = { type: "module", sideEffects: false };
   const packageJsonEsmFilepath = `${esmOutDir}/package.json`;
