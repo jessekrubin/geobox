@@ -6,12 +6,12 @@
     "rootDir": "src",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "types": ["node"],
     "noImplicitAny": true,
     "noEmit": false,
     "outDir": "dist",
     "sourceMap": false,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": false,
     "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.mts"],
