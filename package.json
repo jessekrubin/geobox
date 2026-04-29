@@ -15,7 +15,7 @@
         "default": "./dist/index.js"
       },
       "require": {
-        "types": "./dist/lib/cjs/index.d.ts",
+        "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
       }
     },
@@ -33,10 +33,6 @@
       "import": {
         "types": "./dist/lib/esm/*.d.ts",
         "default": "./dist/lib/esm/*"
-      },
-      "require": {
-        "types": "./dist/lib/cjs/*",
-        "default": "./dist/lib/cjs/*"
       }
     },
     "./package.json": "./package.json",

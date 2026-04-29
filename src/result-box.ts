@@ -85,11 +85,11 @@ function isCheckOptions(value: unknown): value is CheckOptions {
     (value.limit === undefined
       ? true
       : // @ts-expect-error - compiled from typebox
-        typeof value.limit === "number" &&
-        // @ts-expect-error - compiled from typebox
-        Number.isInteger(value.limit) &&
-        // @ts-expect-error - compiled from typebox
-        value.limit >= 1)
+      typeof value.limit === "number" &&
+      // @ts-expect-error - compiled from typebox
+      Number.isInteger(value.limit) &&
+      // @ts-expect-error - compiled from typebox
+      value.limit >= 1)
   );
 }
 
@@ -218,7 +218,6 @@ export class JsonSchemaValidator<
    * @returns The decoded value.
    */
   public decode = (value: unknown): StaticDecode<T, Context> => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.typeguard.Decode(value);
   };
 
@@ -228,7 +227,6 @@ export class JsonSchemaValidator<
    * @returns The encoded value.
    */
   public encode = (value: unknown): StaticEncode<T, Context> => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.typeguard.Encode(value);
   };
 
@@ -302,7 +300,6 @@ export class JsonSchemaValidator<
    */
   public from = (value: unknown, options?: { limit?: number }): Static<T> => {
     if (this.is(value)) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return value;
     }
     const earr = this.errorsArr(value, options);
@@ -313,7 +310,6 @@ export class JsonSchemaValidator<
    * Alias for from()
    */
   public parse = (value: unknown, options?: { limit?: number }): Static<T> => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return this.from(value, options);
   };
 

@@ -4,12 +4,8 @@ import process from "node:process";
 
 const VERBOSE =
   process.argv.includes("--verbose") || process.argv.includes("-v");
-const cjsOutDir = "dist/lib/cjs";
-const esmOutDir = "dist/lib/esm";
 
-const packageJsonCjs = { type: "commonjs", sideEffects: false };
 
-const packageJsonEsm = { type: "module", sideEffects: false };
 
 const log: typeof console.log = (...args: Parameters<typeof console.log>) => {
   if (VERBOSE) {
@@ -18,19 +14,24 @@ const log: typeof console.log = (...args: Parameters<typeof console.log>) => {
   }
 };
 
-async function writeCjsPackageJson() {
-  const packageJsonCjsFilepath = `${cjsOutDir}/package.json`;
-  const packageJsonCjsString = JSON.stringify(packageJsonCjs, undefined, 2);
-  log(
-    `Writing cjs package.json to ${packageJsonCjsFilepath}: ${packageJsonCjsString}`,
-  );
-  await fs.writeFile(`${cjsOutDir}/package.json`, packageJsonCjsString, {
-    encoding: "utf8",
-  });
-  log(`Wrote cjs package.json to ${packageJsonCjsFilepath}`);
-}
+// async function writeCjsPackageJson() {
+//   const cjsOutDir = "dist/lib/cjs";
+//   const packageJsonCjs = { type: "commonjs", sideEffects: false };
+//   const packageJsonCjsFilepath = `${cjsOutDir}/package.json`;
+//   const packageJsonCjsString = JSON.stringify(packageJsonCjs, undefined, 2);
+//   log(
+//     `Writing cjs package.json to ${packageJsonCjsFilepath}: ${packageJsonCjsString}`,
+//   );
+//   await fs.writeFile(`${cjsOutDir}/package.json`, packageJsonCjsString, {
+//     encoding: "utf8",
+//   });
+//   log(`Wrote cjs package.json to ${packageJsonCjsFilepath}`);
+// }
 
 async function writeEsmPackageJson() {
+
+  const esmOutDir = "dist/lib/esm";
+  const packageJsonEsm = { type: "module", sideEffects: false };
   const packageJsonEsmFilepath = `${esmOutDir}/package.json`;
   const packageJsonEsmString = JSON.stringify(packageJsonEsm, undefined, 2);
   log(
@@ -65,7 +66,7 @@ async function makeLite() {
 }
 
 async function main() {
-  await Promise.all([writeCjsPackageJson(), writeEsmPackageJson()]);
+  await writeEsmPackageJson();
   await makeLite();
 }
 
