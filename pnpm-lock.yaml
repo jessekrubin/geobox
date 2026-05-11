@@ -49,7 +49,7 @@ importers:
         version: 9.39.4
       eslint-plugin-antfu:
         specifier: ^3.2.2
-        version: 3.2.2(eslint@9.39.4)
+        version: 3.2.3(eslint@9.39.4)
       fastify:
         specifier: ^5.8.2
         version: 5.8.5
@@ -1945,8 +1945,8 @@ packages:
     peerDependencies:
       eslint: '*'
 
-  eslint-plugin-antfu@3.2.2:
-    resolution: {integrity: sha512-Qzixht2Dmd/pMbb5EnKqw2V8TiWHbotPlsORO8a+IzCLFwE0RxK8a9k4DCTFPzBwyxJzH+0m2Mn8IUGeGQkyUw==}
+  eslint-plugin-antfu@3.2.3:
+    resolution: {integrity: sha512-U2fnz/H0gFPxpuC7QpaHa0Jv2AgCZ5hunp36SOP/yWo8yFzgvMh8X4pZ4uN4IKoqtBhk7G3HuVa93Urf51+sZg==}
     peerDependencies:
       eslint: '*'
 
@@ -3791,7 +3791,7 @@ snapshots:
       eslint: 9.39.4
       eslint-config-flat-gitignore: 2.3.0(eslint@9.39.4)
       eslint-merge-processors: 2.0.0(eslint@9.39.4)
-      eslint-plugin-antfu: 3.2.2(eslint@9.39.4)
+      eslint-plugin-antfu: 3.2.3(eslint@9.39.4)
       eslint-plugin-command: 3.5.2(@typescript-eslint/rule-tester@8.59.1(eslint@9.39.4)(typescript@6.0.3))(@typescript-eslint/typescript-estree@8.59.2(typescript@6.0.3))(@typescript-eslint/utils@8.59.2(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)
       eslint-plugin-de-morgan: 2.1.1(eslint@9.39.4)
       eslint-plugin-import-lite: 0.6.0(eslint@9.39.4)
@@ -5829,7 +5829,7 @@ snapshots:
     dependencies:
       eslint: 9.39.4
 
-  eslint-plugin-antfu@3.2.2(eslint@9.39.4):
+  eslint-plugin-antfu@3.2.3(eslint@9.39.4):
     dependencies:
       eslint: 9.39.4
 
