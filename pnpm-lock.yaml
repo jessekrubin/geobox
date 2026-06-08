@@ -13,7 +13,7 @@ importers:
         version: 2.31.0(@types/node@24.13.0)
       '@fastify/type-provider-typebox':
         specifier: ^6.1.0
-        version: 6.1.0(typebox@1.2.1)
+        version: 6.1.0(typebox@1.2.2)
       '@jsse/eslint-config':
         specifier: ^0.7.0
         version: 0.7.7(@typescript-eslint/typescript-estree@8.60.1(typescript@6.0.3))(@typescript-eslint/utils@8.60.1(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(ts-declaration-location@1.0.7(typescript@6.0.3))(typescript@6.0.3)(vitest@4.1.5)
@@ -67,7 +67,7 @@ importers:
         version: 4.22.4
       typebox:
         specifier: ^1.1.6
-        version: 1.2.1
+        version: 1.2.2
       typescript:
         specifier: ~6.0.3
         version: 6.0.3
@@ -3107,8 +3107,8 @@ packages:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
 
-  typebox@1.2.1:
-    resolution: {integrity: sha512-0upGv6+mxJR7/Wc7yoxjc/U6SjOk2aNDNzbihYacSHh+JfOsf28IJ8ggW4/3tRlDKfbInvEDPVneEywjOWYCzw==}
+  typebox@1.2.2:
+    resolution: {integrity: sha512-0nqIJFL+baWoAEtwa0l/vfbfXg0+3gEhiWGnHuoIiivXjlk/TpxDddG0WER34CojKNpHi4ZXku8XGEz9H55b5Q==}
 
   typescript-eslint@8.60.0:
     resolution: {integrity: sha512-9f65qWLZdAW9m1JaxBDUHcqRUfL8bkxxXL7XxEfI+F09q56PkBvIfCjLF3yInsDM/BBmwkqmCQdCZe/RYlIWEw==}
@@ -3757,9 +3757,9 @@ snapshots:
       '@fastify/forwarded': 3.0.1
       ipaddr.js: 2.3.0
 
-  '@fastify/type-provider-typebox@6.1.0(typebox@1.2.1)':
+  '@fastify/type-provider-typebox@6.1.0(typebox@1.2.2)':
     dependencies:
-      typebox: 1.2.1
+      typebox: 1.2.2
 
   '@humanfs/core@0.19.1': {}
 
@@ -7230,7 +7230,7 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
 
-  typebox@1.2.1: {}
+  typebox@1.2.2: {}
 
   typescript-eslint@8.60.0(eslint@9.39.4)(typescript@6.0.3):
     dependencies:
