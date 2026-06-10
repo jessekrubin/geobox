@@ -13,7 +13,7 @@ importers:
         version: 2.31.0(@types/node@24.13.1)
       '@fastify/type-provider-typebox':
         specifier: ^6.1.0
-        version: 6.1.0(typebox@1.2.3)
+        version: 6.1.0(typebox@1.2.7)
       '@jsse/eslint-config':
         specifier: ^0.7.0
         version: 0.7.7(@typescript-eslint/typescript-estree@8.61.0(typescript@6.0.3))(@typescript-eslint/utils@8.60.1(eslint@9.39.4)(typescript@6.0.3))(eslint@9.39.4)(ts-declaration-location@1.0.7(typescript@6.0.3))(typescript@6.0.3)(vitest@4.1.5)
@@ -67,7 +67,7 @@ importers:
         version: 4.22.4
       typebox:
         specifier: ^1.1.6
-        version: 1.2.3
+        version: 1.2.7
       typescript:
         specifier: ~6.0.3
         version: 6.0.3
@@ -668,6 +668,12 @@ packages:
 
   '@napi-rs/wasm-runtime@1.1.4':
     resolution: {integrity: sha512-3NQNNgA1YSlJb/kMH1ildASP9HW7/7kYnRI2szWJaofaS1hWmbGI4H+d3+22aGzXXN9IJ+n+GiFVcGipJP18ow==}
+    peerDependencies:
+      '@emnapi/core': ^1.7.1
+      '@emnapi/runtime': ^1.7.1
+
+  '@napi-rs/wasm-runtime@1.1.5':
+    resolution: {integrity: sha512-AWPoBRJ9tsnVhor4sjO7rkni+7p+2IAEFj6cx06UgP10jkQHqay/36uRV/bFkgrh18D9vb4cr8Q0Pthskgzy+Q==}
     peerDependencies:
       '@emnapi/core': ^1.7.1
       '@emnapi/runtime': ^1.7.1
@@ -3142,8 +3148,8 @@ packages:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
 
-  typebox@1.2.3:
-    resolution: {integrity: sha512-EdFz/9FGvhQK2NmjZjSLri+nd5oMH+t/46/6lueEPbeHmS9WbWOz5IayPyLw0HHIyOWfo+wPrQGcAEQ+GsXc/w==}
+  typebox@1.2.7:
+    resolution: {integrity: sha512-V+5x1sMxqFeAoaRe3HlEQ3ZZoF8PYYVu8EG5HbbbrMjPgfJ53B5zKUa/xAU0qJm4Af+5ruv5deR6HpjR6LbHSw==}
 
   typescript-eslint@8.60.0:
     resolution: {integrity: sha512-9f65qWLZdAW9m1JaxBDUHcqRUfL8bkxxXL7XxEfI+F09q56PkBvIfCjLF3yInsDM/BBmwkqmCQdCZe/RYlIWEw==}
@@ -3792,9 +3798,9 @@ snapshots:
       '@fastify/forwarded': 3.0.1
       ipaddr.js: 2.3.0
 
-  '@fastify/type-provider-typebox@6.1.0(typebox@1.2.3)':
+  '@fastify/type-provider-typebox@6.1.0(typebox@1.2.7)':
     dependencies:
-      typebox: 1.2.3
+      typebox: 1.2.7
 
   '@humanfs/core@0.19.1': {}
 
@@ -3889,6 +3895,13 @@ snapshots:
       read-yaml-file: 1.1.0
 
   '@napi-rs/wasm-runtime@1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
+    dependencies:
+      '@emnapi/core': 1.10.0
+      '@emnapi/runtime': 1.10.0
+      '@tybys/wasm-util': 0.10.2
+    optional: true
+
+  '@napi-rs/wasm-runtime@1.1.5(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
       '@emnapi/core': 1.10.0
       '@emnapi/runtime': 1.10.0
@@ -3998,7 +4011,7 @@ snapshots:
     dependencies:
       '@emnapi/core': 1.10.0
       '@emnapi/runtime': 1.10.0
-      '@napi-rs/wasm-runtime': 1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
+      '@napi-rs/wasm-runtime': 1.1.5(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)
     optional: true
 
   '@rolldown/binding-wasm32-wasi@1.1.0':
@@ -7307,7 +7320,7 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
 
-  typebox@1.2.3: {}
+  typebox@1.2.7: {}
 
   typescript-eslint@8.60.0(eslint@9.39.4)(typescript@6.0.3):
     dependencies:
