@@ -83,7 +83,7 @@ export function TileSet(options?: TSchemaOptions) {
         Type.String({
           format: "uri",
           description:
-            "Reference to a Tile Matrix Set on an official source for Tile Matrix Sets such as the OGC-NA definition server (http://www.opengis.net/def/tms). Required if the tile matrix set is registered on an open official source.",
+            "Reference to a Tile Matrix Set on an official source for Tile Matrix Sets such as the OGC-NA definition server (https://www.opengis.net/def/tms). Required if the tile matrix set is registered on an open official source.",
         }),
       ),
       links: Type.Optional(Type.Array(TmsLink())),
@@ -91,7 +91,7 @@ export function TileSet(options?: TSchemaOptions) {
     {
       title: "Tile Set Metadata",
       description:
-        "A resource describing a tileset based on the OGC TileSet Metadata Standard. At least one of the 'TileMatrixSet',  or a link with 'rel' http://www.opengis.net/def/rel/ogc/1.0/tiling-scheme",
+        "A resource describing a tileset based on the OGC TileSet Metadata Standard. At least one of the 'TileMatrixSet',  or a link with 'rel' https://www.opengis.net/def/rel/ogc/1.0/tiling-scheme",
 
       ...options,
     },

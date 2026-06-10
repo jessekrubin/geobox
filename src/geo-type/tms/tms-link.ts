@@ -7,7 +7,7 @@ export function TmsLink(options?: TSchemaOptions) {
       href: Type.String({
         description:
           "Supplies the URI to a remote resource (or resource fragment).",
-        example: "http://data.example.com/buildings/123",
+        example: "https://data.example.com/buildings/123",
       }),
       rel: Type.String({
         description: "The type or semantics of the relation.",

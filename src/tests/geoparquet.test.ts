@@ -52,7 +52,7 @@ const geoparquetMetadataExample = {
           datum_ensemble: {
             accuracy: "2.0",
             ellipsoid: {
-              inverse_flattening: 298.257_223_563,
+              inverse_flattening: 298.257223563,
               name: "WGS 84",
               semi_major_axis: 6_378_137,
             },
