@@ -14,9 +14,7 @@ export function SimpleStyleMarkerSize() {
       SimpleStyleMarkerSizeMedium(),
       SimpleStyleMarkerSizeLarge(),
     ],
-    {
-      default: SimpleStyleMarkerSizeMedium(),
-    },
+    { default: SimpleStyleMarkerSizeMedium() },
   );
 }
 

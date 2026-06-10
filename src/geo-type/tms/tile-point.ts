@@ -19,9 +19,7 @@ export function TmsTilePoint(options?: TSchemaOptions) {
         }),
       ),
       cellSize: Type.Optional(
-        Type.Number({
-          description: "Cell size of the tile matrix selected",
-        }),
+        Type.Number({ description: "Cell size of the tile matrix selected" }),
       ),
     },
     {

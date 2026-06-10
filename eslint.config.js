@@ -4,9 +4,7 @@ import pluginAntfu from "eslint-plugin-antfu";
 
 export default jsse(
   {
-    typescript: {
-      tsconfig: "tsconfig.json",
-    },
+    typescript: { tsconfig: "tsconfig.eslint.json" },
     ignores: ["example/**/*"],
     markdown: false,
   },
@@ -16,28 +14,18 @@ export default jsse(
       "test-data/**/*.json",
       "schemas/**/*.json",
     ],
-    rules: {
-      "unicorn/filename-case": "off",
-    },
+    rules: { "unicorn/filename-case": "off" },
   },
   {
     files: ["./src/dev/dev.ts", "./src/dev/dev.test.ts", "./src/scratch/**/*"],
-    rules: {
-      "@typescript-eslint/no-unused-vars": "off",
-    },
+    rules: { "@typescript-eslint/no-unused-vars": "off" },
   },
   {
-    plugins: {
-      antfu: pluginAntfu,
-    },
-    rules: {
-      "antfu/top-level-function": "error",
-    },
+    plugins: { antfu: pluginAntfu },
+    rules: { "antfu/top-level-function": "error" },
   },
   {
     files: ["./src/**/*.ts"],
-    rules: {
-      "@typescript-eslint/no-deprecated": "error",
-    },
+    rules: { "@typescript-eslint/no-deprecated": "error" },
   },
 );

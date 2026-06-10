@@ -1,5 +1,5 @@
 import type { TNever, TOptional, TSchema } from "typebox";
-import type { IsDefined } from "../../types.js";
+import type { IsDefined, TUnionVec4Vec6 } from "../../types.js";
 import type { TBBoxSchema } from "../bbox.js";
 import type { Coord, TCoord2d, TCoord3d, TCoordinateSchema } from "../coord.js";
 import type { LineStringGeometry } from "./line-string-geometry.js";
@@ -19,27 +19,22 @@ export type TGeojsonCoordinate<T extends TCoordinateSchema | undefined> =
   IsDefined<T> extends true ? AssertType<T> : ReturnType<typeof Coord>;
 
 export type TGeojsonBoundingBox<T extends TSchema | undefined> =
-  IsDefined<T> extends true ? AssertType<T> : TOptional<TBBoxSchema>;
+  IsDefined<T> extends true ? AssertType<T> : TOptional<TUnionVec4Vec6>;
 export type TGeometrySchemas<
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined = undefined,
-> = {
-  coordinate?: TCoord;
-  bbox?: TBBox;
-};
+> = { coordinate?: TCoord; bbox?: TBBox };
 
 export type TFeatureSchemas<
   TProperties extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-> = {
-  properties?: TProperties;
-} & TGeometrySchemas<TCoord, TBBox>;
+> = { properties?: TProperties } & TGeometrySchemas<TCoord, TBBox>;
 
 export type TProperties<T extends TSchema | undefined> =
   IsDefined<T> extends true
-  ? AssertType<T>
-  : ReturnType<typeof GeojsonProperties>;
+    ? AssertType<T>
+    : ReturnType<typeof GeojsonProperties>;
 
 export type TFeatureSchemas2d<
   TProps extends TSchema | undefined,

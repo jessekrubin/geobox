@@ -3,46 +3,26 @@ import { Type } from "typebox";
 
 function TmsCrsUriObject(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      uri: Type.String({ format: "uri" }),
-    },
-    {
-      ...options,
-      required: ["uri"],
-    },
+    { uri: Type.String({ format: "uri" }) },
+    { ...options, required: ["uri"] },
   );
 }
 
 function TmsCrsWktObject(options?: TSchemaOptions) {
-  return Type.Object(
-    {
-      wkt: Type.Any(),
-    },
-    {
-      ...options,
-      required: ["wkt"],
-    },
-  );
+  return Type.Object({ wkt: Type.Any() }, { ...options, required: ["wkt"] });
 }
 
 function TmsCrsReferenceSystemObject(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      referenceSystem: Type.Any(),
-    },
-    {
-      ...options,
-      required: ["referenceSystem"],
-    },
+    { referenceSystem: Type.Any() },
+    { ...options, required: ["referenceSystem"] },
   );
 }
 
 function TmsCrsObject(options?: TSchemaOptions) {
   return Type.Union(
     [TmsCrsUriObject(), TmsCrsWktObject(), TmsCrsReferenceSystemObject()],
-    {
-      ...options,
-    },
+    { ...options },
   );
 }
 

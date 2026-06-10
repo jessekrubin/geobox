@@ -20,9 +20,7 @@ export function PointFeature<
     {
       type: Type.Literal("Feature"),
       id: Type.Optional(FeatureId()),
-      geometry: PointGeometry({
-        coordinate: schemas?.coordinate,
-      }),
+      geometry: PointGeometry({ coordinate: schemas?.coordinate }),
       properties: FeatureProperties(schemas?.properties),
       bbox: GeojsonBoudingBox(schemas?.bbox),
     },
@@ -41,13 +39,7 @@ export function PointFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: TSchemaOptions) {
-  return PointFeature(
-    {
-      coordinate: Coord2d(),
-      ...schemas,
-    },
-    options,
-  );
+  return PointFeature({ coordinate: Coord2d(), ...schemas }, options);
 }
 
 export { PointFeature2d as Point2d };
@@ -56,13 +48,7 @@ export function PointFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: TSchemaOptions) {
-  return PointFeature(
-    {
-      coordinate: Coord3d(),
-      ...schemas,
-    },
-    options,
-  );
+  return PointFeature({ coordinate: Coord3d(), ...schemas }, options);
 }
 
 export { PointFeature3d as Point3d };

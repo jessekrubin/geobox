@@ -45,10 +45,7 @@ export function isZoom(x: unknown): x is Zoom {
   );
 }
 
-export type ZoomRange = {
-  minZoom: number;
-  maxZoom: number;
-};
+export type ZoomRange = { minZoom: number; maxZoom: number };
 
 export function TileZoom(zoom: number, options?: TSchemaOptions) {
   if (!isZoom(zoom)) {
@@ -58,22 +55,14 @@ export function TileZoom(zoom: number, options?: TSchemaOptions) {
 }
 
 export function TileZoomRange(options?: TSchemaOptions & ZoomRange) {
-  return Type.Integer({
-    minimum: MIN_ZOOM,
-    maximum: MAX_ZOOM,
-    ...options,
-  });
+  return Type.Integer({ minimum: MIN_ZOOM, maximum: MAX_ZOOM, ...options });
 }
 
 export function TileZoomXY(zoom: number, options?: TSchemaOptions) {
   if (!isZoom(zoom)) {
     throw new Error(`Invalid zoom: ${zoom}`);
   }
-  return Type.Integer({
-    minimum: 0,
-    maximum: 2 ** zoom - 1,
-    ...options,
-  });
+  return Type.Integer({ minimum: 0, maximum: 2 ** zoom - 1, ...options });
 }
 
 export function TileAtZoom(zoom: number, options?: TSchemaOptions) {
@@ -81,11 +70,7 @@ export function TileAtZoom(zoom: number, options?: TSchemaOptions) {
     throw new Error(`Invalid zoom: ${zoom}`);
   }
   return Type.Object(
-    {
-      z: Type.Literal(zoom),
-      x: TileZoomXY(zoom),
-      y: TileZoomXY(zoom),
-    },
+    { z: Type.Literal(zoom), x: TileZoomXY(zoom), y: TileZoomXY(zoom) },
     options,
   );
 }

@@ -44,24 +44,14 @@ export function GeometryCollection<
 
 export function GeometryCollection2d(options?: TSchemaOptions) {
   return GeometryCollection(
-    {
-      coordinate: Coord(),
-    },
-    {
-      title: "GeoJSON GeometryCollection 2d",
-      ...options,
-    },
+    { coordinate: Coord() },
+    { title: "GeoJSON GeometryCollection 2d", ...options },
   );
 }
 
 export function GeometryCollection3d(options?: TSchemaOptions) {
   return GeometryCollection(
-    {
-      coordinate: Coord(),
-    },
-    {
-      title: "GeoJSON GeometryCollection 3d",
-      ...options,
-    },
+    { coordinate: Coord() },
+    { title: "GeoJSON GeometryCollection 3d", ...options },
   );
 }

@@ -9,10 +9,7 @@ const SIMPLESTYLE_SPEC_EG = {
   features: [
     {
       type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [0, 0],
-      },
+      geometry: { type: "Point", coordinates: [0, 0] },
       properties: {
         // OPTIONAL: default ""
         // A title to show when this item is clicked or

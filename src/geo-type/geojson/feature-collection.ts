@@ -13,9 +13,6 @@ export function FeatureCollection<FSchema extends TSchema>(
       features: Type.Array(feature ?? Feature()),
       bbox: Type.Optional(BBox()),
     },
-    {
-      additionalProperties: false,
-      ...options,
-    },
+    { additionalProperties: false, ...options },
   );
 }

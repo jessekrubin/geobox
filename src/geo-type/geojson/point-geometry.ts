@@ -37,13 +37,8 @@ export function PointGeometry2d(
   options?: TSchemaOptions,
 ) {
   return PointGeometry(
-    {
-      coordinate: schemas && schemas.coordinate,
-    },
-    {
-      title: "GeoJSON Point 2d",
-      ...options,
-    },
+    { coordinate: schemas && schemas.coordinate },
+    { title: "GeoJSON Point 2d", ...options },
   );
 }
 
@@ -52,12 +47,7 @@ export function PointGeometry3d(
   options?: TSchemaOptions,
 ) {
   return PointGeometry(
-    {
-      coordinate: schemas && schemas.coordinate,
-    },
-    {
-      title: "GeoJSON Point 3d",
-      ...options,
-    },
+    { coordinate: schemas && schemas.coordinate },
+    { title: "GeoJSON Point 3d", ...options },
   );
 }

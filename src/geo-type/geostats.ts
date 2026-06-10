@@ -12,10 +12,7 @@ export function GeostatsAttribute(options?: TSchemaOptions) {
       min: Type.Number(),
       max: Type.Number(),
     },
-    {
-      title: "geostats-attribute",
-      ...options,
-    },
+    { title: "geostats-attribute", ...options },
   );
 }
 
@@ -28,22 +25,13 @@ export function GeostatsLayer(options?: TSchemaOptions) {
       attributeCount: Type.Number(),
       attributes: Type.Array(GeostatsAttribute()),
     },
-    {
-      title: "geostats-layer",
-      ...options,
-    },
+    { title: "geostats-layer", ...options },
   );
 }
 
 export function GeostatsTilestats(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      layerCount: Type.Number(),
-      layers: Type.Array(GeostatsLayer()),
-    },
-    {
-      title: "geostats-tilestats",
-      ...options,
-    },
+    { layerCount: Type.Number(), layers: Type.Array(GeostatsLayer()) },
+    { title: "geostats-tilestats", ...options },
   );
 }

@@ -22,9 +22,6 @@ export function GeoJSON() {
       MultiLineStringGeometry(),
       MultiPolygonGeometry(),
     ],
-    {
-      title: "GeoJSON",
-      description: "GeoJSON",
-    },
+    { title: "GeoJSON", description: "GeoJSON" },
   );
 }

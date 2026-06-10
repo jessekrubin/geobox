@@ -50,68 +50,36 @@ export function LongitudeWgs84(options?: TSchemaOptions) {
 
 export function LonLat(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      lon: Longitude(options),
-      lat: Latitude(options),
-    },
-    {
-      title: "LonLat",
-      description: "Longitude, Latitude",
-      ...options,
-    },
+    { lon: Longitude(options), lat: Latitude(options) },
+    { title: "LonLat", description: "Longitude, Latitude", ...options },
   );
 }
 
 export function LonLatZ(options?: TSchemaOptions) {
   return Type.Object(
     { lon: Longitude(options), lat: Latitude(options), z: Type.Number() },
-    {
-      title: "LonLatZ",
-      description: "Longitude, Latitude, Z",
-      ...options,
-    },
+    { title: "LonLatZ", description: "Longitude, Latitude, Z", ...options },
   );
 }
 
 export function LonLatWgs84(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      lon: LongitudeWgs84(options),
-      lat: LatitudeWgs84(options),
-    },
-    {
-      title: "LonLatWgs84",
-      description: "Longitude, Latitude",
-      ...options,
-    },
+    { lon: LongitudeWgs84(options), lat: LatitudeWgs84(options) },
+    { title: "LonLatWgs84", description: "Longitude, Latitude", ...options },
   );
 }
 
 export function LngLat(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      lng: Longitude(options),
-      lat: Latitude(options),
-    },
-    {
-      title: "LngLat",
-      description: "Longitude, Latitude",
-      ...options,
-    },
+    { lng: Longitude(options), lat: Latitude(options) },
+    { title: "LngLat", description: "Longitude, Latitude", ...options },
   );
 }
 
 export function LngLatWgs84(options?: TSchemaOptions) {
   return Type.Object(
-    {
-      lng: LongitudeWgs84(options),
-      lat: LatitudeWgs84(options),
-    },
-    {
-      title: "LngLatWgs84",
-      description: "Longitude, Latitude",
-      ...options,
-    },
+    { lng: LongitudeWgs84(options), lat: LatitudeWgs84(options) },
+    { title: "LngLatWgs84", description: "Longitude, Latitude", ...options },
   );
 }
 

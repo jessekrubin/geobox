@@ -27,9 +27,7 @@ export function NamedCoordinateReferenceSystem(
   return Type.Object(
     {
       type: Type.Literal("name"),
-      properties: Type.Object({
-        name: Type.String(),
-      }),
+      properties: Type.Object({ name: Type.String() }),
     },
     {
       title: "Named Coordinate Reference System",
@@ -45,10 +43,7 @@ export function LinkedCoordinateReferenceSystem(
   return Type.Object(
     {
       type: Type.Literal("link"),
-      properties: Type.Object({
-        href: Type.String(),
-        type: Type.String(),
-      }),
+      properties: Type.Object({ href: Type.String(), type: Type.String() }),
     },
     {
       title: "Linked Coordinate Reference System",

@@ -34,13 +34,7 @@ export function MultiLineStringFeature2d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas2d<TProps, TBBox>, options?: TSchemaOptions) {
-  return MultiLineStringFeature(
-    {
-      coordinate: Coord2d(),
-      ...schemas,
-    },
-    options,
-  );
+  return MultiLineStringFeature({ coordinate: Coord2d(), ...schemas }, options);
 }
 
 export { MultiLineStringFeature2d as MultiLineString2d };
@@ -50,13 +44,7 @@ export function MultiLineStringFeature3d<
   TProps extends TSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
 >(schemas?: TFeatureSchemas3d<TProps, TBBox>, options?: TSchemaOptions) {
-  return MultiLineStringFeature(
-    {
-      coordinate: Coord3d(),
-      ...schemas,
-    },
-    options,
-  );
+  return MultiLineStringFeature({ coordinate: Coord3d(), ...schemas }, options);
 }
 
 export { MultiLineStringFeature3d as MultiLineString3d };

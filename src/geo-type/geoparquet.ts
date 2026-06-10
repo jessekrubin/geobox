@@ -55,48 +55,32 @@ export function GeoparquetColumn_v1_1_0() {
           bbox: Type.Object({
             xmin: Type.Tuple(
               [Type.String({ minLength: 1 }), Type.Literal("xmin")],
-              {
-                minItems: 2,
-                maxItems: 2,
-              },
+              { minItems: 2, maxItems: 2 },
             ),
             xmax: Type.Tuple(
               [Type.String({ minLength: 1 }), Type.Literal("xmax")],
-              {
-                minItems: 2,
-                maxItems: 2,
-              },
+              { minItems: 2, maxItems: 2 },
             ),
             ymin: Type.Tuple(
               [Type.String({ minLength: 1 }), Type.Literal("ymin")],
-              {
-                minItems: 2,
-                maxItems: 2,
-              },
+              { minItems: 2, maxItems: 2 },
             ),
             ymax: Type.Tuple(
               [Type.String({ minLength: 1 }), Type.Literal("ymax")],
-              {
-                minItems: 2,
-                maxItems: 2,
-              },
+              { minItems: 2, maxItems: 2 },
             ),
           }),
         }),
       ),
     },
-    {
-      additionalProperties: false,
-    },
+    { additionalProperties: false },
   );
 }
 
 export function Geoparquet_v1_1_1() {
   return Type.Object({
     version: Type.Literal("1.1.0"),
-    primary_column: Type.String({
-      minLength: 1,
-    }),
+    primary_column: Type.String({ minLength: 1 }),
     columns: Type.Record(Type.String(), GeoparquetColumn_v1_1_0()),
   });
 }

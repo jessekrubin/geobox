@@ -17,13 +17,9 @@ export function MultiPolygonGeometry<
           Type.Array(GeojsonCoordinate(schemas && schemas.coordinate), {
             minItems: 4,
           }),
-          {
-            minItems: 1,
-          },
+          { minItems: 1 },
         ),
-        {
-          minItems: 1,
-        },
+        { minItems: 1 },
       ),
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },

@@ -14,10 +14,7 @@ export function MultiPointGeometry<
       type: Type.Literal("MultiPoint"),
       coordinates: Type.Array(
         GeojsonCoordinate(schemas && schemas.coordinate),
-        {
-          minItems: 1,
-          title: "MultiPoint coordinates",
-        },
+        { minItems: 1, title: "MultiPoint coordinates" },
       ),
       bbox: GeojsonBoudingBox(schemas && schemas.bbox),
     },

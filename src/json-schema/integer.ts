@@ -18,9 +18,6 @@ export function JsonSchemaInteger(options?: TSchemaOptions) {
       ),
     ],
     {},
-    {
-      description: "JSON-Schema-Schema",
-      ...options,
-    },
+    { description: "JSON-Schema-Schema", ...options },
   );
 }

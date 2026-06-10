@@ -25,10 +25,7 @@ export function JsonSchemaStringFormat(options?: TSchemaOptions) {
       Type.Literal("regex"),
       Type.String(),
     ],
-    {
-      ...options,
-      description: "A format this string should match",
-    },
+    { ...options, description: "A format this string should match" },
   );
 }
 
@@ -42,10 +39,7 @@ export function JsonSchemaStringContentEncoding(options?: TSchemaOptions) {
       Type.Literal("base64"),
       Type.String(),
     ],
-    {
-      ...options,
-      description: "The content encoding for this string",
-    },
+    { ...options, description: "The content encoding for this string" },
   );
 }
 

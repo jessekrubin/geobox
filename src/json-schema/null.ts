@@ -6,17 +6,9 @@ export function JsonSchemaNull(options?: TSchemaOptions) {
   return Type.Interface(
     [
       JSON_SCHEMA_OPTIONS_SCHEMA,
-      Type.Object(
-        {
-          type: Type.Literal("null"),
-        },
-        options,
-      ),
+      Type.Object({ type: Type.Literal("null") }, options),
     ],
     {},
-    {
-      description: "JSON-Schema-Schema",
-      ...options,
-    },
+    { description: "JSON-Schema-Schema", ...options },
   );
 }
