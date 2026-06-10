@@ -50,7 +50,7 @@ test("utile.json", () => {
     tilejson: "2.2.0",
     format: "png",
     name: "raster",
-    tiles: ["http://example.com/{z}/{x}/{y}.png"],
+    tiles: ["https://example.com/{z}/{x}/{y}.png"],
     minzoom: 0,
     maxzoom: 22,
     bounds: [-180, -85.0511, 180, 85.0511],
@@ -60,7 +60,7 @@ test("utile.json", () => {
     tilejson: "2.2.0",
     format: "pbf",
     name: "vector",
-    tiles: ["http://example.com/{z}/{x}/{y}.pbf"],
+    tiles: ["https://example.com/{z}/{x}/{y}.pbf"],
     vector_layers: [
       {
         id: "telephone",
@@ -89,7 +89,7 @@ test("utile.json", () => {
     tilejson: "2.2.0",
     name: "pbf-bad",
     format: "pbf",
-    tiles: ["http://example.com/{z}/{x}/{y}.png"],
+    tiles: ["https://example.com/{z}/{x}/{y}.png"],
     minzoom: 0,
     maxzoom: 22,
     bounds: [-180, -85.0511, 180, 85.0511],

@@ -52,7 +52,7 @@ export function TileMatrixSet(options?: TSchemaOptions) {
     {
       title: "TileMatrixSet",
       description:
-        "A definition of a tile matrix set following the Tile Matrix Set standard. For tileset metadata, such a description (in `tileMatrixSet` property) is only required for offline use, as an alternative to a link with a `http://www.opengis.net/def/rel/ogc/1.0/tiling-scheme` relation type.",
+        "A definition of a tile matrix set following the Tile Matrix Set standard. For tileset metadata, such a description (in `tileMatrixSet` property) is only required for offline use, as an alternative to a link with a `https://www.opengis.net/def/rel/ogc/1.0/tiling-scheme` relation type.",
       ...options,
     },
   );
