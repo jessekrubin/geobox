@@ -29,7 +29,7 @@ export type TFeatureSchemas<
   TProperties extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-> = { properties?: TProperties } & TGeometrySchemas<TCoord, TBBox>;
+> = TGeometrySchemas<TCoord, TBBox> & { properties?: TProperties };
 
 export type TProperties<T extends TSchema | undefined> =
   IsDefined<T> extends true

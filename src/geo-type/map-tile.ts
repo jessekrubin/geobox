@@ -39,7 +39,7 @@ export type Zoom =
 export function isZoom(x: unknown): x is Zoom {
   return (
     typeof x === "number" &&
-    Number.isInteger(x) &&
+    Number.isSafeInteger(x) &&
     x >= MIN_ZOOM &&
     x <= MAX_ZOOM
   );

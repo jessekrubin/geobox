@@ -87,6 +87,7 @@ function isCheckOptions(value: unknown): value is CheckOptions {
       : // @ts-expect-error - compiled from typebox
         typeof value.limit === "number" &&
         // @ts-expect-error - compiled from typebox
+        // eslint-disable-next-line unicorn/prefer-number-is-safe-integer
         Number.isInteger(value.limit) &&
         // @ts-expect-error - compiled from typebox
         value.limit >= 1)
@@ -101,10 +102,10 @@ export class JsonSchemaValidator<
   Context extends TProperties,
   const T extends TSchema,
 > {
+  private _typeguard?: Validator<Context, T>;
   public schema: T;
   public references: Context;
   public readonly options: { compile: boolean; limit?: number };
-  private _typeguard?: Validator<Context, T>;
 
   /**
    * Creates a new JsonSchemaValidator instance.
@@ -187,13 +188,11 @@ export class JsonSchemaValidator<
     value: unknown,
     options?: { limit?: number },
   ): asserts value is Static<T> => {
-    if (!this.is(value)) {
-      const earr = this.errorsArr(value, options);
-      throw new GeoboxValueError(
-        `geobox-assert: ${JSON.stringify(value)}`,
-        earr,
-      );
+    if (this.is(value)) {
+      return;
     }
+    const earr = this.errorsArr(value, options);
+    throw new GeoboxValueError(`geobox-assert: ${JSON.stringify(value)}`, earr);
   };
 
   /**
@@ -203,13 +202,11 @@ export class JsonSchemaValidator<
     value: unknown,
     options?: { limit?: number },
   ): asserts value is Static<T> => {
-    if (!this.is(value)) {
-      const earr = this.errorsArr(value, options);
-      throw new GeoboxValueError(
-        `geobox-assert: ${JSON.stringify(value)}`,
-        earr,
-      );
+    if (this.is(value)) {
+      return;
     }
+    const earr = this.errorsArr(value, options);
+    throw new GeoboxValueError(`geobox-assert: ${JSON.stringify(value)}`, earr);
   };
 
   /**
