@@ -13,26 +13,43 @@ export function resolveRepoPath(fspath: string): string {
   return path.resolve(reporoot(), fspath);
 }
 
+function firstChar(value: string) {
+  return value.at(0);
+}
+
 export function geoboxSchemaFunctionNames(): string[] {
   return Object.entries(GeoType)
-    .filter(
-      ([k, v]) =>
-        typeof v === "function" &&
-        k[0] !== undefined &&
-        v.name[0] === k[0].toUpperCase() &&
-        /[A-Z]/.test(v.name[0]),
-    )
+    .filter(([k, v]) => {
+      if (typeof v !== "function") {
+        return false;
+      }
+
+      const keyFirstChar = firstChar(k);
+      const nameFirstChar = firstChar(v.name);
+
+      return (
+        keyFirstChar !== undefined &&
+        nameFirstChar === keyFirstChar.toUpperCase() &&
+        /[A-Z]/.test(nameFirstChar)
+      );
+    })
     .map(([k, _v]) => k);
 }
 
 export function typeboxSchemaFunctionNames() {
   const fns: string[] = [];
   for (const [k, v] of Object.entries(tb)) {
+    if (typeof v !== "function") {
+      continue;
+    }
+
+    const keyFirstChar = firstChar(k);
+    const nameFirstChar = firstChar(v.name);
+
     if (
-      typeof v === "function" &&
-      k[0] !== undefined &&
-      v.name[0] === k[0].toUpperCase() &&
-      /[A-Z]/.test(v.name[0])
+      keyFirstChar !== undefined &&
+      nameFirstChar === keyFirstChar.toUpperCase() &&
+      /[A-Z]/.test(nameFirstChar)
     ) {
       fns.push(k);
     }

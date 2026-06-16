@@ -85,12 +85,12 @@ function isCheckOptions(value: unknown): value is CheckOptions {
     (value.limit === undefined
       ? true
       : // @ts-expect-error - compiled from typebox
-      typeof value.limit === "number" &&
-      // @ts-expect-error - compiled from typebox
-      // eslint-disable-next-line unicorn/prefer-number-is-safe-integer
-      Number.isInteger(value.limit) &&
-      // @ts-expect-error - compiled from typebox
-      value.limit >= 1)
+        typeof value.limit === "number" &&
+        // @ts-expect-error - compiled from typebox
+        // eslint-disable-next-line unicorn/prefer-number-is-safe-integer
+        Number.isInteger(value.limit) &&
+        // @ts-expect-error - compiled from typebox
+        value.limit >= 1)
   );
 }
 
@@ -192,10 +192,7 @@ export class JsonSchemaValidator<
       return;
     }
     const earr = this.errorsArr(value, options);
-    throw new GeoboxValueError(
-      `geobox-assert: ${JSON.stringify(value)}`,
-      earr,
-    );
+    throw new GeoboxValueError(`geobox-assert: ${JSON.stringify(value)}`, earr);
   };
 
   /**
@@ -209,10 +206,7 @@ export class JsonSchemaValidator<
       return;
     }
     const earr = this.errorsArr(value, options);
-    throw new GeoboxValueError(
-      `geobox-assert: ${JSON.stringify(value)}`,
-      earr,
-    );
+    throw new GeoboxValueError(`geobox-assert: ${JSON.stringify(value)}`, earr);
   };
 
   /**

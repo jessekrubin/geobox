@@ -11,8 +11,7 @@ export type TCoord3d = TVec3;
 export type TCoord = TUnionVec2Vec3;
 export type TCoordinateSchema = TCoord | TCoord2d | TCoord3d;
 
-export type CoordSchemaOptions = TSchemaOptions &
-{
+export type CoordSchemaOptions = TSchemaOptions & {
   x?: TNumber;
   y?: TNumber;
   z?: TNumber;

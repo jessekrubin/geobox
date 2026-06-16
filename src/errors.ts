@@ -7,6 +7,8 @@ import type { TLocalizedValidationError } from "typebox/error";
 export class GeoboxValueError extends Error {
   public errors: TLocalizedValidationError[];
 
+  // Preserve the public `(message, errors)` API for validation failures.
+  // eslint-disable-next-line unicorn/custom-error-definition
   public constructor(message: string, errors: TLocalizedValidationError[]) {
     super(message);
     this.name = "GeoboxValueError";
