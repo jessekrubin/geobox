@@ -77,7 +77,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
     "@fastify/type-provider-typebox": "^6.1.0",
-    "@jsse/eslint-config": "^0.7.8",
+    "@jsse/eslint-config": "^0.7.9",
     "@jsse/tsconfig": "^0.5.1",
     "@turf/helpers": "^7.3.5",
     "@turf/turf": "^7.3.5",
@@ -85,8 +85,8 @@
     "@types/node": "^24.13.1",
     "@typescript-eslint/eslint-plugin": "^8.61.0",
     "@typescript-eslint/parser": "^8.61.0",
-    "@vitest/coverage-v8": "^4.1.8",
-    "esbuild": "^0.28.0",
+    "@vitest/coverage-v8": "^4.1.9",
+    "esbuild": "^0.28.1",
     "eslint": "^9.39.4",
     "eslint-plugin-antfu": "^3.2.3",
     "fastify": "^5.8.5",
@@ -94,8 +94,8 @@
     "prettier": "3.8.4",
     "tsdown": "^0.22.2",
     "tsx": "^4.22.4",
-    "typebox": "^1.2.6",
+    "typebox": "^1.2.11",
     "typescript": "~6.0.3",
-    "vitest": "4.1.8"
+    "vitest": "4.1.9"
   }
 }

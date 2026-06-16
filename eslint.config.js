@@ -26,6 +26,10 @@ export default jsse(
   },
   {
     files: ["./src/**/*.ts"],
-    rules: { "@typescript-eslint/no-deprecated": "error" },
+    rules: {
+      "@typescript-eslint/no-deprecated": "error",
+      "unicorn/max-nested-calls": "off",
+      "unicorn/consistent-class-member-order": "off",
+    },
   },
 );

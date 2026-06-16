@@ -29,12 +29,12 @@ export type TFeatureSchemas<
   TProperties extends TSchema | undefined,
   TCoord extends TCoordinateSchema | undefined,
   TBBox extends TBBoxSchema | undefined,
-> = { properties?: TProperties } & TGeometrySchemas<TCoord, TBBox>;
+> = TGeometrySchemas<TCoord, TBBox> & { properties?: TProperties };
 
 export type TProperties<T extends TSchema | undefined> =
   IsDefined<T> extends true
-    ? AssertType<T>
-    : ReturnType<typeof GeojsonProperties>;
+  ? AssertType<T>
+  : ReturnType<typeof GeojsonProperties>;
 
 export type TFeatureSchemas2d<
   TProps extends TSchema | undefined,
