@@ -1,10 +1,12 @@
 import { describe, expect, test } from "vitest";
+import type { TProperties } from "typebox";
 import { PointFeature } from "../geo-type/geojson/point-feature.js";
 import * as geobox from "../index.js";
 
 describe("jsonschema", () => {
   const rawSchema = PointFeature();
-  const s = geobox.jsonschema(rawSchema);
+  const s: geobox.JsonSchemaValidator<TProperties, typeof rawSchema> =
+    geobox.jsonschema(rawSchema);
 
   test("jsonschema", () => {
     expect(s).toBeDefined();
@@ -13,6 +15,7 @@ describe("jsonschema", () => {
     expect(s.schema).toEqual(rawSchema);
 
     expect(
+      // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
       s.assert({
         type: "Feature",
         geometry: { type: "Point", coordinates: [0, 0] },
@@ -20,19 +23,21 @@ describe("jsonschema", () => {
       }),
     ).toBeUndefined();
 
-    expect(() =>
-      s.assert({
+    expect(() => {
+      const value = {
         type: "Feature",
         geometry: { type: "LineString", coordinates: [0, 0] },
         properties: { dingo: "bash" },
-      }),
-    ).toThrow();
+      };
+      s.assert(value);
+    }).toThrow();
   });
 });
 
 describe("json-schema-destructure", () => {
   const rawSchema = PointFeature();
-  const s = geobox.jsonschema(rawSchema);
+  const s: geobox.JsonSchemaValidator<TProperties, typeof rawSchema> =
+    geobox.jsonschema(rawSchema);
   const {
     schema,
     typeguard,

@@ -40,8 +40,8 @@ async function writeEsmPackageJson() {
   log(`Wrote esm package.json to ${packageJsonEsmFilepath}`);
 }
 
-const DESC_STRING_RE = /(\s*description\s*:\s*(["'`])(?:\\\2|.)*?\2\s*,?)/g;
-const DESC_OBJ_LITERAL_RE = /(\s*description\s*:\s*{[^{}]*?}\s*,?)/g;
+const DESC_STRING_RE = /\s*description\s*:\s*(["'`])(?:\\\1|.)*?\1\s*,?/g;
+const DESC_OBJ_LITERAL_RE = /\s*description\s*:\s*\{[^{}]*\}\s*,?/g;
 
 function stripDescriptions(codeString: string) {
   codeString = codeString.replace(DESC_STRING_RE, "");

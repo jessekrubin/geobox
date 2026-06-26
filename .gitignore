@@ -6,3 +6,4 @@ scratch/
 .idea/
 coverage
 src/dev/
+*.tgz
