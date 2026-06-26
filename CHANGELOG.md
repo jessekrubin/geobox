@@ -1,5 +1,11 @@
 # @jsse/geobox
 
+## 0.6.1
+
+### Patch Changes
+
+- updated deps and minor internals
+
 ## 0.5.1
 
 ### Patch Changes

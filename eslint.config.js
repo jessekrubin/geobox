@@ -4,7 +4,10 @@ import pluginAntfu from "eslint-plugin-antfu";
 
 export default jsse(
   {
-    typescript: { tsconfig: "tsconfig.eslint.json" },
+    typescript: {
+      strict: true,
+      tsconfig: "tsconfig.eslint.json",
+    },
     ignores: ["example/**/*"],
     markdown: false,
   },
@@ -30,6 +33,7 @@ export default jsse(
       "@typescript-eslint/no-deprecated": "error",
       "unicorn/max-nested-calls": "off",
       "unicorn/consistent-class-member-order": "off",
+      "@typescript-eslint/restrict-template-expressions": "off",
     },
   },
 );

@@ -6,7 +6,7 @@
 import Format from "typebox/format";
 
 const FORMATS = {
-  uri: /^[a-z][\d+.a-z-]*:(?:\/?\/)?\S*$/i,
+  uri: /^[a-z][\d+.a-z-]*:\S*$/i,
   "date-time":
     /^\d{4}-[01]\d-[0-3]\dt(?:[0-2](?:\d:[0-5]){2}\d|23:59:60)(?:\.\d+)?(?:z|[+-]\d{2}(?::?\d{2})?)$/i,
 };

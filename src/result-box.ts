@@ -198,16 +198,16 @@ export class JsonSchemaValidator<
   /**
    * Asserts that the value is of this schema; throws an error if not
    */
-  public assert = (
+  public assert(
     value: unknown,
     options?: { limit?: number },
-  ): asserts value is Static<T> => {
+  ): asserts value is Static<T> {
     if (this.is(value)) {
       return;
     }
     const earr = this.errorsArr(value, options);
     throw new GeoboxValueError(`geobox-assert: ${JSON.stringify(value)}`, earr);
-  };
+  }
 
   /**
    * Decodes a value according to the schema.
@@ -237,7 +237,7 @@ export class JsonSchemaValidator<
       return function* () {
         let i = 0;
         for (const e of it) {
-          if (options?.limit && i >= options.limit) {
+          if (options.limit && i >= options.limit) {
             break;
           }
           i++;
