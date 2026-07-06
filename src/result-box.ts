@@ -48,8 +48,7 @@ export type ResultErr<TErr = GeoboxValueError> = {
  * @returns ResultOk<T> | ResultErr
  */
 export type Result<TData, TErr = GeoboxValueError> =
-  | ResultOk<TData>
-  | ResultErr<TErr>;
+  ResultOk<TData> | ResultErr<TErr>;
 
 /**
  * Options for checking/validating
