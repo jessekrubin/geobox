@@ -1,13 +1,21 @@
 {
   "name": "@jsse/geobox",
-  "type": "module",
   "version": "0.6.1",
   "description": "geo + typebox => geo-schemas",
   "readme": "README.md",
-  "publishConfig": {
-    "access": "public"
-  },
   "license": "MIT",
+  "files": [
+    "!**/*.spec.*",
+    "!**/*.test-d.*",
+    "!**/*.test.*",
+    "!**/*.tsbuildinfo",
+    "README.md",
+    "dist"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/lib/cjs/index.d.ts",
   "exports": {
     ".": {
       "import": {
@@ -38,17 +46,9 @@
     "./package.json": "./package.json",
     "./dist/*": "./dist/*"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/lib/cjs/index.d.ts",
-  "files": [
-    "!**/*.spec.*",
-    "!**/*.test-d.*",
-    "!**/*.test.*",
-    "!**/*.tsbuildinfo",
-    "README.md",
-    "dist"
-  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "pnpm run test && pnpm run build:tsdown && pnpm run build:tsc && pnpm run build:post && pnpm run typecheck && pnpm run lint",
     "build:cjs": "tsc -p tsconfig.cjs.json --outDir dist/lib/cjs --module commonjs",
@@ -71,17 +71,14 @@
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.dts.json --noEmit"
   },
-  "peerDependencies": {
-    "typebox": "^1.0.13"
-  },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
     "@fastify/type-provider-typebox": "^6.1.0",
-    "@jsse/eslint-config": "^0.9.1",
+    "@jsse/eslint-config": "^0.9.2",
     "@jsse/tsconfig": "^0.5.2",
     "@types/geojson": "^7946.0.16",
     "@types/node": "^24.13.1",
-    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^10.6.0",
     "eslint-plugin-antfu": "^3.2.3",
     "fastify": "^5.10.0",
@@ -90,6 +87,9 @@
     "tsx": "^4.23.0",
     "typebox": "^1.3.4",
     "typescript": "~6.0.3",
-    "vitest": "4.1.9"
+    "vitest": "4.1.10"
+  },
+  "peerDependencies": {
+    "typebox": "^1.0.13"
   }
 }
