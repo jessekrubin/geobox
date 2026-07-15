@@ -98,12 +98,12 @@ function isCheckOptions(value: unknown): value is CheckOptions {
  * @typeParam T - The TypeBox schema type.
  */
 export class JsonSchemaValidator<
-  Context extends TProperties,
-  const T extends TSchema,
+  Context extends TProperties = TProperties,
+  const T extends TSchema = TSchema,
 > {
   private _typeguard?: Validator<Context, T>;
   public schema: T;
-  public references: Context;
+  public references?: Context;
   public readonly options: { compile: boolean; limit?: number };
 
   /**
@@ -121,13 +121,16 @@ export class JsonSchemaValidator<
   ) {
     this.schema = schema;
     this.options = { compile: options?.compile ?? true };
-    this.references = references ?? ({} as Context);
+    this.references = references;
   }
 
   /**
    * Alias for calling `new JsonSchemaValidator(yer-schema)`
    */
-  public static new<Context extends TProperties, const T extends TSchema>(
+  public static new<
+    Context extends TProperties = TProperties,
+    const T extends TSchema = TSchema,
+  >(
     schema: T,
     references?: Context,
     options?: { compile?: boolean; limit?: number },
@@ -142,9 +145,11 @@ export class JsonSchemaValidator<
     if (this._typeguard !== undefined) {
       return this._typeguard;
     }
-    const tg = Compile(this.references, this.schema);
-    this._typeguard = tg;
-    return tg;
+    this._typeguard =
+      this.references === undefined
+        ? Compile(this.schema)
+        : Compile(this.references, this.schema);
+    return this._typeguard;
   }
 
   /**
