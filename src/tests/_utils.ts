@@ -17,6 +17,7 @@ function firstChar(value: string) {
   return value.at(0);
 }
 
+const GEOBOX_FN_NAME_RE = /^[A-Z]/;
 export function geoboxSchemaFunctionNames(): string[] {
   return Object.entries(GeoType)
     .filter(([k, v]) => {
@@ -30,7 +31,7 @@ export function geoboxSchemaFunctionNames(): string[] {
       return (
         keyFirstChar !== undefined &&
         nameFirstChar === keyFirstChar.toUpperCase() &&
-        /[A-Z]/.test(nameFirstChar)
+        GEOBOX_FN_NAME_RE.test(nameFirstChar)
       );
     })
     .map(([k, _v]) => k);
@@ -49,7 +50,7 @@ export function typeboxSchemaFunctionNames() {
     if (
       keyFirstChar !== undefined &&
       nameFirstChar === keyFirstChar.toUpperCase() &&
-      /[A-Z]/.test(nameFirstChar)
+      GEOBOX_FN_NAME_RE.test(nameFirstChar)
     ) {
       fns.push(k);
     }

@@ -130,7 +130,7 @@ describe("fastify-geobox", () => {
   test("bbox-schema", async () => {
     const r = await fastify.inject("/bbox");
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const data = JSON.parse(r.payload);
     expect(data).toEqual({ west: -180, south: -90, east: 180, north: 90 });
   });
@@ -138,7 +138,7 @@ describe("fastify-geobox", () => {
   test("point-schema", async () => {
     const r = await fastify.inject("/point");
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const data = JSON.parse(r.payload);
     expect(data).toEqual({
       type: "Feature",
@@ -149,7 +149,7 @@ describe("fastify-geobox", () => {
   test("tilejson-schema", async () => {
     const r = await fastify.inject("/tilejson300");
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const data = JSON.parse(r.payload);
     expect(data).toEqual(exampleTilejson300);
   });
@@ -157,7 +157,7 @@ describe("fastify-geobox", () => {
   test("utilejson-schema", async () => {
     const r = await fastify.inject("/utile.json");
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+     
     const data = JSON.parse(r.payload);
     expect(data).toEqual(exampleTilejson300);
   });
@@ -211,7 +211,7 @@ describe("fastify-geobox", () => {
     test(url, async () => {
       const r = await fastify.inject(url);
       try {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+         
         const { data } = JSON.parse(r.payload);
         const validator = new geobox.JsonSchemaValidator(schema);
         validator.parse(data);
