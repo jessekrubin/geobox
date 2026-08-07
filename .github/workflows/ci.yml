@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: pnpm-setup
-        uses: pnpm/setup@v2
+        uses: pnpm/setup@4700d737c3d7a2e7199f3d42a920f0bf7f34e411 # v2
         with:
           install: true
           cache: true
