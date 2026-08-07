@@ -91,5 +91,12 @@
   },
   "peerDependencies": {
     "typebox": "^1.0.13"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.20.0",
+      "onFail": "download"
+    }
   }
 }
