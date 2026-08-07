@@ -20,7 +20,7 @@ jobs:
       - name: pnpm-setup
         uses: pnpm/setup@v2
         with:
-          install: install
+          install: true
           cache: true
       - name: build-test-lint
         run: pnpm run ci
