@@ -121,7 +121,8 @@ export class JsonSchemaValidator<
   ) {
     this.schema = schema;
     this.options = { compile: options?.compile ?? true };
-    this.references = references;
+    if (references)
+      this.references = references;
   }
 
   /**
