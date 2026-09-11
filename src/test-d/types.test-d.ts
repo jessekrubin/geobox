@@ -27,7 +27,6 @@ test("test point schema builder", () => {
   // @ts-expect-error invalid properties
   const _badProps: BabydogProperties = { dingo: 123 };
   const _goodProps: BabydogProperties = { dingo: "bash" };
-  void _goodProps;
 
   const _bbox2: PointFeatureBabydogBBox = [0, 0, 0, 0];
   const _bbox3: PointFeatureBabydogBBox = [0, 0, 0, 0, 0, 0];
@@ -37,7 +36,7 @@ test("test point schema builder", () => {
   // @ts-expect-error - invalid bbox value
   const _bboxBad = { a: 123 } satisfies PointFeatureBabydogBBox;
 
-  console.debug({ _bbox2, _bbox3, _bboxUndef, _bboxBad });
+  console.debug({ _goodProps, _bbox2, _bbox3, _bboxUndef, _bboxBad });
 
   const pointSchemaDingoValidator = Compile(pointSchemaBabydog);
   if (pointSchemaDingoValidator.Check(pDingo)) {

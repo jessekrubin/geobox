@@ -7,5 +7,6 @@ export default defineConfig({
       include: ["**/*.{bench,benchmark}.?(c|m)[jt]s?(x)"],
     },
     coverage: { provider: "v8", include: ["src/**/*.ts"] },
+    fsModuleCache: false
   },
 });
